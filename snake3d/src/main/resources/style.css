@@ -1,31 +1,32 @@
 @font-face {
-    font-family: 'Doto';
-    src: url('fonts/Doto-Bold.ttf');
+    font-family: 'Doto SemiBold';
+    src: url('fonts/Doto-SemiBold.ttf');
+}
+
+@font-face {
+    font-family: 'Doto ExtraBold';
+    src: url('fonts/Doto-ExtraBold.ttf');
 }
 
 #title {
-    -fx-font-family: 'Doto';
-    -fx-font-size: 60;
-    -fx-font-weight: 700;
+    -fx-font-family: 'Doto ExtraBold';
+    -fx-font-size: 64;
     -fx-text-fill: cornflowerblue;
 
-    font-family: 'Doto';
-    font-size: 60;
-    font-weight: 700;
+    font-family: 'Doto ExtraBold';
+    font-size: 64;
     color: cornflowerblue;
 }
 
 .button {
-    -fx-font-family: 'Doto';
-    -fx-font-size: 28;
+    -fx-font-family: 'Doto SemiBold';
+    -fx-font-size: 32;
     -fx-background-color: cornflowerblue;
-    -fx-font-weight: 700;
     -fx-text-fill: whitesmoke;
 
-    font-family: 'Doto';
-    font-size: 28;
+    font-family: 'Doto SemiBold';
+    font-size: 32;
     background-color: cornflowerblue;
-    font-weight: 700;
     color: whitesmoke;
 }
 
