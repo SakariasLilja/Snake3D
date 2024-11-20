@@ -72,8 +72,10 @@ public class Vector3DTests {
     void vectorEquals() {
         Vector3D backward = Vector3D.Backward;
         Vector3D forward = Vector3D.Forward;
+        Vector3D custom = new Vector3D(0, 0, 1);
         assertEquals(forward, forward, "The equals method should return true if equal");
         assertNotEquals(backward, forward, "The equals method should return false when not equal");
+        assertEquals(forward, custom, "The equals method should return true if the values are the same");
     }
     
 }
