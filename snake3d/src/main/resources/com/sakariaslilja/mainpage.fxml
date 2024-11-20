@@ -10,8 +10,8 @@
         <Label text="Snake 3D"/>
         <VBox alignment="CENTER">
             <Button fx:id="newgame" text="New Game" onAction="#gotoNewGame"/>
-            <Button text="Load Game"/>
-            <Button text="Scores"/>
+            <Button fx:id="loadgame" text="Load Game" onAction="#gotoLoadGame" />
+            <Button fx:id="scoreboard" text="Scoresboard" onAction="#gotoScoreboard" />
             <Button text="Quit"/>
         </VBox>
     </children>
