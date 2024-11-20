@@ -23,7 +23,7 @@ public class App extends Application {
 
     // Sets the primary scene of the application.
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(@SuppressWarnings("exports") Stage stage) throws IOException {
         scene = new Scene(loadFXML(primarySceneFXML), width, height);
         stage.setScene(scene);
         stage.show();
