@@ -87,5 +87,19 @@ public class Vector3D {
     public String toString() {
         return "Vector3D(" + x + ", " + y + ", " + z + ")";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || obj.getClass() != this.getClass()) {
+            return false;
+        }
+
+        final Vector3D other = (Vector3D) obj;
+        if (x == other.x && y == other.y && z == other.z) {
+            return true;
+        }
+        
+        return false;
+    }
     
 }
