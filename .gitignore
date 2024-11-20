@@ -459,3 +459,6 @@ crashlytics.properties
 crashlytics-build.properties
 
 # Created by .ignore support plugin (hsz.mobi)
+
+snake3d/target
+snake3d/target/*
