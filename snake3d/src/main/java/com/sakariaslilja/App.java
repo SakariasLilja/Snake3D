@@ -25,6 +25,7 @@ public class App extends Application {
     @Override
     public void start(@SuppressWarnings("exports") Stage stage) throws IOException {
         scene = new Scene(loadFXML(primarySceneFXML), width, height);
+        scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
     }
