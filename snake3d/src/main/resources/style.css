@@ -3,9 +3,34 @@
     src: url('fonts/Doto-Bold.ttf');
 }
 
-.label {
+#title {
     -fx-font-family: 'Doto';
+    -fx-font-size: 60;
+    -fx-font-weight: 700;
+    -fx-text-fill: cornflowerblue;
+
     font-family: 'Doto';
-    -fx-font-size: 20;
-    font-size: 20;
+    font-size: 60;
+    font-weight: 700;
+    color: cornflowerblue;
+}
+
+.button {
+    -fx-font-family: 'Doto';
+    -fx-font-size: 28;
+    -fx-background-color: cornflowerblue;
+    -fx-font-weight: 700;
+    -fx-text-fill: whitesmoke;
+
+    font-family: 'Doto';
+    font-size: 28;
+    background-color: cornflowerblue;
+    font-weight: 700;
+    color: whitesmoke;
+}
+
+#background {
+    -fx-background-color: #4a4e69;
+
+    background-color: #4a4e69;
 }
