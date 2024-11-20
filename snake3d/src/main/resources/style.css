@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'Doto';
+    src: url('fonts/Doto-Bold.ttf');
+}
+
+.label {
+    -fx-font-family: 'Doto';
+    font-family: 'Doto';
+    -fx-font-size: 20;
+    font-size: 20;
+}
