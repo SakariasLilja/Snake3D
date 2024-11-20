@@ -12,7 +12,7 @@
             <Button fx:id="newgame" text="New Game" onAction="#gotoNewGame"/>
             <Button fx:id="loadgame" text="Load Game" onAction="#gotoLoadGame" />
             <Button fx:id="scoreboard" text="Scoresboard" onAction="#gotoScoreboard" />
-            <Button text="Quit"/>
+            <Button fx:id="quit" text="Quit" onAction="#quitGame" />
         </VBox>
     </children>
     <padding>

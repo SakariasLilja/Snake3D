@@ -32,5 +32,13 @@ public class MainPageController {
     private void gotoScoreboard() throws IOException {
         App.setRoot("scoreboard");
     }
+
+    /**
+     * Calls method from [App] to close it.
+     */
+    @FXML
+    private void quitGame() {
+        App.closeApp();
+    }
     
 }
