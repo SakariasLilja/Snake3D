@@ -82,5 +82,10 @@ public class Vector3D {
     public Vector3D mul(int scalar) {
         return new Vector3D(scalar * this.x, scalar * this.y, scalar * this.z);
     }
+
+    @Override
+    public String toString() {
+        return "Vector3D(" + x + ", " + y + ", " + z + ")";
+    }
     
 }
