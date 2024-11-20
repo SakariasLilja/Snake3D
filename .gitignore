@@ -462,3 +462,4 @@ crashlytics-build.properties
 
 snake3d/target
 snake3d/target/*
+documentation/.*
