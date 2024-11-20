@@ -16,24 +16,25 @@ public class App extends Application {
     private static Scene scene;
 
     // Variables of the scene.
-    private static final String primaryFXML = "primary";
+    private static final String primarySceneFXML = "mainpage";
     private static final int width = 640;
     private static final int height = 480;
 
     // Sets the primary scene of the application.
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML(primaryFXML), width, height);
+        scene = new Scene(loadFXML(primarySceneFXML), width, height);
         stage.setScene(scene);
         stage.show();
     }
 
     /**
      * Sets the root of the application's scene to be the inputed fxml-file.
+     * Used for navigation between views.
      * @param fxml File that is to be made the application's scene's root.
      * @throws IOException File wasn't found/able to be read.
      */
-    static void setRoot(String fxml) throws IOException {
+    public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
 
