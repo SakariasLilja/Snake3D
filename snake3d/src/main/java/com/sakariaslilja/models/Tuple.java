@@ -1,7 +1,7 @@
 package com.sakariaslilja.models;
 
 /**
- * Generic tuple class for storing two values.
+ * Integer tuple class for storing two integers.
  * Tuples are equal if each element is equivalent 
  * to the corresponding one of the other.
  */
