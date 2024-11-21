@@ -3,7 +3,6 @@ package com.sakariaslilja.models;
 import com.sakariaslilja.Constants;
 import java.lang.Math;
 import java.util.ArrayList;
-import java.util.function.Function;
 import java.util.function.Predicate;
 
 /**
