@@ -1,21 +1,21 @@
 package com.sakariaslilja.models;
 
 /**
- * Integer tuple class for storing two integers.
+ * Vector3D tuple class for storing two vectors.
  * Tuples are equal if each element is equivalent 
  * to the corresponding one of the other.
  */
 public class Tuple {
 
-    public int value1;
-    public int value2;
+    public Vector3D value1;
+    public Vector3D value2;
 
     /**
      * Tuple of two values.
      * @param value1 First value
      * @param value2 Second value
      */
-    public Tuple(int value1, int value2) {
+    public Tuple(Vector3D value1, Vector3D value2) {
         this.value1 = value1;
         this.value2 = value2;
     }

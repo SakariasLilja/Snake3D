@@ -11,8 +11,8 @@ public class TupleTests {
     @Test
     @DisplayName("Tuple values test")
     void tupleValues() {
-        int value1 = 6;
-        int value2 = -219;
+        Vector3D value1 = new Vector3D(6,1,2);
+        Vector3D value2 = new Vector3D(7, 2, 221);
 
         Tuple tuple = new Tuple(value1, value2);
 
@@ -23,8 +23,8 @@ public class TupleTests {
     @Test
     @DisplayName("Tuple equivalency test")
     void tupleEqual() {
-        int value1 = 12;
-        int value2 = -172;
+        Vector3D value1 = new Vector3D(126, 16, -27);
+        Vector3D value2 = new Vector3D(8, -3, -818);
 
         Tuple tuple1 = new Tuple(value1, value2);
         Tuple tuple2 = new Tuple(value1, value1);
@@ -38,8 +38,8 @@ public class TupleTests {
     @Test
     @DisplayName("Updating values should work")
     void tupleUpdate() {
-        int value1 = 2378;
-        int value2 = -3;
+        Vector3D value1 = new Vector3D(28, 3, 182);
+        Vector3D value2 = new Vector3D(18, 7327, -1);
 
         Tuple tuple = new Tuple(value1, value2);
         Tuple expected = new Tuple(value2, value1);
