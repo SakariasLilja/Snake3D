@@ -12,19 +12,31 @@ public class World {
     private final int height;
 
     /**
-     * World constructor.
+     * World constructor with two parameters.
      * Parameters are unmodifiable.
      * 
-     * Unit size of one width can be found in [Constants].
-     * 
-     * The dimension sizes are validated before assignment, 
-     * to avoid invalid world-sizes.
+     * The dimension sizes are validated before assignment
+     * to avoid an invalid world size.
      * @param width The width of the world. 
      * @param height The height of the world.
      */
     public World(int width, int height) {
         this.width = validateSize(width);
         this.height = validateSize(height);
+    }
+
+    /**
+     * World constructor with one parameter.
+     * Parameters are unmodifiable.
+     * 
+     * The size is validated before assignment to
+     * avoid an invalid world size.
+     * @param size The width and height of the world.
+     */
+    public World(int size) {
+        int validatedSize = validateSize(size);
+        this.height = validatedSize;
+        this.width = validatedSize;
     }
 
     /**
