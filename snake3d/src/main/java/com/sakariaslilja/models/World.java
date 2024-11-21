@@ -91,29 +91,39 @@ public class World {
     }
 
     /**
-     * Every vertex of the world. 
-     * Vertices are in order:
+     * Calculates the vertices of the world.
+     * Inserts each vertex to their location in the corresponding array.
+     * @return 3 arrays:
      * <p>
-     * Clockwise starting from z=0 (loop through z-coords)
-     * @return An array of 3D coordinates
+     *         0: Left to right
+     * <p>
+     *         1: Top to bottm
+     * <p>
+     *         2: Front to back
      */
-    public Vector3D[] getVerticesClockwise() {
+    public Vector3D[][] getVertices() {
         int columns = this.width + (Constants.WORLD_ACCURACY * (this.width - 1));
         int rows = this.height + (Constants.WORLD_ACCURACY * (this.height - 1));
         int layers = this.depth + (Constants.WORLD_ACCURACY * (this.depth - 1));
 
-        Vector3D[] out = new Vector3D[columns*rows*layers];
+        Vector3D[][] out = new Vector3D[3][columns*rows*layers];
 
-        for (int k = 0; k < layers; k++) {
-            for (int j = 0; j < rows; j++) {
-                for (int i = 0; i < columns; i++) {
-                    int index = i + j*columns + k*columns*rows;
+        for (int layer = 0; layer < layers; layer++) {
+            for (int row = 0; row < rows; row++) {
+                for (int column = 0; column < columns; column++) {
+                    int indexLR = column + row*columns + layer*columns*rows;
+                    int indexTB = row + column*rows + layer*columns*rows;
+                    int indexFB = layer + column*layers + row*layers*columns;
 
-                    double x = Math.rint(1.0 * i * Constants.UNIT / (Constants.WORLD_ACCURACY + 1));
-                    double y = Math.rint(1.0 * j * Constants.UNIT / (Constants.WORLD_ACCURACY + 1));
-                    double z = Math.rint(1.0 * k * Constants.UNIT / (Constants.WORLD_ACCURACY + 1));
+                    double x = Math.rint(1.0 * column * Constants.UNIT / (Constants.WORLD_ACCURACY + 1));
+                    double y = Math.rint(1.0 * row * Constants.UNIT / (Constants.WORLD_ACCURACY + 1));
+                    double z = Math.rint(1.0 * layer * Constants.UNIT / (Constants.WORLD_ACCURACY + 1));
 
-                    out[index] = new Vector3D((int) x, (int) y, (int) z);
+                    Vector3D vector3d = new Vector3D((int) x, (int) y, (int) z);
+
+                    out[0][indexLR] = vector3d;
+                    out[1][indexTB] = vector3d;
+                    out[2][indexFB] = vector3d;
                 }
             }
         }
@@ -122,26 +132,15 @@ public class World {
     }
 
     /**
-     * Every vertex of the world.
-     * Vertices are in order:
-     * <p>
-     * Lenghtwise starting from x=0 (loop through x-coords)
-     * @return An array of 3D coordinates
-     */
-    public Vector3D[] getVerticesLengthwise() {
-        Vector3D[] out = new Vector3D[2];
-        // TODO: implement similarly to getVerticesClockwise
-        return out;
-    }
-
-    /**
      * Every edge of the world.
      * An edge is the connection between two vertices.
      * Edges come in the order:
      * <p>
-     * - Clockwise starting from z=0 (loop through z-coords).
+     * - Left to right
      * <p>
-     * - Left to right starting from x=0 (loop through x-coords).
+     * - Top to bottom
+     * <p>
+     * - Front to back
      * @return [Tuple] array.
      */
     public Tuple[] getEdges() {

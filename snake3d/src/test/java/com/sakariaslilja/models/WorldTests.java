@@ -61,8 +61,7 @@ public class WorldTests {
         int depth = 4;
         World world = new World(width, height, depth);
 
-        Vector3D[] verticesCW = world.getVerticesClockwise();
-        Vector3D[] verticesLW = world.getVerticesLengthwise();
+        Vector3D[][] verticesArr = world.getVertices();
 
         int rowSize = width + (Constants.WORLD_ACCURACY * (width - 1));
         int columnSize = height + (Constants.WORLD_ACCURACY * (height - 1));
@@ -70,13 +69,13 @@ public class WorldTests {
 
         int expectedSize = rowSize*columnSize*layerSize;
 
-        assertEquals(expectedSize, verticesCW.length, "The number of vertices should be correct");
+        assertEquals(expectedSize, verticesArr[0].length, "The number of vertices should be correct");
 
         Vector3D head = new Vector3D(0, 0, 0);
         Vector3D last = new Vector3D((width - 1), (height - 1), (depth - 1)).mul(Constants.UNIT);
 
-        assertEquals(head, verticesCW[0], "First element should be located at (0, 0, 0)");
-        assertEquals(last, verticesCW[expectedSize - 1], "Last element should be correct");
+        assertEquals(head, verticesArr[0][0], "First element should be located at (0, 0, 0)");
+        assertEquals(last, verticesArr[0][expectedSize - 1], "Last element should be correct");
 
         int x = width - 1;
         int y = height - 1;
@@ -89,8 +88,7 @@ public class WorldTests {
         Vector3D oddLocation = new Vector3D((int) weirdX, (int) weirdY, (int) weirdZ);
         int expectedIndex = x + y * rowSize + z * rowSize * columnSize;
         
-        assertEquals(oddLocation, verticesCW[expectedIndex]);
-        //assertEquals(expectedSize, verticesLW.length, "The number of vertices should be correct");
+        assertEquals(oddLocation, verticesArr[0][expectedIndex]);
     }
     
 }
