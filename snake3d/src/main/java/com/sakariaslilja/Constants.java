@@ -37,8 +37,8 @@ public class Constants {
     public static final int MAX_WORLD_SIZE = 100;
 
     /**
-     * The number of vertices (inclusive) between each main vertex.
+     * The number of vertices (exclusize) between each main vertex.
      */
-    public static final int WORLD_ACCURACY = 20;
+    public static final int WORLD_ACCURACY = 1;
     
 }
