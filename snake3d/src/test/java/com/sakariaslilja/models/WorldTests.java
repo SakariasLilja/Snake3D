@@ -45,5 +45,20 @@ public class WorldTests {
         assertEquals(Constants.MIN_WORLD_SIZE * Constants.UNIT, smallWorld.getHeight(), "The world should not be too small");
         assertEquals(Constants.MAX_WORLD_SIZE * Constants.UNIT, largeWorld.getHeight(), "The world should not be too large");
     }
+
+    @Test
+    @DisplayName("World vertices")
+    void getVertices() {
+        int size = 4;
+        World world = new World(size);
+
+        Vector3D[] verticesCW = world.getVerticesClockwise();
+        Vector3D[] verticesLW = world.getVerticesLengthwise();
+        int rowSize = (size + (Constants.WORLD_ACCURACY * size - 1));
+        int expectedSize = rowSize*rowSize*rowSize;
+
+        assertEquals(expectedSize, verticesCW.length, "The number of vertices should be correct");
+        assertEquals(expectedSize, verticesLW.length, "The number of vertices should be correct");
+    }
     
 }
