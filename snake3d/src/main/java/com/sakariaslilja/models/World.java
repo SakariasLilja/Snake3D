@@ -2,7 +2,9 @@ package com.sakariaslilja.models;
 
 import com.sakariaslilja.Constants;
 import java.lang.Math;
+import java.util.ArrayList;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * An instance of a world with a set width, height and depth.
@@ -144,21 +146,16 @@ public class World {
      * - Front to back
      * @return [Tuple] array containing every edge present in the world's walls.
      */
-    public Tuple[] getEdges() {
+    public ArrayList<Tuple> getEdges() {
         int columns = this.width + (Constants.WORLD_ACCURACY * (this.width - 1));
         int rows = this.height + (Constants.WORLD_ACCURACY * (this.height - 1));
         int layers = this.depth + (Constants.WORLD_ACCURACY * (this.depth - 1));
-        // TODO: remove null values from array
-
-        int horizontalStripes = columns * 2 * (rows + layers - 2);
-        int verticalStripes = rows * 2 * (columns + layers - 2);
 
         Vector3D[][] verticesArr = this.getVertices();
         int[] correspondingDimension = {columns, rows, layers};
         int vertexCount = verticesArr[0].length;
 
-        Tuple[] edges = new Tuple[horizontalStripes + verticalStripes];
-        int edgeIndex = 0;
+        ArrayList<Tuple> edges = new ArrayList<Tuple>();
 
         for (int arrayIndex = 0; arrayIndex < verticesArr.length; arrayIndex++) {
             for (int i = 1; i < vertexCount - 1; i++) {
@@ -168,11 +165,11 @@ public class World {
                 } else {
                     Vector3D firstVector = verticesArr[arrayIndex][i-1];
                     Vector3D secondVector = verticesArr[arrayIndex][i];
-                    Function<Integer, Boolean> valuesInBetween = (c) -> c > 0 && c <= (upperLimit) * Constants.UNIT;
+                    Predicate<Integer> valuesInBetween = (c) -> c > 0 && c <= (upperLimit) * Constants.UNIT;
 
                     if (!firstVector.forAll(valuesInBetween) && !secondVector.forAll(valuesInBetween)) {
-                        edges[edgeIndex] = new Tuple(firstVector, secondVector);
-                        edgeIndex++;
+                        Tuple tuple = new Tuple(firstVector, secondVector);
+                        edges.add(tuple);
                     }
                 }
             }

@@ -1,6 +1,7 @@
 package com.sakariaslilja.models;
 
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * Class representing a 3D vector.
@@ -87,13 +88,13 @@ public class Vector3D {
     }
 
     /**
-     * Method that takes an anonymous function and applies it to
+     * Method that takes a predicate and applies it to
      * each coordinate of this Vector3D.
-     * @param function The anonymous function to apply to each coordinate
+     * @param predicate The predicate to apply to each coordinate
      * @return If the function is true for every coordinate
      */
-    public boolean forAll(Function<Integer, Boolean> function) {
-        return function.apply(x) && function.apply(y) && function.apply(z);
+    public boolean forAll(Predicate<Integer> predicate) {
+        return predicate.test(x) && predicate.test(y) && predicate.test(z);
     }
 
     /**

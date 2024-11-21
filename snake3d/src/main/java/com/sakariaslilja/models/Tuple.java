@@ -1,6 +1,7 @@
 package com.sakariaslilja.models;
 
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * Vector3D tuple class for storing two vectors.
@@ -23,13 +24,13 @@ public class Tuple {
     }
 
     /**
-     * Method that takes an anonymous function and checks both
+     * Method that takes a predicate and checks both
      * variables of the this Tuple with it.
-     * @param function Anonymous function to apply to this Tuple's values
+     * @param predicate Predicate to apply to this Tuple's values
      * @return The boolean result.
      */
-    public boolean forAll(Function<Vector3D, Boolean> function) {
-        return function.apply(value1) && function.apply(value2);
+    public boolean forAll(Predicate<Vector3D> predicate) {
+        return predicate.test(value1) && predicate.test(value2);
     }
 
     /**

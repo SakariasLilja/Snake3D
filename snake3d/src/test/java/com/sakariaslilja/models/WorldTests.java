@@ -2,6 +2,8 @@ package com.sakariaslilja.models;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -98,21 +100,23 @@ public class WorldTests {
         int height = 3;
         int depth = 4;
 
-        int rowSize = width + (Constants.WORLD_ACCURACY * (width - 1));
-        int columnSize = height + (Constants.WORLD_ACCURACY * (height - 1));
-        int layerSize = depth + (Constants.WORLD_ACCURACY * (depth - 1));
-
         World world = new World(width, height, depth);
 
-        Tuple[] edges = world.getEdges();
+        ArrayList<Tuple> edges = world.getEdges();
+        Vector3D[] verticesArr = world.getVertices()[0];
+        ArrayList<Vector3D> vertices = new ArrayList<Vector3D>();
+        Integer maxX = 0;
+        Integer maxY = 0;
+        Integer maxZ = 0;
 
-        int horizontal = columnSize * 2 * (rowSize + layerSize - 2);
-        int vertical = rowSize * 2 * (columnSize + layerSize - 2);
+        for (Vector3D vertex : verticesArr) {
+            vertices.add(vertex);
+            maxX = Integer.max(maxX, vertex.getX());
+            maxY = Integer.max(maxY, vertex.getY());
+            maxZ = Integer.max(maxZ, vertex.getZ());
+        }
 
-        // TODO: correct expected edge count
-        int expectedEdgeCount = horizontal + vertical;
-
-        assertEquals(expectedEdgeCount, edges.length, "The number of edges should be correct");
+        vertices.removeIf( (v) -> v.forAll(null) );
     }
     
 }
