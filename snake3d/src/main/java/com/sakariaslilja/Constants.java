@@ -10,5 +10,8 @@ public class Constants {
 
     public static final int UNIT = 1000;
     public static final int STEP_SIZE = 1;
+
+    public static final int MIN_WORLD_SIZE = 2;
+    public static final int MAX_WORLD_SIZE = 100;
     
 }
