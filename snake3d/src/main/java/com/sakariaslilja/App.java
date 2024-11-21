@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import com.sakariaslilja.models.Tuple;
+
 /**
  * JavaFX App for the Snake3D game.
  */
@@ -22,6 +24,7 @@ public class App extends Application {
     // Sets the primary scene of the application.
     @Override
     public void start(@SuppressWarnings("exports") Stage stage) throws IOException {
+        stage.setTitle(Constants.GAME_NAME);
         scene = new Scene(loadFXML(primarySceneFXML), Constants.WIDTH, Constants.HEIGHT);
         scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
         stage.setScene(scene);

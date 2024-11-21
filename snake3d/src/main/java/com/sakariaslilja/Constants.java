@@ -5,6 +5,8 @@ package com.sakariaslilja;
  */
 public class Constants {
 
+    public static final String GAME_NAME = "Snake 3D";
+
     /**
      * The display's width in pixels.
      */
