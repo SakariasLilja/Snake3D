@@ -3,13 +3,14 @@ package com.sakariaslilja.models;
 import com.sakariaslilja.Constants;
 
 /**
- * An instance of a world with a set width and height.
+ * An instance of a world with a set width, height and depth.
  */
 public class World {
 
     // Constants of the world.
     private final int width;
     private final int height;
+    private final int depth;
 
     /**
      * World constructor with two parameters.
@@ -19,10 +20,12 @@ public class World {
      * to avoid an invalid world size.
      * @param width The width of the world. 
      * @param height The height of the world.
+     * @param depth The depth of the world.
      */
-    public World(int width, int height) {
+    public World(int width, int height, int depth) {
         this.width = validateSize(width);
         this.height = validateSize(height);
+        this.depth = validateSize(depth);
     }
 
     /**
@@ -31,12 +34,13 @@ public class World {
      * <p>
      * The size is validated before assignment to
      * avoid an invalid world size.
-     * @param size The width and height of the world.
+     * @param size The width, height and depth of the world.
      */
     public World(int size) {
         int validatedSize = validateSize(size);
         this.height = validatedSize;
         this.width = validatedSize;
+        this.depth = validatedSize;
     }
 
     /**
@@ -77,6 +81,15 @@ public class World {
     }
 
     /**
+     * The depth is calculated with the world height and
+     * the game's unit size.
+     * @return The converted world depth.
+     */
+    public int getDepth() {
+        return this.depth * Constants.UNIT;
+    }
+
+    /**
      * Every vertex of the world. 
      * Vertices are in order:
      * <p>
@@ -84,6 +97,9 @@ public class World {
      * @return An array of 3D coordinates
      */
     public Vector3D[] getVerticesClockwise() {
+        int columns = this.width * (Constants.WORLD_ACCURACY * (this.width - 1));
+        int rows = this.height * (Constants.WORLD_ACCURACY * (this.height - 1));
+        int layers = this.depth * (Constants.WORLD_ACCURACY * (this.depth - 1));
         Vector3D[] out = new Vector3D[100];
         return out;
     }
@@ -97,6 +113,7 @@ public class World {
      */
     public Vector3D[] getVerticesLengthwise() {
         Vector3D[] out = new Vector3D[2];
+        // TODO: implement similarly to getVerticesClockwise
         return out;
     }
 
@@ -112,6 +129,7 @@ public class World {
      */
     public Tuple[] getEdges() {
         Tuple[] out = new Tuple[100];
+        // TODO: implement w/ both getVertices-methods
         return out;
     }
     
