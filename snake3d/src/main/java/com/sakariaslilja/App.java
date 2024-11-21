@@ -18,13 +18,11 @@ public class App extends Application {
 
     // Variables of the scene.
     private static final String primarySceneFXML = "mainpage";
-    private static final int width = 640;
-    private static final int height = 480;
 
     // Sets the primary scene of the application.
     @Override
     public void start(@SuppressWarnings("exports") Stage stage) throws IOException {
-        scene = new Scene(loadFXML(primarySceneFXML), width, height);
+        scene = new Scene(loadFXML(primarySceneFXML), Constants.WIDTH, Constants.HEIGHT);
         scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
