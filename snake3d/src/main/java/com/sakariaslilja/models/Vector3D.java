@@ -1,5 +1,7 @@
 package com.sakariaslilja.models;
 
+import java.util.function.Function;
+
 /**
  * Class representing a 3D vector.
  * Vectors are considered equal if each of their values are the same.
@@ -82,6 +84,16 @@ public class Vector3D {
      */
     public Vector3D mul(int scalar) {
         return new Vector3D(scalar * this.x, scalar * this.y, scalar * this.z);
+    }
+
+    /**
+     * Method that takes an anonymous function and applies it to
+     * each coordinate of this Vector3D.
+     * @param function The anonymous function to apply to each coordinate
+     * @return If the function is true for every coordinate
+     */
+    public boolean forAll(Function<Integer, Boolean> function) {
+        return function.apply(x) && function.apply(y) && function.apply(z);
     }
 
     @Override

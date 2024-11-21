@@ -77,5 +77,14 @@ public class Vector3DTests {
         assertNotEquals(backward, forward, "The equals method should return false when not equal");
         assertEquals(forward, custom, "The equals method should return true if the values are the same");
     }
+
+    @Test
+    @DisplayName("Vector3D forAll")
+    void vectorForAll() {
+        Vector3D vector3d = new Vector3D(2, 0, 4);
+
+        assertNotEquals(true, vector3d.forAll((c) -> c < 0), "The forAll method should return false");
+        assertEquals(true, vector3d.forAll((c) -> c >= 0), "The forAll method should return true");
+    }
     
 }
