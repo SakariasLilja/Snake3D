@@ -42,6 +42,16 @@ public class Tuple {
         value2 = function.apply(value2);
     }
 
+    /**
+     * Contains method. 
+     * Checks if a Vector3D is found in this Tuple.
+     * @param vector3d The Vector3D to check for
+     * @return If either value equals the wanted Vector3D
+     */
+    public boolean contains(Vector3D vector3d) {
+        return value1.equals(vector3d) || value2.equals(vector3d);
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj.getClass() == null || obj.getClass() != this.getClass()) {

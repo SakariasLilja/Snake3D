@@ -93,5 +93,18 @@ public class TupleTests {
 
         assertEquals(expected, tuple.toString(), "The toString method should work as expected");
     }
+
+    @Test
+    @DisplayName("Tuple contains")
+    void tupleContains() {
+        Vector3D value1 = Vector3D.Right;
+        Vector3D value2 = Vector3D.Up;
+
+        Tuple tuple = new Tuple(value1, value2);
+        Vector3D check = new Vector3D(1, 0, 0);
+
+        assertEquals(true, tuple.contains(check), "The contains method should return true when Tuple contains Vector3D");
+        assertNotEquals(true, tuple.contains(check.neg()), "The contains method should return false when Tuple doesn't contain Vector3D");
+    }
     
 }
