@@ -3,6 +3,8 @@ package com.sakariaslilja.models;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -103,20 +105,56 @@ public class WorldTests {
         World world = new World(width, height, depth);
 
         ArrayList<Tuple> edges = world.getEdges();
+
+        HashSet<Vector3D> edgeVertices = new HashSet<Vector3D>();
+
+        for (Tuple edge : edges) {
+            Vector3D value1 = edge.value1;
+            Vector3D value2 = edge.value2;
+            edgeVertices.add(value1);
+            edgeVertices.add(value2);
+        }
+
         Vector3D[] verticesArr = world.getVertices()[0];
-        ArrayList<Vector3D> vertices = new ArrayList<Vector3D>();
+        ArrayList<Vector3D> validVertices = new ArrayList<Vector3D>();
+        ArrayList<Vector3D> invalidVertices = new ArrayList<Vector3D>();
         Integer maxX = 0;
         Integer maxY = 0;
         Integer maxZ = 0;
 
         for (Vector3D vertex : verticesArr) {
-            vertices.add(vertex);
+            validVertices.add(vertex);
+            invalidVertices.add(vertex);
             maxX = Integer.max(maxX, vertex.getX());
             maxY = Integer.max(maxY, vertex.getY());
             maxZ = Integer.max(maxZ, vertex.getZ());
         }
 
-        vertices.removeIf( (v) -> v.forAll(null) );
+        final int x = maxX.intValue();
+        final int y = maxY.intValue();
+        final int z = maxZ.intValue();
+
+        Predicate<Integer> largerThanZero = (c) -> c > 0;
+        Predicate<Vector3D> isInvalidVector = (v) -> v.forAll(largerThanZero) && v.getX() < x && v.getY() < y && v.getZ() < z;
+        Predicate<Vector3D> isValidVector = (v) -> !(v.forAll(largerThanZero) && v.getX() < x && v.getY() < y && v.getZ() < z);
+
+        validVertices.removeIf(isInvalidVector);
+        invalidVertices.removeIf(isValidVector);
+
+        boolean edgesAreValid = true;
+        boolean edgesContainAllValidVertices = true;
+
+        for (Vector3D vertex : edgeVertices) {
+            if (invalidVertices.contains(vertex)) {
+                edgesAreValid = false;
+            }
+            if (!validVertices.contains(vertex)) {
+                edgesAreValid = false;
+            }
+        }
+
+        assertEquals(true, edgesAreValid, "No invalid edges should be present in new edges");
+        assertEquals(true, edgesContainAllValidVertices, "All valid vertices should be found in edges");
     }
     
 }
