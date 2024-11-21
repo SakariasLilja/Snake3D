@@ -4,6 +4,10 @@ import com.sakariaslilja.App;
 import java.io.IOException;
 import javafx.fxml.FXML;
 
+/**
+ * Controller for newgame.fxml.
+ * View for starting a new game and giving it parameters.
+ */
 public class NewGameController {
 
     /**

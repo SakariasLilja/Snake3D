@@ -4,6 +4,10 @@ import com.sakariaslilja.App;
 import java.io.IOException;
 import javafx.fxml.FXML;
 
+/**
+ * Controller for loadgame.fxml.
+ * View for loading a previously saved game.
+ */
 public class LoadGameController {
 
     /**

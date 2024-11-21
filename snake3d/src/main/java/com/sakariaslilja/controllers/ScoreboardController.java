@@ -4,6 +4,10 @@ import com.sakariaslilja.App;
 import java.io.IOException;
 import javafx.fxml.FXML;
 
+/**
+ * Controller for scoreboard.fxml.
+ * View for viewing previous highscores etc.
+ */
 public class ScoreboardController {
 
     /**

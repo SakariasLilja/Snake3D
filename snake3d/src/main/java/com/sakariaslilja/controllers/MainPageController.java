@@ -4,6 +4,10 @@ import com.sakariaslilja.App;
 import java.io.IOException;
 import javafx.fxml.FXML;
 
+/**
+ * Controller for mainpage.fxml.
+ * View for title screen when loading up the game.
+ */
 public class MainPageController {
 
     /**
