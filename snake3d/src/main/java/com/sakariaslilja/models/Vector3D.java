@@ -2,6 +2,7 @@ package com.sakariaslilja.models;
 
 /**
  * Class representing a 3D vector.
+ * Vectors are considered equal if each of their values are the same.
  */
 public class Vector3D {
 

@@ -4,6 +4,7 @@ import java.lang.Math;
 
 /**
  * 3D vector class for double precision.
+ * Vectors are considered equal if each of their values are the same.
  */
 public class DoubleVector3D {
 
@@ -76,6 +77,10 @@ public class DoubleVector3D {
         return new DoubleVector3D(x*Math.cos(radians)-y*Math.sin(radians), x*Math.sin(radians)+y*Math.cos(radians), z);
     }
 
+    /**
+     * Rounds every value of the vector's values to the closest integer.
+     * @return A new [DoubleVector3D] with the rounded values.
+     */
     public DoubleVector3D round() {
         return new DoubleVector3D(Math.rint(x), Math.rint(y), Math.rint(z));
     }
