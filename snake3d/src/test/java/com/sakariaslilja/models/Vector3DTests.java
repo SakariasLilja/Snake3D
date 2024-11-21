@@ -86,5 +86,15 @@ public class Vector3DTests {
         assertNotEquals(true, vector3d.forAll((c) -> c < 0), "The forAll method should return false");
         assertEquals(true, vector3d.forAll((c) -> c >= 0), "The forAll method should return true");
     }
+
+    @Test
+    @DisplayName("Vector3D conversion to DoubleVector3D")
+    void vectorConvert() {
+        Vector3D vector3d = new Vector3D(1, 2, 3);
+        DoubleVector3D converted = vector3d.toDoubleVector3D();
+        DoubleVector3D expected = new DoubleVector3D(1, 2, 3);
+
+        assertEquals(expected, converted, "The toDoubleVector3D should work as expected");
+    }
     
 }

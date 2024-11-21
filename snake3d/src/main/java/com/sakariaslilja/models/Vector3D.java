@@ -96,6 +96,14 @@ public class Vector3D {
         return function.apply(x) && function.apply(y) && function.apply(z);
     }
 
+    /**
+     * Converts this Vector3D to a DoubleVector3D.
+     * Has the same values.
+     */
+    public DoubleVector3D toDoubleVector3D() {
+        return new DoubleVector3D(x, y, z);
+    }
+
     @Override
     public String toString() {
         return "Vector3D(" + x + ", " + y + ", " + z + ")";

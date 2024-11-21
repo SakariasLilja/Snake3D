@@ -83,5 +83,15 @@ public class DoubleVector3DTests {
         DoubleVector3D expected = new DoubleVector3D(-2, 1, 3);
         assertEquals(expected, result, "The rotateZ method should give correct result");
     }
+
+    @Test
+    @DisplayName("DoubleVector3D convert to Vector3D")
+    void convertToVector3D() {
+        DoubleVector3D vector = new DoubleVector3D(1.8, -0.2, -1.9);
+        Vector3D converted = vector.toVector3D();
+        Vector3D expected = new Vector3D(2, 0, -2);
+
+        assertEquals(expected, converted, "The toVector3D method should work as expected");
+    }
     
 }

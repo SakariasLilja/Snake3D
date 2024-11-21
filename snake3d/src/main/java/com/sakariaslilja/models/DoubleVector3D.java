@@ -85,6 +85,16 @@ public class DoubleVector3D {
         return new DoubleVector3D(Math.rint(x), Math.rint(y), Math.rint(z));
     }
 
+    /**
+     * Conversion method from this DoubleVector3D to a Vector3D.
+     * Round the values of this vector with the {@code round} method.
+     * @return Vector3D with this DoubleVector3D's values rounded to the closest integer.
+     */
+    public Vector3D toVector3D() {
+        DoubleVector3D rounded = this.round();
+        return new Vector3D((int) rounded.getX(), (int) rounded.getY(), (int) rounded.getZ());
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null || obj.getClass() != this.getClass()) {
