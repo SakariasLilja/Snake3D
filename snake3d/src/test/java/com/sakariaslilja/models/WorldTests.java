@@ -90,5 +90,25 @@ public class WorldTests {
         
         assertEquals(oddLocation, verticesArr[0][expectedIndex]);
     }
+
+    @Test
+    @DisplayName("World edges test")
+    void getEdges() {
+        int width = 2;
+        int height = 3;
+        int depth = 4;
+
+        int rowSize = width + (Constants.WORLD_ACCURACY * (width - 1));
+        int columnSize = height + (Constants.WORLD_ACCURACY * (height - 1));
+        int layerSize = depth + (Constants.WORLD_ACCURACY * (depth - 1));
+
+        World world = new World(width, height, depth);
+
+        Tuple[] edges = world.getEdges();
+        
+        int expectedEdgeCount = 2*((rowSize-1)*columnSize + (rowSize-1)*layerSize + (columnSize-1)*rowSize + (columnSize-1)*layerSize + (layerSize-1)*rowSize + (layerSize-1)*columnSize);
+
+        assertEquals(expectedEdgeCount, edges.length, "The number of edges should be correct");
+    }
     
 }

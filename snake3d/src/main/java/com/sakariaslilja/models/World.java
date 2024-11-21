@@ -132,7 +132,7 @@ public class World {
     }
 
     /**
-     * Every edge of the world.
+     * Every edge of the world's walls.
      * An edge is the connection between two vertices.
      * Edges come in the order:
      * <p>
@@ -141,11 +141,17 @@ public class World {
      * - Top to bottom
      * <p>
      * - Front to back
-     * @return [Tuple] array.
+     * @return [Tuple] array containing every edge present in the world's walls.
      */
     public Tuple[] getEdges() {
-        Tuple[] out = new Tuple[100];
-        // TODO: implement w/ both getVertices-methods
+        int columns = this.width + (Constants.WORLD_ACCURACY * (this.width - 1));
+        int rows = this.height + (Constants.WORLD_ACCURACY * (this.height - 1));
+        int layers = this.depth + (Constants.WORLD_ACCURACY * (this.depth - 1));
+
+        int worldSizeEstimation = 4 * (rows*columns + columns*layers + layers*rows);
+        int worldSizeError = 4 * (rows + columns + layers);
+
+        Tuple[] out = new Tuple[worldSizeEstimation - worldSizeError];
         return out;
     }
     
