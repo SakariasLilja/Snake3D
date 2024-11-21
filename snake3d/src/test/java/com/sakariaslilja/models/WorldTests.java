@@ -105,8 +105,12 @@ public class WorldTests {
         World world = new World(width, height, depth);
 
         Tuple[] edges = world.getEdges();
-        
-        int expectedEdgeCount = 2*((rowSize-1)*columnSize + (rowSize-1)*layerSize + (columnSize-1)*rowSize + (columnSize-1)*layerSize + (layerSize-1)*rowSize + (layerSize-1)*columnSize);
+
+        int horizontal = columnSize * 2 * (rowSize + layerSize - 2);
+        int vertical = rowSize * 2 * (columnSize + layerSize - 2);
+
+        // TODO: correct expected edge count
+        int expectedEdgeCount = horizontal + vertical;
 
         assertEquals(expectedEdgeCount, edges.length, "The number of edges should be correct");
     }

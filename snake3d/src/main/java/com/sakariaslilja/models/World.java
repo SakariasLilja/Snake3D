@@ -2,6 +2,7 @@ package com.sakariaslilja.models;
 
 import com.sakariaslilja.Constants;
 import java.lang.Math;
+import java.util.function.Function;
 
 /**
  * An instance of a world with a set width, height and depth.
@@ -147,12 +148,37 @@ public class World {
         int columns = this.width + (Constants.WORLD_ACCURACY * (this.width - 1));
         int rows = this.height + (Constants.WORLD_ACCURACY * (this.height - 1));
         int layers = this.depth + (Constants.WORLD_ACCURACY * (this.depth - 1));
+        // TODO: remove null values from array
 
-        int worldSizeEstimation = 4 * (rows*columns + columns*layers + layers*rows);
-        int worldSizeError = 4 * (rows + columns + layers);
+        int horizontalStripes = columns * 2 * (rows + layers - 2);
+        int verticalStripes = rows * 2 * (columns + layers - 2);
 
-        Tuple[] out = new Tuple[worldSizeEstimation - worldSizeError];
-        return out;
+        Vector3D[][] verticesArr = this.getVertices();
+        int[] correspondingDimension = {columns, rows, layers};
+        int vertexCount = verticesArr[0].length;
+
+        Tuple[] edges = new Tuple[horizontalStripes + verticalStripes];
+        int edgeIndex = 0;
+
+        for (int arrayIndex = 0; arrayIndex < verticesArr.length; arrayIndex++) {
+            for (int i = 1; i < vertexCount - 1; i++) {
+                int upperLimit = correspondingDimension[arrayIndex];
+                if (i % upperLimit == 0) {
+                    continue;
+                } else {
+                    Vector3D firstVector = verticesArr[arrayIndex][i-1];
+                    Vector3D secondVector = verticesArr[arrayIndex][i];
+                    Function<Integer, Boolean> valuesInBetween = (c) -> c > 0 && c <= (upperLimit) * Constants.UNIT;
+
+                    if (!firstVector.forAll(valuesInBetween) && !secondVector.forAll(valuesInBetween)) {
+                        edges[edgeIndex] = new Tuple(firstVector, secondVector);
+                        edgeIndex++;
+                    }
+                }
+            }
+        }
+        
+        return edges;
     }
     
 }
