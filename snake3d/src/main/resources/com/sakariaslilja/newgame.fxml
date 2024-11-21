@@ -17,6 +17,11 @@
                 <Insets top="5.0" bottom="5.0" right="5.0" left="5.0" />
             </padding>
         </HBox>
+        <VBox spacing="20.0">
+            <children>
+                <Button text="Start Game" onAction="#gotoGame" />
+            </children>
+        </VBox>
     </children>
     <padding>
         <Insets top="10.0" bottom="10.0" right="10.0" left="10.0" />
