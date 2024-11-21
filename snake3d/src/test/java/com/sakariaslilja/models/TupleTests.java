@@ -25,10 +25,11 @@ public class TupleTests {
     void tupleEqual() {
         Vector3D value1 = new Vector3D(126, 16, -27);
         Vector3D value2 = new Vector3D(8, -3, -818);
+        Vector3D value2copy = new Vector3D(8, -3, -818);
 
         Tuple tuple1 = new Tuple(value1, value2);
         Tuple tuple2 = new Tuple(value1, value1);
-        Tuple tuple3 = new Tuple(value1, value2);
+        Tuple tuple3 = new Tuple(value1, value2copy);
 
         assertEquals(tuple1, tuple1, "Same reference should be equal");
         assertNotEquals(tuple1, tuple2, "Different values should not be equal");
