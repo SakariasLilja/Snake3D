@@ -9,8 +9,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import com.sakariaslilja.models.Tuple;
-
 /**
  * JavaFX App for the Snake3D game.
  */
