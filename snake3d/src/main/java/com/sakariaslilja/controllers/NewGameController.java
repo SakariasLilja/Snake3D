@@ -18,5 +18,14 @@ public class NewGameController {
     private void gotoMainPage() throws IOException {
         App.setRoot("mainpage");
     }
+
+    /**
+     * Navigates via [App] to game.fxml
+     * @throws IOException The file game.fxml wasn't found/couldn't be read.
+     */
+    @FXML
+    private void gotoGame() throws IOException {
+        App.setRoot("game");
+    }
     
 }
