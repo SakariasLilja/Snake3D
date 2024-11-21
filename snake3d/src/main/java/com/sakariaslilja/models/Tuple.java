@@ -56,5 +56,10 @@ public class Tuple {
 
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "[" + value1.toString() + " <-> " + value2.toString() + "]";
+    }
     
 }

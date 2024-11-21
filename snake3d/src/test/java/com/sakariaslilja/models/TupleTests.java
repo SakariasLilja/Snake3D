@@ -80,5 +80,18 @@ public class TupleTests {
 
         assertEquals(expected, tuple, "forEach should work as expected");
     }
+
+    @Test
+    @DisplayName("Tuple toString")
+    void tupleToString() {
+        Vector3D value1 = Vector3D.Right;
+        Vector3D value2 = Vector3D.Down;
+
+        Tuple tuple = new Tuple(value1, value2);
+
+        String expected = "[Vector3D(1, 0, 0) <-> Vector3D(0, 1, 0)]";
+
+        assertEquals(expected, tuple.toString(), "The toString method should work as expected");
+    }
     
 }
