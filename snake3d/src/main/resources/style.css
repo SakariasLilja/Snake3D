@@ -35,3 +35,23 @@
 
     background-color: #4a4e69;
 }
+
+#bgoverlay {
+    -fx-background-color: black;
+    -fx-opacity: 0.7;
+
+    background-color: black;
+    opacity: 0.7;
+}
+
+#pausebtn {
+    -fx-font-family: 'Doto SemiBold';
+    -fx-font-size: 26;
+    -fx-background-color: cornflowerblue;
+    -fx-text-fill: whitesmoke;
+
+    font-family: 'Doto SemiBold';
+    font-size: 26;
+    background-color: cornflowerblue;
+    color: whitesmoke;
+}
