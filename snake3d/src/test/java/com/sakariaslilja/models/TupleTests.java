@@ -49,5 +49,35 @@ public class TupleTests {
 
         assertEquals(expected, tuple, "Updating values should work");
     }
+
+    @Test
+    @DisplayName("ForAll function")
+    void forAll() {
+        Vector3D value1 = new Vector3D(6, 4, 1);
+        Vector3D value2 = new Vector3D(6, 2, 55);
+
+        Tuple tuple = new Tuple(value1, value2);
+
+        assertEquals(true, tuple.forAll((v) -> v.getX() > 0), "forAll should return true");
+        assertEquals(false, tuple.forAll((v) -> v.getZ() == 0), "forAll should return false");
+    }
+
+    @Test
+    @DisplayName("ForEach function")
+    void forEach() {
+        Vector3D value1 = Vector3D.Right;
+        Vector3D value2 = Vector3D.Left;
+        int scalar = 2;
+
+        Tuple tuple = new Tuple(value1, value2);
+        
+        Tuple expected = new Tuple(value1.mul(scalar), value2.mul(scalar));
+
+        assertNotEquals(expected, tuple, "Should not be equal before forEach is run");
+
+        tuple.forEach((v) -> v.mul(scalar));
+
+        assertEquals(expected, tuple, "forEach should work as expected");
+    }
     
 }
