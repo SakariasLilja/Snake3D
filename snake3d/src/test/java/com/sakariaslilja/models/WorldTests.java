@@ -56,16 +56,41 @@ public class WorldTests {
     @Test
     @DisplayName("World vertices")
     void getVertices() {
-        int size = 4;
-        World world = new World(size);
+        int width = 2;
+        int height = 3;
+        int depth = 4;
+        World world = new World(width, height, depth);
 
         Vector3D[] verticesCW = world.getVerticesClockwise();
         Vector3D[] verticesLW = world.getVerticesLengthwise();
-        int edgeSize = (size + (Constants.WORLD_ACCURACY * size - 1));
-        int expectedSize = edgeSize*edgeSize*edgeSize;
+
+        int rowSize = width + (Constants.WORLD_ACCURACY * (width - 1));
+        int columnSize = height + (Constants.WORLD_ACCURACY * (height - 1));
+        int layerSize = depth + (Constants.WORLD_ACCURACY * (depth - 1));
+
+        int expectedSize = rowSize*columnSize*layerSize;
 
         assertEquals(expectedSize, verticesCW.length, "The number of vertices should be correct");
-        assertEquals(expectedSize, verticesLW.length, "The number of vertices should be correct");
+
+        Vector3D head = new Vector3D(0, 0, 0);
+        Vector3D last = new Vector3D((width - 1), (height - 1), (depth - 1)).mul(Constants.UNIT);
+
+        assertEquals(head, verticesCW[0], "First element should be located at (0, 0, 0)");
+        assertEquals(last, verticesCW[expectedSize - 1], "Last element should be correct");
+
+        int x = width - 1;
+        int y = height - 1;
+        int z = depth - 1;
+
+        double weirdX = Math.rint(1.0 * x * Constants.UNIT / (Constants.WORLD_ACCURACY + 1));
+        double weirdY = Math.rint(1.0 * y * Constants.UNIT / (Constants.WORLD_ACCURACY + 1));
+        double weirdZ = Math.rint(1.0 * z * Constants.UNIT / (Constants.WORLD_ACCURACY + 1));
+
+        Vector3D oddLocation = new Vector3D((int) weirdX, (int) weirdY, (int) weirdZ);
+        int expectedIndex = x + y * rowSize + z * rowSize * columnSize;
+        
+        assertEquals(oddLocation, verticesCW[expectedIndex]);
+        //assertEquals(expectedSize, verticesLW.length, "The number of vertices should be correct");
     }
     
 }

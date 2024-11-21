@@ -1,6 +1,7 @@
 package com.sakariaslilja.models;
 
 import com.sakariaslilja.Constants;
+import java.lang.Math;
 
 /**
  * An instance of a world with a set width, height and depth.
@@ -97,10 +98,26 @@ public class World {
      * @return An array of 3D coordinates
      */
     public Vector3D[] getVerticesClockwise() {
-        int columns = this.width * (Constants.WORLD_ACCURACY * (this.width - 1));
-        int rows = this.height * (Constants.WORLD_ACCURACY * (this.height - 1));
-        int layers = this.depth * (Constants.WORLD_ACCURACY * (this.depth - 1));
-        Vector3D[] out = new Vector3D[100];
+        int columns = this.width + (Constants.WORLD_ACCURACY * (this.width - 1));
+        int rows = this.height + (Constants.WORLD_ACCURACY * (this.height - 1));
+        int layers = this.depth + (Constants.WORLD_ACCURACY * (this.depth - 1));
+
+        Vector3D[] out = new Vector3D[columns*rows*layers];
+
+        for (int k = 0; k < layers; k++) {
+            for (int j = 0; j < rows; j++) {
+                for (int i = 0; i < columns; i++) {
+                    int index = i + j*columns + k*columns*rows;
+
+                    double x = Math.rint(1.0 * i * Constants.UNIT / (Constants.WORLD_ACCURACY + 1));
+                    double y = Math.rint(1.0 * j * Constants.UNIT / (Constants.WORLD_ACCURACY + 1));
+                    double z = Math.rint(1.0 * k * Constants.UNIT / (Constants.WORLD_ACCURACY + 1));
+
+                    out[index] = new Vector3D((int) x, (int) y, (int) z);
+                }
+            }
+        }
+
         return out;
     }
 
