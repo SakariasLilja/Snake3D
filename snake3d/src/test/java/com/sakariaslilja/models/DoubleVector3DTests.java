@@ -112,5 +112,16 @@ public class DoubleVector3DTests {
 
         assertEquals(expected, vector.toString(), "The toString method should work as expected");
     }
+
+    @Test
+    @DisplayName("DoubleVector3D add")
+    void doubleVectorAdd() {
+        DoubleVector3D first = Vector3D.Backward.toDoubleVector3D();
+        DoubleVector3D second = Vector3D.Forward.toDoubleVector3D();
+
+        DoubleVector3D expected = new DoubleVector3D(0, 0, 0);
+
+        assertEquals(expected, first.add(second), "The add method should work as expected");
+    }
     
 }

@@ -107,6 +107,15 @@ public class DoubleVector3D extends AbstractVector {
         return new Vector3D((int) rounded.getX(), (int) rounded.getY(), (int) rounded.getZ());
     }
 
+    /**
+     * Method for adding two DoubleVector3D to each other
+     * @param other The DoubleVector3D to add to this one
+     * @return A new DoubleVector3D with the added values
+     */
+    public DoubleVector3D add(DoubleVector3D other) {
+        return new DoubleVector3D(x + other.getX(), y + other.getY(), z + other.getZ());
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null || obj.getClass() != this.getClass()) {
