@@ -76,7 +76,7 @@ public class WorldTests {
         assertEquals(expectedSize, verticesArr[0].length, "The number of vertices should be correct");
 
         Vector3D head = new Vector3D(0, 0, 0);
-        Vector3D last = new Vector3D((width - 1), (height - 1), (depth - 1)).mul(Constants.UNIT);
+        Vector3D last = new Vector3D((width - 1), (height - 1), (depth - 1));
 
         assertEquals(head, verticesArr[0][0], "First element should be located at (0, 0, 0)");
         assertEquals(last, verticesArr[0][expectedSize - 1], "Last element should be correct");
@@ -85,9 +85,9 @@ public class WorldTests {
         int y = height - 1;
         int z = depth - 1;
 
-        double weirdX = Math.rint(1.0 * x * Constants.UNIT / (Constants.WORLD_ACCURACY + 1));
-        double weirdY = Math.rint(1.0 * y * Constants.UNIT / (Constants.WORLD_ACCURACY + 1));
-        double weirdZ = Math.rint(1.0 * z * Constants.UNIT / (Constants.WORLD_ACCURACY + 1));
+        double weirdX = Math.rint(1.0 * x / (Constants.WORLD_ACCURACY + 1));
+        double weirdY = Math.rint(1.0 * y / (Constants.WORLD_ACCURACY + 1));
+        double weirdZ = Math.rint(1.0 * z / (Constants.WORLD_ACCURACY + 1));
 
         Vector3D oddLocation = new Vector3D((int) weirdX, (int) weirdY, (int) weirdZ);
         int expectedIndex = x + y * rowSize + z * rowSize * columnSize;

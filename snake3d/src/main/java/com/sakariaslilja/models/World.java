@@ -93,7 +93,7 @@ public class World {
     }
 
     /**
-     * Calculates the vertices of the world.
+     * Calculates the vertices of the world shape.
      * Inserts each vertex to their location in the corresponding array.
      * @return 3 arrays:
      * <p>
@@ -117,9 +117,9 @@ public class World {
                     int indexTB = row + column*rows + layer*columns*rows;
                     int indexFB = layer + column*layers + row*layers*columns;
 
-                    double x = Math.rint(1.0 * column * Constants.UNIT / (Constants.WORLD_ACCURACY + 1));
-                    double y = Math.rint(1.0 * row * Constants.UNIT / (Constants.WORLD_ACCURACY + 1));
-                    double z = Math.rint(1.0 * layer * Constants.UNIT / (Constants.WORLD_ACCURACY + 1));
+                    double x = Math.rint(1.0 * column / (Constants.WORLD_ACCURACY + 1));
+                    double y = Math.rint(1.0 * row / (Constants.WORLD_ACCURACY + 1));
+                    double z = Math.rint(1.0 * layer / (Constants.WORLD_ACCURACY + 1));
 
                     Vector3D vector3d = new Vector3D((int) x, (int) y, (int) z);
 
@@ -164,7 +164,7 @@ public class World {
                 } else {
                     Vector3D firstVector = verticesArr[arrayIndex][i-1];
                     Vector3D secondVector = verticesArr[arrayIndex][i];
-                    Predicate<Integer> valuesInBetween = (c) -> c > 0 && c <= (upperLimit) * Constants.UNIT;
+                    Predicate<Integer> valuesInBetween = (c) -> c > 0 && c <= (upperLimit);
 
                     if (!firstVector.forAll(valuesInBetween) && !secondVector.forAll(valuesInBetween)) {
                         Tuple tuple = new Tuple(firstVector.toDoubleVector3D(), secondVector.toDoubleVector3D());
