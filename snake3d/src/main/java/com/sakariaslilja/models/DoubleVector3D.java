@@ -124,6 +124,14 @@ public class DoubleVector3D extends AbstractVector {
         return new DoubleVector3D(x, y, z);
     }
 
+    /**
+     * Negates the values of this DoubleVector3D
+     * @return A negated DoubleVector3D
+     */
+    public DoubleVector3D neg() {
+        return new DoubleVector3D(-x, -y, -z);
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null || obj.getClass() != this.getClass()) {

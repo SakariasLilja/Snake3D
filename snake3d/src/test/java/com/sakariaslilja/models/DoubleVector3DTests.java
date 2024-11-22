@@ -134,4 +134,14 @@ public class DoubleVector3DTests {
         assertNotEquals(true, vector == duplicate, "The duplicate should create a new object reference");
     }
     
+    @Test
+    @DisplayName("DoubleVector3D negate")
+    void doubleVectorNegate() {
+        DoubleVector3D vector = new DoubleVector3D(1, 2, 3);
+        DoubleVector3D negated = vector.neg();
+        DoubleVector3D expected = new DoubleVector3D(-1, -2, -3);
+
+        assertEquals(expected, negated, "The negate method should work as expected");
+    }
+    
 }
