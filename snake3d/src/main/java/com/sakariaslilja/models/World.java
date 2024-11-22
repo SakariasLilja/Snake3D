@@ -149,27 +149,42 @@ public class World {
         int columns = this.width + (Constants.WORLD_ACCURACY * (this.width - 1));
         int rows = this.height + (Constants.WORLD_ACCURACY * (this.height - 1));
         int layers = this.depth + (Constants.WORLD_ACCURACY * (this.depth - 1));
+        int[] dimensions = {columns, rows, layers};
 
         Vector3D[][] verticesArr = this.getVertices();
-        int[] correspondingDimension = {columns, rows, layers};
         int vertexCount = verticesArr[0].length;
 
         ArrayList<Tuple> edges = new ArrayList<Tuple>();
 
-        for (int arrayIndex = 0; arrayIndex < verticesArr.length; arrayIndex++) {
-            for (int i = 1; i < vertexCount - 1; i++) {
-                int upperLimit = correspondingDimension[arrayIndex];
-                if (i % upperLimit == 0) {
-                    continue;
-                } else {
-                    Vector3D firstVector = verticesArr[arrayIndex][i-1];
-                    Vector3D secondVector = verticesArr[arrayIndex][i];
-                    Predicate<Integer> valuesInBetween = (c) -> c > 0 && c <= (upperLimit);
+        Predicate<Double> isZero = (d) -> d.doubleValue() == 0;
 
-                    if (!firstVector.forAll(valuesInBetween) && !secondVector.forAll(valuesInBetween)) {
-                        Tuple tuple = new Tuple(firstVector.toDoubleVector3D(), secondVector.toDoubleVector3D());
-                        edges.add(tuple);
-                    }
+        Predicate<DoubleVector3D> hasZero = (v) -> v.exists(isZero);
+        Predicate<DoubleVector3D> hasValidX = (v) -> v.getX() == 0 || v.getX() == columns - 1;
+        Predicate<DoubleVector3D> hasValidY = (v) -> v.getY() == 0 || v.getY() == rows - 1;
+        Predicate<DoubleVector3D> hasValidZ = (v) -> v.getZ() == 0 || v.getZ() == layers - 1;
+
+        ArrayList<Predicate<DoubleVector3D>> predicates = new ArrayList<>();
+        predicates.add(hasValidX);
+        predicates.add(hasValidY);
+        predicates.add(hasValidZ);
+
+        for (int arr = 0; arr < verticesArr.length; arr++) {
+            ArrayList<Integer> predIndex = new ArrayList<>();
+            predIndex.add(0);
+            predIndex.add(1);
+            predIndex.add(2);
+            predIndex.remove(arr);
+
+            for (int i = 1; i < vertexCount; i++) {
+                if (i % dimensions[arr] == 0) {
+                    continue;
+                }
+                DoubleVector3D first = verticesArr[arr][i-1].toDoubleVector3D();
+                DoubleVector3D second = verticesArr[arr][i].toDoubleVector3D();
+    
+                Tuple tuple = new Tuple(first, second);
+                if (tuple.forAll(hasZero) || tuple.forAll(predicates.get(predIndex.get(0))) || tuple.forAll(predicates.get(predIndex.get(1)))) {
+                    edges.add(tuple);
                 }
             }
         }
