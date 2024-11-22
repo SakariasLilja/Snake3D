@@ -41,7 +41,7 @@ public class Renderer {
         this.engine = engine;
 
         double offsetX = 0.5 * (engine.getWorldWidth() - 1);
-        double offsetY = 0.5 * (engine.getWorldHeight() - 1);
+        double offsetY = 0.5 * (engine.getWorldHeight() - 2);
         double offsetZ = 0.5 * (engine.getWorldDepth() - 1);
         this.worldOffsetCorrection = new DoubleVector3D(offsetX, offsetY, offsetZ).neg();
     }
