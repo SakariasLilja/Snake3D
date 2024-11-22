@@ -98,6 +98,8 @@ public class GameEngine {
      * Update method of the world.
      */
     public void update() {
+        DoubleVector3D movement = new DoubleVector3D(0.001, 0, 0);
+        camera = camera.add(movement);
     }
     
 }
