@@ -123,5 +123,15 @@ public class DoubleVector3DTests {
 
         assertEquals(expected, first.add(second), "The add method should work as expected");
     }
+
+    @Test
+    @DisplayName("DoubleVector3D duplicate")
+    void doubleVectorDuplicate() {
+        DoubleVector3D vector = new DoubleVector3D(1, 2, 2);
+        DoubleVector3D duplicate = vector.duplicate();
+
+        assertEquals(vector, duplicate, "The duplicate method should produce a copy");
+        assertNotEquals(true, vector == duplicate, "The duplicate should create a new object reference");
+    }
     
 }

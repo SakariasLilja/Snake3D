@@ -116,6 +116,14 @@ public class DoubleVector3D extends AbstractVector {
         return new DoubleVector3D(x + other.getX(), y + other.getY(), z + other.getZ());
     }
 
+    /**
+     * Duplicates this DoubleVector3D
+     * @return A new DoubleVector3D with identical values
+     */
+    public DoubleVector3D duplicate() {
+        return new DoubleVector3D(x, y, z);
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null || obj.getClass() != this.getClass()) {
