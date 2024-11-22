@@ -11,11 +11,6 @@ public class Constants {
     public static final String GAME_NAME = "Snake 3D";
 
     /**
-     * The focal length of the game's camera.
-     */
-    public static final double FOCAL_LENGTH = 1.0;
-
-    /**
      * The frames per second the game is running and rendered at.
      */
     public static final int FPS = 60;
@@ -29,6 +24,11 @@ public class Constants {
      * The display's height in pixels.
      */
     public static final int HEIGHT = 480;
+
+    /**
+     * The focal length of the game's camera.
+     */
+    public static final double FOCAL_LENGTH = 1.4;
 
     /**
      * The game camera's sensor size in the x-dimension.
