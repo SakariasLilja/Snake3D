@@ -66,9 +66,9 @@ public class WorldTests {
 
         Vector3D[][] verticesArr = world.getVertices();
 
-        int rowSize = width + 1 + (Constants.WORLD_ACCURACY * width);
-        int columnSize = height + 1 + (Constants.WORLD_ACCURACY * height);
-        int layerSize = depth + 1 + (Constants.WORLD_ACCURACY * depth);
+        int rowSize = width + 1;
+        int columnSize = height + 1;
+        int layerSize = depth + 1;
 
         int expectedSize = rowSize*columnSize*layerSize;
 
@@ -84,11 +84,7 @@ public class WorldTests {
         int y = height - 1;
         int z = depth - 1;
 
-        double weirdX = Math.rint(1.0 * x / (Constants.WORLD_ACCURACY + 1));
-        double weirdY = Math.rint(1.0 * y / (Constants.WORLD_ACCURACY + 1));
-        double weirdZ = Math.rint(1.0 * z / (Constants.WORLD_ACCURACY + 1));
-
-        Vector3D oddLocation = new Vector3D((int) weirdX, (int) weirdY, (int) weirdZ);
+        Vector3D oddLocation = new Vector3D(x, y, z);
         int expectedIndex = x + y * rowSize + z * rowSize * columnSize;
         
         assertEquals(oddLocation, verticesArr[0][expectedIndex]);

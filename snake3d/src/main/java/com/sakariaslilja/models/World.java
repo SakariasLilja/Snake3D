@@ -1,7 +1,6 @@
 package com.sakariaslilja.models;
 
 import com.sakariaslilja.Constants;
-import java.lang.Math;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
@@ -104,9 +103,9 @@ public class World {
      *         2: Front to back
      */
     public Vector3D[][] getVertices() {
-        int columns = this.width + 1 + (Constants.WORLD_ACCURACY * this.width);
-        int rows = this.height + 1 + (Constants.WORLD_ACCURACY * this.height);
-        int layers = this.depth + 1 + (Constants.WORLD_ACCURACY * this.depth);
+        int columns = this.width + 1;
+        int rows = this.height + 1;
+        int layers = this.depth + 1;
 
         Vector3D[][] out = new Vector3D[3][columns*rows*layers];
 
@@ -117,11 +116,7 @@ public class World {
                     int indexTB = row + column*rows + layer*columns*rows;
                     int indexFB = layer + column*layers + row*layers*columns;
 
-                    double x = Math.rint(1.0 * column / (Constants.WORLD_ACCURACY + 1));
-                    double y = Math.rint(1.0 * row / (Constants.WORLD_ACCURACY + 1));
-                    double z = Math.rint(1.0 * layer / (Constants.WORLD_ACCURACY + 1));
-
-                    Vector3D vector3d = new Vector3D((int) x, (int) y, (int) z);
+                    Vector3D vector3d = new Vector3D(column, row, layer);
 
                     out[0][indexLR] = vector3d;
                     out[1][indexTB] = vector3d;
@@ -146,9 +141,9 @@ public class World {
      * @return [Tuple] array containing every edge present in the world's walls.
      */
     public ArrayList<Tuple> getEdges() {
-        int columns = this.width + 1 + (Constants.WORLD_ACCURACY * this.width);
-        int rows = this.height + 1 + (Constants.WORLD_ACCURACY * this.height);
-        int layers = this.depth + 1 + (Constants.WORLD_ACCURACY * this.depth);
+        int columns = this.width + 1;
+        int rows = this.height + 1;
+        int layers = this.depth + 1;
         int[] dimensions = {columns, rows, layers};
 
         Vector3D[][] verticesArr = this.getVertices();

@@ -60,10 +60,5 @@ public class Constants {
      * The maximum size of any of the world's dimensions.
      */
     public static final int MAX_WORLD_SIZE = 100;
-
-    /**
-     * The number of vertices (exclusize) between each main vertex.
-     */
-    public static final int WORLD_ACCURACY = 0;
     
 }
