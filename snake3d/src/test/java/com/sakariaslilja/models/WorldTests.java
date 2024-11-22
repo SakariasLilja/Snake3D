@@ -106,7 +106,7 @@ public class WorldTests {
 
         ArrayList<Tuple> edges = world.getEdges();
 
-        HashSet<DoubleVector3D> edgeVertices = new HashSet<DoubleVector3D>();
+        ArrayList<DoubleVector3D> edgeVertices = new ArrayList<DoubleVector3D>();
 
         for (Tuple edge : edges) {
             DoubleVector3D value1 = edge.value1;
