@@ -20,7 +20,7 @@ public class Renderer {
     private DoubleVector3D camera;
     private DoubleVector3D normalVector;
 
-    private final Color backgroundColor = Color.RED; //Color.web("#4a4e69");
+    private final Color backgroundColor = Color.web("#4a4e69");
     //private final Color strokeColor = Color.web("#6495ED");
     //private final Color snakeColor = Color.web("#F5F5F5");
 
