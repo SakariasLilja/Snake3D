@@ -53,6 +53,17 @@ public class Tuple {
         return value1.equals(vector3d) || value2.equals(vector3d);
     }
 
+    /**
+     * Method for duplicating this object.
+     * Both this object and its contents are duplicated.
+     * @return A copy of this object
+     */
+    public Tuple duplicate() {
+        DoubleVector3D newValue1 = this.value1.duplicate();
+        DoubleVector3D newValue2 = this.value2.duplicate();
+        return new Tuple(newValue1, newValue2);
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj.getClass() == null || obj.getClass() != this.getClass()) {

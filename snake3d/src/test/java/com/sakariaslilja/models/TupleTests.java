@@ -106,5 +106,24 @@ public class TupleTests {
         assertEquals(true, tuple.contains(check), "The contains method should return true when Tuple contains Vector3D");
         assertNotEquals(true, tuple.contains(check.mul(-1)), "The contains method should return false when Tuple doesn't contain Vector3D");
     }
+
+    @Test
+    @DisplayName("Tuple duplicate")
+    void tupleDuplicate() {
+        DoubleVector3D value1 = new DoubleVector3D(4, 2, 1);
+        DoubleVector3D value2 = new DoubleVector3D(1, 2, 2);
+
+        Tuple tuple = new Tuple(value1, value2);
+        Tuple duplicate = tuple.duplicate();
+
+        assertEquals(tuple, duplicate, "The duplicate method should produce a clone");
+        assertNotEquals(true, tuple == duplicate, "The duplicate should create a new object reference");
+
+        assertEquals(value1, duplicate.value1, "The first value should be the same in both instances");
+        assertEquals(value2, duplicate.value2, "The second value should be the same in both instances");
+
+        assertNotEquals(true, value1 == duplicate.value1, "The references of the values should not be the same");
+        assertNotEquals(true, value2 == duplicate.value2, "The references of the values should not be the same");
+    }
     
 }
