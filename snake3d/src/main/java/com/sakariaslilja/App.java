@@ -9,12 +9,24 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import com.sakariaslilja.models.DoubleVector3D;
+import com.sakariaslilja.models.Vector3D;
+import com.sakariaslilja.services.GameEngine;
+
 /**
  * JavaFX App for the Snake3D game.
  */
 public class App extends Application {
 
     private static Scene scene;
+    private static GameEngine engine = new GameEngine(
+        (int) System.currentTimeMillis(), 
+        2, 
+        3, 
+        4, 
+        new DoubleVector3D(0.5 * Constants.UNIT, 0.5 * Constants.UNIT, -Constants.UNIT), 
+        Vector3D.Up.toDoubleVector3D()
+    );
 
     // Variables of the scene.
     private static final String primarySceneFXML = "mainpage";
@@ -55,6 +67,22 @@ public class App extends Application {
      */
     public static void closeApp() {
         Platform.exit();
+    }
+
+    /**
+     * Setter for the game's engine
+     * @param engine The game's engine
+     */
+    public static void setEngine(GameEngine newEngine) {
+        engine = newEngine;
+    }
+
+    /**
+     * Getter for the game's engine
+     * @return The game's engine
+     */
+    public static GameEngine getEngine() {
+        return engine;
     }
 
     /**
