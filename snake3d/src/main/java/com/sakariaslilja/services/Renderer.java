@@ -12,7 +12,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 /**
- * Renderer for Snake 3D.
+ * 3D renderer for Snake 3D.
  */
 public class Renderer {
 
@@ -80,7 +80,7 @@ public class Renderer {
      * @param vertex Vertex to translate
      * @return The translated vertex
      */
-    private DoubleVector3D translationMatrix(DoubleVector3D vertex) {
+    private DoubleVector3D translate(DoubleVector3D vertex) {
         return vertex.add(engine.getCamera().neg());
     }
 
@@ -90,7 +90,7 @@ public class Renderer {
      * @param vertex The vertex to rotate
      * @return The rotated vertex
      */
-    private DoubleVector3D applyRotations(DoubleVector3D vertex) {
+    private DoubleVector3D rotate(DoubleVector3D vertex) {
         return vertex.rotateZ(engine.getRotZ()).rotateY(engine.getRotY()).rotateX(engine.getRotX());
     }
 
@@ -111,16 +111,16 @@ public class Renderer {
      * @param vertex The vertex to correct
      * @return The corrected vertex
      */
-    private DoubleVector3D perpectiveCorrection(DoubleVector3D vertex) {
+    private DoubleVector3D perspectiveCorrection(DoubleVector3D vertex) {
         return new DoubleVector3D(vertex.getX() / vertex.getZ(), vertex.getY() / vertex.getZ(), vertex.getZ());
     }
 
     /**
-     * Moves the vertex to the center of the screen
+     * Centers the vertex on the screen
      * @param vertex Vertex to translate
      * @return The translated vertex
      */
-    private DoubleVector3D centralizeVertex(DoubleVector3D vertex) {
+    private DoubleVector3D centerOnScreen(DoubleVector3D vertex) {
         return new DoubleVector3D(vertex.getX() + 0.5 * Constants.WIDTH, vertex.getY() + 0.5 * Constants.HEIGHT, vertex.getZ());
     }
 
@@ -130,7 +130,7 @@ public class Renderer {
      * @return The rendered vertex
      */
     private DoubleVector3D applyMatrices(DoubleVector3D vertex) {
-        return centralizeVertex(perpectiveCorrection(cameraTransform(applyRotations(translationMatrix(vertex)))));
+        return centerOnScreen(perspectiveCorrection(cameraTransform(rotate(translate(vertex)))));
     }
 
     /**
