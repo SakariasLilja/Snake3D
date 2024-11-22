@@ -135,8 +135,8 @@ public class WorldTests {
         final int z = maxZ.intValue();
 
         Predicate<Integer> largerThanZero = (c) -> c > 0;
-        Predicate<Vector3D> isInvalidVector = (v) -> v.forAll(largerThanZero) && v.getX() < x && v.getY() < y && v.getZ() < z;
-        Predicate<Vector3D> isValidVector = (v) -> !(v.forAll(largerThanZero) && v.getX() < x && v.getY() < y && v.getZ() < z);
+        Predicate<Vector3D> isInvalidVector = (v) -> v.forAll(largerThanZero) && (v.getX() < x || v.getY() < y || v.getZ() < z);
+        Predicate<Vector3D> isValidVector = (v) -> !(v.forAll(largerThanZero) && (v.getX() < x || v.getY() < y || v.getZ() < z));
 
         validVertices.removeIf(isInvalidVector);
         invalidVertices.removeIf(isValidVector);
