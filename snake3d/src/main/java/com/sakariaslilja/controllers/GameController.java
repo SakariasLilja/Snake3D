@@ -38,7 +38,7 @@ public class GameController {
     
     public void initialize() {
         this.engine = App.getEngine();
-        this.renderer = new Renderer(gameCanvas.getGraphicsContext2D(), engine.getEdges(), engine.getCamera(), engine.getCameraNormal());
+        this.renderer = new Renderer(gameCanvas.getGraphicsContext2D(), engine.getEdges(), engine);
         gameClock.start();
     }
 
