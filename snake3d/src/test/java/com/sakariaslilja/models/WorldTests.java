@@ -134,9 +134,10 @@ public class WorldTests {
         final int y = maxY.intValue();
         final int z = maxZ.intValue();
 
-        Predicate<Integer> largerThanZero = (c) -> c > 0;
-        Predicate<Vector3D> isInvalidVector = (v) -> v.forAll(largerThanZero) && (v.getX() < x || v.getY() < y || v.getZ() < z);
-        Predicate<Vector3D> isValidVector = (v) -> !(v.forAll(largerThanZero) && (v.getX() < x || v.getY() < y || v.getZ() < z));
+        Predicate<Integer> largerThanZero = (c) -> c.intValue() > 0;
+        Predicate<Integer> isZero = (c) -> c.intValue() == 0;
+        Predicate<Vector3D> isInvalidVector = (v) -> v.forAll(largerThanZero) && v.getX() < x && v.getY() < y && v.getZ() < z;
+        Predicate<Vector3D> isValidVector = (v) -> v.exists(isZero) || v.getX() == x || v.getY() == y || v.getZ() == z;
 
         validVertices.removeIf(isInvalidVector);
         invalidVertices.removeIf(isValidVector);
@@ -145,12 +146,11 @@ public class WorldTests {
         boolean edgesContainAllValidVertices = true;
 
         for (DoubleVector3D vertex : edgeVertices) {
-            if (invalidVertices.contains(vertex.toVector3D())) {
-                edgesAreValid = false;
-            }
-            if (!validVertices.contains(vertex.toVector3D())) {
-                edgesAreValid = false;
-            }
+            edgesAreValid = invalidVertices.contains(vertex.toVector3D()) ? false : true;
+        }
+
+        for (Vector3D validVertex : validVertices) {
+            edgesContainAllValidVertices = !edgeVertices.contains(validVertex.toDoubleVector3D()) ? false : true;
         }
 
         assertEquals(true, edgesAreValid, "No invalid edges should be present in new edges");
