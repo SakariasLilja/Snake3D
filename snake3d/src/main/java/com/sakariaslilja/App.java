@@ -27,7 +27,9 @@ public class App extends Application {
     @Override
     public void start(@SuppressWarnings("exports") Stage stage) throws IOException {
         stage.setTitle(Constants.GAME_NAME);
-        scene = new Scene(loadFXML(primarySceneFXML), Constants.WIDTH, Constants.HEIGHT);
+        stage.setMaximized(true);
+        stage.setResizable(false);
+        scene = new Scene(loadFXML(primarySceneFXML), 800, 400);
         scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
@@ -75,6 +77,22 @@ public class App extends Application {
      */
     public static GameEngine getEngine() {
         return engine;
+    }
+
+    /**
+     * Getter for the application window's width
+     * @return The width of the window
+     */
+    public static double getWidth() {
+        return scene.getWindow().getWidth();
+    }
+
+    /**
+     * Getter for the application window's height
+     * @return The height of the window
+     */
+    public static double getHeight() {
+        return scene.getWindow().getHeight();
     }
 
     /**
