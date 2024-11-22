@@ -106,11 +106,11 @@ public class WorldTests {
 
         ArrayList<Tuple> edges = world.getEdges();
 
-        HashSet<Vector3D> edgeVertices = new HashSet<Vector3D>();
+        HashSet<DoubleVector3D> edgeVertices = new HashSet<DoubleVector3D>();
 
         for (Tuple edge : edges) {
-            Vector3D value1 = edge.value1;
-            Vector3D value2 = edge.value2;
+            DoubleVector3D value1 = edge.value1;
+            DoubleVector3D value2 = edge.value2;
             edgeVertices.add(value1);
             edgeVertices.add(value2);
         }
@@ -144,11 +144,11 @@ public class WorldTests {
         boolean edgesAreValid = true;
         boolean edgesContainAllValidVertices = true;
 
-        for (Vector3D vertex : edgeVertices) {
-            if (invalidVertices.contains(vertex)) {
+        for (DoubleVector3D vertex : edgeVertices) {
+            if (invalidVertices.contains(vertex.toVector3D())) {
                 edgesAreValid = false;
             }
-            if (!validVertices.contains(vertex)) {
+            if (!validVertices.contains(vertex.toVector3D())) {
                 edgesAreValid = false;
             }
         }

@@ -167,7 +167,7 @@ public class World {
                     Predicate<Integer> valuesInBetween = (c) -> c > 0 && c <= (upperLimit) * Constants.UNIT;
 
                     if (!firstVector.forAll(valuesInBetween) && !secondVector.forAll(valuesInBetween)) {
-                        Tuple tuple = new Tuple(firstVector, secondVector);
+                        Tuple tuple = new Tuple(firstVector.toDoubleVector3D(), secondVector.toDoubleVector3D());
                         edges.add(tuple);
                     }
                 }
