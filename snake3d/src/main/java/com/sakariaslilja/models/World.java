@@ -159,9 +159,9 @@ public class World {
         Predicate<Double> isZero = (d) -> d.doubleValue() == 0;
 
         Predicate<DoubleVector3D> hasZero = (v) -> v.exists(isZero);
-        Predicate<DoubleVector3D> hasValidX = (v) -> v.getX() == 0 || v.getX() == columns - 1;
-        Predicate<DoubleVector3D> hasValidY = (v) -> v.getY() == 0 || v.getY() == rows - 1;
-        Predicate<DoubleVector3D> hasValidZ = (v) -> v.getZ() == 0 || v.getZ() == layers - 1;
+        Predicate<DoubleVector3D> hasValidX = (v) -> v.getX() == 0 || v.getX() == width - 1;
+        Predicate<DoubleVector3D> hasValidY = (v) -> v.getY() == 0 || v.getY() == height - 1;
+        Predicate<DoubleVector3D> hasValidZ = (v) -> v.getZ() == 0 || v.getZ() == depth - 1;
 
         ArrayList<Predicate<DoubleVector3D>> predicates = new ArrayList<>();
         predicates.add(hasValidX);
