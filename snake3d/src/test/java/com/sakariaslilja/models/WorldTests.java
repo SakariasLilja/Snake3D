@@ -3,7 +3,6 @@ package com.sakariaslilja.models;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.DisplayName;
