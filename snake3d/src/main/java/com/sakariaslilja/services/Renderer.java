@@ -110,7 +110,7 @@ public class Renderer {
      */
     private DoubleVector3D applyRotations(DoubleVector3D vertex) {
         double[] rotations = this.getRotationAmount(engine.getCamera(), engine.getCameraNormal());
-        return vertex.rotateZ(rotations[0]).rotateY(rotations[1]).rotateX(rotations[2]);
+        return vertex.rotateZ(rotations[2]).rotateY(rotations[1]).rotateX(rotations[0]);
     }
 
     /**
@@ -122,7 +122,7 @@ public class Renderer {
         double newX = vertex.getX() * Constants.FOCAL_LENGTH * Constants.WIDTH / (2 * Constants.SENSOR_SIZE_X);
         double newY = vertex.getY() * Constants.FOCAL_LENGTH * Constants.HEIGHT / (2 * Constants.SENSOR_SIZE_Y);
 
-        return new DoubleVector3D(newX, newY, vertex.getY() + vertex.getZ());
+        return new DoubleVector3D(newX, newY, vertex.getZ());
     }
 
     /**
