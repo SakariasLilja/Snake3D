@@ -3,7 +3,6 @@ package com.sakariaslilja.models;
 import java.lang.Math;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.Locale;
 
 /**
  * 3D vector class for double precision.
