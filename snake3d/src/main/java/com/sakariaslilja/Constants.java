@@ -26,11 +26,6 @@ public class Constants {
     public static final double HEIGHT = App.getHeight();
 
     /**
-     * The thickness of the borders surrounding the game canvas
-     */
-    public static final int BORDER_THICKNESS = 10;
-
-    /**
      * The focal length of the game's camera.
      */
     public static final double FOCAL_LENGTH = 0.1;
