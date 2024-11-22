@@ -4,7 +4,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 /**
- * Vector3D tuple class for storing two vectors.
+ * DoubleVector3D tuple class for storing two vectors.
  * Tuples are equal if each element is equivalent 
  * to the corresponding one of the other.
  */
@@ -45,9 +45,9 @@ public class Tuple {
 
     /**
      * Contains method. 
-     * Checks if a Vector3D is found in this Tuple.
-     * @param vector3d The Vector3D to check for
-     * @return If either value equals the wanted Vector3D
+     * Checks if a DoubleVector3D is found in this Tuple.
+     * @param vector3d The DoubleVector3D to check for
+     * @return If either value equals the wanted DoubleVector3D
      */
     public boolean contains(DoubleVector3D vector3d) {
         return value1.equals(vector3d) || value2.equals(vector3d);
