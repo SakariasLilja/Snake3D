@@ -1,12 +1,15 @@
 package com.sakariaslilja.models;
 
 import java.lang.Math;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 
 /**
  * 3D vector class for double precision.
  * Vectors are considered equal if each of their values are the same.
  */
-public class DoubleVector3D {
+public class DoubleVector3D extends AbstractVector {
 
     // Private values of this complex vector.
     private final double x;
@@ -48,6 +51,16 @@ public class DoubleVector3D {
      */
     public double getZ() {
         return this.z;
+    }
+
+    /**
+     * Inhertied method.
+     * Multiplies this DoubleVector3D with a scalar
+     * @param scalar The scalar with which to multiply this vector with
+     * @return A new DoubleVector3D with scaled values
+     */
+    public DoubleVector3D mul(int scalar) {
+        return new DoubleVector3D(scalar * this.x, scalar * this.y, scalar * this.z);
     }
 
     /**
@@ -107,6 +120,14 @@ public class DoubleVector3D {
         }
 
         return false;
+    }
+
+    @Override
+    public String toString() {
+        DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+        dfs.setDecimalSeparator('.');
+        DecimalFormat df = new DecimalFormat("#0.000", dfs);
+        return "DV(" + df.format(x) + "  " + df.format(y) + "  " + df.format(z) + ")";
     }
     
 }

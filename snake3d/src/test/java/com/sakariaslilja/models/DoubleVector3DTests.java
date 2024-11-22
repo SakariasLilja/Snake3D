@@ -93,5 +93,24 @@ public class DoubleVector3DTests {
 
         assertEquals(expected, converted, "The toVector3D method should work as expected");
     }
+
+    @Test
+    @DisplayName("DoubleVector3D mul")
+    void mulDoubleVector() {
+        int scalar = 10;
+        DoubleVector3D vector = new DoubleVector3D(1.8, -1, 0.5);
+        DoubleVector3D expected = new DoubleVector3D(18, -10, 5);
+
+        assertEquals(expected, vector.mul(scalar), "The mul method should work as expected");
+    }
+
+    @Test
+    @DisplayName("DoubleVector3D toString")
+    void doubleVectorToString() {
+        DoubleVector3D vector = new DoubleVector3D(Math.PI, -0, 22.1);
+        String expected = "DV(3.142  0.000  22.100)";
+
+        assertEquals(expected, vector.toString(), "The toString method should work as expected");
+    }
     
 }
