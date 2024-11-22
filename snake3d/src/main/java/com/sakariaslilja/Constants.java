@@ -13,7 +13,7 @@ public class Constants {
     /**
      * The frames per second the game is running and rendered at.
      */
-    public static final int FPS = 60;
+    public static final int FPS = 120;
 
     /**
      * The display's width in pixels.
