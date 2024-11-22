@@ -11,8 +11,8 @@ public class TupleTests {
     @Test
     @DisplayName("Tuple values test")
     void tupleValues() {
-        Vector3D value1 = new Vector3D(6,1,2);
-        Vector3D value2 = new Vector3D(7, 2, 221);
+        DoubleVector3D value1 = new DoubleVector3D(6,1,2);
+        DoubleVector3D value2 = new DoubleVector3D(7, 2, 221);
 
         Tuple tuple = new Tuple(value1, value2);
 
@@ -23,9 +23,9 @@ public class TupleTests {
     @Test
     @DisplayName("Tuple equivalency test")
     void tupleEqual() {
-        Vector3D value1 = new Vector3D(126, 16, -27);
-        Vector3D value2 = new Vector3D(8, -3, -818);
-        Vector3D value2copy = new Vector3D(8, -3, -818);
+        DoubleVector3D value1 = new DoubleVector3D(126, 16, -27);
+        DoubleVector3D value2 = new DoubleVector3D(8, -3, -818);
+        DoubleVector3D value2copy = new DoubleVector3D(8, -3, -818);
 
         Tuple tuple1 = new Tuple(value1, value2);
         Tuple tuple2 = new Tuple(value1, value1);
@@ -39,8 +39,8 @@ public class TupleTests {
     @Test
     @DisplayName("Updating values should work")
     void tupleUpdate() {
-        Vector3D value1 = new Vector3D(28, 3, 182);
-        Vector3D value2 = new Vector3D(18, 7327, -1);
+        DoubleVector3D value1 = new DoubleVector3D(28, 3, 182);
+        DoubleVector3D value2 = new DoubleVector3D(18, 7327, -1);
 
         Tuple tuple = new Tuple(value1, value2);
         Tuple expected = new Tuple(value2, value1);
@@ -54,8 +54,8 @@ public class TupleTests {
     @Test
     @DisplayName("ForAll function")
     void forAll() {
-        Vector3D value1 = new Vector3D(6, 4, 1);
-        Vector3D value2 = new Vector3D(6, 2, 55);
+        DoubleVector3D value1 = new DoubleVector3D(6, 4, 1);
+        DoubleVector3D value2 = new DoubleVector3D(6, 2, 55);
 
         Tuple tuple = new Tuple(value1, value2);
 
@@ -66,8 +66,8 @@ public class TupleTests {
     @Test
     @DisplayName("ForEach function")
     void forEach() {
-        Vector3D value1 = Vector3D.Right;
-        Vector3D value2 = Vector3D.Left;
+        DoubleVector3D value1 = Vector3D.Right.toDoubleVector3D();
+        DoubleVector3D value2 = Vector3D.Left.toDoubleVector3D();
         int scalar = 2;
 
         Tuple tuple = new Tuple(value1, value2);
@@ -84,12 +84,12 @@ public class TupleTests {
     @Test
     @DisplayName("Tuple toString")
     void tupleToString() {
-        Vector3D value1 = Vector3D.Right;
-        Vector3D value2 = Vector3D.Down;
+        DoubleVector3D value1 = Vector3D.Right.toDoubleVector3D();
+        DoubleVector3D value2 = Vector3D.Down.toDoubleVector3D();
 
         Tuple tuple = new Tuple(value1, value2);
 
-        String expected = "[Vector3D(1, 0, 0) <-> Vector3D(0, 1, 0)]";
+        String expected = "[DV(1.000  0.000  0.000) <-> DV(0.000  1.000  0.000)]";
 
         assertEquals(expected, tuple.toString(), "The toString method should work as expected");
     }
@@ -97,14 +97,14 @@ public class TupleTests {
     @Test
     @DisplayName("Tuple contains")
     void tupleContains() {
-        Vector3D value1 = Vector3D.Right;
-        Vector3D value2 = Vector3D.Up;
+        DoubleVector3D value1 = Vector3D.Right.toDoubleVector3D();
+        DoubleVector3D value2 = Vector3D.Up.toDoubleVector3D();
 
         Tuple tuple = new Tuple(value1, value2);
-        Vector3D check = new Vector3D(1, 0, 0);
+        DoubleVector3D check = new DoubleVector3D(1, 0, 0);
 
         assertEquals(true, tuple.contains(check), "The contains method should return true when Tuple contains Vector3D");
-        assertNotEquals(true, tuple.contains(check.neg()), "The contains method should return false when Tuple doesn't contain Vector3D");
+        assertNotEquals(true, tuple.contains(check.mul(-1)), "The contains method should return false when Tuple doesn't contain Vector3D");
     }
     
 }

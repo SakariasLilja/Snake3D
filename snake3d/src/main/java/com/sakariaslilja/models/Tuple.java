@@ -10,15 +10,15 @@ import java.util.function.Predicate;
  */
 public class Tuple {
 
-    public Vector3D value1;
-    public Vector3D value2;
+    public DoubleVector3D value1;
+    public DoubleVector3D value2;
 
     /**
      * Tuple of two values.
      * @param value1 First value
      * @param value2 Second value
      */
-    public Tuple(Vector3D value1, Vector3D value2) {
+    public Tuple(DoubleVector3D value1, DoubleVector3D value2) {
         this.value1 = value1;
         this.value2 = value2;
     }
@@ -29,7 +29,7 @@ public class Tuple {
      * @param predicate Predicate to apply to this Tuple's values
      * @return The boolean result.
      */
-    public boolean forAll(Predicate<Vector3D> predicate) {
+    public boolean forAll(Predicate<DoubleVector3D> predicate) {
         return predicate.test(value1) && predicate.test(value2);
     }
 
@@ -38,7 +38,7 @@ public class Tuple {
      * values of this Tuple accordingly.
      * @param function Anonymous function to apply to this Tuple's values
      */
-    public void forEach(Function<Vector3D, Vector3D> function) {
+    public void forEach(Function<DoubleVector3D, DoubleVector3D> function) {
         value1 = function.apply(value1);
         value2 = function.apply(value2);
     }
@@ -49,7 +49,7 @@ public class Tuple {
      * @param vector3d The Vector3D to check for
      * @return If either value equals the wanted Vector3D
      */
-    public boolean contains(Vector3D vector3d) {
+    public boolean contains(DoubleVector3D vector3d) {
         return value1.equals(vector3d) || value2.equals(vector3d);
     }
 
