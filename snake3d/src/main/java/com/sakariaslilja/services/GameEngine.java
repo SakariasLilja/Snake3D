@@ -19,9 +19,9 @@ public class GameEngine {
     private ArrayList<Tuple> edges;
     private DoubleVector3D camera;
 
-    private double rotX = 0;
-    private double rotY = 0;
-    private double rotZ = 0;
+    private double rotX;
+    private double rotY;
+    private double rotZ;
 
     /**
      * To create an instance of a game engine, the world dimensions are needed
@@ -30,7 +30,7 @@ public class GameEngine {
      * @param worldHeight Height of the world
      * @param worldDepth Depth of the world
      */
-    public GameEngine(int seed, int worldWidth, int worldHeight, int worldDepth, DoubleVector3D camera) {
+    public GameEngine(int seed, int worldWidth, int worldHeight, int worldDepth, DoubleVector3D camera, int rotX, int rotY, int rotZ) {
         this.seed = seed;
         this.worldWidth = worldWidth;
         this.worldHeight = worldHeight;
@@ -38,6 +38,9 @@ public class GameEngine {
         World world = new World(worldWidth, worldHeight, worldDepth);
         this.edges = world.getEdges();
         this.camera = camera;
+        this.rotX = rotX;
+        this.rotY = rotY;
+        this.rotZ = rotZ;
     }
 
     /**
