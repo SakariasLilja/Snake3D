@@ -10,7 +10,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 import com.sakariaslilja.models.DoubleVector3D;
-import com.sakariaslilja.models.Vector3D;
 import com.sakariaslilja.services.GameEngine;
 
 /**
@@ -24,8 +23,7 @@ public class App extends Application {
         3, 
         3, 
         3, 
-        new DoubleVector3D(1, 1.5, -0.5), 
-        Vector3D.Up.toDoubleVector3D()
+        new DoubleVector3D(0.5, 0.5, 0.5)
     );
 
     // Variables of the scene.

@@ -18,7 +18,6 @@ public class GameEngine {
     private int worldDepth;
     private ArrayList<Tuple> edges;
     private DoubleVector3D camera;
-    private DoubleVector3D cameraNormal;
 
     private double rotX = 0;
     private double rotY = 0;
@@ -31,7 +30,7 @@ public class GameEngine {
      * @param worldHeight Height of the world
      * @param worldDepth Depth of the world
      */
-    public GameEngine(int seed, int worldWidth, int worldHeight, int worldDepth, DoubleVector3D camera, DoubleVector3D cameraNormal) {
+    public GameEngine(int seed, int worldWidth, int worldHeight, int worldDepth, DoubleVector3D camera) {
         this.seed = seed;
         this.worldWidth = worldWidth;
         this.worldHeight = worldHeight;
@@ -39,7 +38,6 @@ public class GameEngine {
         World world = new World(worldWidth, worldHeight, worldDepth);
         this.edges = world.getEdges();
         this.camera = camera;
-        this.cameraNormal = cameraNormal;
     }
 
     /**
@@ -91,14 +89,6 @@ public class GameEngine {
     }
 
     /**
-     * Getter for the game camera's normal vector
-     * @return The normal of the camera
-     */
-    public DoubleVector3D getCameraNormal() {
-        return cameraNormal;
-    }
-
-    /**
      * Getter for the x-rotation values of the world
      * @return The x-rotation of the world
      */
@@ -126,6 +116,7 @@ public class GameEngine {
      * Update method of the world.
      */
     public void update() {
+        rotY += Math.PI / 180;
     }
     
 }
