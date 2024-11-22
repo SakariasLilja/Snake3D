@@ -40,10 +40,10 @@ public class Renderer {
         this.edges = edges;
         this.engine = engine;
 
-        double offsetX = engine.getWorldWidth() * Constants.UNIT;
-        double offsetY = engine.getWorldHeight() * Constants.UNIT;
-        double offsetZ = engine.getWorldDepth() * Constants.UNIT;
-        this.worldOffsetCorrection = new DoubleVector3D(offsetX, offsetY, offsetZ);
+        double offsetX = 0.5 * (engine.getWorldWidth() - 1);
+        double offsetY = 0.5 * (engine.getWorldHeight() - 1);
+        double offsetZ = 0.5 * (engine.getWorldDepth() - 1);
+        this.worldOffsetCorrection = new DoubleVector3D(offsetX, offsetY, offsetZ).neg();
     }
 
     /**
@@ -87,7 +87,7 @@ public class Renderer {
      * @return The translated vertex
      */
     private DoubleVector3D translationMatrix(DoubleVector3D vertex) {
-        return vertex.add(engine.getCamera().add(worldOffsetCorrection));
+        return vertex.add(engine.getCamera().add(worldOffsetCorrection).neg());
     }
 
     /**
@@ -135,12 +135,21 @@ public class Renderer {
     }
 
     /**
+     * Moves the vertex to the center of the screen
+     * @param vertex Vertex to translate
+     * @return The translated vertex
+     */
+    private DoubleVector3D centralizeVertex(DoubleVector3D vertex) {
+        return new DoubleVector3D(vertex.getX() + 0.5 * Constants.WIDTH, vertex.getY() + 0.5 * Constants.HEIGHT, vertex.getZ());
+    }
+
+    /**
      * Applies every rendering matrix in order.
      * @param vertex The vertex to render
      * @return The rendered vertex
      */
     private DoubleVector3D applyMatrices(DoubleVector3D vertex) {
-        return perpectiveCorrection(cameraTransform(applyRotations(translationMatrix(vertex))));
+        return centralizeVertex(perpectiveCorrection(cameraTransform(applyRotations(translationMatrix(vertex)))));
     }
 
     /**
