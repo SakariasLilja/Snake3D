@@ -18,17 +18,17 @@ public class Constants {
     /**
      * The display's width in pixels.
      */
-    public static final int WIDTH = 640;
+    public static final double WIDTH = App.getWidth();
 
     /**
      * The display's height in pixels.
      */
-    public static final int HEIGHT = 480;
+    public static final double HEIGHT = App.getHeight();
 
     /**
      * The focal length of the game's camera.
      */
-    public static final double FOCAL_LENGTH = 0.085;
+    public static final double FOCAL_LENGTH = 0.1;
 
     /**
      * The game camera's sensor size in the x-dimension.
