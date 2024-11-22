@@ -20,6 +20,10 @@ public class GameEngine {
     private DoubleVector3D camera;
     private DoubleVector3D cameraNormal;
 
+    private double rotX = 0;
+    private double rotY = 0;
+    private double rotZ = 0;
+
     /**
      * To create an instance of a game engine, the world dimensions are needed
      * @param seed The random seed of the game
@@ -95,11 +99,33 @@ public class GameEngine {
     }
 
     /**
+     * Getter for the x-rotation values of the world
+     * @return The x-rotation of the world
+     */
+    public double getRotX() {
+        return rotX;
+    }
+
+    /**
+     * Getter for the y-rotation values of the world
+     * @return The y-rotation of the world
+     */
+    public double getRotY() {
+        return rotY;
+    }
+    
+    /**
+     * Getter for the z-rotation values of the world
+     * @return The z-rotation of the world
+     */
+    public double getRotZ() {
+        return rotZ;
+    }
+
+    /**
      * Update method of the world.
      */
     public void update() {
-        DoubleVector3D movement = new DoubleVector3D(0.001, 0, 0);
-        camera = camera.add(movement);
     }
     
 }
