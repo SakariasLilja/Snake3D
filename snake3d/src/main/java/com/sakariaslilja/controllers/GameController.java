@@ -28,7 +28,7 @@ public class GameController {
         @Override
         public void handle(long arg0) {
             long currentTime = System.nanoTime();
-            if (Constants.FPS <= (currentTime - startTime)) {
+            if (1000000000l / Constants.FPS <= (currentTime - startTime)) {
                 engine.update();
                 renderer.render();
                 startTime = currentTime;
