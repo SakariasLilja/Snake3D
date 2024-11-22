@@ -5,7 +5,15 @@ package com.sakariaslilja;
  */
 public class Constants {
 
+    /**
+     * The title name of the game.
+     */
     public static final String GAME_NAME = "Snake 3D";
+
+    /**
+     * The frames per second the game is running and rendered at.
+     */
+    public static final int FPS = 60;
 
     /**
      * The display's width in pixels.
