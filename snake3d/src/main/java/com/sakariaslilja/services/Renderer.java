@@ -141,6 +141,6 @@ public class Renderer {
     /**
      * Predicate that checks if the z-coordinate of a DoubleVector3D is positive
      */
-    private Predicate<DoubleVector3D> hasPositiveZ = (v) -> v.getZ() > 0.000001;
+    private Predicate<DoubleVector3D> hasPositiveZ = (v) -> v.getZ() > Double.MIN_VALUE;
     
 }
