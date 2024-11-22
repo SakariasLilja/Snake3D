@@ -21,10 +21,10 @@ public class App extends Application {
     private static Scene scene;
     private static GameEngine engine = new GameEngine(
         (int) System.currentTimeMillis(), 
-        2, 
         3, 
-        4, 
-        new DoubleVector3D(0.5 * Constants.UNIT, 0.5 * Constants.UNIT, 10), 
+        3, 
+        3, 
+        new DoubleVector3D(1, 1.5, -0.5), 
         Vector3D.Up.toDoubleVector3D()
     );
 
