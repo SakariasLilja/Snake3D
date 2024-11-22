@@ -24,7 +24,7 @@ public class App extends Application {
         2, 
         3, 
         4, 
-        new DoubleVector3D(0.5 * Constants.UNIT, 0.5 * Constants.UNIT, -Constants.UNIT), 
+        new DoubleVector3D(0.5 * Constants.UNIT, 0.5 * Constants.UNIT, 10), 
         Vector3D.Up.toDoubleVector3D()
     );
 
