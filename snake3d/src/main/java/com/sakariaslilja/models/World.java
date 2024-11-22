@@ -104,9 +104,9 @@ public class World {
      *         2: Front to back
      */
     public Vector3D[][] getVertices() {
-        int columns = this.width + (Constants.WORLD_ACCURACY * (this.width - 1));
-        int rows = this.height + (Constants.WORLD_ACCURACY * (this.height - 1));
-        int layers = this.depth + (Constants.WORLD_ACCURACY * (this.depth - 1));
+        int columns = this.width + 1 + (Constants.WORLD_ACCURACY * this.width);
+        int rows = this.height + 1 + (Constants.WORLD_ACCURACY * this.height);
+        int layers = this.depth + 1 + (Constants.WORLD_ACCURACY * this.depth);
 
         Vector3D[][] out = new Vector3D[3][columns*rows*layers];
 
@@ -146,9 +146,9 @@ public class World {
      * @return [Tuple] array containing every edge present in the world's walls.
      */
     public ArrayList<Tuple> getEdges() {
-        int columns = this.width + (Constants.WORLD_ACCURACY * (this.width - 1));
-        int rows = this.height + (Constants.WORLD_ACCURACY * (this.height - 1));
-        int layers = this.depth + (Constants.WORLD_ACCURACY * (this.depth - 1));
+        int columns = this.width + 1 + (Constants.WORLD_ACCURACY * this.width);
+        int rows = this.height + 1 + (Constants.WORLD_ACCURACY * this.height);
+        int layers = this.depth + 1 + (Constants.WORLD_ACCURACY * this.depth);
         int[] dimensions = {columns, rows, layers};
 
         Vector3D[][] verticesArr = this.getVertices();
@@ -159,9 +159,9 @@ public class World {
         Predicate<Double> isZero = (d) -> d.doubleValue() == 0;
 
         Predicate<DoubleVector3D> hasZero = (v) -> v.exists(isZero);
-        Predicate<DoubleVector3D> hasValidX = (v) -> v.getX() == 0 || v.getX() == width - 1;
-        Predicate<DoubleVector3D> hasValidY = (v) -> v.getY() == 0 || v.getY() == height - 1;
-        Predicate<DoubleVector3D> hasValidZ = (v) -> v.getZ() == 0 || v.getZ() == depth - 1;
+        Predicate<DoubleVector3D> hasValidX = (v) -> v.getX() == 0 || v.getX() == width;
+        Predicate<DoubleVector3D> hasValidY = (v) -> v.getY() == 0 || v.getY() == height;
+        Predicate<DoubleVector3D> hasValidZ = (v) -> v.getZ() == 0 || v.getZ() == depth;
 
         ArrayList<Predicate<DoubleVector3D>> predicates = new ArrayList<>();
         predicates.add(hasValidX);

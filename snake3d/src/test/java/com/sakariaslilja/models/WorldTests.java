@@ -66,16 +66,16 @@ public class WorldTests {
 
         Vector3D[][] verticesArr = world.getVertices();
 
-        int rowSize = width + (Constants.WORLD_ACCURACY * (width - 1));
-        int columnSize = height + (Constants.WORLD_ACCURACY * (height - 1));
-        int layerSize = depth + (Constants.WORLD_ACCURACY * (depth - 1));
+        int rowSize = width + 1 + (Constants.WORLD_ACCURACY * width);
+        int columnSize = height + 1 + (Constants.WORLD_ACCURACY * height);
+        int layerSize = depth + 1 + (Constants.WORLD_ACCURACY * depth);
 
         int expectedSize = rowSize*columnSize*layerSize;
 
         assertEquals(expectedSize, verticesArr[0].length, "The number of vertices should be correct");
 
         Vector3D head = new Vector3D(0, 0, 0);
-        Vector3D last = new Vector3D((width - 1), (height - 1), (depth - 1));
+        Vector3D last = new Vector3D(width, height, depth);
 
         assertEquals(head, verticesArr[0][0], "First element should be located at (0, 0, 0)");
         assertEquals(last, verticesArr[0][expectedSize - 1], "Last element should be correct");
