@@ -16,11 +16,6 @@ public class Constants {
     public static final double FOCAL_LENGTH = 1.0;
 
     /**
-     * The sensor size of the game's camera.
-     */
-    public static final double SENSOR_SIZE = 1.0;
-
-    /**
      * The frames per second the game is running and rendered at.
      */
     public static final int FPS = 60;
@@ -34,6 +29,16 @@ public class Constants {
      * The display's height in pixels.
      */
     public static final int HEIGHT = 480;
+
+    /**
+     * The game camera's sensor size in the x-dimension.
+     */
+    public static final double SENSOR_SIZE_X = 1.0 * WIDTH / HEIGHT;
+
+    /**
+     * The game camera's sensor size in the y-dimension.
+     */
+    public static final double SENSOR_SIZE_Y = 1.0;
 
     /**
      * The game's unit size.
