@@ -20,7 +20,6 @@ public class Renderer {
     private GraphicsContext g;
     private ArrayList<Tuple> edges;
     private GameEngine engine;
-    private DoubleVector3D worldOffsetCorrection;
 
     private final Color backgroundColor = Color.web("#4a4e69");
     private final Color strokeColor = Color.web("#6495ED");
@@ -39,11 +38,6 @@ public class Renderer {
         this.g = g;
         this.edges = edges;
         this.engine = engine;
-
-        double offsetX = 0.5 * (engine.getWorldWidth() - 1);
-        double offsetY = 0.5 * (engine.getWorldHeight() - 2);
-        double offsetZ = 0.5 * (engine.getWorldDepth() - 1);
-        this.worldOffsetCorrection = new DoubleVector3D(offsetX, offsetY, offsetZ).neg();
     }
 
     /**
@@ -87,19 +81,7 @@ public class Renderer {
      * @return The translated vertex
      */
     private DoubleVector3D translationMatrix(DoubleVector3D vertex) {
-        return vertex.add(engine.getCamera().add(worldOffsetCorrection).neg());
-    }
-
-    /**
-     * Gets the amount to rotate in each respective direction.
-     * @param camera The camera's position
-     * @param cameraNormal The camera's normal
-     * @return
-     */
-    private double[] getRotationAmount(DoubleVector3D camera, DoubleVector3D cameraNormal) {
-        // TODO: get calculations based on heading and normal
-        double[] rotations = {0, 0, 0};
-        return rotations;
+        return vertex.add(engine.getCamera().neg());
     }
 
     /**
@@ -109,8 +91,7 @@ public class Renderer {
      * @return The rotated vertex
      */
     private DoubleVector3D applyRotations(DoubleVector3D vertex) {
-        double[] rotations = this.getRotationAmount(engine.getCamera(), engine.getCameraNormal());
-        return vertex.rotateZ(rotations[2]).rotateY(rotations[1]).rotateX(rotations[0]);
+        return vertex.rotateZ(engine.getRotZ()).rotateY(engine.getRotY()).rotateX(engine.getRotX());
     }
 
     /**
