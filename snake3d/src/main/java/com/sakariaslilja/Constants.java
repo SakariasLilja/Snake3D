@@ -28,17 +28,17 @@ public class Constants {
     /**
      * The focal length of the game's camera.
      */
-    public static final double FOCAL_LENGTH = 1.4;
+    public static final double FOCAL_LENGTH = 0.085;
 
     /**
      * The game camera's sensor size in the x-dimension.
      */
-    public static final double SENSOR_SIZE_X = 1.0 * WIDTH / HEIGHT;
+    public static final double SENSOR_SIZE_X = 0.0001 * WIDTH;
 
     /**
      * The game camera's sensor size in the y-dimension.
      */
-    public static final double SENSOR_SIZE_Y = 1.0;
+    public static final double SENSOR_SIZE_Y = 0.0001 * HEIGHT;
 
     /**
      * The game's unit size.
@@ -64,6 +64,6 @@ public class Constants {
     /**
      * The number of vertices (exclusize) between each main vertex.
      */
-    public static final int WORLD_ACCURACY = 1;
+    public static final int WORLD_ACCURACY = 0;
     
 }
