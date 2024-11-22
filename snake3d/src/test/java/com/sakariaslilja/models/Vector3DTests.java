@@ -3,6 +3,8 @@ package com.sakariaslilja.models;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import java.util.function.Predicate;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -95,6 +97,17 @@ public class Vector3DTests {
         DoubleVector3D expected = new DoubleVector3D(1, 2, 3);
 
         assertEquals(expected, converted, "The toDoubleVector3D should work as expected");
+    }
+
+    @Test
+    @DisplayName("Vector3D exists")
+    void vectorExists() {
+        Vector3D vector3d = new Vector3D(1, 1, -1);
+        Predicate<Integer> isNegative = (i) -> i < 0;
+        Predicate<Integer> isZero = (i) -> i.intValue() == 0;
+
+        assertEquals(true, vector3d.exists(isNegative), "The exists method should work");
+        assertNotEquals(true, vector3d.exists(isZero), "The exists method should not return true for false values");
     }
     
 }

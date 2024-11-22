@@ -3,6 +3,8 @@ package com.sakariaslilja.models;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import java.util.function.Predicate;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -124,6 +126,24 @@ public class TupleTests {
 
         assertNotEquals(true, value1 == duplicate.value1, "The references of the values should not be the same");
         assertNotEquals(true, value2 == duplicate.value2, "The references of the values should not be the same");
+    }
+
+    @Test
+    @DisplayName("Tuple exists")
+    void tupleExists() {
+        DoubleVector3D value1 = new DoubleVector3D(1, 2, 2);
+        DoubleVector3D value2 = new DoubleVector3D(-1, 1, 1);
+
+        Tuple tuple = new Tuple(value1, value2);
+
+        Predicate<Double> isNegative = (d) -> d.doubleValue() < 0;
+        Predicate<Double> isZero = (d) -> d.doubleValue() == 0;
+
+        Predicate<DoubleVector3D> hasNegative = (v) -> v.exists(isNegative);
+        Predicate<DoubleVector3D> hasZero = (v) -> v.exists(isZero);
+
+        assertEquals(true, tuple.exists(hasNegative), "The exists method should work");
+        assertNotEquals(true, tuple.exists(hasZero), "The exists method should not give incorrect results");
     }
     
 }

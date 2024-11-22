@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.lang.Math;
+import java.util.function.Predicate;
 
 public class DoubleVector3DTests {
 
@@ -142,6 +143,17 @@ public class DoubleVector3DTests {
         DoubleVector3D expected = new DoubleVector3D(-1, -2, -3);
 
         assertEquals(expected, negated, "The negate method should work as expected");
+    }
+    
+    @Test
+    @DisplayName("DoubleVector3D exists")
+    void doubleVectorExists() {
+        DoubleVector3D vector = new DoubleVector3D(1, 1, -1);
+        Predicate<Double> isNegative = (d) -> d.doubleValue() < 0;
+        Predicate<Double> isZero = (d) -> d.doubleValue() == 0;
+
+        assertEquals(true, vector.exists(isNegative), "The exists method should work");
+        assertNotEquals(true, vector.exists(isZero), "The exists method should not give false results");
     }
     
 }

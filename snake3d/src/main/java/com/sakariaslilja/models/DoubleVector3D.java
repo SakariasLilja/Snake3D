@@ -3,6 +3,7 @@ package com.sakariaslilja.models;
 import java.lang.Math;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.function.Predicate;
 
 /**
  * 3D vector class for double precision.
@@ -130,6 +131,15 @@ public class DoubleVector3D extends AbstractVector {
      */
     public DoubleVector3D neg() {
         return new DoubleVector3D(-x, -y, -z);
+    }
+
+    /**
+     * Method for checking if a predicate holds for any of the values
+     * @param predicate Predicate to check
+     * @return If any of the values of this vector fulfilled the predicate
+     */
+    public boolean exists(Predicate<Double> predicate) {
+        return predicate.test(x) || predicate.test(y) || predicate.test(z);
     }
 
     @Override

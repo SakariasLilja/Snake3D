@@ -64,6 +64,15 @@ public class Tuple {
         return new Tuple(newValue1, newValue2);
     }
 
+    /**
+     * Method for checking if a predicate holds for any of the Tuple's values.
+     * @param predicate The predicate to check
+     * @return If the predicate held for any of the values
+     */
+    public boolean exists(Predicate<DoubleVector3D> predicate) {
+        return predicate.test(value1) || predicate.test(value2);
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj.getClass() == null || obj.getClass() != this.getClass()) {

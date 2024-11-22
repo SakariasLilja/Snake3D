@@ -104,6 +104,15 @@ public class Vector3D extends AbstractVector{
         return new DoubleVector3D(x, y, z);
     }
 
+    /**
+     * Method that checks if a predicate holds for any of the Vector3D's values
+     * @param predicate Predicate to check
+     * @return If the predicate held for any of the values
+     */
+    public boolean exists(Predicate<Integer> predicate) {
+        return predicate.test(x) || predicate.test(y) || predicate.test(z);
+    }
+
     @Override
     public String toString() {
         return "Vector3D(" + x + ", " + y + ", " + z + ")";
