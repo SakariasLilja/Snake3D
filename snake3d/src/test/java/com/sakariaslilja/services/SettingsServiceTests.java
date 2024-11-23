@@ -21,5 +21,25 @@ public class SettingsServiceTests {
         assertEquals(defaultSettings.validate, settings.validate, "The getSettings method should work");
 
     }
+
+    @Test
+    @DisplayName("SettingsService saveSettings, resetSettings")
+    void saveSettings() {
+        SettingsModel settings = new SettingsModel();
+        String defaultValidate = settings.validate;
+        String newValidate = "this";
+        settings.validate = newValidate;
+
+        SettingsService service = new SettingsService();
+        service.saveSettings(settings);
+        SettingsModel modified = service.getSettings();
+
+        assertEquals(newValidate, modified.validate, "The saveSettings should work as expected");
+
+        service.resetSettings();
+        SettingsModel reseted = service.getSettings();
+
+        assertEquals(defaultValidate, reseted.validate, "The reset method should work as expected");
+    }
     
 }
