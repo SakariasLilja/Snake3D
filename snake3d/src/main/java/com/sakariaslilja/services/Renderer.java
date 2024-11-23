@@ -34,9 +34,9 @@ public class Renderer {
      * @param normalVector The normal vector of the camera
      */
     @SuppressWarnings("exports")
-    public Renderer(GraphicsContext g, ArrayList<Tuple> edges, GameEngine engine) {
+    public Renderer(GraphicsContext g, GameEngine engine) {
         this.g = g;
-        this.edges = edges;
+        this.edges = engine.getEdges();
         this.engine = engine;
     }
 

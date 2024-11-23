@@ -40,7 +40,7 @@ public class GameController {
         gameCanvas.setWidth(Constants.WIDTH);
         gameCanvas.setHeight(Constants.HEIGHT);
         this.engine = App.getEngine();
-        this.renderer = new Renderer(gameCanvas.getGraphicsContext2D(), engine.getEdges(), engine);
+        this.renderer = new Renderer(gameCanvas.getGraphicsContext2D(), engine);
         gameClock.start();
     }
 
