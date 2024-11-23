@@ -6,8 +6,6 @@ import com.sakariaslilja.Constants;
 import com.sakariaslilja.models.DoubleVector3D;
 import com.sakariaslilja.models.Vector3D;
 
-import javafx.scene.paint.Color;
-
 /**
  * Abstract class for all cube entities
  */
@@ -18,8 +16,8 @@ public abstract class CubeEntity extends Entity {
      * @param position The world position of the entity
      * @param color The color of the entity
      */
-    public CubeEntity(Vector3D position, Color color) {
-        super(position, color);
+    public CubeEntity(Vector3D position) {
+        super(position);
     }
 
     @Override
