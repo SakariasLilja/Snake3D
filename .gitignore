@@ -465,3 +465,4 @@ snake3d/target/*
 documentation/.*
 .vscode
 .vscode/*
+snake3d/resources/game_settings_error.json

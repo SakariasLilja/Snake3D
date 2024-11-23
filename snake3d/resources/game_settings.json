@@ -1,0 +1,8 @@
+{
+  "validate": "validate",
+  "backgroundColor": "#4A4E69",
+  "textColor": "#6495ED",
+  "edgeColor": "#6495ED",
+  "snakeColor": "#F5F5F5",
+  "appleColor": "#00CCCC"
+}
