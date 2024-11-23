@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import com.sakariaslilja.Constants;
 import com.sakariaslilja.models.DoubleVector3D;
+import com.sakariaslilja.models.SettingsModel;
 import com.sakariaslilja.models.Tuple;
 
 import javafx.scene.canvas.GraphicsContext;
@@ -21,9 +22,10 @@ public class Renderer {
     private ArrayList<Tuple> edges;
     private GameEngine engine;
 
-    private final Color backgroundColor = Color.web("#4a4e69");
-    private final Color strokeColor = Color.web("#6495ED");
-    //private final Color snakeColor = Color.web("#F5F5F5");
+    private Color backgroundColor;
+    private Color strokeColor;
+    private Color snakeColor;
+    private Color appleColor;
 
     /**
      * Renderer instance.
@@ -38,6 +40,14 @@ public class Renderer {
         this.g = g;
         this.edges = engine.getEdges();
         this.engine = engine;
+
+        // Initialize colors
+        SettingsService settingsService = new SettingsService();
+        SettingsModel settings = settingsService.getSettings();
+        backgroundColor = Color.web(settings.backgroundColor);
+        strokeColor = Color.web(settings.edgeColor);
+        snakeColor = Color.web(settings.snakeColor);
+        appleColor = Color.web(settings.appleColor);
     }
 
     /**
