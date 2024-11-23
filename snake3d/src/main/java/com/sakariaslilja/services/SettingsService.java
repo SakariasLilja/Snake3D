@@ -18,21 +18,24 @@ import com.sakariaslilja.models.SettingsModel;
  */
 public class SettingsService {
 
+    private static Gson gson = new GsonBuilder().setPrettyPrinting().setDateFormat(DateFormat.MEDIUM).create();
+
     private final String SETTINGS_PATH = "resources" + File.separator + "game_settings.json";
     private final String BACKUP_PATH ="resources" + File.separator + "game_settings_error.json";
 
-    private static Gson gson = new GsonBuilder()
-        .setPrettyPrinting()
-        .setDateFormat(DateFormat.MEDIUM)
-        .create();
+    File settingsFile = new File(SETTINGS_PATH);
+    File backupFile = new File(BACKUP_PATH);
 
-    public SettingsService() {
-    }
+    SettingsModel defaultSettings = new SettingsModel();
+    String defaultSettingsString = gson.toJson(defaultSettings);
 
+    /**
+     * Gets the settings saved at game_settings.json
+     * @return The settings at game_settings.json/the default settings
+     */
     public SettingsModel getSettings() {
         SettingsModel settingsModel = new SettingsModel();
         String contents = "";
-        File settingsFile = new File(SETTINGS_PATH);
         try 
         {
             StringBuilder stringBuilder = new StringBuilder();
@@ -43,16 +46,13 @@ public class SettingsService {
 
         // File did not exist
         catch (FileNotFoundException e) {
-            String defaultSettings = gson.toJson(settingsModel);
-            createAndPopulateFile(settingsFile, defaultSettings);
+            createAndPopulateFile(settingsFile, defaultSettingsString);
         }
 
         // The JSON in the file was wrong
         catch (JsonSyntaxException e) {
-            File backup = new File(BACKUP_PATH);
-            createAndPopulateFile(backup, contents);
-            String settingsJson = gson.toJson(settingsModel);
-            createAndPopulateFile(settingsFile, settingsJson);
+            createAndPopulateFile(backupFile, contents);
+            resetSettings();
         }
 
         // I/O Exception
@@ -61,6 +61,22 @@ public class SettingsService {
         }
 
         return settingsModel;
+    }
+
+    /**
+     * Saves new settings to game_settings.json
+     * @param settings The settings to save
+     */
+    public void saveSettings(SettingsModel settings) {
+        String jsonString = gson.toJson(settings);
+        createAndPopulateFile(settingsFile, jsonString);
+    }
+
+    /**
+     * Sets the settings at game_settings.json to default values
+     */
+    public void resetSettings() {
+        createAndPopulateFile(settingsFile, defaultSettingsString);
     }
 
     /**
