@@ -5,6 +5,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 import com.sakariaslilja.Constants;
+import com.sakariaslilja.entities.CubeEntity;
 import com.sakariaslilja.models.DoubleVector3D;
 import com.sakariaslilja.models.SettingsModel;
 import com.sakariaslilja.models.Tuple;
@@ -83,6 +84,35 @@ public class Renderer {
                 g.strokeLine(point1.getX(), point1.getY(), point2.getX(), point2.getY());
             }            
         }
+    }
+
+    /**
+     * Draws the cube entity onto the canvas
+     * @param g The canvas onto which to draw
+     * @param color The color of the entity
+     * @param entity The entity do draw
+     */
+    private void drawCubeEntity(GraphicsContext g, Color color, CubeEntity entity) {
+        ArrayList<DoubleVector3D> vertices = entity.getVertices();
+        for (int i = 0; i < vertices.size(); i++) {
+            DoubleVector3D vertex = vertices.get(i);
+            DoubleVector3D renderedVertex = applyMatrices(vertex);
+            vertices.set(i, renderedVertex);
+        }
+
+        g.setFill(color);
+        g.fillRect( vertices.get(0).getX(), vertices.get(0).getY(), 
+                    vertices.get(3).getX(), vertices.get(3).getY());
+        g.fillRect( vertices.get(4).getX(), vertices.get(4).getY(), 
+                    vertices.get(1).getX(), vertices.get(1).getY());
+        g.fillRect( vertices.get(4).getX(), vertices.get(4).getY(), 
+                    vertices.get(7).getX(), vertices.get(7).getY());
+        g.fillRect( vertices.get(6).getX(), vertices.get(6).getY(), 
+                    vertices.get(3).getX(), vertices.get(3).getY());
+        g.fillRect( vertices.get(4).getX(), vertices.get(4).getY(), 
+                    vertices.get(2).getX(), vertices.get(2).getY());
+        g.fillRect( vertices.get(1).getX(), vertices.get(1).getY(), 
+                    vertices.get(7).getX(), vertices.get(7).getY());
     }
 
     /**
