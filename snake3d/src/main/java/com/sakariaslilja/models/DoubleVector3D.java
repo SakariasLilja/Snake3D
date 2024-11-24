@@ -95,7 +95,7 @@ public class DoubleVector3D extends AbstractVector {
      * @return A new [DoubleVector3D] with the rounded values.
      */
     public DoubleVector3D round() {
-        return new DoubleVector3D(Math.rint(x), Math.rint(y), Math.rint(z));
+        return new DoubleVector3D(Math.round(x), Math.round(y), Math.round(z));
     }
 
     /**

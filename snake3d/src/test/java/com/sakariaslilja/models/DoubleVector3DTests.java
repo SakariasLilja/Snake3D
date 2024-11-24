@@ -49,9 +49,9 @@ public class DoubleVector3DTests {
     @Test
     @DisplayName("DoubleVector3D round")
     void round() {
-        DoubleVector3D vector3d = new DoubleVector3D(1.9, -0.4, -0.9);
+        DoubleVector3D vector3d = new DoubleVector3D(0.5, -0.4, -0.9);
         DoubleVector3D result = vector3d.round();
-        DoubleVector3D expected = new DoubleVector3D(2, 0, -1);
+        DoubleVector3D expected = new DoubleVector3D(1, 0, -1);
         assertEquals(expected, result, "The round method should work as expected");
     }
 
