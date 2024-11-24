@@ -15,6 +15,7 @@ import com.sakariaslilja.models.World;
 
 /**
  * The game engine.
+ * The rotation values are in degrees.
  */
 public class GameEngine {
 
@@ -26,9 +27,7 @@ public class GameEngine {
     private Date creationDate;
     private int score;
 
-    private int worldWidth;
-    private int worldHeight;
-    private int worldDepth;
+    private int worldWidth, worldHeight, worldDepth;
 
     private ArrayList<Tuple> edges;
     private ArrayList<Vector3D> gridPositions = new ArrayList<>();
@@ -36,9 +35,8 @@ public class GameEngine {
 
     private DoubleVector3D camera;
 
-    private double rotX;
-    private double rotY;
-    private double rotZ;
+    // In degrees
+    private int rotX, rotY, rotZ;
 
     /**
      * To create an instance of a game engine, the world dimensions are needed
@@ -83,6 +81,28 @@ public class GameEngine {
     public double getRotX() { return rotX; }
     public double getRotY() { return rotY; }   
     public double getRotZ() { return rotZ; }
+
+    /**
+     * Converts this GameEngine instance to a GameModel.
+     * Used for saving the game.
+     * @return A GameModel instance with the attributes of this game
+     */
+    public GameModel toGameModel() {
+        GameModel model = new GameModel();
+
+        model.gameTitle = gameTitle;
+        model.creationDate = creationDate;
+        model.score = score;
+        model.seed = seed;
+        model.worldWidth = worldWidth;
+        model.worldHeight = worldHeight;
+        model.worldDepth = worldDepth;
+        model.rotX = rotX;
+        model.rotY = rotY;
+        model.rotZ = rotZ;
+
+        return model;
+    }
 
     /**
      * Update method of the world.
