@@ -6,19 +6,13 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.text.DateFormat;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.sakariaslilja.models.SettingsModel;
 
 /**
  * Service for getting and setting data from game_settings.json
  */
-public class SettingsService {
-
-    private static Gson gson = new GsonBuilder().setPrettyPrinting().setDateFormat(DateFormat.MEDIUM).create();
+public class SettingsService implements Snake3DGson {
 
     private final String SETTINGS_PATH = "resources" + File.separator + "game_settings.json";
     private final String BACKUP_PATH ="resources" + File.separator + "game_settings_error.json";
