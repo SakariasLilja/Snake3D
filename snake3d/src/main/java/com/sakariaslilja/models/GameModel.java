@@ -13,7 +13,7 @@ public class GameModel {
     public Date playDate = new Date();
     public int score = 0;
     public long seed = System.nanoTime();
-    public int wordWidth = 5;
+    public int worldWidth = 5;
     public int worldHeight = 5;
     public int worldDepth = 5;
     public int rotX = 0;
