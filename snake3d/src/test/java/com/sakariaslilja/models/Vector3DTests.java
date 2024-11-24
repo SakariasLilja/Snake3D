@@ -12,7 +12,7 @@ public class Vector3DTests {
 
     @Test
     @DisplayName("Vector3D toString")
-    void returnsCorrectString() {
+    public void returnsCorrectString() {
         Vector3D vector3d = new Vector3D(0, 0, 0);
         String expected = "Vector3D(0, 0, 0)";
         assertEquals(expected, vector3d.toString(), "Vector3D(0, 0, 0) should be returned when toString is called");
@@ -20,7 +20,7 @@ public class Vector3DTests {
 
     @Test
     @DisplayName("Vector3D getX")
-    void getX() {
+    public void getX() {
         Vector3D vector3d = new Vector3D(0, 0, 0);
         int expected = 0;
         assertEquals(expected, vector3d.getX(), "getX() should return correct value");
@@ -28,7 +28,7 @@ public class Vector3DTests {
 
     @Test
     @DisplayName("Vector3D getY")
-    void getY() {
+    public void getY() {
         Vector3D vector3d = new Vector3D(0, 5, 0);
         int expected = 5;
         assertEquals(expected, vector3d.getY(), "getY() should return correct value");
@@ -36,7 +36,7 @@ public class Vector3DTests {
 
     @Test
     @DisplayName("Vector3D getZ")
-    void getZ() {
+    public void getZ() {
         Vector3D vector3d = new Vector3D(0, 0, -3);
         int expected = -3;
         assertEquals(expected, vector3d.getZ(), "getZ() should return correct value");
@@ -44,7 +44,7 @@ public class Vector3DTests {
 
     @Test
     @DisplayName("Vector3D add")
-    void addVector3D() {
+    public void addVector3D() {
         Vector3D first = Vector3D.Right;
         Vector3D second = Vector3D.Down;
         Vector3D result = first.add(second);
@@ -54,7 +54,7 @@ public class Vector3DTests {
 
     @Test
     @DisplayName("Vector3D negate")
-    void negateVector3D() {
+    public void negateVector3D() {
         Vector3D vector3d = Vector3D.Backward;
         Vector3D expected = Vector3D.Forward;
         assertEquals(expected, vector3d.neg(), "The neg method should work as expected");
@@ -62,7 +62,7 @@ public class Vector3DTests {
 
     @Test
     @DisplayName("Vector3D scalar multiply")
-    void scalarMul() {
+    public void scalarMul() {
         int scalar = 5;
         Vector3D vector3d = Vector3D.Right;
         Vector3D expected = new Vector3D(scalar, 0, 0);
@@ -71,7 +71,7 @@ public class Vector3DTests {
 
     @Test
     @DisplayName("Vector3D equals")
-    void vectorEquals() {
+    public void vectorEquals() {
         Vector3D backward = Vector3D.Backward;
         Vector3D forward = Vector3D.Forward;
         Vector3D custom = new Vector3D(0, 0, 1);
@@ -82,7 +82,7 @@ public class Vector3DTests {
 
     @Test
     @DisplayName("Vector3D forAll")
-    void vectorForAll() {
+    public void vectorForAll() {
         Vector3D vector3d = new Vector3D(2, 0, 4);
 
         assertNotEquals(true, vector3d.forAll((c) -> c < 0), "The forAll method should return false");
@@ -91,7 +91,7 @@ public class Vector3DTests {
 
     @Test
     @DisplayName("Vector3D conversion to DoubleVector3D")
-    void vectorConvert() {
+    public void vectorConvert() {
         Vector3D vector3d = new Vector3D(1, 2, 3);
         DoubleVector3D converted = vector3d.toDoubleVector3D();
         DoubleVector3D expected = new DoubleVector3D(1, 2, 3);
@@ -101,7 +101,7 @@ public class Vector3DTests {
 
     @Test
     @DisplayName("Vector3D exists")
-    void vectorExists() {
+    public void vectorExists() {
         Vector3D vector3d = new Vector3D(1, 1, -1);
         Predicate<Integer> isNegative = (i) -> i < 0;
         Predicate<Integer> isZero = (i) -> i.intValue() == 0;

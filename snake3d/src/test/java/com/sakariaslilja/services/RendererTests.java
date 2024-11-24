@@ -12,7 +12,7 @@ public class RendererTests {
 
     @Test
     @DisplayName("Renderer translate")
-    void renderTranslate() {
+    public void renderTranslate() {
         DoubleVector3D camera = new DoubleVector3D(1, 1, 1);
         GameEngine engine = new GameEngine(new GameModel(), camera);
         Renderer renderer = new Renderer(null, engine);
@@ -25,7 +25,7 @@ public class RendererTests {
 
     @Test
     @DisplayName("Renderer rotations")
-    void renderRotations() {
+    public void renderRotations() {
         GameModel model = new GameModel();
         model.rotX = 90;
         model.rotY = 90;
@@ -41,7 +41,7 @@ public class RendererTests {
 
     @Test
     @DisplayName("Renderer perspectiveCorrection")
-    void rendererPerspectiveCorrection() {
+    public void rendererPerspectiveCorrection() {
         GameEngine engine = new GameEngine(new GameModel(), null);
         Renderer renderer = new Renderer(null, engine);
 

@@ -14,7 +14,7 @@ public class AppleTests {
 
     @Test
     @DisplayName("Apple position")
-    void getPosition() {
+    public void getPosition() {
         Vector3D position = new Vector3D(1, 2, -2);
         Apple apple = new Apple(position);
 
@@ -23,7 +23,7 @@ public class AppleTests {
 
     @Test
     @DisplayName("Apple getGridPos")
-    void getGridPos() {
+    public void getGridPos() {
         Vector3D position = new Vector3D(500, 499, 501);
         Apple apple = new Apple(position);
         Vector3D expected = new Vector3D(0, 0, 1);
@@ -33,7 +33,7 @@ public class AppleTests {
 
     @Test
     @DisplayName("Apple Vertices")
-    void getVertices() {
+    public void getVertices() {
         Vector3D position = new Vector3D(500, 500, 500);
         Apple apple = new Apple(position);
         ArrayList<DoubleVector3D> vertices = apple.getVertices();

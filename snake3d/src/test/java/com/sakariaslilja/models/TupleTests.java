@@ -12,7 +12,7 @@ public class TupleTests {
 
     @Test
     @DisplayName("Tuple values test")
-    void tupleValues() {
+    public void tupleValues() {
         DoubleVector3D value1 = new DoubleVector3D(6,1,2);
         DoubleVector3D value2 = new DoubleVector3D(7, 2, 221);
 
@@ -24,7 +24,7 @@ public class TupleTests {
 
     @Test
     @DisplayName("Tuple equivalency test")
-    void tupleEqual() {
+    public void tupleEqual() {
         DoubleVector3D value1 = new DoubleVector3D(126, 16, -27);
         DoubleVector3D value2 = new DoubleVector3D(8, -3, -818);
         DoubleVector3D value2copy = new DoubleVector3D(8, -3, -818);
@@ -40,7 +40,7 @@ public class TupleTests {
 
     @Test
     @DisplayName("Updating values should work")
-    void tupleUpdate() {
+    public void tupleUpdate() {
         DoubleVector3D value1 = new DoubleVector3D(28, 3, 182);
         DoubleVector3D value2 = new DoubleVector3D(18, 7327, -1);
 
@@ -55,7 +55,7 @@ public class TupleTests {
 
     @Test
     @DisplayName("ForAll function")
-    void forAll() {
+    public void forAll() {
         DoubleVector3D value1 = new DoubleVector3D(6, 4, 1);
         DoubleVector3D value2 = new DoubleVector3D(6, 2, 55);
 
@@ -67,7 +67,7 @@ public class TupleTests {
 
     @Test
     @DisplayName("ForEach function")
-    void forEach() {
+    public void forEach() {
         DoubleVector3D value1 = Vector3D.Right.toDoubleVector3D();
         DoubleVector3D value2 = Vector3D.Left.toDoubleVector3D();
         int scalar = 2;
@@ -85,7 +85,7 @@ public class TupleTests {
 
     @Test
     @DisplayName("Tuple toString")
-    void tupleToString() {
+    public void tupleToString() {
         DoubleVector3D value1 = Vector3D.Right.toDoubleVector3D();
         DoubleVector3D value2 = Vector3D.Down.toDoubleVector3D();
 
@@ -98,7 +98,7 @@ public class TupleTests {
 
     @Test
     @DisplayName("Tuple contains")
-    void tupleContains() {
+    public void tupleContains() {
         DoubleVector3D value1 = Vector3D.Right.toDoubleVector3D();
         DoubleVector3D value2 = Vector3D.Up.toDoubleVector3D();
 
@@ -111,7 +111,7 @@ public class TupleTests {
 
     @Test
     @DisplayName("Tuple duplicate")
-    void tupleDuplicate() {
+    public void tupleDuplicate() {
         DoubleVector3D value1 = new DoubleVector3D(4, 2, 1);
         DoubleVector3D value2 = new DoubleVector3D(1, 2, 2);
 
@@ -130,7 +130,7 @@ public class TupleTests {
 
     @Test
     @DisplayName("Tuple exists")
-    void tupleExists() {
+    public void tupleExists() {
         DoubleVector3D value1 = new DoubleVector3D(1, 2, 2);
         DoubleVector3D value2 = new DoubleVector3D(-1, 1, 1);
 

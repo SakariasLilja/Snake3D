@@ -13,7 +13,7 @@ public class DoubleVector3DTests {
 
     @Test
     @DisplayName("DoubleVector3D getX")
-    void getX() {
+    public void getX() {
         double x = 7.0;
         DoubleVector3D vector3d = new DoubleVector3D(x, 0, 0);
         assertEquals(x, vector3d.getX(), "The getX method should work as expected");
@@ -21,7 +21,7 @@ public class DoubleVector3DTests {
 
     @Test
     @DisplayName("DoubleVector3D getY")
-    void getY() {
+    public void getY() {
         double y = -3.5;
         DoubleVector3D vector3d = new DoubleVector3D(0, y, 0);
         assertEquals(y, vector3d.getY(), "The getY method should work as expected");
@@ -29,7 +29,7 @@ public class DoubleVector3DTests {
 
     @Test
     @DisplayName("DoubleVector3D getZ")
-    void getZ() {
+    public void getZ() {
         double z = 0.004;
         DoubleVector3D vector3d = new DoubleVector3D(0, 0, z);
         assertEquals(z, vector3d.getZ(), "The getZ method should work as expected");
@@ -37,7 +37,7 @@ public class DoubleVector3DTests {
 
     @Test
     @DisplayName("DoubleVector3D equals")
-    void doubleVector3DEquals() {
+    public void doubleVector3DEquals() {
         DoubleVector3D first = new DoubleVector3D(1, 2, 3);
         DoubleVector3D second = new DoubleVector3D(5, -3, 8);
         DoubleVector3D third = new DoubleVector3D(1, 2, 3);
@@ -48,7 +48,7 @@ public class DoubleVector3DTests {
 
     @Test
     @DisplayName("DoubleVector3D round")
-    void round() {
+    public void round() {
         DoubleVector3D vector3d = new DoubleVector3D(2.5, -0.4, -0.9);
         DoubleVector3D result = vector3d.round();
         DoubleVector3D expected = new DoubleVector3D(3, 0, -1);
@@ -57,7 +57,7 @@ public class DoubleVector3DTests {
 
     @Test
     @DisplayName("DoubleVector3D rotateX")
-    void rotateX() {
+    public void rotateX() {
         double angle = Math.PI * 0.5;
         DoubleVector3D vector3d = new DoubleVector3D(1, 2, 3);
         DoubleVector3D result = vector3d.rotateX(angle).round();
@@ -67,7 +67,7 @@ public class DoubleVector3DTests {
 
     @Test
     @DisplayName("DoubleVector3D rotateY")
-    void rotateY() {
+    public void rotateY() {
         double angle = Math.PI * 0.5;
         DoubleVector3D vector3d = new DoubleVector3D(1, 2, 3);
         DoubleVector3D result = vector3d.rotateY(angle).round();
@@ -77,7 +77,7 @@ public class DoubleVector3DTests {
 
     @Test
     @DisplayName("DoubleVector3D rotateZ")
-    void rotateZ() {
+    public void rotateZ() {
         double angle = Math.PI * 0.5;
         DoubleVector3D vector3d = new DoubleVector3D(1, 2, 3);
         DoubleVector3D result = vector3d.rotateZ(angle).round();
@@ -87,7 +87,7 @@ public class DoubleVector3DTests {
 
     @Test
     @DisplayName("DoubleVector3D convert to Vector3D")
-    void convertToVector3D() {
+    public void convertToVector3D() {
         DoubleVector3D vector = new DoubleVector3D(0.5, -0.2, -1.9);
         Vector3D converted = vector.toVector3D();
         Vector3D expected = new Vector3D(1, 0, -2);
@@ -97,7 +97,7 @@ public class DoubleVector3DTests {
 
     @Test
     @DisplayName("DoubleVector3D mul")
-    void mulDoubleVector() {
+    public void mulDoubleVector() {
         int scalar = 10;
         DoubleVector3D vector = new DoubleVector3D(1.8, -1, 0.5);
         DoubleVector3D expected = new DoubleVector3D(18, -10, 5);
@@ -107,7 +107,7 @@ public class DoubleVector3DTests {
 
     @Test
     @DisplayName("DoubleVector3D toString")
-    void doubleVectorToString() {
+    public void doubleVectorToString() {
         DoubleVector3D vector = new DoubleVector3D(Math.PI, -0, 22.1);
         String expected = "DV(3.142  0.000  22.100)";
 
@@ -116,7 +116,7 @@ public class DoubleVector3DTests {
 
     @Test
     @DisplayName("DoubleVector3D add")
-    void doubleVectorAdd() {
+    public void doubleVectorAdd() {
         DoubleVector3D first = Vector3D.Backward.toDoubleVector3D();
         DoubleVector3D second = Vector3D.Forward.toDoubleVector3D();
 
@@ -127,7 +127,7 @@ public class DoubleVector3DTests {
 
     @Test
     @DisplayName("DoubleVector3D duplicate")
-    void doubleVectorDuplicate() {
+    public void doubleVectorDuplicate() {
         DoubleVector3D vector = new DoubleVector3D(1, 2, 2);
         DoubleVector3D duplicate = vector.duplicate();
 
@@ -137,7 +137,7 @@ public class DoubleVector3DTests {
     
     @Test
     @DisplayName("DoubleVector3D negate")
-    void doubleVectorNegate() {
+    public void doubleVectorNegate() {
         DoubleVector3D vector = new DoubleVector3D(1, 2, 3);
         DoubleVector3D negated = vector.neg();
         DoubleVector3D expected = new DoubleVector3D(-1, -2, -3);
@@ -147,7 +147,7 @@ public class DoubleVector3DTests {
     
     @Test
     @DisplayName("DoubleVector3D exists")
-    void doubleVectorExists() {
+    public void doubleVectorExists() {
         DoubleVector3D vector = new DoubleVector3D(1, 1, -1);
         Predicate<Double> isNegative = (d) -> d.doubleValue() < 0;
         Predicate<Double> isZero = (d) -> d.doubleValue() == 0;

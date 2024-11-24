@@ -11,7 +11,7 @@ public class SettingsServiceTests {
 
     @Test
     @DisplayName("SettingsService getSettings")
-    void getSettings() {
+    public void getSettings() {
         SettingsService service = new SettingsService();
         SettingsModel defaultSettings = new SettingsModel();
         assertEquals("validate", defaultSettings.validate, "The validation message should be correct");
@@ -24,7 +24,7 @@ public class SettingsServiceTests {
 
     @Test
     @DisplayName("SettingsService saveSettings, resetSettings")
-    void saveSettings() {
+    public void saveSettings() {
         SettingsModel settings = new SettingsModel();
         String defaultValidate = settings.validate;
         String newValidate = "this";

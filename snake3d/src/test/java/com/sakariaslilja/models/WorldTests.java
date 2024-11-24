@@ -14,7 +14,7 @@ public class WorldTests implements Constants {
 
     @Test
     @DisplayName("World with width and height parameters")
-    void setDimensions() {
+    public void setDimensions() {
         int width = 5;
         int height = 7;
         int depth = 18;
@@ -38,7 +38,7 @@ public class WorldTests implements Constants {
 
     @Test
     @DisplayName("World with size parameter")
-    void setSize() {
+    public void setSize() {
         int size = 3;
         World normalWorld = new World(size);
         int expectedHeight = UNIT * size;
@@ -58,7 +58,7 @@ public class WorldTests implements Constants {
 
     @Test
     @DisplayName("World vertices")
-    void getVertices() {
+    public void getVertices() {
         int width = 2;
         int height = 3;
         int depth = 4;
@@ -92,7 +92,7 @@ public class WorldTests implements Constants {
 
     @Test
     @DisplayName("World edges test")
-    void getEdges() {
+    public void getEdges() {
         int width = 2;
         int height = 3;
         int depth = 4;

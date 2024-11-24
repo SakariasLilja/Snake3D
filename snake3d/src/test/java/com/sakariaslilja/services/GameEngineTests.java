@@ -16,7 +16,7 @@ public class GameEngineTests {
 
     @Test
     @DisplayName("GameEngine incrementScore")
-    void incrementScore() {
+    public void incrementScore() {
         GameEngine engine = new GameEngine(new GameModel(), null);
         int initialScore = engine.getScore();
         engine.incrementScore();
@@ -26,7 +26,7 @@ public class GameEngineTests {
 
     @Test
     @DisplayName("GameEngine toGameModel")
-    void toGameModel() {
+    public void toGameModel() {
         GameModel model = new GameModel();
         GameEngine engine = new GameEngine(model, null);
 
@@ -40,7 +40,7 @@ public class GameEngineTests {
     @SuppressWarnings("unchecked")
     @Test
     @DisplayName("GameEngine getAvailableGridPositions")
-    void getAvailableGridPositions() {
+    public void getAvailableGridPositions() {
         GameEngine engine = new GameEngine(new GameModel(), null);
         Vector3D position = new Vector3D(0, 0, 0);
 
