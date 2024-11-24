@@ -172,7 +172,7 @@ public class Renderer implements Constants {
      * @param vertex Vertex to translate
      * @return The translated vertex
      */
-    protected DoubleVector3D centerOnScreen(DoubleVector3D vertex) {
+    private DoubleVector3D centerOnScreen(DoubleVector3D vertex) {
         return new DoubleVector3D(vertex.getX() + 0.5 * App.getWidth(), vertex.getY() + 0.5 * App.getHeight(), vertex.getZ());
     }
 
