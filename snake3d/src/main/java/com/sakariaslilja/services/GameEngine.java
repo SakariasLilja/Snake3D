@@ -65,12 +65,6 @@ public class GameEngine {
 
     // Engine getters and setters
 
-    public long getSeed() { return seed; }
-
-    public int getWorldWidth() { return worldWidth; }
-    public int getWorldHeight() { return worldHeight; }
-    public int getWorldDepth() { return worldDepth; }
-
     public ArrayList<Tuple> getEdges() { return edges; }
 
     public ArrayList<Apple> getApples() { return apples; }
