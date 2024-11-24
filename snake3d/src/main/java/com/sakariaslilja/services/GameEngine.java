@@ -3,6 +3,7 @@ package com.sakariaslilja.services;
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.sakariaslilja.entities.Apple;
 import com.sakariaslilja.models.DoubleVector3D;
 import com.sakariaslilja.models.Tuple;
 import com.sakariaslilja.models.World;
@@ -13,12 +14,17 @@ import com.sakariaslilja.models.World;
 public class GameEngine {
 
     // The variables of the engine
+
     private long seed;
     private Random random;
+
     private int worldWidth;
     private int worldHeight;
     private int worldDepth;
+
     private ArrayList<Tuple> edges;
+    private ArrayList<Apple> apples = new ArrayList<>();
+
     private DoubleVector3D camera;
 
     private double rotX;
@@ -46,24 +52,23 @@ public class GameEngine {
         this.rotZ = rotZ;
     }
 
-    // Engine getters
+    // Engine getters and setters
+
+    public long getSeed() { return seed; }
+
+    public int getWorldWidth() { return worldWidth; }
+    public int getWorldHeight() { return worldHeight; }
+    public int getWorldDepth() { return worldDepth; }
 
     public ArrayList<Tuple> getEdges() { return edges; }
 
-    public long getSeed() {return seed;}
-
-    public int getWorldWidth() { return worldWidth; }
-
-    public int getWorldHeight() { return worldHeight; }
-
-    public int getWorldDepth() { return worldDepth; }
+    public ArrayList<Apple> getApples() { return apples; }
+    public void setApples(ArrayList<Apple> apples) { this.apples = apples; }
 
     public DoubleVector3D getCamera() { return camera; }
 
     public double getRotX() { return rotX; }
-
-    public double getRotY() { return rotY; }
-    
+    public double getRotY() { return rotY; }   
     public double getRotZ() { return rotZ; }
 
     /**
