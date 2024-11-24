@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 import com.sakariaslilja.models.DoubleVector3D;
+import com.sakariaslilja.models.GameModel;
 import com.sakariaslilja.services.GameEngine;
 
 /**
@@ -18,7 +19,7 @@ import com.sakariaslilja.services.GameEngine;
 public class App extends Application {
 
     private static Scene scene;
-    private static GameEngine engine = new GameEngine(System.nanoTime(), 3, 3, 3, new DoubleVector3D(0.5, 0.5, 0.5), 0, 0, 0);
+    private static GameEngine engine = new GameEngine(new GameModel(), new DoubleVector3D(0.5, 0.5, 0.5));
 
     // Variables of the scene.
     private static final String primarySceneFXML = "mainpage";

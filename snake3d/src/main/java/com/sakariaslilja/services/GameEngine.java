@@ -5,7 +5,9 @@ import java.util.Collections;
 import java.util.Random;
 
 import com.sakariaslilja.entities.Apple;
+import com.sakariaslilja.entities.Entity;
 import com.sakariaslilja.models.DoubleVector3D;
+import com.sakariaslilja.models.GameModel;
 import com.sakariaslilja.models.Tuple;
 import com.sakariaslilja.models.Vector3D;
 import com.sakariaslilja.models.World;
@@ -41,19 +43,19 @@ public class GameEngine {
      * @param worldHeight Height of the world
      * @param worldDepth Depth of the world
      */
-    public GameEngine(long seed, int worldWidth, int worldHeight, int worldDepth, DoubleVector3D camera, int rotX, int rotY, int rotZ) {
-        this.seed = seed;
+    public GameEngine(GameModel game, DoubleVector3D camera) {
+        this.seed = game.seed;
         this.random = new Random(seed);
-        this.worldWidth = worldWidth;
-        this.worldHeight = worldHeight;
-        this.worldDepth = worldDepth;
+        this.worldWidth = game.worldWidth;
+        this.worldHeight = game.worldHeight;
+        this.worldDepth = game.worldDepth;
         World world = new World(worldWidth, worldHeight, worldDepth);
         this.edges = world.getEdges();
         Collections.addAll(gridPositions, world.getVertices()[0]);
         this.camera = camera;
-        this.rotX = rotX;
-        this.rotY = rotY;
-        this.rotZ = rotZ;
+        this.rotX = game.rotX;
+        this.rotY = game.rotY;
+        this.rotZ = game.rotZ;
     }
 
     // Engine getters and setters
@@ -80,6 +82,25 @@ public class GameEngine {
      */
     public void update() {
         rotY += Math.PI / 180;
+    }
+
+    /**
+     * Gets the non-occupied grid positions.
+     * Non-occupied entails that no entity is present at the location.
+     * @param obstructors Vararg of collections of entities
+     * @return An ArrayList of free spaces
+     */
+    private ArrayList<Vector3D> getAvailableGridPositions(ArrayList<Entity>... obstructors) {
+        ArrayList<Vector3D> available = new ArrayList<>();
+        available.addAll(this.gridPositions);
+
+        for (ArrayList<Entity> obstructor : obstructors) {
+            for (Entity entity : obstructor) {
+                available.removeIf( (pos) -> pos.equals(entity.getGridPos()) );
+            }
+        }
+
+        return available;
     }
     
 }
