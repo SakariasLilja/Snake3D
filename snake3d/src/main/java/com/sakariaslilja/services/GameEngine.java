@@ -1,11 +1,13 @@
 package com.sakariaslilja.services;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 import com.sakariaslilja.entities.Apple;
 import com.sakariaslilja.models.DoubleVector3D;
 import com.sakariaslilja.models.Tuple;
+import com.sakariaslilja.models.Vector3D;
 import com.sakariaslilja.models.World;
 
 /**
@@ -23,6 +25,7 @@ public class GameEngine {
     private int worldDepth;
 
     private ArrayList<Tuple> edges;
+    private ArrayList<Vector3D> gridPositions = new ArrayList<>();
     private ArrayList<Apple> apples = new ArrayList<>();
 
     private DoubleVector3D camera;
@@ -46,6 +49,7 @@ public class GameEngine {
         this.worldDepth = worldDepth;
         World world = new World(worldWidth, worldHeight, worldDepth);
         this.edges = world.getEdges();
+        Collections.addAll(gridPositions, world.getVertices()[0]);
         this.camera = camera;
         this.rotX = rotX;
         this.rotY = rotY;
