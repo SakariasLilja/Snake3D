@@ -72,11 +72,26 @@ public class GameEngine {
 
     public DoubleVector3D getCamera() { return camera; }
 
-    public double getRotX() { return rotX; }
-    public double getRotY() { return rotY; }   
-    public double getRotZ() { return rotZ; }
-
     public int getScore() { return score; }
+
+    /**
+     * Gets the x-rotation in radians.
+     * @return The x-rotation in radians
+     */
+    public double getRotX() { return Math.PI * rotX / 180; }
+
+    /**
+     * Gets the y-rotation in radians.
+     * @return The y-rotation in radians
+     */
+    public double getRotY() { return Math.PI * rotY / 180; }
+
+    /**
+     * Gets the z-rotation in radians.
+     * @return The z-rotation in radians
+     */
+    public double getRotZ() { return Math.PI * rotZ / 180; }
+
 
     /**
      * Increases the score by 1.
@@ -109,7 +124,7 @@ public class GameEngine {
      * Update method of the world.
      */
     public void update() {
-        rotY += Math.PI / 180;
+        rotY += 1;
     }
 
     /**
