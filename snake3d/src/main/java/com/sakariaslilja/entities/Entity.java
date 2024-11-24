@@ -42,14 +42,14 @@ public abstract class Entity {
      * Getter for the grid position of the entity.
      * Values are rounded to their closest values exceptions 
      * being for the value 500 which is rounded down, e.g.
-     * <p> - 750 => 1
-     * <p> - 400 => 0
+     * <p> - 501 => 1
+     * <p> - 499 => 0
      * <p> - 500 => 0
      * @return Grid coordinates of this entity
      */
     public Vector3D getGridPos() {
         Vector3D subtractOne = new Vector3D(-1, -1, -1);
-        return position.add(subtractOne).toDoubleVector3D().mul(1 / Constants.UNIT).toVector3D();
+        return position.add(subtractOne).toDoubleVector3D().mul(1.0 / Constants.UNIT).toVector3D();
     }
 
     /**
