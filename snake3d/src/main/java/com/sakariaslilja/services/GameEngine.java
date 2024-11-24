@@ -118,12 +118,13 @@ public class GameEngine {
      * @param obstructors Vararg of collections of entities
      * @return An ArrayList of free spaces
      */
-    private ArrayList<Vector3D> getAvailableGridPositions(ArrayList<Entity>... obstructors) {
+    @SuppressWarnings("unchecked")
+    protected <T extends Entity> ArrayList<Vector3D> getAvailableGridPositions(ArrayList<T>... obstructors) {
         ArrayList<Vector3D> available = new ArrayList<>();
         available.addAll(this.gridPositions);
 
-        for (ArrayList<Entity> obstructor : obstructors) {
-            for (Entity entity : obstructor) {
+        for (ArrayList<T> obstructor : obstructors) {
+            for (T entity : obstructor) {
                 available.removeIf( (pos) -> pos.equals(entity.getGridPos()) );
             }
         }
