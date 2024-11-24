@@ -98,7 +98,7 @@ public class World {
      * <p>
      *         0: Left to right
      * <p>
-     *         1: Top to bottm
+     *         1: Top to bottom
      * <p>
      *         2: Front to back
      */
