@@ -2,6 +2,7 @@ package com.sakariaslilja.entities;
 
 import java.util.ArrayList;
 
+import com.sakariaslilja.Constants;
 import com.sakariaslilja.models.DoubleVector3D;
 import com.sakariaslilja.models.Vector3D;
 
@@ -35,6 +36,20 @@ public abstract class Entity {
      */
     public void setPosition(Vector3D position) {
         this.position = position;
+    }
+
+    /**
+     * Getter for the grid position of the entity.
+     * Values are rounded to their closest values exceptions 
+     * being for the value 500 which is rounded down, e.g.
+     * <p> - 750 => 1
+     * <p> - 400 => 0
+     * <p> - 500 => 0
+     * @return Grid coordinates of this entity
+     */
+    public Vector3D getGridPos() {
+        Vector3D subtractOne = new Vector3D(-1, -1, -1);
+        return position.add(subtractOne).toDoubleVector3D().mul(1 / Constants.UNIT).toVector3D();
     }
 
     /**
