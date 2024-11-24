@@ -151,7 +151,7 @@ public class Renderer implements Constants {
      * @param vertex The vertex to transform
      * @return The transformed vertex
      */
-    protected DoubleVector3D cameraTransform(DoubleVector3D vertex) {
+    private DoubleVector3D cameraTransform(DoubleVector3D vertex) {
         double newX = vertex.getX() * FOCAL_LENGTH / (0.0001 * 2);
         double newY = vertex.getY() * FOCAL_LENGTH / (0.0001 * 2);
 
