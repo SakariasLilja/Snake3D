@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import com.sakariaslilja.App;
 import com.sakariaslilja.Constants;
+import com.sakariaslilja.entities.Apple;
 import com.sakariaslilja.entities.CubeEntity;
 import com.sakariaslilja.models.DoubleVector3D;
 import com.sakariaslilja.models.SettingsModel;
@@ -58,6 +59,7 @@ public class Renderer {
     public void render() {
         this.clearCanvas(g);
         this.drawEdges(g);
+        this.drawApples(g);
     }
 
     /**
@@ -85,6 +87,15 @@ public class Renderer {
                 g.strokeLine(point1.getX(), point1.getY(), point2.getX(), point2.getY());
             }            
         }
+    }
+
+    /**
+     * Draws the game's apples onto the canvas.
+     * @param g The canvas onto which to draw
+     */
+    private void drawApples(GraphicsContext g) {
+        ArrayList<Apple> apples = engine.getApples();
+        for (Apple apple : apples) { drawCubeEntity(g, appleColor, apple); }
     }
 
     /**
