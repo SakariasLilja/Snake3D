@@ -18,7 +18,7 @@ import javafx.scene.paint.Color;
 /**
  * 3D renderer for Snake 3D.
  */
-public class Renderer {
+public class Renderer implements Constants {
 
     // Local variables
     private GraphicsContext g;
@@ -152,8 +152,8 @@ public class Renderer {
      * @return The transformed vertex
      */
     protected DoubleVector3D cameraTransform(DoubleVector3D vertex) {
-        double newX = vertex.getX() * Constants.FOCAL_LENGTH / (0.0001 * 2);
-        double newY = vertex.getY() * Constants.FOCAL_LENGTH / (0.0001 * 2);
+        double newX = vertex.getX() * FOCAL_LENGTH / (0.0001 * 2);
+        double newY = vertex.getY() * FOCAL_LENGTH / (0.0001 * 2);
 
         return new DoubleVector3D(newX, newY, vertex.getZ());
     }
