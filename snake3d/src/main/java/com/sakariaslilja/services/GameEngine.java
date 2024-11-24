@@ -65,10 +65,6 @@ public class GameEngine {
 
     // Engine getters and setters
 
-    public int getScore() { return score; }
-
-    public void incrementScore() { score++; }
-
     public ArrayList<Tuple> getEdges() { return edges; }
 
     public ArrayList<Apple> getApples() { return apples; }
@@ -79,6 +75,13 @@ public class GameEngine {
     public double getRotX() { return rotX; }
     public double getRotY() { return rotY; }   
     public double getRotZ() { return rotZ; }
+
+    public int getScore() { return score; }
+
+    /**
+     * Increases the score by 1.
+     */
+    public void incrementScore() { score++; }
 
     /**
      * Converts this GameEngine instance to a GameModel.
