@@ -79,11 +79,13 @@ public class Vector3D extends AbstractVector{
 
     /**
      * Function for multiplying this [Vector3D] with a scalar.
+     * The scalar is rounded to the nearest integer value.
      * @param scalar The scalar with which to scale the vector.
      * @return A new [Vector3D] with the scaled values.
      */
-    public Vector3D mul(int scalar) {
-        return new Vector3D(scalar * this.x, scalar * this.y, scalar * this.z);
+    public Vector3D mul(double scalar) {
+        int scalarInt = (int) Math.rint(scalar);
+        return new Vector3D(scalarInt * this.x, scalarInt * this.y, scalarInt * this.z);
     }
 
     /**

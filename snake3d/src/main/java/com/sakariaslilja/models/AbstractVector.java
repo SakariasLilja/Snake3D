@@ -11,6 +11,6 @@ public abstract class AbstractVector {
      * @param scalar The scalar with which to multiply this vector with
      * @return A new AbstractVector instance with the new values
      */
-    public abstract AbstractVector mul(int scalar);
+    public abstract AbstractVector mul(double scalar);
     
 }

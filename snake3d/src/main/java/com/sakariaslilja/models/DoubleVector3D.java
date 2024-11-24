@@ -59,7 +59,7 @@ public class DoubleVector3D extends AbstractVector {
      * @param scalar The scalar with which to multiply this vector with
      * @return A new DoubleVector3D with scaled values
      */
-    public DoubleVector3D mul(int scalar) {
+    public DoubleVector3D mul(double scalar) {
         return new DoubleVector3D(scalar * this.x, scalar * this.y, scalar * this.z);
     }
 
