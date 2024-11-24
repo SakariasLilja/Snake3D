@@ -16,7 +16,7 @@ import com.sakariaslilja.services.GameEngine;
 /**
  * JavaFX App for the Snake3D game.
  */
-public class App extends Application {
+public class App extends Application implements Constants {
 
     private static Scene scene;
     private static GameEngine engine = new GameEngine(new GameModel(), new DoubleVector3D(0.5, 0.5, 0.5));
@@ -27,7 +27,7 @@ public class App extends Application {
     // Sets the primary scene of the application.
     @Override
     public void start(@SuppressWarnings("exports") Stage stage) throws IOException {
-        stage.setTitle(Constants.GAME_NAME);
+        stage.setTitle(GAME_NAME);
         stage.setMaximized(true);
         stage.setResizable(false);
         scene = new Scene(loadFXML(primarySceneFXML), 800, 400);

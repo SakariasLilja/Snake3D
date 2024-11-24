@@ -12,7 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.VBox;
 
-public class GameController {
+public class GameController implements Constants {
 
     @FXML
     Canvas gameCanvas;
@@ -28,7 +28,7 @@ public class GameController {
         @Override
         public void handle(long arg0) {
             long currentTime = System.nanoTime();
-            if (1000000000l / Constants.FPS <= (currentTime - startTime)) {
+            if (1000000000l / (long) FPS <= (currentTime - startTime)) {
                 engine.update();
                 renderer.render();
                 startTime = currentTime;
@@ -37,8 +37,8 @@ public class GameController {
     };
     
     public void initialize() {
-        gameCanvas.setWidth(Constants.WIDTH);
-        gameCanvas.setHeight(Constants.HEIGHT);
+        gameCanvas.setWidth(App.getWidth());
+        gameCanvas.setHeight(App.getHeight());
         this.engine = App.getEngine();
         this.renderer = new Renderer(gameCanvas.getGraphicsContext2D(), engine);
         gameClock.start();

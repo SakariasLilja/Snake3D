@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import com.sakariaslilja.App;
 import com.sakariaslilja.Constants;
 import com.sakariaslilja.entities.CubeEntity;
 import com.sakariaslilja.models.DoubleVector3D;
@@ -65,7 +66,7 @@ public class Renderer {
      */
     private void clearCanvas(GraphicsContext g) {
         g.setFill(backgroundColor);
-        g.fillRect(0, 0, Constants.WIDTH, Constants.HEIGHT);
+        g.fillRect(0, 0, App.getWidth(), App.getHeight());
     }
 
     /**
@@ -140,8 +141,8 @@ public class Renderer {
      * @return The transformed vertex
      */
     private DoubleVector3D cameraTransform(DoubleVector3D vertex) {
-        double newX = vertex.getX() * Constants.FOCAL_LENGTH * Constants.WIDTH / (2 * Constants.SENSOR_SIZE_X);
-        double newY = vertex.getY() * Constants.FOCAL_LENGTH * Constants.HEIGHT / (2 * Constants.SENSOR_SIZE_Y);
+        double newX = vertex.getX() * Constants.FOCAL_LENGTH / (0.0001 * 2);
+        double newY = vertex.getY() * Constants.FOCAL_LENGTH / (0.0001 * 2);
 
         return new DoubleVector3D(newX, newY, vertex.getZ());
     }
@@ -161,7 +162,7 @@ public class Renderer {
      * @return The translated vertex
      */
     private DoubleVector3D centerOnScreen(DoubleVector3D vertex) {
-        return new DoubleVector3D(vertex.getX() + 0.5 * Constants.WIDTH, vertex.getY() + 0.5 * Constants.HEIGHT, vertex.getZ());
+        return new DoubleVector3D(vertex.getX() + 0.5 * App.getWidth(), vertex.getY() + 0.5 * App.getHeight(), vertex.getZ());
     }
 
     /**

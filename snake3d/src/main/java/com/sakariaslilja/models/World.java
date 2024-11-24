@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 /**
  * An instance of a world with a set width, height and depth.
  */
-public class World {
+public class World implements Constants {
 
     // Constants of the world.
     private final int width;
@@ -53,12 +53,12 @@ public class World {
      * @return The validated size
      */
     private int validateSize(int param) {
-        if (param < Constants.MIN_WORLD_SIZE) {
-            return Constants.MIN_WORLD_SIZE;
+        if (param < MIN_WORLD_SIZE) {
+            return MIN_WORLD_SIZE;
         }
 
-        if (param > Constants.MAX_WORLD_SIZE) {
-            return Constants.MAX_WORLD_SIZE;
+        if (param > MAX_WORLD_SIZE) {
+            return MAX_WORLD_SIZE;
         }
 
         return param;
@@ -70,7 +70,7 @@ public class World {
      * @return The converted world width.
      */
     public int getWidth() {
-        return this.width * Constants.UNIT;
+        return this.width * UNIT;
     }
 
     /**
@@ -79,7 +79,7 @@ public class World {
      * @return The converted world height.
      */
     public int getHeight() {
-        return this.height * Constants.UNIT;
+        return this.height * UNIT;
     }
 
     /**
@@ -88,7 +88,7 @@ public class World {
      * @return The converted world depth.
      */
     public int getDepth() {
-        return this.depth * Constants.UNIT;
+        return this.depth * UNIT;
     }
 
     /**

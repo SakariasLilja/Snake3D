@@ -9,7 +9,7 @@ import com.sakariaslilja.models.Vector3D;
 /**
  * Entity class for all entities.
  */
-public abstract class Entity {
+public abstract class Entity implements Constants {
 
     private Vector3D position;
     
@@ -49,7 +49,7 @@ public abstract class Entity {
      */
     public Vector3D getGridPos() {
         Vector3D subtractOne = new Vector3D(-1, -1, -1);
-        return position.add(subtractOne).toDoubleVector3D().mul(1.0 / Constants.UNIT).toVector3D();
+        return position.add(subtractOne).toDoubleVector3D().mul(1.0 / UNIT).toVector3D();
     }
 
     /**

@@ -2,7 +2,6 @@ package com.sakariaslilja.entities;
 
 import java.util.ArrayList;
 
-import com.sakariaslilja.Constants;
 import com.sakariaslilja.models.DoubleVector3D;
 import com.sakariaslilja.models.Vector3D;
 
@@ -23,7 +22,7 @@ public abstract class CubeEntity extends Entity {
     @Override
     public ArrayList<DoubleVector3D> getVertices() {
         ArrayList<DoubleVector3D> vertices = new ArrayList<>();
-        DoubleVector3D center = this.getPosition().toDoubleVector3D().mul(1.0 / Constants.UNIT);
+        DoubleVector3D center = this.getPosition().toDoubleVector3D().mul(1.0 / UNIT);
 
         for (int zDim = -1; zDim <= 1; zDim += 2) {
             for (int yDim = -1; yDim <= 1; yDim += 2) {

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import com.sakariaslilja.Constants;
 
-public class WorldTests {
+public class WorldTests implements Constants {
 
     @Test
     @DisplayName("World with width and height parameters")
@@ -21,19 +21,19 @@ public class WorldTests {
 
         World normalWorld = new World(width, height, depth);
 
-        int expectedWidth = Constants.UNIT * width;
-        int expectedHeight = Constants.UNIT * height;
-        int expectedDepth = Constants.UNIT * depth;
+        int expectedWidth = UNIT * width;
+        int expectedHeight = UNIT * height;
+        int expectedDepth = UNIT * depth;
 
         assertEquals(expectedWidth, normalWorld.getWidth(), "The getWidth method should return correct value");
         assertEquals(expectedHeight, normalWorld.getHeight(), "The getHeight method should return correct value");
         assertEquals(expectedDepth, normalWorld.getDepth(), "The getDepth method should return correct value");
 
         World smallWorld = new World(0, 0, 0);
-        World largeWorld = new World(2 * Constants.MAX_WORLD_SIZE, 2 * Constants.MAX_WORLD_SIZE, 2 * Constants.MAX_WORLD_SIZE);
+        World largeWorld = new World(2 * MAX_WORLD_SIZE, 2 * MAX_WORLD_SIZE, 2 * MAX_WORLD_SIZE);
 
-        assertEquals(Constants.MIN_WORLD_SIZE * Constants.UNIT, smallWorld.getHeight(), "The world should not be smaller than allowed");
-        assertEquals(Constants.MAX_WORLD_SIZE * Constants.UNIT, largeWorld.getWidth(), "The world should not be larger than allowed");
+        assertEquals(MIN_WORLD_SIZE * UNIT, smallWorld.getHeight(), "The world should not be smaller than allowed");
+        assertEquals(MAX_WORLD_SIZE * UNIT, largeWorld.getWidth(), "The world should not be larger than allowed");
     }
 
     @Test
@@ -41,7 +41,7 @@ public class WorldTests {
     void setSize() {
         int size = 3;
         World normalWorld = new World(size);
-        int expectedHeight = Constants.UNIT * size;
+        int expectedHeight = UNIT * size;
         int expectedWidth = expectedHeight;
         int expectedDepth = expectedHeight;
         
@@ -50,10 +50,10 @@ public class WorldTests {
         assertEquals(expectedDepth, normalWorld.getDepth(), "The depth should be set properly");
 
         World smallWorld = new World(0);
-        World largeWorld = new World(2* Constants.MAX_WORLD_SIZE);
+        World largeWorld = new World(2* MAX_WORLD_SIZE);
 
-        assertEquals(Constants.MIN_WORLD_SIZE * Constants.UNIT, smallWorld.getHeight(), "The world should not be too small");
-        assertEquals(Constants.MAX_WORLD_SIZE * Constants.UNIT, largeWorld.getHeight(), "The world should not be too large");
+        assertEquals(MIN_WORLD_SIZE * UNIT, smallWorld.getHeight(), "The world should not be too small");
+        assertEquals(MAX_WORLD_SIZE * UNIT, largeWorld.getHeight(), "The world should not be too large");
     }
 
     @Test
