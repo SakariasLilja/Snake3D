@@ -49,9 +49,9 @@ public class DoubleVector3DTests {
     @Test
     @DisplayName("DoubleVector3D round")
     void round() {
-        DoubleVector3D vector3d = new DoubleVector3D(0.5, -0.4, -0.9);
+        DoubleVector3D vector3d = new DoubleVector3D(2.5, -0.4, -0.9);
         DoubleVector3D result = vector3d.round();
-        DoubleVector3D expected = new DoubleVector3D(1, 0, -1);
+        DoubleVector3D expected = new DoubleVector3D(3, 0, -1);
         assertEquals(expected, result, "The round method should work as expected");
     }
 
@@ -88,9 +88,9 @@ public class DoubleVector3DTests {
     @Test
     @DisplayName("DoubleVector3D convert to Vector3D")
     void convertToVector3D() {
-        DoubleVector3D vector = new DoubleVector3D(1.8, -0.2, -1.9);
+        DoubleVector3D vector = new DoubleVector3D(0.5, -0.2, -1.9);
         Vector3D converted = vector.toVector3D();
-        Vector3D expected = new Vector3D(2, 0, -2);
+        Vector3D expected = new Vector3D(1, 0, -2);
 
         assertEquals(expected, converted, "The toVector3D method should work as expected");
     }
