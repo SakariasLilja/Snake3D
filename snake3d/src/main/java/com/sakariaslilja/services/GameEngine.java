@@ -2,6 +2,7 @@ package com.sakariaslilja.services;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Random;
 
 import com.sakariaslilja.entities.Apple;
@@ -19,8 +20,11 @@ public class GameEngine {
 
     // The variables of the engine
 
+    private String gameTitle;
     private long seed;
     private Random random;
+    private Date creationDate;
+    private int score;
 
     private int worldWidth;
     private int worldHeight;
@@ -44,8 +48,11 @@ public class GameEngine {
      * @param worldDepth Depth of the world
      */
     public GameEngine(GameModel game, DoubleVector3D camera) {
+        this.gameTitle = game.gameTitle;
         this.seed = game.seed;
         this.random = new Random(seed);
+        this.creationDate = game.creationDate;
+        this.score = game.score;
         this.worldWidth = game.worldWidth;
         this.worldHeight = game.worldHeight;
         this.worldDepth = game.worldDepth;
