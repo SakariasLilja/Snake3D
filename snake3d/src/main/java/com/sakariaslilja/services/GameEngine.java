@@ -1,7 +1,6 @@
 package com.sakariaslilja.services;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.Random;
 
