@@ -5,7 +5,7 @@ import com.sakariaslilja.models.Vector3D;
 /**
  * Interface for all movable entities
  */
-public interface Movable {
+public interface IMovable {
 
     /**
      * Getter for the heading of this entity
