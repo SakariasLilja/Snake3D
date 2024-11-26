@@ -68,6 +68,7 @@ public class GameEngine {
     public ArrayList<Tuple> getEdges() { return edges; }
 
     public ArrayList<Apple> getApples() { return apples; }
+    protected int countApples() { return apples.size(); }
     public void setApples(ArrayList<Apple> apples) { this.apples = apples; }
 
     public DoubleVector3D getCamera() { return camera; }

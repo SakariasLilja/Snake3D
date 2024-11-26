@@ -56,5 +56,23 @@ public class GameEngineTests {
         assertNotEquals(-1, index, "The position should exist in the original array");
         assertNotEquals(allPositions.get(index), appleOccupied.get(index), "The position at the deleted index should not be the same");
     }
+
+    @Test
+    @DisplayName("GameEngine apple count")
+    void appleCount() {
+        GameEngine engine = new GameEngine(new GameModel(), null);
+
+        assertEquals(0, engine.countApples(), "The number of apples should be 0 if not set to anything");
+
+        ArrayList<Apple> apples = new ArrayList<>();
+        int expectedAppleCount = 3;
+        for (int i = 0; i < expectedAppleCount; i ++) {
+            Apple apple = new Apple(new Vector3D(i, i, i));
+            apples.add(apple);
+        }
+        engine.setApples(apples);
+
+        assertEquals(expectedAppleCount, engine.countApples(), "The number of apples should be correct");
+    }
     
 }
