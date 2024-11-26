@@ -57,16 +57,25 @@ public class GameEngine implements IConstants {
         this.worldDepth = game.worldDepth;
         World world = new World(worldWidth, worldHeight, worldDepth);
         this.edges = world.getEdges();
-        Collections.addAll(gridPositions, world.getVertices()[0]);
         this.camera = camera;
         this.rotX = game.rotX;
         this.rotY = game.rotY;
         this.rotZ = game.rotZ;
+
+        // Adding the grid positions of the world
+        for (int layer = 0; layer < game.worldDepth; layer++) {
+            for (int row = 0; row < game.worldHeight; row++) {
+                for (int column = 0; column < game.worldWidth; column++) {
+                    gridPositions.add(new Vector3D(column, row, layer));
+                }
+            }
+        }
     }
 
     // Engine getters and setters
 
     public ArrayList<Tuple> getEdges() { return edges; }
+    protected int gridPositionCount() { return gridPositions.size(); }
 
     public ArrayList<Apple> getApples() { return apples; }
     protected int countApples() { return apples.size(); }
@@ -158,12 +167,19 @@ public class GameEngine implements IConstants {
     /**
      * Spawns an apple at a random location in the world if the number of
      * apples is less than a given limit.
+     * <p> 
+     * An apple can only spawn if there are unoccupied locations in the world.
      * @param limit The max number of apples a world can have
      */
     @SuppressWarnings("unchecked")
     protected void spawnApple(int limit) {
         if (this.countApples() < limit) {
             ArrayList<Vector3D> availableGridPositions = getAvailableGridPositions(apples);
+
+            if (availableGridPositions.size() == 0) {
+                return;
+            }
+
             int locationIndex = random.nextInt(availableGridPositions.size());
             Vector3D offset = new Vector3D(500, 500, 500);
             Apple apple = new Apple(availableGridPositions.get(locationIndex).mul(UNIT).add(offset));

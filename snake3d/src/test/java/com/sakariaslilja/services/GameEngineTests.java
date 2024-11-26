@@ -87,9 +87,28 @@ public class GameEngineTests {
     }
 
     @Test
+    @DisplayName("GameEngine gridPositions")
+    void gridPositions() {
+        int width = 3;
+        int height = 4;
+        int depth = 7;
+
+        GameModel model = new GameModel();
+        model.worldWidth = width;
+        model.worldHeight = height;
+        model.worldDepth = depth;
+        GameEngine engine = new GameEngine(model, null);
+
+        int expectedSize = width * height * depth;
+
+        assertEquals(expectedSize, engine.gridPositionCount(), "The number of grid positions should be correct");
+    }
+
+    @Test
     @DisplayName("GameEngine spawnApple")
     void spawnApple() {
-        GameEngine engine = new GameEngine(new GameModel(), null);
+        GameModel model = new GameModel();
+        GameEngine engine = new GameEngine(model, null);
         int oldAppleCount = engine.countApples();
 
         Apple apple = new Apple(new Vector3D(0,0,0));
@@ -107,6 +126,15 @@ public class GameEngineTests {
         }
 
         assertEquals(appleLimit, engine.countApples(), "The number of apples should not exceed the limit");
+
+        int worldSize = model.worldDepth * model.worldHeight * model.worldWidth;
+        int largeNumber = 2 * worldSize;
+
+        for (int i = 0; i < largeNumber; i++) {
+            engine.spawnApple(largeNumber);
+        }
+
+        assertEquals(worldSize, engine.countApples(), "The number of apples should not exceed world size");
     }
     
 }
