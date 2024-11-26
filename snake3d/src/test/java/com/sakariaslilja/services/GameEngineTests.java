@@ -85,5 +85,28 @@ public class GameEngineTests {
 
         assertEquals(oldScore + increaseAmount, engine.getScore(), "The score should be increased by the correct amount");
     }
+
+    @Test
+    @DisplayName("GameEngine spawnApple")
+    void spawnApple() {
+        GameEngine engine = new GameEngine(new GameModel(), null);
+        int oldAppleCount = engine.countApples();
+
+        Apple apple = new Apple(new Vector3D(0,0,0));
+        ArrayList<Apple> apples = new ArrayList<>();
+        apples.add(apple);
+        engine.setApples(apples);
+
+        int appleLimit = 3;
+        engine.spawnApple(appleLimit);
+
+        assertEquals(oldAppleCount + 2, engine.countApples(), "The number of apples should be correct");
+
+        for (int i = 0; i < 10; i++) {
+            engine.spawnApple(appleLimit);
+        }
+
+        assertEquals(appleLimit, engine.countApples(), "The number of apples should not exceed the limit");
+    }
     
 }

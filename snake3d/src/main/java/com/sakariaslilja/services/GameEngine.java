@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Random;
 
+import com.sakariaslilja.Constants;
 import com.sakariaslilja.entities.Apple;
 import com.sakariaslilja.entities.Entity;
 import com.sakariaslilja.models.DoubleVector3D;
@@ -17,7 +18,7 @@ import com.sakariaslilja.models.World;
  * The game engine.
  * The rotation values are in degrees.
  */
-public class GameEngine {
+public class GameEngine implements Constants {
 
     // The variables of the engine
 
@@ -152,6 +153,22 @@ public class GameEngine {
         }
 
         return available;
+    }
+
+    /**
+     * Spawns an apple at a random location in the world if the number of
+     * apples is less than a given limit.
+     * @param limit The max number of apples a world can have
+     */
+    @SuppressWarnings("unchecked")
+    protected void spawnApple(int limit) {
+        if (this.countApples() < limit) {
+            ArrayList<Vector3D> availableGridPositions = getAvailableGridPositions(apples);
+            int locationIndex = random.nextInt(availableGridPositions.size());
+            Vector3D offset = new Vector3D(500, 500, 500);
+            Apple apple = new Apple(availableGridPositions.get(locationIndex).mul(UNIT).add(offset));
+            apples.add(apple);
+        }
     }
     
 }
