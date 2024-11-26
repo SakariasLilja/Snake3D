@@ -100,7 +100,9 @@ public class Renderer implements IConstants {
     }
 
     /**
-     * Draws the cube entity onto the canvas
+     * Draws the cube entity onto the canvas.
+     * A cube consists of 6 faces, each which can be represented as a
+     * 4-sided polygon. 
      * @param g The canvas onto which to draw
      * @param color The color of the entity
      * @param entity The entity do draw
@@ -113,28 +115,28 @@ public class Renderer implements IConstants {
             vertices.set(i, renderedVertex);
         }
         
-        DoubleVector3D[] frontFaces  = {vertices.get(0), vertices.get(1), vertices.get(3), vertices.get(2)};
-        DoubleVector3D[] rearFaces   = {vertices.get(4), vertices.get(5), vertices.get(7), vertices.get(6)};
-        DoubleVector3D[] topFaces    = {vertices.get(0), vertices.get(1), vertices.get(5), vertices.get(4)};
-        DoubleVector3D[] bottomFaces = {vertices.get(2), vertices.get(3), vertices.get(7), vertices.get(6)};
-        DoubleVector3D[] leftFaces   = {vertices.get(0), vertices.get(2), vertices.get(6), vertices.get(4)};
-        DoubleVector3D[] rightFaces  = {vertices.get(1), vertices.get(3), vertices.get(7), vertices.get(5)};
+        // The vertices used to make up each respective face, ordered so that a square can be drawn
+        DoubleVector3D[] frontFace  = {vertices.get(0), vertices.get(1), vertices.get(3), vertices.get(2)};
+        DoubleVector3D[] rearFace   = {vertices.get(4), vertices.get(5), vertices.get(7), vertices.get(6)};
+        DoubleVector3D[] topFace    = {vertices.get(0), vertices.get(1), vertices.get(5), vertices.get(4)};
+        DoubleVector3D[] bottomFace = {vertices.get(2), vertices.get(3), vertices.get(7), vertices.get(6)};
+        DoubleVector3D[] leftFace   = {vertices.get(0), vertices.get(2), vertices.get(6), vertices.get(4)};
+        DoubleVector3D[] rightFace  = {vertices.get(1), vertices.get(3), vertices.get(7), vertices.get(5)};
 
-        DoubleVector3D[][] faces = {frontFaces, rearFaces, topFaces, bottomFaces, leftFaces, rightFaces};
+        DoubleVector3D[][] faces = {frontFace, rearFace, topFace, bottomFace, leftFace, rightFace};
 
         g.setFill(color);
         
-        for (int i = 0; i < faces.length; i++) {
-            DoubleVector3D[] face = faces[i];
-
+        for (DoubleVector3D[] face : faces) {
+            // Don't draw if any of the points are behind the camera
             if (face[0].getZ() < 0 || face[1].getZ() < 0 || face[2].getZ() < 0 || face[3].getZ() < 0) { continue; }
 
             double[] xPoints = new double[face.length];
             double[] yPoints = new double[face.length];
 
-            for (int j = 0; j < faces[i].length; j++) {
-                xPoints[j] = face[j].getX();
-                yPoints[j] = face[j].getY();
+            for (int i = 0; i < face.length; i++) {
+                xPoints[i] = face[i].getX();
+                yPoints[i] = face[i].getY();
             }
 
             g.fillPolygon(xPoints, yPoints, xPoints.length);
