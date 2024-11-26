@@ -74,5 +74,16 @@ public class GameEngineTests {
 
         assertEquals(expectedAppleCount, engine.countApples(), "The number of apples should be correct");
     }
+
+    @Test
+    @DisplayName("GameEngine increaseScore")
+    void increaseScore() {
+        GameEngine engine = new GameEngine(new GameModel(), null);
+        int oldScore = engine.getScore();
+        int increaseAmount = 5;
+        engine.increaseScore(increaseAmount);
+
+        assertEquals(oldScore + increaseAmount, engine.getScore(), "The score should be increased by the correct amount");
+    }
     
 }

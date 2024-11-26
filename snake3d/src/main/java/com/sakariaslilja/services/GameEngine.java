@@ -100,6 +100,12 @@ public class GameEngine {
     public void incrementScore() { score++; }
 
     /**
+     * Increases the score by a given amount.
+     * @param amount The amount to increase the score by
+     */
+    public void increaseScore(int amount) { score += amount; }
+
+    /**
      * Converts this GameEngine instance to a GameModel.
      * Used for saving the game.
      * @return A GameModel instance with the attributes of this game
