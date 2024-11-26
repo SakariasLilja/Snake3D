@@ -1,7 +1,7 @@
 package com.sakariaslilja.controllers;
 
 import com.sakariaslilja.App;
-import com.sakariaslilja.Constants;
+import com.sakariaslilja.IConstants;
 import com.sakariaslilja.services.GameEngine;
 import com.sakariaslilja.services.Renderer;
 
@@ -12,7 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.VBox;
 
-public class GameController implements Constants {
+public class GameController implements IConstants {
 
     @FXML
     Canvas gameCanvas;

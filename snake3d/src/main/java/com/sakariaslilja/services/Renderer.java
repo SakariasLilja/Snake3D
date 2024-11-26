@@ -5,7 +5,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 import com.sakariaslilja.App;
-import com.sakariaslilja.Constants;
+import com.sakariaslilja.IConstants;
 import com.sakariaslilja.entities.Apple;
 import com.sakariaslilja.entities.CubeEntity;
 import com.sakariaslilja.models.DoubleVector3D;
@@ -18,7 +18,7 @@ import javafx.scene.paint.Color;
 /**
  * 3D renderer for Snake 3D.
  */
-public class Renderer implements Constants {
+public class Renderer implements IConstants {
 
     // Local variables
     private GraphicsContext g;

@@ -2,14 +2,14 @@ package com.sakariaslilja.entities;
 
 import java.util.ArrayList;
 
-import com.sakariaslilja.Constants;
+import com.sakariaslilja.IConstants;
 import com.sakariaslilja.models.DoubleVector3D;
 import com.sakariaslilja.models.Vector3D;
 
 /**
  * Entity class for all entities.
  */
-public abstract class Entity implements Constants {
+public abstract class Entity implements IConstants {
 
     private Vector3D position;
     

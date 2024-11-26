@@ -1,13 +1,13 @@
 package com.sakariaslilja.models;
 
-import com.sakariaslilja.Constants;
+import com.sakariaslilja.IConstants;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
 /**
  * An instance of a world with a set width, height and depth.
  */
-public class World implements Constants {
+public class World implements IConstants {
 
     // Constants of the world.
     private final int width;

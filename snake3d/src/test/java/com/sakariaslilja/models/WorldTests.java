@@ -8,9 +8,9 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import com.sakariaslilja.Constants;
+import com.sakariaslilja.IConstants;
 
-public class WorldTests implements Constants {
+public class WorldTests implements IConstants {
 
     @Test
     @DisplayName("World with width and height parameters")

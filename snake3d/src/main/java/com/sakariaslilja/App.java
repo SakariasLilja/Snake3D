@@ -16,7 +16,7 @@ import com.sakariaslilja.services.GameEngine;
 /**
  * JavaFX App for the Snake3D game.
  */
-public class App extends Application implements Constants {
+public class App extends Application implements IConstants {
 
     private static Scene scene;
     private static GameEngine engine = new GameEngine(new GameModel(), new DoubleVector3D(0.5, 0.5, 0.5));

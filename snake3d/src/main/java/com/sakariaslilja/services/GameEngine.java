@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Random;
 
-import com.sakariaslilja.Constants;
+import com.sakariaslilja.IConstants;
 import com.sakariaslilja.entities.Apple;
 import com.sakariaslilja.entities.Entity;
 import com.sakariaslilja.models.DoubleVector3D;
@@ -18,7 +18,7 @@ import com.sakariaslilja.models.World;
  * The game engine.
  * The rotation values are in degrees.
  */
-public class GameEngine implements Constants {
+public class GameEngine implements IConstants {
 
     // The variables of the engine
 

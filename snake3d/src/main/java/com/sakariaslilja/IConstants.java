@@ -3,7 +3,7 @@ package com.sakariaslilja;
 /**
  * Class for defining global constants.
  */
-public interface Constants {
+public interface IConstants {
 
     /**
      * The title name of the game.
