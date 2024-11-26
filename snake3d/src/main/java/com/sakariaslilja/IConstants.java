@@ -40,5 +40,10 @@ public interface IConstants {
      * The maximum size of any of the world's dimensions.
      */
     int MAX_WORLD_SIZE = 100;
+
+    /**
+     * The maximum number of apples in the world.
+     */
+    int appleLimit = 4;
     
 }
