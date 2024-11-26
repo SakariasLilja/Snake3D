@@ -1,6 +1,7 @@
 package com.sakariaslilja.services;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -111,20 +112,33 @@ public class Renderer implements IConstants {
             DoubleVector3D renderedVertex = applyMatrices(vertex);
             vertices.set(i, renderedVertex);
         }
+        
+        DoubleVector3D[] frontFaces  = {vertices.get(0), vertices.get(1), vertices.get(3), vertices.get(2)};
+        DoubleVector3D[] rearFaces   = {vertices.get(4), vertices.get(5), vertices.get(7), vertices.get(6)};
+        DoubleVector3D[] topFaces    = {vertices.get(0), vertices.get(1), vertices.get(5), vertices.get(4)};
+        DoubleVector3D[] bottomFaces = {vertices.get(2), vertices.get(3), vertices.get(7), vertices.get(6)};
+        DoubleVector3D[] leftFaces   = {vertices.get(0), vertices.get(2), vertices.get(6), vertices.get(4)};
+        DoubleVector3D[] rightFaces  = {vertices.get(1), vertices.get(3), vertices.get(7), vertices.get(5)};
+
+        DoubleVector3D[][] faces = {frontFaces, rearFaces, topFaces, bottomFaces, leftFaces, rightFaces};
 
         g.setFill(color);
-        g.fillRect( vertices.get(0).getX(), vertices.get(0).getY(), 
-                    vertices.get(3).getX(), vertices.get(3).getY());
-        g.fillRect( vertices.get(4).getX(), vertices.get(4).getY(), 
-                    vertices.get(1).getX(), vertices.get(1).getY());
-        g.fillRect( vertices.get(4).getX(), vertices.get(4).getY(), 
-                    vertices.get(7).getX(), vertices.get(7).getY());
-        g.fillRect( vertices.get(6).getX(), vertices.get(6).getY(), 
-                    vertices.get(3).getX(), vertices.get(3).getY());
-        g.fillRect( vertices.get(4).getX(), vertices.get(4).getY(), 
-                    vertices.get(2).getX(), vertices.get(2).getY());
-        g.fillRect( vertices.get(1).getX(), vertices.get(1).getY(), 
-                    vertices.get(7).getX(), vertices.get(7).getY());
+        
+        for (int i = 0; i < faces.length; i++) {
+            DoubleVector3D[] face = faces[i];
+
+            if (face[0].getZ() < 0 || face[1].getZ() < 0 || face[2].getZ() < 0 || face[3].getZ() < 0) { continue; }
+
+            double[] xPoints = new double[face.length];
+            double[] yPoints = new double[face.length];
+
+            for (int j = 0; j < faces[i].length; j++) {
+                xPoints[j] = face[j].getX();
+                yPoints[j] = face[j].getY();
+            }
+
+            g.fillPolygon(xPoints, yPoints, xPoints.length);
+        }
     }
 
     /**
