@@ -140,6 +140,7 @@ public class GameEngine implements IConstants {
      * Update method of the world.
      */
     public void update() {
+        this.spawnApple(APPLE_LIMIT);
         rotY += 1;
     }
 

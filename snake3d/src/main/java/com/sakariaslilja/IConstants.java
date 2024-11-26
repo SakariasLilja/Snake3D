@@ -44,6 +44,6 @@ public interface IConstants {
     /**
      * The maximum number of apples in the world.
      */
-    int appleLimit = 4;
+    int APPLE_LIMIT = 4;
     
 }
