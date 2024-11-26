@@ -1,7 +1,6 @@
 package com.sakariaslilja.services;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -109,6 +108,7 @@ public class Renderer implements IConstants {
      */
     private void drawCubeEntity(GraphicsContext g, Color color, CubeEntity entity) {
         ArrayList<DoubleVector3D> vertices = entity.getVertices();
+        // Render each vertex
         for (int i = 0; i < vertices.size(); i++) {
             DoubleVector3D vertex = vertices.get(i);
             DoubleVector3D renderedVertex = applyMatrices(vertex);
