@@ -22,13 +22,13 @@ public abstract class CubeEntity extends Entity {
     @Override
     public ArrayList<DoubleVector3D> getVertices() {
         ArrayList<DoubleVector3D> vertices = new ArrayList<>();
-        DoubleVector3D center = this.getPosition().toDoubleVector3D().mul(1.0 / UNIT);
+        DoubleVector3D topLeft = this.getGridPos().toDoubleVector3D();
 
-        for (int zDim = -1; zDim <= 1; zDim += 2) {
-            for (int yDim = -1; yDim <= 1; yDim += 2) {
-                for (int xDim = -1; xDim <= 1; xDim += 2) {
-                    DoubleVector3D offset = new DoubleVector3D(0.5*xDim, 0.5*yDim, 0.5*zDim);
-                    DoubleVector3D vertex = center.add(offset);
+        for (int zDim = 0; zDim <= 1; zDim ++) {
+            for (int yDim = 0; yDim <= 1; yDim ++) {
+                for (int xDim = 0; xDim <= 1; xDim ++) {
+                    DoubleVector3D offset = new DoubleVector3D(xDim, yDim, zDim);
+                    DoubleVector3D vertex = topLeft.add(offset);
                     vertices.add(vertex);
                 }
             }
