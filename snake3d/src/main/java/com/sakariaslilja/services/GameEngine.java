@@ -59,7 +59,7 @@ public class GameEngine implements IConstants {
         this.worldWidth = game.worldWidth;
         this.worldHeight = game.worldHeight;
         this.worldDepth = game.worldDepth;
-        this.appleLimit = Integer.max(1, (int) Math.cbrt(worldWidth*worldHeight*worldDepth));
+        this.appleLimit = Integer.max(1, (int) Math.cbrt(worldWidth*worldHeight*worldDepth) - 2);
         World world = new World(worldWidth, worldHeight, worldDepth);
         this.edges = world.getEdges();
         this.camera = camera;
