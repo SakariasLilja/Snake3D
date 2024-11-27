@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.lang.Math;
 import java.util.function.Predicate;
 
-public class DoubleVector3DTests implements IHeadings {
+public class DoubleVector3DTests implements IHeading {
 
     @Test
     @DisplayName("DoubleVector3D getX")

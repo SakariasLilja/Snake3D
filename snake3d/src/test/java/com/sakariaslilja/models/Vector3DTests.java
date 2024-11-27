@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class Vector3DTests implements IHeadings {
+public class Vector3DTests implements IHeading {
 
     @Test
     @DisplayName("Vector3D toString")

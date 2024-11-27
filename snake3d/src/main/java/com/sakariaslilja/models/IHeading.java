@@ -1,6 +1,6 @@
 package com.sakariaslilja.models;
 
-public interface IHeadings {
+public interface IHeading {
 
     Vector3D FORWARD    = new Vector3D(0, 0, 1);
     Vector3D BACKWARD   = new Vector3D(0, 0, -1);

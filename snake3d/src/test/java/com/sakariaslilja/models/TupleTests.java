@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class TupleTests implements IHeadings {
+public class TupleTests implements IHeading {
 
     @Test
     @DisplayName("Tuple values test")
