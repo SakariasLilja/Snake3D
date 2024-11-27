@@ -89,6 +89,7 @@ public class GameEngine implements IConstants {
      * @return The x-rotation in radians
      */
     public double getRotX() { return Math.PI * rotX / 180; }
+    public void doButtonAction(int amount) { rotX += amount; } // TODO: temporary method for testing inputs
 
     /**
      * Gets the y-rotation in radians.
@@ -141,7 +142,6 @@ public class GameEngine implements IConstants {
      */
     public void update() {
         this.spawnApple(APPLE_LIMIT);
-        rotY += 1;
     }
 
     /**
