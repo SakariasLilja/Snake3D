@@ -13,6 +13,8 @@ import com.sakariaslilja.models.Tuple;
 import com.sakariaslilja.models.Vector3D;
 import com.sakariaslilja.models.World;
 
+import javafx.scene.input.KeyCode;
+
 /**
  * The game engine.
  * The rotation values are in degrees.
@@ -93,7 +95,7 @@ public class GameEngine implements IConstants {
      * @return The x-rotation in radians
      */
     public double getRotX() { return Math.PI * rotX / 180; }
-    public void doButtonAction(int amount) { rotX += amount; } // TODO: temporary method for testing inputs
+    public void doButtonAction(@SuppressWarnings("exports") KeyCode keyCode) { rotX += 1; } // TODO: temporary method for testing inputs
 
     /**
      * Gets the y-rotation in radians.

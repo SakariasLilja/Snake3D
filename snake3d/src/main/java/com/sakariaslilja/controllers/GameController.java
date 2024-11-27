@@ -11,6 +11,7 @@ import java.io.IOException;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 
@@ -45,7 +46,10 @@ public class GameController implements IConstants {
         this.renderer = new Renderer(gameCanvas.getGraphicsContext2D(), engine);
         gameClock.start();
 
-        EventHandler<KeyEvent> buttonPressed = e -> engine.doButtonAction(1);
+        EventHandler<KeyEvent> buttonPressed = e -> {
+            if (e.getCode().equals(KeyCode.ESCAPE) || e.getCode().equals(KeyCode.P)) { this.triggerPause(); }
+            else { engine.doButtonAction(e.getCode()); }
+        };
 
         bgoverlay.sceneProperty().addListener((obs, oldScene, newScene) -> {
             if (oldScene != null) {
@@ -73,6 +77,15 @@ public class GameController implements IConstants {
     @FXML
     private void saveAndQuit() {
         App.closeApp();
+    }
+
+    /**
+     * Triggers the visibility of the pause overlay and
+     * pauses the game.
+     */
+    private void triggerPause() {
+        bgoverlay.setVisible(!bgoverlay.isVisible());
+        engine.togglePause();
     }
     
 }
