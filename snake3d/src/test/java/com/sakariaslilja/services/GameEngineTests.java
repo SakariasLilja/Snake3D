@@ -136,5 +136,18 @@ public class GameEngineTests {
 
         assertEquals(worldSize, engine.countApples(), "The number of apples should not exceed world size");
     }
+
+    @Test
+    @DisplayName("GameEngine pause")
+    void pauseGame() {
+        GameEngine engine = new GameEngine(new GameModel(), null);
+
+        int appleCount = engine.countApples();
+
+        engine.togglePause();
+        engine.update();
+
+        assertEquals(appleCount, engine.countApples(), "Updating the game shouldn't spawn new apples if the game is paused");
+    }
     
 }

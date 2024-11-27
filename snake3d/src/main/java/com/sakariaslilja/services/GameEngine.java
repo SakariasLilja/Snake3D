@@ -38,6 +38,8 @@ public class GameEngine implements IConstants {
     // In degrees
     private int rotX, rotY, rotZ;
 
+    private boolean paused = false;
+
     /**
      * To create an instance of a game engine, the world dimensions are needed
      * @param seed The random seed of the game
@@ -103,6 +105,13 @@ public class GameEngine implements IConstants {
      */
     public double getRotZ() { return Math.PI * rotZ / 180; }
 
+    /**
+     * Triggers the paused variable of the game.
+     * <p> I.e. if the game is paused, this method resumes
+     * the game, and if the game is running, this method
+     * pauses the game.
+     */
+    public void togglePause() { paused = !paused; }
 
     /**
      * Increases the score by 1.
@@ -141,7 +150,9 @@ public class GameEngine implements IConstants {
      * Update method of the world.
      */
     public void update() {
-        this.spawnApple(APPLE_LIMIT);
+        if (!paused) {
+            this.spawnApple(APPLE_LIMIT);
+        }        
     }
 
     /**
