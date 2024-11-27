@@ -28,6 +28,7 @@ public class GameEngine implements IConstants {
     private int score;
 
     private int worldWidth, worldHeight, worldDepth;
+    private int appleLimit;
 
     private ArrayList<Tuple> edges;
     private ArrayList<Vector3D> gridPositions = new ArrayList<>();
@@ -56,6 +57,7 @@ public class GameEngine implements IConstants {
         this.worldWidth = game.worldWidth;
         this.worldHeight = game.worldHeight;
         this.worldDepth = game.worldDepth;
+        this.appleLimit = Integer.max(1, (int) Math.cbrt(worldWidth*worldHeight*worldDepth));
         World world = new World(worldWidth, worldHeight, worldDepth);
         this.edges = world.getEdges();
         this.camera = camera;
@@ -151,7 +153,7 @@ public class GameEngine implements IConstants {
      */
     public void update() {
         if (!paused) {
-            this.spawnApple(APPLE_LIMIT);
+            this.spawnApple(appleLimit);
         }        
     }
 
