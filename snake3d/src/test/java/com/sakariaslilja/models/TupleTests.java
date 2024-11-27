@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class TupleTests {
+public class TupleTests implements IHeadings {
 
     @Test
     @DisplayName("Tuple values test")
@@ -68,8 +68,8 @@ public class TupleTests {
     @Test
     @DisplayName("ForEach function")
     public void forEach() {
-        DoubleVector3D value1 = Vector3D.Right.toDoubleVector3D();
-        DoubleVector3D value2 = Vector3D.Left.toDoubleVector3D();
+        DoubleVector3D value1 = RIGHT.toDoubleVector3D();
+        DoubleVector3D value2 = LEFT.toDoubleVector3D();
         int scalar = 2;
 
         Tuple tuple = new Tuple(value1, value2);
@@ -86,8 +86,8 @@ public class TupleTests {
     @Test
     @DisplayName("Tuple toString")
     public void tupleToString() {
-        DoubleVector3D value1 = Vector3D.Right.toDoubleVector3D();
-        DoubleVector3D value2 = Vector3D.Down.toDoubleVector3D();
+        DoubleVector3D value1 = RIGHT.toDoubleVector3D();
+        DoubleVector3D value2 = DOWN.toDoubleVector3D();
 
         Tuple tuple = new Tuple(value1, value2);
 
@@ -99,8 +99,8 @@ public class TupleTests {
     @Test
     @DisplayName("Tuple contains")
     public void tupleContains() {
-        DoubleVector3D value1 = Vector3D.Right.toDoubleVector3D();
-        DoubleVector3D value2 = Vector3D.Up.toDoubleVector3D();
+        DoubleVector3D value1 = RIGHT.toDoubleVector3D();
+        DoubleVector3D value2 = UP.toDoubleVector3D();
 
         Tuple tuple = new Tuple(value1, value2);
         DoubleVector3D check = new DoubleVector3D(1, 0, 0);

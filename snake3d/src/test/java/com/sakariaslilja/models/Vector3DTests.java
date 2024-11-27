@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class Vector3DTests {
+public class Vector3DTests implements IHeadings {
 
     @Test
     @DisplayName("Vector3D toString")
@@ -45,8 +45,8 @@ public class Vector3DTests {
     @Test
     @DisplayName("Vector3D add")
     public void addVector3D() {
-        Vector3D first = Vector3D.Right;
-        Vector3D second = Vector3D.Down;
+        Vector3D first = RIGHT;
+        Vector3D second = DOWN;
         Vector3D result = first.add(second);
         Vector3D expected = new Vector3D(1, 1, 0);
         assertEquals(expected, result, "The add method should work as expected");
@@ -55,8 +55,8 @@ public class Vector3DTests {
     @Test
     @DisplayName("Vector3D negate")
     public void negateVector3D() {
-        Vector3D vector3d = Vector3D.Backward;
-        Vector3D expected = Vector3D.Forward;
+        Vector3D vector3d = BACKWARD;
+        Vector3D expected = FORWARD;
         assertEquals(expected, vector3d.neg(), "The neg method should work as expected");
     }
 
@@ -64,7 +64,7 @@ public class Vector3DTests {
     @DisplayName("Vector3D scalar multiply")
     public void scalarMul() {
         int scalar = 5;
-        Vector3D vector3d = Vector3D.Right;
+        Vector3D vector3d = RIGHT;
         Vector3D expected = new Vector3D(scalar, 0, 0);
         assertEquals(expected, vector3d.mul(scalar), "The mul method should work as expected");
     }
@@ -72,8 +72,8 @@ public class Vector3DTests {
     @Test
     @DisplayName("Vector3D equals")
     public void vectorEquals() {
-        Vector3D backward = Vector3D.Backward;
-        Vector3D forward = Vector3D.Forward;
+        Vector3D backward = BACKWARD;
+        Vector3D forward = FORWARD;
         Vector3D custom = new Vector3D(0, 0, 1);
         assertEquals(forward, forward, "The equals method should return true if equal");
         assertNotEquals(backward, forward, "The equals method should return false when not equal");

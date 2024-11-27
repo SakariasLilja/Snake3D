@@ -27,14 +27,6 @@ public class Vector3D extends AbstractVector{
         this.z = z;
     }
 
-    // Static directions used for calculations.
-    public static Vector3D Up = new Vector3D(0, -1, 0);
-    public static Vector3D Down = new Vector3D(0, 1, 0);
-    public static Vector3D Left = new Vector3D(-1, 0, 0);
-    public static Vector3D Right = new Vector3D(1, 0, 0);
-    public static Vector3D Forward = new Vector3D(0, 0, 1);
-    public static Vector3D Backward = new Vector3D(0, 0, -1);
-
     /**
      * Getter for the x-coordinate.
      * @return The x-coordinate of this [Vector3D]

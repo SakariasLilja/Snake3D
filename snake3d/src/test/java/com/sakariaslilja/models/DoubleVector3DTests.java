@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.lang.Math;
 import java.util.function.Predicate;
 
-public class DoubleVector3DTests {
+public class DoubleVector3DTests implements IHeadings {
 
     @Test
     @DisplayName("DoubleVector3D getX")
@@ -117,8 +117,8 @@ public class DoubleVector3DTests {
     @Test
     @DisplayName("DoubleVector3D add")
     public void doubleVectorAdd() {
-        DoubleVector3D first = Vector3D.Backward.toDoubleVector3D();
-        DoubleVector3D second = Vector3D.Forward.toDoubleVector3D();
+        DoubleVector3D first = BACKWARD.toDoubleVector3D();
+        DoubleVector3D second = FORWARD.toDoubleVector3D();
 
         DoubleVector3D expected = new DoubleVector3D(0, 0, 0);
 
