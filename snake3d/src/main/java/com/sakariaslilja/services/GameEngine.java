@@ -95,7 +95,15 @@ public class GameEngine implements IConstants {
      * @return The x-rotation in radians
      */
     public double getRotX() { return Math.PI * rotX / 180; }
-    public void doButtonAction(@SuppressWarnings("exports") KeyCode keyCode) { rotX += 1; } // TODO: temporary method for testing inputs
+
+    /**
+     * Performs the action associated with each key.
+     * @param keyCode The key code of the pressed key
+     */
+    public void doButtonAction(@SuppressWarnings("exports") KeyCode keyCode) {
+        // TODO: temporary method for testing inputs
+        rotX += 1; 
+    }
 
     /**
      * Gets the y-rotation in radians.
