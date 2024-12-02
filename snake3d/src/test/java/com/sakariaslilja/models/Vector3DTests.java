@@ -109,5 +109,11 @@ public class Vector3DTests implements IHeading {
         assertEquals(true, vector3d.exists(isNegative), "The exists method should work");
         assertNotEquals(true, vector3d.exists(isZero), "The exists method should not return true for false values");
     }
+
+    @Test
+    @DisplayName("Vector3D cross-product")
+    void crossProduct() {
+        assertEquals(RIGHT, DOWN.crossProd(FORWARD), "The cross product should work as expected");
+    }
     
 }

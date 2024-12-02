@@ -107,6 +107,19 @@ public class Vector3D extends AbstractVector{
         return predicate.test(x) || predicate.test(y) || predicate.test(z);
     }
 
+    /**
+     * Returns the cross product of this and another vector.
+     * <p> The product order is: this x that
+     * @param other The vector to perform the cross product with
+     * @return The cross product vector
+     */
+    public Vector3D crossProd(Vector3D other) {
+        int resX = y * other.getZ() - z * other.getY();
+        int rexY = z * other.getX() - x * other.getZ();
+        int rexZ = x * other.getY() - y * other.getX();
+        return new Vector3D(resX, rexY, rexZ);
+    }
+
     @Override
     public String toString() {
         return "Vector3D(" + x + ", " + y + ", " + z + ")";
