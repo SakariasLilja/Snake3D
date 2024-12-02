@@ -120,6 +120,39 @@ public class Vector3D extends AbstractVector{
         return new Vector3D(resX, rexY, rexZ);
     }
 
+    /**
+     * Simple 90 degree rotation matrix.
+     * <p> Rotates 90 degrees either positively or negatively.
+     * @param isPositive If the rotation value is positive
+     * @return The rotated matrix
+     */
+    public Vector3D rotateX(boolean isPositive) {
+        int amount = isPositive ? 1 : -1;
+        return new Vector3D(x, -z * amount, y * amount);
+    }
+
+    /**
+     * Simple 90 degree rotation matrix.
+     * <p> Rotates 90 degrees either positively or negatively.
+     * @param isPositive If the rotation value is positive
+     * @return The rotated matrix
+     */
+    public Vector3D rotateY(boolean isPositive) {
+        int amount = isPositive ? 1 : -1;
+        return new Vector3D(z * amount, y, -x * amount);
+    }
+
+    /**
+     * Simple 90 degree rotation matrix.
+     * <p> Rotates 90 degrees either positively or negatively.
+     * @param isPositive If the rotation value is positive
+     * @return The rotated matrix
+     */
+    public Vector3D rotateZ(boolean isPositive) {
+        int amount = isPositive ? 1 : -1;
+        return new Vector3D(-y * amount, x * amount, z);
+    }
+
     @Override
     public String toString() {
         return "Vector3D(" + x + ", " + y + ", " + z + ")";
