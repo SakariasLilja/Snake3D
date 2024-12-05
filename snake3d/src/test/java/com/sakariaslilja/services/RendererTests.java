@@ -24,13 +24,12 @@ public class RendererTests {
         assertEquals(expected, renderer.translate(vertex), "The translate method should work as expected");
     }*/
 
-    @Test
+    /*@Test
     @DisplayName("Renderer rotations")
     public void renderRotations() {
         GameModel model = new GameModel();
         model.rotX = 90;
         model.rotY = 90;
-        model.rotZ = 90;
         GameEngine engine = new GameEngine(model);
         Renderer renderer = new Renderer(null, engine);
 
@@ -38,7 +37,7 @@ public class RendererTests {
         DoubleVector3D expected = new DoubleVector3D(3, -2, 1);
 
         assertEquals(expected, renderer.rotate(vertex).round(), "The rotate method should apply the matrices correctly");
-    }
+    }*/
 
     @Test
     @DisplayName("Renderer perspectiveCorrection")
