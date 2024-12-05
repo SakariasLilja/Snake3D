@@ -86,6 +86,18 @@ public class Quaternion {
         return new DoubleVector3D(x, y, z);
     }
 
+    /**
+     * Applies the quaternion rotation to the vector
+     * @param vector The vector to rotate
+     * @return The rotated vector
+     */
+    public DoubleVector3D applyRotation(DoubleVector3D vector) {
+        double vectorX = (1-2*y*y-2*z*z)*vector.getX() + (2*x*y-2*w*z)*vector.getY() + (2*x*z+2*w*y)*vector.getZ();
+        double vectorY = (2*x*y+2*w*z)*vector.getX() + (1-2*x*x-2*z*z)*vector.getY() + (2*y*z-2*w*x)*vector.getZ();
+        double vectorZ = (2*x*z-2*w*y)*vector.getX() + (2*y*z+2*w*x)*vector.getY() + (1-2*x*x-2*y*y)*vector.getZ();
+        return new DoubleVector3D(vectorX, vectorY, vectorZ);
+    }
+
     @Override
     public String toString() {
         DecimalFormatSymbols dfs = new DecimalFormatSymbols();
