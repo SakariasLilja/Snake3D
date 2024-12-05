@@ -9,6 +9,8 @@ import com.sakariaslilja.entities.Apple;
 import com.sakariaslilja.entities.Entity;
 import com.sakariaslilja.models.DoubleVector3D;
 import com.sakariaslilja.models.GameModel;
+import com.sakariaslilja.models.Int;
+import com.sakariaslilja.models.RotatableTuple;
 import com.sakariaslilja.models.Tuple;
 import com.sakariaslilja.models.Vector3D;
 import com.sakariaslilja.models.World;
@@ -17,11 +19,8 @@ import javafx.scene.input.KeyCode;
 
 /**
  * The game engine.
- * The rotation values are in degrees.
  */
 public class GameEngine implements IConstants {
-
-    // The variables of the engine
 
     private String gameTitle;
     private long seed;
@@ -39,9 +38,15 @@ public class GameEngine implements IConstants {
     private DoubleVector3D camera;
 
     // In degrees
-    private int rotX, rotY, rotZ;
+    private Int rotX;
+    private Int rotY;
+    private Int rotZ;
+    private RotatableTuple rotations;
 
     private boolean paused = false;
+    private boolean isTurning = false;
+    private boolean isTilting = false;
+    private boolean positiveRotation = false;
 
     /**
      * To create an instance of a game engine, the world dimensions are needed
@@ -63,9 +68,10 @@ public class GameEngine implements IConstants {
         World world = new World(worldWidth, worldHeight, worldDepth);
         this.edges = world.getEdges();
         this.camera = camera;
-        this.rotX = game.rotX;
-        this.rotY = game.rotY;
-        this.rotZ = game.rotZ;
+        this.rotX = new Int(game.rotX);
+        this.rotY = new Int(game.rotY);
+        this.rotZ = new Int(game.rotZ);
+        this.rotations = new RotatableTuple(this.rotX, this.rotY, this.rotZ);
 
         // Adding the grid positions of the world
         for (int layer = 0; layer < game.worldDepth; layer++) {
@@ -89,12 +95,7 @@ public class GameEngine implements IConstants {
     public DoubleVector3D getCamera() { return camera; }
 
     public int getScore() { return score; }
-
-    /**
-     * Gets the x-rotation in radians.
-     * @return The x-rotation in radians
-     */
-    public double getRotX() { return Math.PI * rotX / 180; }
+    
 
     /**
      * Performs the action associated with each key.
@@ -102,20 +103,27 @@ public class GameEngine implements IConstants {
      */
     public void doButtonAction(@SuppressWarnings("exports") KeyCode keyCode) {
         // TODO: temporary method for testing inputs
-        rotX += 1; 
+        if (keyCode.equals(KeyCode.LEFT)) { isTurning = true; positiveRotation = true; }
+        if (keyCode.equals(KeyCode.RIGHT)) { isTurning = true; positiveRotation = false; }
+        if (keyCode.equals(KeyCode.UP)) { isTilting = true; positiveRotation = true; }
+        if (keyCode.equals(KeyCode.DOWN)) { isTilting = true; positiveRotation = false; }
+
     }
 
     /**
-     * Gets the y-rotation in radians.
-     * @return The y-rotation in radians
+     * @return The x-rotation in radians
      */
-    public double getRotY() { return Math.PI * rotY / 180; }
+    public double getRotX() { return Math.PI * rotX.value() / 180.0; }
 
     /**
-     * Gets the z-rotation in radians.
+     * @return The y-rotation in radians
+     */
+    public double getRotY() { return Math.PI * rotY.value() / 180.0; }
+
+    /**
      * @return The z-rotation in radians
      */
-    public double getRotZ() { return Math.PI * rotZ / 180; }
+    public double getRotZ() { return Math.PI * rotZ.value() / 180.0; }
 
     /**
      * Triggers the paused variable of the game.
@@ -151,9 +159,9 @@ public class GameEngine implements IConstants {
         model.worldWidth = worldWidth;
         model.worldHeight = worldHeight;
         model.worldDepth = worldDepth;
-        model.rotX = rotX;
-        model.rotY = rotY;
-        model.rotZ = rotZ;
+        model.rotX = rotX.value();
+        model.rotY = rotY.value();
+        model.rotZ = rotZ.value();
 
         return model;
     }
@@ -162,9 +170,34 @@ public class GameEngine implements IConstants {
      * Update method of the world.
      */
     public void update() {
-        if (!paused) {
+        if (paused) {
+            return;
+        }
+
+        int v = positiveRotation ? 1 : -1;
+
+        if (this.isTurning) {
+            rotations.setY((rotations.getY().value() % 360) + v);
+            if (rotY.value() % 90 == 0) {
+                isTurning = false;
+                System.out.println("Rotations before turning: " + rotations.toString());
+                rotations.rotateY(positiveRotation);
+                System.out.println("Rotations after turning: " + rotations.toString());
+            }
+        }
+        else if (this.isTilting) {
+            rotations.setX((rotations.getX().value() % 360) + v);
+            if (rotations.getX().value() % 90 == 0) {
+                isTilting = false;
+                System.out.println("Rotations before turning: " + rotations.toString());
+                rotations.rotateX(positiveRotation);
+                System.out.println("Rotations after turning: " + rotations.toString());
+            }
+
+        }
+        else {
             this.spawnApple(appleLimit);
-        }        
+        }
     }
 
     /**
