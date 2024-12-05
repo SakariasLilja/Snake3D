@@ -9,6 +9,8 @@ import com.sakariaslilja.IConstants;
 import com.sakariaslilja.entities.Apple;
 import com.sakariaslilja.entities.CubeEntity;
 import com.sakariaslilja.models.DoubleVector3D;
+import com.sakariaslilja.models.IHeading;
+import com.sakariaslilja.models.Quaternion;
 import com.sakariaslilja.models.SettingsModel;
 import com.sakariaslilja.models.Tuple;
 
@@ -18,7 +20,7 @@ import javafx.scene.paint.Color;
 /**
  * 3D renderer for Snake 3D.
  */
-public class Renderer implements IConstants {
+public class Renderer implements IConstants, IHeading {
 
     // Local variables
     private GraphicsContext g;
@@ -159,7 +161,10 @@ public class Renderer implements IConstants {
      * @return The rotated vertex
      */
     protected DoubleVector3D rotate(DoubleVector3D vertex) {
-        return vertex.rotateZ(engine.getRotZ()).rotateY(engine.getRotY()).rotateX(engine.getRotX());
+        Quaternion qX = new Quaternion(RIGHT.toDoubleVector3D(), engine.getRotX());
+        Quaternion qY = new Quaternion(UP.toDoubleVector3D(), engine.getRotY());
+        Quaternion qZ = new Quaternion(FORWARD.toDoubleVector3D(), engine.getRotZ());
+        return qZ.applyRotation(qY.applyRotation(qX.applyRotation(vertex)));
     }
 
     /**
