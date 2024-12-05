@@ -12,6 +12,7 @@ import com.sakariaslilja.models.DoubleVector3D;
 import com.sakariaslilja.models.GameModel;
 import com.sakariaslilja.models.IHeading;
 import com.sakariaslilja.models.Int;
+import com.sakariaslilja.models.Quaternion;
 import com.sakariaslilja.models.RotatableTuple;
 import com.sakariaslilja.models.Tuple;
 import com.sakariaslilja.models.Vector3D;
@@ -88,8 +89,8 @@ public class GameEngine implements IConstants, IHeading {
         }
 
         snake.add(new Snake(new Vector3D(500, 500, 500), FORWARD, UP));
-        this.heading = snake.get(0).getHeading().toDoubleVector3D();
-        this.normal = snake.get(0).getNormal().toDoubleVector3D();
+        this.heading = head().getHeading().toDoubleVector3D();
+        this.normal = head().getNormal().toDoubleVector3D();
     }
 
     // Engine getters and setters
@@ -204,11 +205,15 @@ public class GameEngine implements IConstants, IHeading {
         // TODO: fix
         if (this.isTurning) {
             this.rotationY += v;
-            this.heading = heading.rotateY(Math.PI / 180);
+            Quaternion qY = new Quaternion(heading, ONE_DEG * v);
+            this.heading = qY.applyRotation(heading);
+
             if (rotationY % 90 == 0) {
                 if (typicalRotation) { head().turnLeft(); }
                 else { head().turnRight(); }
+
                 this.heading = head().getHeading().toDoubleVector3D();
+
                 rotationY = 0;
                 isTurning = false;
             }
@@ -216,13 +221,17 @@ public class GameEngine implements IConstants, IHeading {
         }
         else if (this.isTilting) {
             this.rotationX += v;
-            this.heading = heading.rotateX(Math.PI / 180);
-            this.normal = normal.rotateX(Math.PI / 180);
+            Quaternion qX = new Quaternion(heading.crossProd(normal), ONE_DEG * v);
+            this.heading = qX.applyRotation(heading);
+            this.normal = qX.applyRotation(normal);
+
             if (rotationX % 90 == 0) {
                 if (typicalRotation) { head().turnDown(); }
                 else { head().turnUp(); }
+
                 this.heading = head().getHeading().toDoubleVector3D();
                 this.normal = head().getNormal().toDoubleVector3D();
+
                 this.rotationX = 0;
                 isTilting = false;
             }
