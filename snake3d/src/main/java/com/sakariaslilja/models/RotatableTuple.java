@@ -40,10 +40,12 @@ public class RotatableTuple implements Iterable<Int> {
      * @return The updated object
      */
     public RotatableTuple rotateX(boolean isPositive) {
-        int amount = isPositive ? 1 : -1;
+        int yOld = values.get(1).value();
+        int zOld = values.get(2).value();
 
-        values.get(1).mul(amount);
-        values.get(2).mul(-amount);
+        values.get(1).set(isPositive ? yOld : 360 - yOld);
+        values.get(2).set(isPositive ? 360 - zOld : zOld);
+
         Int temp = values.get(1);
         values.set(1, values.get(2));
         values.set(2, temp);
@@ -58,10 +60,12 @@ public class RotatableTuple implements Iterable<Int> {
      * @return The updated object
      */
     public RotatableTuple rotateY(boolean isPositive) {
-        int amount = isPositive ? 1 : -1;
+        int xOld = values.get(0).value();
+        int zOld = values.get(2).value();
 
-        values.get(2).mul(amount);
-        values.get(0).mul(-amount);
+        values.get(0).set(isPositive ? 360 - xOld : xOld);
+        values.get(2).set(isPositive ? zOld : 360 - zOld);
+
         Int temp = values.get(0);
         values.set(0, values.get(2));
         values.set(2, temp);
@@ -76,10 +80,12 @@ public class RotatableTuple implements Iterable<Int> {
      * @return The updated object
      */
     public RotatableTuple rotateZ(boolean isPositive) {
-        int amount = isPositive ? 1 : -1;
+        int xOld = values.get(0).value();
+        int yOld = values.get(1).value();
 
-        values.get(1).mul(-amount);
-        values.get(0).mul(amount);
+        values.get(0).set(isPositive ? xOld : 360 - xOld);
+        values.get(1).set(isPositive ? 360 - yOld : yOld);
+        
         Int temp = values.get(0);
         values.set(0, values.get(1));
         values.set(1, temp);
