@@ -7,8 +7,10 @@ import java.util.Random;
 import com.sakariaslilja.IConstants;
 import com.sakariaslilja.entities.Apple;
 import com.sakariaslilja.entities.Entity;
+import com.sakariaslilja.entities.Snake;
 import com.sakariaslilja.models.DoubleVector3D;
 import com.sakariaslilja.models.GameModel;
+import com.sakariaslilja.models.IHeading;
 import com.sakariaslilja.models.Int;
 import com.sakariaslilja.models.RotatableTuple;
 import com.sakariaslilja.models.Tuple;
@@ -20,7 +22,7 @@ import javafx.scene.input.KeyCode;
 /**
  * The game engine.
  */
-public class GameEngine implements IConstants {
+public class GameEngine implements IConstants, IHeading {
 
     private String gameTitle;
     private long seed;
@@ -34,10 +36,14 @@ public class GameEngine implements IConstants {
     private ArrayList<Tuple> edges;
     private ArrayList<Vector3D> gridPositions = new ArrayList<>();
     private ArrayList<Apple> apples = new ArrayList<>();
+    private ArrayList<Snake> snake = new ArrayList<>();
 
-    private DoubleVector3D camera;
+    private DoubleVector3D heading;
+    private DoubleVector3D normal;
 
     // In degrees
+    private int rotationX;
+    private int rotationY;
     private Int rotX;
     private Int rotY;
     private Int rotZ;
@@ -46,7 +52,7 @@ public class GameEngine implements IConstants {
     private boolean paused = false;
     private boolean isTurning = false;
     private boolean isTilting = false;
-    private boolean positiveRotation = false;
+    private boolean typicalRotation = true;
 
     /**
      * To create an instance of a game engine, the world dimensions are needed
@@ -55,7 +61,7 @@ public class GameEngine implements IConstants {
      * @param worldHeight Height of the world
      * @param worldDepth Depth of the world
      */
-    public GameEngine(GameModel game, DoubleVector3D camera) {
+    public GameEngine(GameModel game) {
         this.gameTitle = game.gameTitle;
         this.seed = game.seed;
         this.random = new Random(seed);
@@ -67,7 +73,6 @@ public class GameEngine implements IConstants {
         this.appleLimit = Integer.max(1, (int) Math.cbrt(worldWidth*worldHeight*worldDepth) - 2);
         World world = new World(worldWidth, worldHeight, worldDepth);
         this.edges = world.getEdges();
-        this.camera = camera;
         this.rotX = new Int(game.rotX);
         this.rotY = new Int(game.rotY);
         this.rotZ = new Int(game.rotZ);
@@ -81,6 +86,10 @@ public class GameEngine implements IConstants {
                 }
             }
         }
+
+        snake.add(new Snake(new Vector3D(500, 500, 500), FORWARD, UP));
+        this.heading = snake.get(0).getHeading().toDoubleVector3D();
+        this.normal = snake.get(0).getNormal().toDoubleVector3D();
     }
 
     // Engine getters and setters
@@ -92,8 +101,6 @@ public class GameEngine implements IConstants {
     protected int countApples() { return apples.size(); }
     public void setApples(ArrayList<Apple> apples) { this.apples = apples; }
 
-    public DoubleVector3D getCamera() { return camera; }
-
     public int getScore() { return score; }
     
 
@@ -103,27 +110,47 @@ public class GameEngine implements IConstants {
      */
     public void doButtonAction(@SuppressWarnings("exports") KeyCode keyCode) {
         // TODO: temporary method for testing inputs
-        if (keyCode.equals(KeyCode.LEFT)) { isTurning = true; positiveRotation = true; }
-        if (keyCode.equals(KeyCode.RIGHT)) { isTurning = true; positiveRotation = false; }
-        if (keyCode.equals(KeyCode.UP)) { isTilting = true; positiveRotation = true; }
-        if (keyCode.equals(KeyCode.DOWN)) { isTilting = true; positiveRotation = false; }
+        if (keyCode.equals(KeyCode.LEFT)) { isTurning = true; typicalRotation = true; }
+        if (keyCode.equals(KeyCode.RIGHT)) { isTurning = true; typicalRotation = false; }
+        if (keyCode.equals(KeyCode.UP)) { isTilting = true; typicalRotation = true; }
+        if (keyCode.equals(KeyCode.DOWN)) { isTilting = true; typicalRotation = false; }
 
     }
 
     /**
      * @return The x-rotation in radians
      */
-    public double getRotX() { return Math.PI * rotX.value() / 180.0; }
+    public double getRotX() { return Math.PI * rotationX / 180.0; }
 
     /**
      * @return The y-rotation in radians
      */
-    public double getRotY() { return Math.PI * rotY.value() / 180.0; }
+    public double getRotY() { return Math.PI * rotationY / 180.0; }
 
     /**
      * @return The z-rotation in radians
      */
     public double getRotZ() { return Math.PI * rotZ.value() / 180.0; }
+
+    /**
+     * @return The directional heading of the camera
+     */
+    public DoubleVector3D getHeading() { return this.heading; }
+
+    /**
+     * @return The directional normal of the camera
+     */
+    public DoubleVector3D getNormal() { return this.normal; }
+
+    /**
+     * @return The camera's location in the world.
+     */
+    public DoubleVector3D camera() { return head().getPosition().toDoubleVector3D().mul(1.0 / UNIT); }
+
+    /**
+     * @return The head of the game's snake entity.
+     */
+    private Snake head() { return snake.get(0); }
 
     /**
      * Triggers the paused variable of the game.
@@ -174,24 +201,31 @@ public class GameEngine implements IConstants {
             return;
         }
 
-        int v = positiveRotation ? 1 : -1;
+        int v = typicalRotation ? 1 : -1;
 
         if (this.isTurning) {
-            rotations.setY((rotations.getY().value() % 360) + v);
-            if (rotY.value() % 90 == 0) {
+            this.rotationY += v;
+            this.heading = heading.rotateY(Math.PI / 180);
+            if (rotationY % 90 == 0) {
+                if (typicalRotation) { head().turnLeft(); }
+                else { head().turnRight(); }
+                this.heading = head().getHeading().toDoubleVector3D();
+                rotationY = 0;
                 isTurning = false;
-                System.out.println("Rotations before turning: " + rotations.toString());
-                rotations.rotateY(positiveRotation);
-                System.out.println("Rotations after turning: " + rotations.toString());
             }
+            
         }
         else if (this.isTilting) {
-            rotations.setX((rotations.getX().value() % 360) + v);
-            if (rotations.getX().value() % 90 == 0) {
+            this.rotationX += v;
+            this.heading = heading.rotateX(Math.PI / 180);
+            this.normal = normal.rotateX(Math.PI / 180);
+            if (rotationX % 90 == 0) {
+                if (typicalRotation) { head().turnDown(); }
+                else { head().turnUp(); }
+                this.heading = head().getHeading().toDoubleVector3D();
+                this.normal = head().getNormal().toDoubleVector3D();
+                this.rotationX = 0;
                 isTilting = false;
-                System.out.println("Rotations before turning: " + rotations.toString());
-                rotations.rotateX(positiveRotation);
-                System.out.println("Rotations after turning: " + rotations.toString());
             }
 
         }

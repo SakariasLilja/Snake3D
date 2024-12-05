@@ -17,7 +17,7 @@ public class GameEngineTests {
     @Test
     @DisplayName("GameEngine incrementScore")
     public void incrementScore() {
-        GameEngine engine = new GameEngine(new GameModel(), null);
+        GameEngine engine = new GameEngine(new GameModel());
         int initialScore = engine.getScore();
         engine.incrementScore();
         int newScore = initialScore + 1;
@@ -28,7 +28,7 @@ public class GameEngineTests {
     @DisplayName("GameEngine toGameModel")
     public void toGameModel() {
         GameModel model = new GameModel();
-        GameEngine engine = new GameEngine(model, null);
+        GameEngine engine = new GameEngine(model);
 
         engine.incrementScore();
         GameModel createdModel = engine.toGameModel();
@@ -41,7 +41,7 @@ public class GameEngineTests {
     @Test
     @DisplayName("GameEngine getAvailableGridPositions")
     public void getAvailableGridPositions() {
-        GameEngine engine = new GameEngine(new GameModel(), null);
+        GameEngine engine = new GameEngine(new GameModel());
         Vector3D position = new Vector3D(0, 0, 0);
 
         ArrayList<Apple> apples = new ArrayList<>();
@@ -60,7 +60,7 @@ public class GameEngineTests {
     @Test
     @DisplayName("GameEngine apple count")
     public void appleCount() {
-        GameEngine engine = new GameEngine(new GameModel(), null);
+        GameEngine engine = new GameEngine(new GameModel());
 
         assertEquals(0, engine.countApples(), "The number of apples should be 0 if not set to anything");
 
@@ -78,7 +78,7 @@ public class GameEngineTests {
     @Test
     @DisplayName("GameEngine increaseScore")
     public void increaseScore() {
-        GameEngine engine = new GameEngine(new GameModel(), null);
+        GameEngine engine = new GameEngine(new GameModel());
         int oldScore = engine.getScore();
         int increaseAmount = 5;
         engine.increaseScore(increaseAmount);
@@ -97,7 +97,7 @@ public class GameEngineTests {
         model.worldWidth = width;
         model.worldHeight = height;
         model.worldDepth = depth;
-        GameEngine engine = new GameEngine(model, null);
+        GameEngine engine = new GameEngine(model);
 
         int expectedSize = width * height * depth;
 
@@ -108,7 +108,7 @@ public class GameEngineTests {
     @DisplayName("GameEngine spawnApple")
     public void spawnApple() {
         GameModel model = new GameModel();
-        GameEngine engine = new GameEngine(model, null);
+        GameEngine engine = new GameEngine(model);
         int oldAppleCount = engine.countApples();
 
         Apple apple = new Apple(new Vector3D(0,0,0));
@@ -140,7 +140,7 @@ public class GameEngineTests {
     @Test
     @DisplayName("GameEngine pause")
     public void pauseGame() {
-        GameEngine engine = new GameEngine(new GameModel(), null);
+        GameEngine engine = new GameEngine(new GameModel());
 
         int appleCount = engine.countApples();
 
