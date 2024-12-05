@@ -29,9 +29,9 @@ public class RotatableTuple implements Iterable<Int> {
     public Int getY() { return values.get(1); }
     public Int getZ() { return values.get(2); }
 
-    public void setX(int value) { values.get(0).set(value); }
-    public void setY(int value) { values.get(1).set(value); }
-    public void setZ(int value) { values.get(2).set(value); }
+    public void setX(int value) { values.get(0).set(value % 360); }
+    public void setY(int value) { values.get(1).set(value % 360); }
+    public void setZ(int value) { values.get(2).set(value % 360); }
 
     /**
      * Applies a 90-degree x-rotation matrix to this tuple.
