@@ -39,5 +39,13 @@ public class RotatableTupleTests {
         assertEquals(expected.getY(), tuple.getY(), "The rotateX method should work as expected");
         assertEquals(expected.getZ(), tuple.getZ(), "The rotateX method should work as expected");
     }
+
+    @Test
+    @DisplayName("RotatableTuple toString")
+    public void rotTupleToString() {
+        RotatableTuple tuple = new RotatableTuple(1, 2, 3);
+        String expected = "RT(1, 2, 3)";
+        assertEquals(expected, tuple.toString(), "The toString override should work as expected");
+    }
     
 }

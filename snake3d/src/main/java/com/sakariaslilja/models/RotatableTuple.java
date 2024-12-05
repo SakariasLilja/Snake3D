@@ -84,5 +84,10 @@ public class RotatableTuple implements Iterable<Integer> {
     public Iterator<Integer> iterator() {
         return values.iterator();
     }
+
+    @Override
+    public String toString() {
+        return "RT(" + values.get(0).intValue() + ", " + values.get(1).intValue() + ", " + values.get(2).intValue() + ")";
+    }
     
 }
