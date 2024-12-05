@@ -7,9 +7,9 @@ import java.util.Iterator;
  * Rotatable tuple for storing numbers.
  * Works in place.
  */
-public class RotatableTuple implements Iterable<Integer> {
+public class RotatableTuple implements Iterable<Int> {
 
-    private ArrayList<Integer> values = new ArrayList<>();
+    private ArrayList<Int> values = new ArrayList<>();
 
     /**
      * Creates a new rotatable tuple of three values.
@@ -19,19 +19,19 @@ public class RotatableTuple implements Iterable<Integer> {
      * @param y y-value
      * @param z z-value
      */
-    public RotatableTuple(Integer x, Integer y, Integer z) {
+    public RotatableTuple(Int x, Int y, Int z) {
         values.add(x);
         values.add(y);
         values.add(z);
     }
 
-    public Integer getX() { return values.get(0); }
-    public Integer getY() { return values.get(1); }
-    public Integer getZ() { return values.get(2); }
+    public Int getX() { return values.get(0); }
+    public Int getY() { return values.get(1); }
+    public Int getZ() { return values.get(2); }
 
-    public void setX(int value) { values.set(0, value); }
-    public void setY(int value) { values.set(1, value); }
-    public void setZ(int value) { values.set(2, value); }
+    public void setX(int value) { values.get(0).set(value); }
+    public void setY(int value) { values.get(1).set(value); }
+    public void setZ(int value) { values.get(2).set(value); }
 
     /**
      * Applies a 90-degree x-rotation matrix to this tuple.
@@ -40,12 +40,14 @@ public class RotatableTuple implements Iterable<Integer> {
      * @return The updated object
      */
     public RotatableTuple rotateX(boolean isPositive) {
-        Integer amount = isPositive ? 1 : -1;
+        int amount = isPositive ? 1 : -1;
 
-        Integer newY = values.get(2).intValue() * -amount;
-        Integer newZ = values.get(1).intValue() * amount;
-        values.set(1, newY);
-        values.set(2, newZ);
+        values.get(1).mul(amount);
+        values.get(2).mul(-amount);
+        Int temp = values.get(1);
+        values.set(1, values.get(2));
+        values.set(2, temp);
+
         return this;
     }
 
@@ -57,10 +59,13 @@ public class RotatableTuple implements Iterable<Integer> {
      */
     public RotatableTuple rotateY(boolean isPositive) {
         int amount = isPositive ? 1 : -1;
-        Integer newX = values.get(2).intValue() * amount;
-        Integer newZ = values.get(0).intValue() * -amount;
-        values.set(0, newX);
-        values.set(2, newZ);
+
+        values.get(2).mul(amount);
+        values.get(0).mul(-amount);
+        Int temp = values.get(0);
+        values.set(0, values.get(2));
+        values.set(2, temp);
+
         return this;
     }
 
@@ -72,22 +77,25 @@ public class RotatableTuple implements Iterable<Integer> {
      */
     public RotatableTuple rotateZ(boolean isPositive) {
         int amount = isPositive ? 1 : -1;
-        Integer newX = values.get(1).intValue() * -amount;
-        Integer newY = values.get(0).intValue() * amount;
-        values.set(0, newX);
-        values.set(1, newY);
+
+        values.get(1).mul(-amount);
+        values.get(0).mul(amount);
+        Int temp = values.get(0);
+        values.set(0, values.get(1));
+        values.set(1, temp);
+
         return this;
     }
 
     // Inherited class for iterating over the elements of this tuple
     @Override
-    public Iterator<Integer> iterator() {
+    public Iterator<Int> iterator() {
         return values.iterator();
     }
 
     @Override
     public String toString() {
-        return "RT(" + values.get(0).intValue() + ", " + values.get(1).intValue() + ", " + values.get(2).intValue() + ")";
+        return "RT(" + values.get(0).value() + ", " + values.get(1).value() + ", " + values.get(2).value() + ")";
     }
     
 }
