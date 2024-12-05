@@ -31,7 +31,7 @@ public class Quaternion {
     /**
      * Quaternion from a vector and an angle.
      * @param vector Axis-vector to rotate around, will be normalized
-     * @param angle The angle to rotate around this axis
+     * @param angle The angle to rotate around this axis in radians
      */
     public Quaternion(DoubleVector3D vector, double angle) {
         this.w = Math.cos(angle * 0.5);
