@@ -40,5 +40,10 @@ public interface IConstants {
      * The maximum size of any of the world's dimensions.
      */
     int MAX_WORLD_SIZE = 100;
+
+    /**
+     * One degree in radians.
+     */
+    double ONE_DEG = Math.PI / 180.0;
     
 }
