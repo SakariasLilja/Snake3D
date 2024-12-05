@@ -49,12 +49,12 @@ public class Snake extends CubeEntity implements IMovable {
     /**
      * Turns the snake's head to the left
      */
-    public void turnLeft() { heading = heading.crossProd(normal); }
+    public void turnLeft() { heading = normal.crossProd(heading); }
 
     /**
      * Turns the snake's head to the right
      */
-    public void turnRight() { heading = normal.crossProd(heading); }
+    public void turnRight() { heading = heading.crossProd(normal); }
 
     /**
      * Turns the snake's head downward

@@ -19,5 +19,29 @@ public class SnakeTests implements IHeading {
         
         assertEquals(expected, snake.getPosition(), "The position should update correctly when move is called");
     }
+
+    @Test
+    @DisplayName("Snake turn left and right")
+    public void snakeTurnHorizontal() {
+        Snake snake = new Snake(null, RIGHT, DOWN);
+        snake.turnRight();
+        assertEquals(FORWARD, snake.getHeading(), "Snake should turn right");
+        snake.turnLeft();
+        snake.turnLeft();
+        assertEquals(BACKWARD, snake.getHeading(), "Snake should turn left");
+    }
+
+    @Test
+    @DisplayName("Snake turn up and down")
+    public void snakeTurnVertical() {
+        Snake snake = new Snake(null, DOWN, BACKWARD);
+        snake.turnUp();
+        assertEquals(BACKWARD, snake.getHeading(), "The snake should be facing the correct way");
+        assertEquals(UP, snake.getNormal(), "The snake should turn upward");
+        snake.turnDown();
+        snake.turnDown();
+        assertEquals(FORWARD, snake.getHeading(), "The snake should be facing the correct way");
+        assertEquals(DOWN, snake.getNormal(), "The snake should turn downward");
+    }
     
 }
