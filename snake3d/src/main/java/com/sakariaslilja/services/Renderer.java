@@ -37,7 +37,6 @@ public class Renderer implements IConstants, IHeading {
      * Sets the world offset vector.
      * @param g The graphics context onto which to draw
      * @param edges The edges of the world
-     * @param camera The camera of the world
      * @param normalVector The normal vector of the camera
      */
     @SuppressWarnings("exports")
@@ -151,7 +150,7 @@ public class Renderer implements IConstants, IHeading {
      * @return The translated vertex
      */
     protected DoubleVector3D translate(DoubleVector3D vertex) {
-        return vertex.add(engine.getCamera().neg());
+        return vertex.add(engine.camera().neg());
     }
 
     /**
@@ -161,10 +160,9 @@ public class Renderer implements IConstants, IHeading {
      * @return The rotated vertex
      */
     protected DoubleVector3D rotate(DoubleVector3D vertex) {
-        Quaternion qX = new Quaternion(RIGHT.toDoubleVector3D(), engine.getRotX());
-        Quaternion qY = new Quaternion(UP.toDoubleVector3D(), engine.getRotY());
-        Quaternion qZ = new Quaternion(FORWARD.toDoubleVector3D(), engine.getRotZ());
-        return qZ.applyRotation(qY.applyRotation(qX.applyRotation(vertex)));
+        Quaternion qX = new Quaternion(engine.getHeading().crossProd(engine.getNormal()), engine.getRotX());
+        Quaternion qY = new Quaternion(engine.getNormal().neg(), engine.getRotY());
+        return qX.applyRotation(qY.applyRotation(vertex));
     }
 
     /**
