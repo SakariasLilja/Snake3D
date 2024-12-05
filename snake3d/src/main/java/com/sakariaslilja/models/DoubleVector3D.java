@@ -142,6 +142,20 @@ public class DoubleVector3D extends AbstractVector {
         return predicate.test(x) || predicate.test(y) || predicate.test(z);
     }
 
+    /**
+     * @return The magnitude of this DoubleVector3D
+     */
+    public double magnitude() {
+        return Math.sqrt(x*x + y*y + z*z);
+    }
+
+    /**
+     * @return A normalized DoubleVector3D, i.e. the magnitude of this vector is 1.
+     */
+    public DoubleVector3D normalized() {
+        return this.mul(1.0 / this.magnitude());
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null || obj.getClass() != this.getClass()) {

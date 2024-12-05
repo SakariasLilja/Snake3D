@@ -155,5 +155,21 @@ public class DoubleVector3DTests implements IHeading {
         assertEquals(true, vector.exists(isNegative), "The exists method should work");
         assertNotEquals(true, vector.exists(isZero), "The exists method should not give false results");
     }
+
+    @Test
+    @DisplayName("DoubleVector3D magnitude")
+    void magnitude() {
+        DoubleVector3D vector = new DoubleVector3D(3, 4, 5);
+        double expected = Math.sqrt(50);
+        assertEquals(expected, vector.magnitude(), "The magnitude should be as expected");
+    }
+
+    @Test
+    @DisplayName("DoubleVector3D normalize")
+    public void normalize() {
+        DoubleVector3D vector = new DoubleVector3D(1, 2, 3);
+        DoubleVector3D result = vector.normalized();
+        assertEquals(1.0, result.magnitude(), "The normalize method should work as expected");
+    }
     
 }
