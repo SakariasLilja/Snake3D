@@ -45,5 +45,33 @@ public class Snake extends CubeEntity implements IMovable {
     public void move() {
         this.setPosition(this.getPosition().add(heading));
     }
+
+    /**
+     * Turns the snake's head to the left
+     */
+    public void turnLeft() { heading = heading.crossProd(normal); }
+
+    /**
+     * Turns the snake's head to the right
+     */
+    public void turnRight() { heading = normal.crossProd(heading); }
+
+    /**
+     * Turns the snake's head downward
+     */
+    public void turnDown() {
+        Vector3D newHeading = normal.neg();
+        normal = heading;
+        heading = newHeading;
+    }
+
+    /**
+     * Turns the snake's head upward
+     */
+    public void turnUp() {
+        Vector3D newNormal = heading.neg();
+        heading = normal;
+        normal = newNormal;
+    }
     
 }
