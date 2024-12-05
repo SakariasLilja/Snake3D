@@ -59,7 +59,7 @@ public class GameEngineTests {
 
     @Test
     @DisplayName("GameEngine apple count")
-    void appleCount() {
+    public void appleCount() {
         GameEngine engine = new GameEngine(new GameModel(), null);
 
         assertEquals(0, engine.countApples(), "The number of apples should be 0 if not set to anything");
@@ -77,7 +77,7 @@ public class GameEngineTests {
 
     @Test
     @DisplayName("GameEngine increaseScore")
-    void increaseScore() {
+    public void increaseScore() {
         GameEngine engine = new GameEngine(new GameModel(), null);
         int oldScore = engine.getScore();
         int increaseAmount = 5;
@@ -88,7 +88,7 @@ public class GameEngineTests {
 
     @Test
     @DisplayName("GameEngine gridPositions")
-    void gridPositions() {
+    public void gridPositions() {
         int width = 3;
         int height = 4;
         int depth = 7;
@@ -106,7 +106,7 @@ public class GameEngineTests {
 
     @Test
     @DisplayName("GameEngine spawnApple")
-    void spawnApple() {
+    public void spawnApple() {
         GameModel model = new GameModel();
         GameEngine engine = new GameEngine(model, null);
         int oldAppleCount = engine.countApples();
@@ -139,7 +139,7 @@ public class GameEngineTests {
 
     @Test
     @DisplayName("GameEngine pause")
-    void pauseGame() {
+    public void pauseGame() {
         GameEngine engine = new GameEngine(new GameModel(), null);
 
         int appleCount = engine.countApples();

@@ -12,7 +12,7 @@ public class SnakeTests implements IHeading {
 
     @Test
     @DisplayName("Snake move")
-    void snakeMove() {
+    public void snakeMove() {
         Snake snake = new Snake(new Vector3D(0, 0, 501), FORWARD, UP);
         Vector3D expected = new Vector3D(0, 0, 502);
         snake.move();
