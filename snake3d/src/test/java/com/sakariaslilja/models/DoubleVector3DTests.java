@@ -171,5 +171,14 @@ public class DoubleVector3DTests implements IHeading {
         DoubleVector3D result = vector.normalized();
         assertEquals(1.0, result.magnitude(), "The normalize method should work as expected");
     }
+
+    @Test
+    @DisplayName("DoubleVector3D cross-product")
+    public void crossProduct() {
+        DoubleVector3D v1 = FORWARD.toDoubleVector3D();
+        DoubleVector3D v2 = UP.toDoubleVector3D();
+        DoubleVector3D expected = RIGHT.toDoubleVector3D();
+        assertEquals(expected, v1.crossProd(v2), "The cross-product should work as expected");
+    }
     
 }

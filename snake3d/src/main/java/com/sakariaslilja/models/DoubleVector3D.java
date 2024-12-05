@@ -156,6 +156,18 @@ public class DoubleVector3D extends AbstractVector {
         return this.mul(1.0 / this.magnitude());
     }
 
+    /**
+     * Performs cartesian vector cross-product with another vector.
+     * @param other The vector to perform the cross-product with
+     * @return The resultant vector of the cross-product
+     */
+    public DoubleVector3D crossProd(DoubleVector3D other) {
+        double newX = y * other.getZ() - (z * other.getY());
+        double newY = z * other.getX() - (x * other.getZ());
+        double newZ = x * other.getY() - (y * other.getX());
+        return new DoubleVector3D(newX, newY, newZ);
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null || obj.getClass() != this.getClass()) {
