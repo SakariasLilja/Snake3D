@@ -109,7 +109,6 @@ public class GameEngine implements IConstants, IHeading {
      * @param keyCode The key code of the pressed key
      */
     public void doButtonAction(@SuppressWarnings("exports") KeyCode keyCode) {
-        // TODO: temporary method for testing inputs
         if (keyCode.equals(KeyCode.LEFT)) { isTurning = true; typicalRotation = true; }
         if (keyCode.equals(KeyCode.RIGHT)) { isTurning = true; typicalRotation = false; }
         if (keyCode.equals(KeyCode.UP)) { isTilting = true; typicalRotation = true; }
@@ -202,7 +201,7 @@ public class GameEngine implements IConstants, IHeading {
         }
 
         int v = typicalRotation ? 1 : -1;
-
+        // TODO: fix
         if (this.isTurning) {
             this.rotationY += v;
             this.heading = heading.rotateY(Math.PI / 180);
