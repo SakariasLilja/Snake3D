@@ -26,5 +26,15 @@ public class IntTests {
         x.neg();
         assertSame(x, reference, "Referencing should not be broken when value is updated");
     }
+
+    @Test
+    @DisplayName("Int multiply")
+    void multiply() {
+        int value = 3;
+        int scalar = -2;
+        Int x = new Int(value);
+        x.mul(scalar);
+        assertEquals(value*scalar, x.value(), "The multiplication method should work as expected");
+    }
     
 }

@@ -25,6 +25,10 @@ public class Int {
      * Negates the value of this Int
      */
     public void neg() { this.value_ *= -1; }
+    /**
+     * @param amount Multiplies this integer by this amount
+     */
+    public void mul(int amount) { this.value_ *= amount; }
 
     @Override
     public String toString() {
