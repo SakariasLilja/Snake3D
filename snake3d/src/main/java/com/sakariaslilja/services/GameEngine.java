@@ -13,7 +13,6 @@ import com.sakariaslilja.models.GameModel;
 import com.sakariaslilja.models.IHeading;
 import com.sakariaslilja.models.Int;
 import com.sakariaslilja.models.Quaternion;
-import com.sakariaslilja.models.RotatableTuple;
 import com.sakariaslilja.models.Tuple;
 import com.sakariaslilja.models.Vector3D;
 import com.sakariaslilja.models.World;
@@ -43,17 +42,14 @@ public class GameEngine implements IConstants, IHeading {
     private DoubleVector3D normal;
 
     // In degrees
-    private int rotationX;
-    private int rotationY;
     private Int rotX;
     private Int rotY;
     private Int rotZ;
-    private RotatableTuple rotations;
 
     private boolean paused = false;
     private boolean isTurning = false;
     private boolean isTilting = false;
-    private boolean typicalRotation = true;
+    private boolean positiveRotation = true;
 
     /**
      * To create an instance of a game engine, the world dimensions are needed
@@ -77,7 +73,6 @@ public class GameEngine implements IConstants, IHeading {
         this.rotX = new Int(game.rotX);
         this.rotY = new Int(game.rotY);
         this.rotZ = new Int(game.rotZ);
-        this.rotations = new RotatableTuple(this.rotX, this.rotY, this.rotZ);
 
         // Adding the grid positions of the world
         for (int layer = 0; layer < game.worldDepth; layer++) {
@@ -110,22 +105,24 @@ public class GameEngine implements IConstants, IHeading {
      * @param keyCode The key code of the pressed key
      */
     public void doButtonAction(@SuppressWarnings("exports") KeyCode keyCode) {
-        if (keyCode.equals(KeyCode.LEFT)) { isTurning = true; typicalRotation = true; }
-        if (keyCode.equals(KeyCode.RIGHT)) { isTurning = true; typicalRotation = false; }
-        if (keyCode.equals(KeyCode.UP)) { isTilting = true; typicalRotation = true; }
-        if (keyCode.equals(KeyCode.DOWN)) { isTilting = true; typicalRotation = false; }
+        if (isTurning || isTilting) { return; } // Stops multiple inputs
+
+        if (keyCode.equals(KeyCode.LEFT)) { isTurning = true; positiveRotation = true; }
+        if (keyCode.equals(KeyCode.RIGHT)) { isTurning = true; positiveRotation = false; }
+        if (keyCode.equals(KeyCode.UP)) { isTilting = true; positiveRotation = true; }
+        if (keyCode.equals(KeyCode.DOWN)) { isTilting = true; positiveRotation = false; }
 
     }
 
     /**
      * @return The x-rotation in radians
      */
-    public double getRotX() { return Math.PI * rotationX / 180.0; }
+    public double getRotX() { return Math.PI * rotX.value() / 180.0; }
 
     /**
      * @return The y-rotation in radians
      */
-    public double getRotY() { return Math.PI * rotationY / 180.0; }
+    public double getRotY() { return Math.PI * rotY.value() / 180.0; }
 
     /**
      * @return The z-rotation in radians
@@ -201,38 +198,51 @@ public class GameEngine implements IConstants, IHeading {
             return;
         }
 
-        int v = typicalRotation ? 1 : -1;
-        // TODO: fix
+        int v = positiveRotation ? 1 : -1;
+        Vector3D snakeNormal = head().getNormal();
+        Vector3D snakeCross = head().getHeading().crossProd(snakeNormal);
+        Int yAxis = null;
+        Int xAxis = null;
+        int ydeg = v;
+        int xdeg = v;
+        // Set the horizontal rotations
+        if (snakeNormal.equals(UP)) { yAxis = rotY; }
+        else if (snakeNormal.equals(DOWN)) { yAxis = rotY; ydeg = -ydeg; }
+        else if (snakeNormal.equals(FORWARD)) { yAxis = rotZ; }
+        else if (snakeNormal.equals(BACKWARD)) { yAxis = rotZ; ydeg = -ydeg; }
+        else if (snakeNormal.equals(LEFT)) { yAxis = rotX; }
+        else if (snakeNormal.equals(RIGHT)) { yAxis = rotX; ydeg = -ydeg; }
+        // Set the vertical rotations
+        if (snakeCross.equals(RIGHT)) { xAxis = rotX; }
+        else if (snakeCross.equals(LEFT)) { xAxis = rotX; xdeg = -xdeg; }
+        else if (snakeCross.equals(BACKWARD)) { xAxis = rotZ; xdeg = -xdeg; }
+        else if (snakeCross.equals(FORWARD)) { xAxis = rotZ; }
+        else if (snakeCross.equals(UP)) { xAxis = rotY; }
+        else if (snakeCross.equals(DOWN)) { xAxis = rotY; xdeg = -xdeg; }
+
         if (this.isTurning) {
-            this.rotationY += v;
-            Quaternion qY = new Quaternion(heading, ONE_DEG * v);
+            yAxis.set(yAxis.value() + ydeg);
+            Quaternion qY = new Quaternion(normal, ONE_DEG * v);
             this.heading = qY.applyRotation(heading);
 
-            if (rotationY % 90 == 0) {
-                if (typicalRotation) { head().turnLeft(); }
+            if (yAxis.value() % 90 == 0) {
+                if (positiveRotation) { head().turnLeft(); }
                 else { head().turnRight(); }
-
-                this.heading = head().getHeading().toDoubleVector3D();
-
-                rotationY = 0;
+                
                 isTurning = false;
             }
             
         }
         else if (this.isTilting) {
-            this.rotationX += v;
+            xAxis.set(xAxis.value() + xdeg);
             Quaternion qX = new Quaternion(heading.crossProd(normal), ONE_DEG * v);
             this.heading = qX.applyRotation(heading);
             this.normal = qX.applyRotation(normal);
 
-            if (rotationX % 90 == 0) {
-                if (typicalRotation) { head().turnDown(); }
+            if (xAxis.value() % 90 == 0) {
+                if (positiveRotation) { head().turnDown(); }
                 else { head().turnUp(); }
-
-                this.heading = head().getHeading().toDoubleVector3D();
-                this.normal = head().getNormal().toDoubleVector3D();
-
-                this.rotationX = 0;
+                
                 isTilting = false;
             }
 
@@ -245,18 +255,15 @@ public class GameEngine implements IConstants, IHeading {
     /**
      * Gets the non-occupied grid positions.
      * Non-occupied entails that no entity is present at the location.
-     * @param obstructors Vararg of collections of entities
+     * @param positions A collection of the occupied positions
      * @return An ArrayList of free spaces
      */
-    @SuppressWarnings("unchecked")
-    protected <T extends Entity> ArrayList<Vector3D> getAvailableGridPositions(ArrayList<T>... obstructors) {
+    protected ArrayList<Vector3D> getAvailableGridPositions(ArrayList<Vector3D> positions) {
         ArrayList<Vector3D> available = new ArrayList<>();
         available.addAll(this.gridPositions);
 
-        for (ArrayList<T> obstructor : obstructors) {
-            for (T entity : obstructor) {
-                available.removeIf( (pos) -> pos.equals(entity.getGridPos()) );
-            }
+        for (Vector3D position : positions) {
+            available.removeIf( (pos) -> pos.equals(position) );
         }
 
         return available;
@@ -269,10 +276,12 @@ public class GameEngine implements IConstants, IHeading {
      * An apple can only spawn if there are unoccupied locations in the world.
      * @param limit The max number of apples a world can have
      */
-    @SuppressWarnings("unchecked")
     protected void spawnApple(int limit) {
         if (this.countApples() < limit) {
-            ArrayList<Vector3D> availableGridPositions = getAvailableGridPositions(apples);
+            ArrayList<Vector3D> occupied = new ArrayList<>();
+            for (Apple apple : apples) { occupied.add(apple.getGridPos()); }
+            for (Snake segment : snake) { occupied.add(segment.getGridPos()); }
+            ArrayList<Vector3D> availableGridPositions = getAvailableGridPositions(occupied);
 
             if (availableGridPositions.size() == 0) {
                 return;

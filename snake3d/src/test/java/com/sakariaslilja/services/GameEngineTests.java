@@ -37,18 +37,17 @@ public class GameEngineTests {
         assertNotEquals(model.score, createdModel.score, "The score should be different after incrementation");
     }
 
-    @SuppressWarnings("unchecked")
     @Test
     @DisplayName("GameEngine getAvailableGridPositions")
     public void getAvailableGridPositions() {
         GameEngine engine = new GameEngine(new GameModel());
         Vector3D position = new Vector3D(0, 0, 0);
 
-        ArrayList<Apple> apples = new ArrayList<>();
-        Apple apple = new Apple(position);
-        apples.add(apple);
+        ArrayList<Vector3D> apples = new ArrayList<>();
+        ArrayList<Vector3D> allPositions = engine.getAvailableGridPositions(apples);
 
-        ArrayList<Vector3D> allPositions = engine.getAvailableGridPositions();
+        Apple apple = new Apple(position);
+        apples.add(apple.getGridPos());
         ArrayList<Vector3D> appleOccupied = engine.getAvailableGridPositions(apples);
 
         assertNotEquals(allPositions.size(), appleOccupied.size(), "Passing elements to remove should remove said elements");
