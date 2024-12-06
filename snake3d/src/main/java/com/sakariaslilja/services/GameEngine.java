@@ -86,6 +86,8 @@ public class GameEngine implements IConstants, IHeading {
     protected int countApples() { return apples.size(); }
     public void setApples(ArrayList<Apple> apples) { this.apples = apples; }
 
+    public ArrayList<Snake> getSnake() { return snake; }
+
     public int getScore() { return score; }
 
     private boolean isTurning() { return turningLeft || turningRight || turningDown || turningUp; }  
@@ -201,7 +203,7 @@ public class GameEngine implements IConstants, IHeading {
                 else { turningUp = false; head().turnUp(); }
             }
         }
-        
+
         else {
             spawnApple(appleLimit);
         }

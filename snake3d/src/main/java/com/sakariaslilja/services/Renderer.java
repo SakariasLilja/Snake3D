@@ -8,6 +8,7 @@ import com.sakariaslilja.App;
 import com.sakariaslilja.IConstants;
 import com.sakariaslilja.entities.Apple;
 import com.sakariaslilja.entities.CubeEntity;
+import com.sakariaslilja.entities.Snake;
 import com.sakariaslilja.models.DoubleVector3D;
 import com.sakariaslilja.models.IHeading;
 import com.sakariaslilja.models.Quaternion;
@@ -61,6 +62,7 @@ public class Renderer implements IConstants, IHeading {
         this.clearCanvas(g);
         this.drawEdges(g);
         this.drawApples(g);
+        this.drawSnake(g);
     }
 
     /**
@@ -97,6 +99,19 @@ public class Renderer implements IConstants, IHeading {
     private void drawApples(GraphicsContext g) {
         ArrayList<Apple> apples = engine.getApples();
         for (Apple apple : apples) { drawCubeEntity(g, appleColor, apple); }
+    }
+
+    /**
+     * Draws the snake onto the canvas.
+     * This excludes the snake's head, as the player needs to see.
+     * @param g The canvas onto which to draw
+     */
+    private void drawSnake(GraphicsContext g) {
+        ArrayList<Snake> snake = engine.getSnake();
+        int i = 1;
+        while (i < snake.size()) {
+            drawCubeEntity(g, snakeColor, snake.get(i));
+        }
     }
 
     /**
