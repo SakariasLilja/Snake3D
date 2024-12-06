@@ -1,18 +1,24 @@
 package com.sakariaslilja.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import com.sakariaslilja.IConstants;
 import com.sakariaslilja.entities.Apple;
+import com.sakariaslilja.entities.Snake;
+import com.sakariaslilja.entities.Turn;
 import com.sakariaslilja.models.GameModel;
+import com.sakariaslilja.models.IHeading;
 import com.sakariaslilja.models.Vector3D;
 
-public class GameEngineTests {
+public class GameEngineTests implements IConstants, IHeading {
 
     @Test
     @DisplayName("GameEngine incrementScore")
@@ -147,6 +153,134 @@ public class GameEngineTests {
         engine.update();
 
         assertEquals(appleCount, engine.countApples(), "Updating the game shouldn't spawn new apples if the game is paused");
+    }
+
+    @Test
+    @DisplayName("GameEngine setSnake")
+    public void setSnake() {
+        GameEngine engine = new GameEngine(new GameModel());
+
+        Vector3D snakePos = new Vector3D(0, 4, 5).mul(UNIT / 2);
+        Snake snakeHead = new Snake(snakePos, FORWARD, UP);
+
+        ArrayList<Snake> snake = new ArrayList<>();
+        snake.add(snakeHead);
+
+        engine.setSnake(snake);
+        
+        assertEquals(snakeHead, engine.getSnake().get(0));
+    }
+
+    @Test
+    @DisplayName("GameEngine grow snake")
+    public void growSnake() {
+        GameEngine engine = new GameEngine(new GameModel());
+
+        Vector3D snakePos = new Vector3D(0, 1, 2).mul(UNIT / 2).add(new Vector3D(500, 500, 500));
+        Snake snakeHead = new Snake(snakePos, FORWARD, UP);
+
+        ArrayList<Snake> snake = new ArrayList<>();
+        snake.add(snakeHead);
+
+        engine.setSnake(snake);
+        engine.growSnake();
+
+        ArrayList<Snake> gameSnake = engine.getSnake();
+
+        Vector3D expectedPos = gameSnake.get(0).getGridPos().add(new Vector3D(0, 0, -1));
+
+        assertEquals(expectedPos, gameSnake.get(gameSnake.size() - 1).getGridPos(), "The growSnake method should work as expected");
+    }
+
+    @Test
+    @DisplayName("GameEngine applyTurns")
+    public void applyTurns() {
+        GameEngine engine = new GameEngine(new GameModel());
+
+        Vector3D snakePos = new Vector3D(0, 1, 2).mul(UNIT / 2).add(new Vector3D(500, 500, 500));
+        Snake snakeHead = new Snake(snakePos, FORWARD, UP);
+
+        ArrayList<Snake> snake = new ArrayList<>();
+        snake.add(snakeHead);
+
+        engine.setSnake(snake);
+        engine.growSnake();
+
+        ArrayList<Snake> gameSnake = engine.getSnake();
+
+        for (Snake s : gameSnake) { s.setTurn(Turn.D); }
+
+        engine.applyTurns();
+
+        gameSnake = engine.getSnake();
+        for (Snake s : gameSnake) {
+            assertEquals(DOWN, s.getHeading(),"The turns should be applied correctly");
+        }
+    }
+
+    @Test
+    @DisplayName("GameEngine propagateTurns")
+    public void propagateTurns() {
+        GameEngine engine = new GameEngine(new GameModel());
+
+        Vector3D snakePos = new Vector3D(0, 1, 2).mul(UNIT / 2).add(new Vector3D(500, 500, 500));
+        Snake snakeHead = new Snake(snakePos, FORWARD, UP);
+        
+        ArrayList<Snake> snake = new ArrayList<>();
+        snake.add(snakeHead);
+
+        engine.setSnake(snake);
+        engine.growSnake();
+        snakeHead.setTurn(Turn.D);
+        engine.propagateTurns();
+
+        ArrayList<Snake> gameSnake = engine.getSnake();
+
+        assertEquals(Turn.N, gameSnake.get(0).getTurn(), "The head's next move should be reset");
+        assertEquals(Turn.D, gameSnake.get(1).getTurn(), "The next turn should have propagated to the next one");
+    }
+
+    @Test
+    @DisplayName("GameEngine snake collisions")
+    public void snakeCollisions() {
+        GameEngine engine = new GameEngine(new GameModel());
+
+        assertFalse(engine.checkSnakeCollisions(), "No collision should occur at start");
+
+        Vector3D snakePos = new Vector3D(0, 1, 2).mul(UNIT / 2).add(new Vector3D(500, 500, 500));
+        Snake snakeHead = new Snake(snakePos, FORWARD, UP);
+
+        ArrayList<Snake> snake = new ArrayList<>();
+        snake.add(snakeHead);
+        snake.add(snakeHead);
+
+        engine.setSnake(snake);
+
+        assertTrue(engine.checkSnakeCollisions(), "The collision should be detected");
+    }
+
+    @Test
+    @DisplayName("GameEngine apple collisions")
+    public void appleCollisions() {
+        GameEngine engine = new GameEngine(new GameModel());
+
+        Vector3D pos = new Vector3D(0, 1, 2).mul(UNIT / 2).add(new Vector3D(500, 500, 500));
+        Snake snakeHead = new Snake(pos, FORWARD, UP);
+        Apple apple = new Apple(pos);
+
+        ArrayList<Snake> snake = new ArrayList<>();
+        ArrayList<Apple> apples = new ArrayList<>();
+
+        snake.add(snakeHead);
+        apples.add(apple);
+
+        engine.setSnake(snake);
+        engine.setApples(apples);
+
+        assertEquals(1, engine.countApples(), "There should be an apple present to start");
+        assertTrue(engine.checkAppleCollisions(), "The apple should be collided with");
+        assertEquals(0, engine.countApples(), "The apple should be removed when eaten");
+        assertEquals(1, engine.getScore(), "The score should increment properly");
     }
     
 }

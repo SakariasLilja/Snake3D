@@ -3,10 +3,12 @@ package com.sakariaslilja.services;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
+import java.util.function.Predicate;
 
 import com.sakariaslilja.IConstants;
 import com.sakariaslilja.entities.Apple;
 import com.sakariaslilja.entities.Snake;
+import com.sakariaslilja.entities.Turn;
 import com.sakariaslilja.models.DoubleVector3D;
 import com.sakariaslilja.models.GameModel;
 import com.sakariaslilja.models.IHeading;
@@ -249,6 +251,70 @@ public class GameEngine implements IConstants, IHeading {
             Apple apple = new Apple(availableGridPositions.get(locationIndex).mul(UNIT).add(offset));
             apples.add(apple);
         }
+    }
+
+    /**
+     * Propagates the next turns to each snake segment from the previous.
+     * Iterates backwards as to not lose data.
+     */
+    protected void propagateTurns() {
+        for (int i = snake.size() - 1; i >= 1; i--) {
+            Turn turn = snake.get(i-1).getTurn();
+            snake.get(i).setTurn(turn);
+        }
+        head().setTurn(Turn.N);
+    }
+
+    /**
+     * Applies the stored turns to each snake segment.
+     */
+    protected void applyTurns() {
+        for (Snake s : snake) { s.applyTurn(); }
+    }
+
+    /**
+     * Grows the snake's tail by one.
+     */
+    protected void growSnake() {
+        Snake tail = snake.get(snake.size() - 1);
+        Vector3D nextPos = tail.getPosition().add(tail.getHeading().neg().mul(UNIT));
+        Snake nextSegment = new Snake(nextPos, tail.getHeading(), tail.getNormal(), tail.getTurn());
+        snake.add(nextSegment);
+    }
+
+    /**
+     * Testing method for setting the engine's snake.
+     * Used for testing.
+     * @param snake The snake to set this world's snake as.
+     */
+    protected void setSnake(ArrayList<Snake> snake) { this.snake = snake; }
+
+    /**
+     * Checks apple collisions. If an apple is collided with,
+     * the score increases by one.
+     */
+    protected boolean checkAppleCollisions() {
+        Predicate<Apple> collided = a -> a.getGridPos().equals(head().getGridPos());
+        boolean appleEaten = apples.removeIf(collided);
+        if (appleEaten) { incrementScore(); return true; }
+        else { return false; }
+    }
+
+    /**
+     * Checks if the snake has collided with itself.
+     * If the player collides with themselves, their game
+     * is over and is saved to the highscores.
+     * The game is also removed from the saved games.
+     */
+    protected boolean checkSnakeCollisions() {
+        Vector3D headGridPos = head().getGridPos();
+        for (int i = 1; i < snake.size(); i++) {
+            if (snake.get(i).getGridPos().equals(headGridPos)) {
+                // TODO: add death
+                return true;
+            }
+        }
+        return false;
     }
     
 }
