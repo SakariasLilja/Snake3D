@@ -307,7 +307,7 @@ public class GameEngine implements IConstants, IHeading {
     protected boolean checkAppleCollisions() {
         Predicate<Apple> collided = a -> a.getGridPos().equals(head().getGridPos());
         boolean appleEaten = apples.removeIf(collided);
-        if (appleEaten) { incrementScore(); return true; }
+        if (appleEaten) { incrementScore(); growSnake(); return true; }
         else { return false; }
     }
 
