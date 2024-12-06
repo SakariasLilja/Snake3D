@@ -7,7 +7,8 @@ import com.sakariaslilja.models.Vector3D;
  */
 public class Snake extends CubeEntity implements IMovable {
 
-    private Vector3D heading, normal, nextTurn;
+    private Vector3D heading, normal;
+    private Turn nextTurn;
 
     /**
      * Creates a snake with all parameters.
@@ -16,7 +17,7 @@ public class Snake extends CubeEntity implements IMovable {
      * @param normal The normal vector of the snake
      * @param nextTurn The next turn the snake will take
      */
-    public Snake(Vector3D position, Vector3D heading, Vector3D normal, Vector3D nextTurn) {
+    public Snake(Vector3D position, Vector3D heading, Vector3D normal, Turn nextTurn) {
         super(position);
         this.heading = heading;
         this.normal = normal;
@@ -31,7 +32,7 @@ public class Snake extends CubeEntity implements IMovable {
      * @param normal The next turn the snake will take
      */
     public Snake(Vector3D position, Vector3D heading, Vector3D normal) {
-        this(position, heading, normal, heading);
+        this(position, heading, normal, Turn.N);
     }
 
     @Override
@@ -72,6 +73,33 @@ public class Snake extends CubeEntity implements IMovable {
         Vector3D newNormal = heading.neg();
         heading = normal;
         normal = newNormal;
+    }
+
+    /**
+     * @param turn Sets this turn as the segment's next turn
+     */
+    public void setTurn(Turn turn) { this.nextTurn = turn; }
+
+    /**
+     * Applies the next turn to this snake object
+     */
+    public void applyTurn() {
+        switch (nextTurn) {
+            case U:
+                turnUp();
+                break;
+            case D:
+                turnDown();
+                break;
+            case L:
+                turnLeft();
+                break;
+            case R:
+                turnRight();
+                break;        
+            default:
+                break;
+        }
     }
     
 }
