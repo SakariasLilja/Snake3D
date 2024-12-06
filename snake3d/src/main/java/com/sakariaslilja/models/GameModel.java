@@ -16,8 +16,9 @@ public class GameModel {
     public int worldWidth = 5;
     public int worldHeight = 5;
     public int worldDepth = 5;
-    public int rotX = 0;
-    public int rotY = 0;
-    public int rotZ = 0;
+    public double qW = 1;
+    public double qX = 0;
+    public double qY = 0;
+    public double qZ = 0;
     
 }

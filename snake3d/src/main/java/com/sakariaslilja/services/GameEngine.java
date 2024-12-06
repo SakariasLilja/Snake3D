@@ -42,7 +42,7 @@ public class GameEngine implements IConstants, IHeading {
     private boolean turningUp = false;
     private boolean turningDown = false;
 
-    private Quaternion q = new Quaternion(1, 0, 0, 0);
+    private Quaternion q;
     private int rCountHelper = 0;
 
     /**
@@ -73,7 +73,7 @@ public class GameEngine implements IConstants, IHeading {
                 }
             }
         }
-
+        q = new Quaternion(game.qW, game.qX, game.qY, game.qZ);
         snake.add(new Snake(new Vector3D(500, 500, 500), FORWARD, UP));
     }
 
@@ -105,16 +105,28 @@ public class GameEngine implements IConstants, IHeading {
     }
 
     /**
-     * @return The camera's location in the world.
+     * @return The camera's location in the world
      */
     public DoubleVector3D camera() { return head().getPosition().toDoubleVector3D().mul(1.0 / UNIT); }
+
+    /**
+     * @return The quaternion representing the rotations of the world
+     */
     public Quaternion quaternion() { return q; }
 
     /**
-     * @return The head of the game's snake entity.
+     * @return The head of the game's snake entity
      */
     private Snake head() { return snake.get(0); }
+
+    /**
+     * @return The snake's normal vector
+     */
     private DoubleVector3D normal() { return head().getNormal().toDoubleVector3D(); }
+
+    /**
+     * @return The relative x-axis of the snake's head
+     */
     private DoubleVector3D snakeXAxis() { return head().getHeading().crossProd(head().getNormal()).toDoubleVector3D(); }
 
     /**
@@ -151,6 +163,10 @@ public class GameEngine implements IConstants, IHeading {
         model.worldWidth = worldWidth;
         model.worldHeight = worldHeight;
         model.worldDepth = worldDepth;
+        model.qW = q.getW();
+        model.qX = q.getX();
+        model.qY = q.getY();
+        model.qZ = q.getZ();
 
         return model;
     }
@@ -166,13 +182,17 @@ public class GameEngine implements IConstants, IHeading {
         if (this.isTurning()) {
             Quaternion rotation;
 
+            // Makes the rotation with the snake's position and the wanted direction
             if (turningLeft) { rotation = new Quaternion(normal(), -ONE_DEG); }
             else if (turningRight) { rotation = new Quaternion(normal(), ONE_DEG); }
             else if (turningDown) { rotation = new Quaternion(snakeXAxis(), ONE_DEG); }
             else { rotation = new Quaternion(snakeXAxis(), -ONE_DEG); }
 
+            // Applies the rotation
             q = q.mul(rotation);
             rCountHelper++;
+
+            // Completed the rotation (degrees reached 90)
             if (rCountHelper == 90) { 
                 rCountHelper = 0;
                 if (turningLeft) { turningLeft = false; head().turnLeft(); }
@@ -181,6 +201,7 @@ public class GameEngine implements IConstants, IHeading {
                 else { turningUp = false; head().turnUp(); }
             }
         }
+        
         else {
             spawnApple(appleLimit);
         }
