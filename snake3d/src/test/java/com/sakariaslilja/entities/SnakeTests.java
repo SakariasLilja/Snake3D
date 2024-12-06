@@ -5,16 +5,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import com.sakariaslilja.IConstants;
 import com.sakariaslilja.datastructures.IHeading;
 import com.sakariaslilja.datastructures.Vector3D;
 
-public class SnakeTests implements IHeading {
+public class SnakeTests implements IHeading, IConstants {
 
     @Test
     @DisplayName("Snake move")
     public void snakeMove() {
         Snake snake = new Snake(new Vector3D(0, 0, 501), FORWARD, UP);
-        Vector3D expected = new Vector3D(0, 0, 502);
+        Vector3D expected = new Vector3D(0, 0, 501 + STEP_SIZE);
         snake.move();
         
         assertEquals(expected, snake.getPosition(), "The position should update correctly when move is called");
