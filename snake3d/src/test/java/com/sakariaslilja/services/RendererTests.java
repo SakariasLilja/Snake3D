@@ -28,14 +28,13 @@ public class RendererTests {
     @DisplayName("Renderer rotations")
     public void renderRotations() {
         GameModel model = new GameModel();
-        model.rotX = 90;
-        model.rotY = 90;
-        model.rotZ = 90;
+        model.qW = 0;
+        model.qY = 1;
         GameEngine engine = new GameEngine(model);
         Renderer renderer = new Renderer(null, engine);
 
         DoubleVector3D vertex = new DoubleVector3D(1, 2, 3);
-        DoubleVector3D expected = new DoubleVector3D(3, -2, 1);
+        DoubleVector3D expected = new DoubleVector3D(-1, 2, -3);
 
         assertEquals(expected, renderer.rotate(vertex).round(), "The rotate method should apply the matrices correctly");
     }
