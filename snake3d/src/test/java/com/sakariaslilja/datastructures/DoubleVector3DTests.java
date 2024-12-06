@@ -1,7 +1,9 @@
 package com.sakariaslilja.datastructures;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -179,6 +181,16 @@ public class DoubleVector3DTests implements IHeading {
         DoubleVector3D v2 = UP.toDoubleVector3D();
         DoubleVector3D expected = RIGHT.toDoubleVector3D();
         assertEquals(expected, v1.crossProd(v2), "The cross-product should work as expected");
+    }
+
+    @Test
+    @DisplayName("DoubleVector3D forAll")
+    public void forAll() {
+        DoubleVector3D vector = new DoubleVector3D(5, -5, 10);
+        Predicate<Double> fiveDivides = d -> d % 5 == 0;
+        Predicate<Double> positive = d -> d > 0;
+        assertTrue(vector.forAll(fiveDivides), "The forAll method should work as expected");
+        assertFalse(vector.forAll(positive), "The forAll method should not return incorrect result");
     }
     
 }

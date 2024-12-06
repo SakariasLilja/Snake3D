@@ -168,6 +168,15 @@ public class DoubleVector3D extends AbstractVector {
         return new DoubleVector3D(newX, newY, newZ);
     }
 
+    /**
+     * Tests a predicate for all of the vector's values.
+     * @param predicate The predicate to check with
+     * @return If the predicate holds for all values of this vector
+     */
+    public boolean forAll(Predicate<Double> predicate) {
+        return predicate.test(x) && predicate.test(y) && predicate.test(z);
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null || obj.getClass() != this.getClass()) {
