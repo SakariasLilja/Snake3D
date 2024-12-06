@@ -83,12 +83,13 @@ public class Renderer implements IConstants, IHeading {
         for (Tuple edge : edges) {
             Tuple copy = edge.duplicate();
             copy.forEach(applyMatricesFunc);
-            if (copy.forAll(hasPositiveZ)){
+            boolean allPositive = copy.forAll(hasPositiveZ);
+            if (allPositive){
                 DoubleVector3D point1 = copy.value1;
                 DoubleVector3D point2 = copy.value2;
 
                 g.strokeLine(point1.getX(), point1.getY(), point2.getX(), point2.getY());
-            }            
+            }
         }
     }
 
