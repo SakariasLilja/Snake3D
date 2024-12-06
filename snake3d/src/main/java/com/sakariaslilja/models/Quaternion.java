@@ -41,18 +41,6 @@ public class Quaternion {
         this.z = angledVector.getZ();
     }
 
-    /**
-     * Quaternion from a single vector.
-     * Vector is NOT normalized, and angle is set to 0.
-     * @param vector The vector to be turned into quaternion form.
-     */
-    public Quaternion(DoubleVector3D vector) {
-        this.w = 0;
-        this.x = vector.getX();
-        this.y = vector.getY();
-        this.z = vector.getZ();
-    }
-
     public double getW() { return w; }
     public double getX() { return x; }
     public double getY() { return y; }
@@ -82,7 +70,7 @@ public class Quaternion {
      * Extracts the DoubleVector3D from this quaternion
      * @return The extracted vector
      */
-    public DoubleVector3D extractVector() {
+    public DoubleVector3D extractVectorComponent() {
         return new DoubleVector3D(x, y, z);
     }
 

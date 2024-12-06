@@ -9,14 +9,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class QuaternionTests {
-    
-    @Test
-    @DisplayName("Quaternion extract")
-    public void extract() {
-        DoubleVector3D vector = new DoubleVector3D(1, 2, 3);
-        Quaternion q = new Quaternion(vector);
-        assertEquals(vector, q.extractVector(), "The extract vector should work as expected");
-    }
 
     @Test
     @DisplayName("Quaternion toString")
@@ -49,7 +41,7 @@ public class QuaternionTests {
         DoubleVector3D expectedVector = vector.mul(1.0 / 14.0);
 
         assertTrue(expectedW - error <= q.getW() && expectedW + error >= q.getW(), "The w-component should be within a range");
-        assertEquals(expectedVector.toString(), q.extractVector().toString(), "The vector component should be correct");
+        assertEquals(expectedVector.toString(), q.extractVectorComponent().toString(), "The vector component should be correct");
     }
 
     @Test
