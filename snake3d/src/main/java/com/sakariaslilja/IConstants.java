@@ -1,5 +1,7 @@
 package com.sakariaslilja;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Class for defining global constants.
  */
@@ -13,7 +15,7 @@ public interface IConstants {
     /**
      * The frames per second the game is running and rendered at.
      */
-    int FPS = 120;
+    long FPS = TimeUnit.SECONDS.toNanos(1L) / 120;
 
     /**
      * The focal length of the game's camera.
@@ -29,7 +31,7 @@ public interface IConstants {
      * The base movement speed of the snake.
      * The amount the snake moves per frame.
      */
-    int STEP_SIZE = 1;
+    int STEP_SIZE = 25;
 
     /**
      * The minimum size of any of the world's dimensions.
