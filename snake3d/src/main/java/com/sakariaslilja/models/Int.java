@@ -21,6 +21,8 @@ public class Int {
      */
     public int value() { return value_; }
     public void set(int value) { this.value_ = value; }
+    public void add(int value) { this.value_ += value; }
+
     /**
      * Negates the value of this Int
      */
