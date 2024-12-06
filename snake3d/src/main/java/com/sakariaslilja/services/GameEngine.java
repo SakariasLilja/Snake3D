@@ -117,7 +117,7 @@ public class GameEngine implements IConstants, IHeading {
     /**
      * @return The quaternion representing the rotations of the world
      */
-    public Quaternion quaternion() { return q; }
+    public Quaternion quaternion() { return new Quaternion(1, 0, 0, 0);}//q; }
 
     /**
      * @return The head of the game's snake entity
@@ -216,8 +216,9 @@ public class GameEngine implements IConstants, IHeading {
             for (Snake segment : snake) { segment.move(); }
             checkAppleCollisions();
             spawnApple(appleLimit);
-            if (turnQueued() && head().getPosition().forAll(c -> (c.intValue() + 500) % 1000 == 0)) { 
-                isTurning = true;
+            if (head().getPosition().forAll(c -> (c.intValue() + 500) % 1000 == 0)) {
+                if (turnQueued()) { isTurning = true; }
+                else { applyTurns(); propagateTurns(); }
             }
         }
     }
