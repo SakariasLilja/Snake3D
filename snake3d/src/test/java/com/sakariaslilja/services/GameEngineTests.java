@@ -266,7 +266,7 @@ public class GameEngineTests implements IConstants, IHeading {
 
         Vector3D pos = new Vector3D(0, 1, 2).mul(UNIT / 2).add(new Vector3D(500, 500, 500));
         Snake snakeHead = new Snake(pos, FORWARD, UP);
-        Apple apple = new Apple(pos);
+        Apple apple = new Apple(pos.add(new Vector3D(0, 0, 0)));
 
         ArrayList<Snake> snake = new ArrayList<>();
         ArrayList<Apple> apples = new ArrayList<>();
@@ -277,10 +277,14 @@ public class GameEngineTests implements IConstants, IHeading {
         engine.setSnake(snake);
         engine.setApples(apples);
 
+        snake = engine.getSnake();
+
         assertEquals(1, engine.countApples(), "There should be an apple present to start");
+        assertEquals(1, snake.size(), "There should be a snake of length one at start");
         assertTrue(engine.checkAppleCollisions(), "The apple should be collided with");
         assertEquals(0, engine.countApples(), "The apple should be removed when eaten");
         assertEquals(1, engine.getScore(), "The score should increment properly");
+        assertEquals(2, snake.size(), "The snake should've grown");
     }
     
 }
