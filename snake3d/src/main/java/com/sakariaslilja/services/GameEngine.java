@@ -10,7 +10,6 @@ import com.sakariaslilja.entities.Snake;
 import com.sakariaslilja.models.DoubleVector3D;
 import com.sakariaslilja.models.GameModel;
 import com.sakariaslilja.models.IHeading;
-import com.sakariaslilja.models.Int;
 import com.sakariaslilja.models.Quaternion;
 import com.sakariaslilja.models.Tuple;
 import com.sakariaslilja.models.Vector3D;
@@ -37,18 +36,14 @@ public class GameEngine implements IConstants, IHeading {
     private ArrayList<Apple> apples = new ArrayList<>();
     private ArrayList<Snake> snake = new ArrayList<>();
 
-    private DoubleVector3D heading;
-    private DoubleVector3D normal;
-
-    // In degrees
-    private Int rotX;
-    private Int rotY;
-    private Int rotZ;
-
     private boolean paused = false;
-    private boolean isTurning = false;
-    private boolean isTilting = false;
-    private boolean positiveRotation = true;
+    private boolean turningLeft = false;
+    private boolean turningRight = false;
+    private boolean turningUp = false;
+    private boolean turningDown = false;
+
+    private Quaternion q = new Quaternion(1, 0, 0, 0);
+    private int rCountHelper = 0;
 
     /**
      * To create an instance of a game engine, the world dimensions are needed
@@ -69,9 +64,6 @@ public class GameEngine implements IConstants, IHeading {
         this.appleLimit = Integer.max(1, (int) Math.cbrt(worldWidth*worldHeight*worldDepth) - 2);
         World world = new World(worldWidth, worldHeight, worldDepth);
         this.edges = world.getEdges();
-        this.rotX = new Int(game.rotX);
-        this.rotY = new Int(game.rotY);
-        this.rotZ = new Int(game.rotZ);
 
         // Adding the grid positions of the world
         for (int layer = 0; layer < game.worldDepth; layer++) {
@@ -83,8 +75,6 @@ public class GameEngine implements IConstants, IHeading {
         }
 
         snake.add(new Snake(new Vector3D(500, 500, 500), FORWARD, UP));
-        this.heading = head().getHeading().toDoubleVector3D();
-        this.normal = head().getNormal().toDoubleVector3D();
     }
 
     // Engine getters and setters
@@ -97,56 +87,35 @@ public class GameEngine implements IConstants, IHeading {
     public void setApples(ArrayList<Apple> apples) { this.apples = apples; }
 
     public int getScore() { return score; }
-    
+
+    private boolean isTurning() { return turningLeft || turningRight || turningDown || turningUp; }  
 
     /**
      * Performs the action associated with each key.
      * @param keyCode The key code of the pressed key
      */
     public void doButtonAction(@SuppressWarnings("exports") KeyCode keyCode) {
-        if (isTurning || isTilting) { return; } // Stops multiple inputs
+        if (isTurning()) { return; } // Stops multiple inputs
 
-        if (keyCode.equals(KeyCode.LEFT)) { isTurning = true; positiveRotation = true; }
-        if (keyCode.equals(KeyCode.RIGHT)) { isTurning = true; positiveRotation = false; }
-        if (keyCode.equals(KeyCode.UP)) { isTilting = true; positiveRotation = true; }
-        if (keyCode.equals(KeyCode.DOWN)) { isTilting = true; positiveRotation = false; }
+        if (keyCode.equals(KeyCode.LEFT)) { turningLeft = true; }
+        if (keyCode.equals(KeyCode.RIGHT)) { turningRight = true; }
+        if (keyCode.equals(KeyCode.UP)) { turningDown = true; }
+        if (keyCode.equals(KeyCode.DOWN)) { turningUp = true; }
 
     }
-
-    /**
-     * @return The x-rotation in radians
-     */
-    public double getRotX() { return Math.PI * rotX.value() / 180.0; }
-
-    /**
-     * @return The y-rotation in radians
-     */
-    public double getRotY() { return Math.PI * rotY.value() / 180.0; }
-
-    /**
-     * @return The z-rotation in radians
-     */
-    public double getRotZ() { return Math.PI * rotZ.value() / 180.0; }
-
-    /**
-     * @return The directional heading of the camera
-     */
-    public DoubleVector3D getHeading() { return this.heading; }
-
-    /**
-     * @return The directional normal of the camera
-     */
-    public DoubleVector3D getNormal() { return this.normal; }
 
     /**
      * @return The camera's location in the world.
      */
     public DoubleVector3D camera() { return head().getPosition().toDoubleVector3D().mul(1.0 / UNIT); }
+    public Quaternion quaternion() { return q; }
 
     /**
      * @return The head of the game's snake entity.
      */
     private Snake head() { return snake.get(0); }
+    private DoubleVector3D normal() { return head().getNormal().toDoubleVector3D(); }
+    private DoubleVector3D snakeXAxis() { return head().getHeading().crossProd(head().getNormal()).toDoubleVector3D(); }
 
     /**
      * Triggers the paused variable of the game.
@@ -182,9 +151,6 @@ public class GameEngine implements IConstants, IHeading {
         model.worldWidth = worldWidth;
         model.worldHeight = worldHeight;
         model.worldDepth = worldDepth;
-        model.rotX = rotX.value();
-        model.rotY = rotY.value();
-        model.rotZ = rotZ.value();
 
         return model;
     }
@@ -197,57 +163,26 @@ public class GameEngine implements IConstants, IHeading {
             return;
         }
 
-        int v = positiveRotation ? 1 : -1;
-        Vector3D snakeNormal = head().getNormal();
-        Vector3D snakeCross = head().getHeading().crossProd(snakeNormal);
-        Int yAxis = null;
-        Int xAxis = null;
-        int ydeg = v;
-        int xdeg = v;
-        // Set the horizontal rotations
-        if (snakeNormal.equals(UP)) { yAxis = rotY; }
-        else if (snakeNormal.equals(DOWN)) { yAxis = rotY; ydeg = -ydeg; }
-        else if (snakeNormal.equals(FORWARD)) { yAxis = rotZ; }
-        else if (snakeNormal.equals(BACKWARD)) { yAxis = rotZ; ydeg = -ydeg; }
-        else if (snakeNormal.equals(LEFT)) { yAxis = rotX; }
-        else if (snakeNormal.equals(RIGHT)) { yAxis = rotX; ydeg = -ydeg; }
-        // Set the vertical rotations
-        if (snakeCross.equals(RIGHT)) { xAxis = rotX; }
-        else if (snakeCross.equals(LEFT)) { xAxis = rotX; xdeg = -xdeg; }
-        else if (snakeCross.equals(BACKWARD)) { xAxis = rotZ; xdeg = -xdeg; }
-        else if (snakeCross.equals(FORWARD)) { xAxis = rotZ; }
-        else if (snakeCross.equals(UP)) { xAxis = rotY; }
-        else if (snakeCross.equals(DOWN)) { xAxis = rotY; xdeg = -xdeg; }
+        if (this.isTurning()) {
+            Quaternion rotation;
 
-        if (this.isTurning) {
-            yAxis.set(yAxis.value() + ydeg);
-            Quaternion qY = new Quaternion(normal, ONE_DEG * v);
-            this.heading = qY.applyRotation(heading);
+            if (turningLeft) { rotation = new Quaternion(normal(), -ONE_DEG); }
+            else if (turningRight) { rotation = new Quaternion(normal(), ONE_DEG); }
+            else if (turningDown) { rotation = new Quaternion(snakeXAxis(), ONE_DEG); }
+            else { rotation = new Quaternion(snakeXAxis(), -ONE_DEG); }
 
-            if (yAxis.value() % 90 == 0) {
-                if (positiveRotation) { head().turnLeft(); }
-                else { head().turnRight(); }
-                
-                isTurning = false;
+            q = q.mul(rotation);
+            rCountHelper++;
+            if (rCountHelper == 90) { 
+                rCountHelper = 0;
+                if (turningLeft) { turningLeft = false; head().turnLeft(); }
+                else if (turningRight) { turningRight = false; head().turnRight(); }
+                else if (turningDown) { turningDown = false; head().turnDown(); }
+                else { turningUp = false; head().turnUp(); }
             }
-            
-        }
-        else if (this.isTilting) {
-            xAxis.set(xAxis.value() + xdeg);
-            Quaternion qX = new Quaternion(heading.crossProd(normal), ONE_DEG * v);
-            this.heading = qX.applyRotation(heading);
-            this.normal = qX.applyRotation(normal);
-
-            if (xAxis.value() % 90 == 0) {
-                if (positiveRotation) { head().turnDown(); }
-                else { head().turnUp(); }
-                
-                isTilting = false;
-            }
-
         }
         else {
-            this.spawnApple(appleLimit);
+            spawnApple(appleLimit);
         }
     }
 

@@ -160,10 +160,9 @@ public class Renderer implements IConstants, IHeading {
      * @return The rotated vertex
      */
     protected DoubleVector3D rotate(DoubleVector3D vertex) {
-        Quaternion qX = new Quaternion(engine.getHeading().crossProd(engine.getNormal()), engine.getRotX());
-        Quaternion qY = new Quaternion(engine.getNormal().neg(), engine.getRotY());
-        Quaternion qZ = new Quaternion(engine.getHeading(), engine.getRotZ());
-        return qX.applyRotation(qY.applyRotation(qZ.applyRotation(vertex)));
+        //Quaternion q = new Quaternion(engine.getQVector(), engine.getRotation());
+        Quaternion q = engine.quaternion();
+        return q.applyRotation(vertex);
     }
 
     /**
