@@ -44,7 +44,7 @@ public class Snake extends CubeEntity implements IMovable {
      */
     @Override
     public void move() {
-        this.setPosition(this.getPosition().add(heading));
+        this.setPosition(this.getPosition().add(heading.mul(STEP_SIZE)));
     }
 
     /**
