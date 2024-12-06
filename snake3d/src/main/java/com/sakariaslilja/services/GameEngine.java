@@ -6,7 +6,6 @@ import java.util.Random;
 
 import com.sakariaslilja.IConstants;
 import com.sakariaslilja.entities.Apple;
-import com.sakariaslilja.entities.Entity;
 import com.sakariaslilja.entities.Snake;
 import com.sakariaslilja.models.DoubleVector3D;
 import com.sakariaslilja.models.GameModel;
