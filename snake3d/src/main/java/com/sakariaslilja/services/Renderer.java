@@ -112,6 +112,7 @@ public class Renderer implements IConstants, IHeading {
         int i = 1;
         while (i < snake.size()) {
             drawCubeEntity(g, snakeColor, snake.get(i));
+            i++;
         }
     }
 
