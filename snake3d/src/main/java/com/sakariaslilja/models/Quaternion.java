@@ -59,10 +59,10 @@ public class Quaternion {
      * @return A new Quaternion with the values formed through quaternion multiplication
      */
     public Quaternion mul(Quaternion other) {
-        double newW = w * other.getW();
-        double newX = - x * other.getX();
-        double newY = - y * other.getY();
-        double newZ = - z * other.getZ();
+        double newW = w*other.getW() - x*other.getX() - y*other.getY() - z*other.getZ();
+        double newX = w*other.getX() + x*other.getW() + y*other.getZ() - z*other.getY();
+        double newY = w*other.getY() - x*other.getZ() + y*other.getW() + z*other.getX();
+        double newZ = w*other.getZ() + x*other.getY() - y*other.getX() + z*other.getW();
         return new Quaternion(newW, newX, newY, newZ);
     }
 
@@ -84,6 +84,15 @@ public class Quaternion {
         double vectorY = (2*x*y+2*w*z)*vector.getX() + (1-2*x*x-2*z*z)*vector.getY() + (2*y*z-2*w*x)*vector.getZ();
         double vectorZ = (2*x*z-2*w*y)*vector.getX() + (2*y*z+2*w*x)*vector.getY() + (1-2*x*x-2*y*y)*vector.getZ();
         return new DoubleVector3D(vectorX, vectorY, vectorZ);
+    }
+    
+    protected double magnitude() {
+        return Math.sqrt(w*w + x*x + y*y + z*z);
+    }
+
+    public Quaternion normalized() {
+        double reduction = 1 / this.magnitude();
+        return new Quaternion(reduction * w, reduction * x, reduction * y, reduction * z);
     }
 
     @Override
