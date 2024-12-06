@@ -22,7 +22,7 @@ public abstract class CubeEntity extends Entity {
     @Override
     public ArrayList<DoubleVector3D> getVertices() {
         ArrayList<DoubleVector3D> vertices = new ArrayList<>();
-        DoubleVector3D topLeft = this.getGridPos().toDoubleVector3D();
+        DoubleVector3D topLeft = this.getPosition().add(new Vector3D(-500, -500, -500)).toDoubleVector3D().mul(1.0 / UNIT);
 
         for (int zDim = 0; zDim <= 1; zDim ++) {
             for (int yDim = 0; yDim <= 1; yDim ++) {
