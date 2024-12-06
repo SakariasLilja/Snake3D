@@ -75,6 +75,8 @@ public class Snake extends CubeEntity implements IMovable {
         normal = newNormal;
     }
 
+    public Turn getTurn() { return nextTurn; }
+
     /**
      * @param turn Sets this turn as the segment's next turn
      */
