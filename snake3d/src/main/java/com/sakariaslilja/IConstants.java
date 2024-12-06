@@ -18,7 +18,7 @@ public interface IConstants {
     /**
      * The focal length of the game's camera.
      */
-    double FOCAL_LENGTH = 0.1;
+    double FOCAL_LENGTH = 0.12;
 
     /**
      * The game's unit size.
