@@ -43,6 +43,7 @@ public class GameEngine implements IConstants, IHeading {
     private boolean turningRight = false;
     private boolean turningUp = false;
     private boolean turningDown = false;
+    private boolean isTurning = false;
 
     private Quaternion q;
     private int rCountHelper = 0;
@@ -92,14 +93,14 @@ public class GameEngine implements IConstants, IHeading {
 
     public int getScore() { return score; }
 
-    private boolean isTurning() { return turningLeft || turningRight || turningDown || turningUp; }  
+    private boolean turnQueued() { return turningLeft || turningRight || turningDown || turningUp; }  
 
     /**
      * Performs the action associated with each key.
      * @param keyCode The key code of the pressed key
      */
     public void doButtonAction(@SuppressWarnings("exports") KeyCode keyCode) {
-        if (isTurning()) { return; } // Stops multiple inputs
+        if (turnQueued()) { return; } // Stops multiple inputs
 
         if (keyCode.equals(KeyCode.LEFT)) { turningLeft = true; }
         if (keyCode.equals(KeyCode.RIGHT)) { turningRight = true; }
@@ -183,7 +184,7 @@ public class GameEngine implements IConstants, IHeading {
             return;
         }
 
-        if (this.isTurning()) {
+        if (isTurning) {
             Quaternion rotation;
 
             // Makes the rotation with the snake's position and the wanted direction
@@ -199,15 +200,25 @@ public class GameEngine implements IConstants, IHeading {
             // Completed the rotation (degrees reached 90)
             if (rCountHelper == 90) { 
                 rCountHelper = 0;
-                if (turningLeft) { turningLeft = false; head().turnLeft(); }
-                else if (turningRight) { turningRight = false; head().turnRight(); }
-                else if (turningDown) { turningDown = false; head().turnDown(); }
-                else { turningUp = false; head().turnUp(); }
+
+                if (turningLeft) { turningLeft = false; head().setTurn(Turn.L); }
+                else if (turningRight) { turningRight = false; head().setTurn(Turn.R); }
+                else if (turningDown) { turningDown = false; head().setTurn(Turn.D); }
+                else { turningUp = false; head().setTurn(Turn.U); }
+
+                isTurning = false;
+
+                applyTurns();
+                propagateTurns();
             }
         }
-
         else {
+            for (Snake segment : snake) { segment.move(); }
+            checkAppleCollisions();
             spawnApple(appleLimit);
+            if (turnQueued() && head().getPosition().forAll(c -> (c.intValue() + 500) % 1000 == 0)) { 
+                isTurning = true;
+            }
         }
     }
 
