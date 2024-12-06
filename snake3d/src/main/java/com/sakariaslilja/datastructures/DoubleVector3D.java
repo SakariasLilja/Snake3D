@@ -1,4 +1,4 @@
-package com.sakariaslilja.models;
+package com.sakariaslilja.datastructures;
 
 import java.lang.Math;
 import java.text.DecimalFormat;

@@ -3,8 +3,8 @@ package com.sakariaslilja.entities;
 import java.util.ArrayList;
 
 import com.sakariaslilja.IConstants;
-import com.sakariaslilja.models.DoubleVector3D;
-import com.sakariaslilja.models.Vector3D;
+import com.sakariaslilja.datastructures.DoubleVector3D;
+import com.sakariaslilja.datastructures.Vector3D;
 
 /**
  * Entity class for all entities.

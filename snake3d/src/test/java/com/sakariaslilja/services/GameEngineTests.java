@@ -11,12 +11,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import com.sakariaslilja.IConstants;
+import com.sakariaslilja.datastructures.IHeading;
+import com.sakariaslilja.datastructures.Vector3D;
 import com.sakariaslilja.entities.Apple;
 import com.sakariaslilja.entities.Snake;
 import com.sakariaslilja.entities.Turn;
 import com.sakariaslilja.models.GameModel;
-import com.sakariaslilja.models.IHeading;
-import com.sakariaslilja.models.Vector3D;
 
 public class GameEngineTests implements IConstants, IHeading {
 

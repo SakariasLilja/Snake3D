@@ -1,6 +1,10 @@
 package com.sakariaslilja.models;
 
 import com.sakariaslilja.IConstants;
+import com.sakariaslilja.datastructures.DoubleVector3D;
+import com.sakariaslilja.datastructures.Tuple;
+import com.sakariaslilja.datastructures.Vector3D;
+
 import java.util.ArrayList;
 import java.util.function.Predicate;
 

@@ -1,4 +1,4 @@
-package com.sakariaslilja.models;
+package com.sakariaslilja.datastructures;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -112,13 +112,13 @@ public class Vector3DTests implements IHeading {
 
     @Test
     @DisplayName("Vector3D cross-product")
-    void crossProduct() {
+    public void crossProduct() {
         assertEquals(RIGHT, DOWN.crossProd(FORWARD), "The cross product should work as expected");
     }
 
     @Test
     @DisplayName("Vector3D rotate")
-    void rotateVector3D() {
+    public void rotateVector3D() {
         assertEquals(DOWN, FORWARD.rotateX(false), "RotateX should work properly");
         assertEquals(RIGHT, FORWARD.rotateY(true), "RotateY should work properly");
         assertEquals(DOWN, RIGHT.rotateZ(true), "RotateZ should work properly");

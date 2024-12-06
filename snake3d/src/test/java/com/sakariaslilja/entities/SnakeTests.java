@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import com.sakariaslilja.models.IHeading;
-import com.sakariaslilja.models.Vector3D;
+import com.sakariaslilja.datastructures.IHeading;
+import com.sakariaslilja.datastructures.Vector3D;
 
 public class SnakeTests implements IHeading {
 

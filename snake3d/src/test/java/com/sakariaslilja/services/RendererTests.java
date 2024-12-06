@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import com.sakariaslilja.models.DoubleVector3D;
+import com.sakariaslilja.datastructures.DoubleVector3D;
 import com.sakariaslilja.models.GameModel;
 
 public class RendererTests {

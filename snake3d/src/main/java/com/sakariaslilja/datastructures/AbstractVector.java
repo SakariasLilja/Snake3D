@@ -1,4 +1,4 @@
-package com.sakariaslilja.models;
+package com.sakariaslilja.datastructures;
 
 /**
  * Abstract class for Vectors.

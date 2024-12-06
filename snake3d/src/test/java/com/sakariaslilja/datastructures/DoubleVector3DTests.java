@@ -1,4 +1,4 @@
-package com.sakariaslilja.models;
+package com.sakariaslilja.datastructures;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -158,7 +158,7 @@ public class DoubleVector3DTests implements IHeading {
 
     @Test
     @DisplayName("DoubleVector3D magnitude")
-    void magnitude() {
+    public void magnitude() {
         DoubleVector3D vector = new DoubleVector3D(3, 4, 5);
         double expected = Math.sqrt(50);
         assertEquals(expected, vector.magnitude(), "The magnitude should be as expected");

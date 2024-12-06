@@ -1,6 +1,6 @@
 package com.sakariaslilja.entities;
 
-import com.sakariaslilja.models.Vector3D;
+import com.sakariaslilja.datastructures.Vector3D;
 
 /**
  * Interface for all movable entities

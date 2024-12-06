@@ -1,7 +1,7 @@
 package com.sakariaslilja.entities;
 
-import com.sakariaslilja.models.IHeading;
-import com.sakariaslilja.models.Vector3D;
+import com.sakariaslilja.datastructures.IHeading;
+import com.sakariaslilja.datastructures.Vector3D;
 
 /**
  * Defines the direction for turning a movable object.

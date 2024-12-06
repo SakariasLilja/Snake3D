@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import com.sakariaslilja.models.DoubleVector3D;
-import com.sakariaslilja.models.Vector3D;
+import com.sakariaslilja.datastructures.DoubleVector3D;
+import com.sakariaslilja.datastructures.Vector3D;
 
 public class AppleTests {
 

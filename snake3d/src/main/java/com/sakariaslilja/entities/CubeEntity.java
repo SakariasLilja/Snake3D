@@ -2,8 +2,8 @@ package com.sakariaslilja.entities;
 
 import java.util.ArrayList;
 
-import com.sakariaslilja.models.DoubleVector3D;
-import com.sakariaslilja.models.Vector3D;
+import com.sakariaslilja.datastructures.DoubleVector3D;
+import com.sakariaslilja.datastructures.Vector3D;
 
 /**
  * Abstract class for all cube entities

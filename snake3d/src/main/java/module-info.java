@@ -8,10 +8,12 @@ module com.sakariaslilja {
     opens com.sakariaslilja.services to javafx.fxml, gson;
     opens com.sakariaslilja.models to javafx.fxml;
     opens com.sakariaslilja.entities to javafx.fxml;
+    opens com.sakariaslilja.datastructures to javafx.fxml, gson;
     
     exports com.sakariaslilja;
     exports com.sakariaslilja.controllers;
     exports com.sakariaslilja.services;
     exports com.sakariaslilja.models;
     exports com.sakariaslilja.entities;
+    exports com.sakariaslilja.datastructures;
 }

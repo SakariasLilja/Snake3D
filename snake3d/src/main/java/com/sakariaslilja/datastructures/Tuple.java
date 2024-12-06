@@ -1,4 +1,4 @@
-package com.sakariaslilja.models;
+package com.sakariaslilja.datastructures;
 
 import java.util.function.Function;
 import java.util.function.Predicate;
