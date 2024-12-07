@@ -36,6 +36,7 @@ public class AppleTests {
     public void getVertices() {
         Vector3D position = new Vector3D(500, 500, 500);
         Apple apple = new Apple(position);
+        apple.setSize(1);
         ArrayList<DoubleVector3D> vertices = apple.getVertices();
 
         ArrayList<DoubleVector3D> expected = new ArrayList<>();

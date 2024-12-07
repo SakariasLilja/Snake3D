@@ -9,6 +9,8 @@ import com.sakariaslilja.datastructures.Vector3D;
  */
 public class Apple extends CubeEntity {
 
+    private double size_ = 0.55;
+
     /**
      * An apple is a simple, non-moving entity.
      * If a snake eats this entity, the score increases.
@@ -21,7 +23,15 @@ public class Apple extends CubeEntity {
 
     @Override
     protected double size() {
-        return 0.55;
+        return size_;
+    }
+
+    /**
+     * Used for testing and debugging CubeEntity getVertices.
+     * @param size Sets the entity's size to the specified value
+     */
+    protected void setSize(double size) {
+        this.size_ = size;
     }
     
 }
