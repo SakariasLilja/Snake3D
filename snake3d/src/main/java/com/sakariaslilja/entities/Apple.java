@@ -5,6 +5,7 @@ import com.sakariaslilja.datastructures.Vector3D;
 /**
  * Apple entity.
  * The simplest form of cube entity with no special attributes.
+ * An apple is slightly smaller than a full cube.
  */
 public class Apple extends CubeEntity {
 
@@ -16,6 +17,11 @@ public class Apple extends CubeEntity {
     public Apple(Vector3D position) {
         super(position);
 
+    }
+
+    @Override
+    protected double size() {
+        return 0.55;
     }
     
 }
