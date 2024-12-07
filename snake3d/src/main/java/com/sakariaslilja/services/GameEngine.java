@@ -198,7 +198,7 @@ public class GameEngine implements IConstants, IHeading {
             else { rotation = new Quaternion(snakeXAxis(), -ONE_DEG); }
 
             // Applies the rotation
-            q = q.mul(rotation);
+            q.mul(rotation);
             rCountHelper++;
 
             // Completed the rotation (degrees reached 90)

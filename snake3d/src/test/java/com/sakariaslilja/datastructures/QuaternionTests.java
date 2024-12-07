@@ -41,17 +41,20 @@ public class QuaternionTests {
         
         DoubleVector3D expectedVector = vector.duplicate();
         expectedVector.mul(1.0 / 14.0);
+        DoubleVector3D quaternionVector = new DoubleVector3D(q.getX(), q.getY(), q.getZ());
 
         assertTrue(expectedW - error <= q.getW() && expectedW + error >= q.getW(), "The w-component should be within a range");
-        assertEquals(expectedVector.toString(), q.extractVectorComponent().toString(), "The vector component should be correct");
+        assertEquals(expectedVector.toString(), quaternionVector.toString(), "The vector component should be correct");
     }
 
     @Test
     @DisplayName("Quaternion conjugate")
     public void conjugate() {
         Quaternion q = new Quaternion(1, 1, 2, -3);
+        q.conjugate();
+
         Quaternion expected = new Quaternion(1, -1, -2, 3);
-        assertEquals(expected, q.conjugate(), "The conjugate should work as expected");
+        assertEquals(expected, q, "The conjugate should work as expected");
     }
 
 }

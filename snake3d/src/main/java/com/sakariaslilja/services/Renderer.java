@@ -192,8 +192,8 @@ public class Renderer implements IConstants, IHeading {
      * @param vertex The vertex to rotate
      */
     protected void rotate(DoubleVector3D vertex) {
-        Quaternion q = engine.quaternion();
-        q.applyRotation(vertex);
+        Quaternion rotation = engine.quaternion();
+        rotation.applyRotation(vertex);
     }
 
     /**

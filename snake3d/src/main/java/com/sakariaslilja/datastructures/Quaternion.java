@@ -49,31 +49,28 @@ public class Quaternion {
     public double getZ() { return z; }
 
     /**
-     * @return The conjugate quaternion, i.e. all of its vector components are multiplied by -1.
+     * The conjugate quaternion, i.e. all of its vector components are multiplied by -1.
      */
-    public Quaternion conjugate() {
-        return new Quaternion(w, -x, -y, -z);
+    public void conjugate() {
+        x = -x;
+        y = -y;
+        z = -z;
     }
 
     /**
      * Mutliplies this quaternion with another.
-     * @param other The other quaternion
-     * @return A new Quaternion with the values formed through quaternion multiplication
+     * @param other The other quaternion whose values to multiply with
      */
-    public Quaternion mul(Quaternion other) {
+    public void mul(Quaternion other) {
         double newW = w*other.getW() - x*other.getX() - y*other.getY() - z*other.getZ();
         double newX = w*other.getX() + x*other.getW() + y*other.getZ() - z*other.getY();
         double newY = w*other.getY() - x*other.getZ() + y*other.getW() + z*other.getX();
         double newZ = w*other.getZ() + x*other.getY() - y*other.getX() + z*other.getW();
-        return new Quaternion(newW, newX, newY, newZ);
-    }
-
-    /**
-     * Extracts the DoubleVector3D from this quaternion
-     * @return The extracted vector
-     */
-    public DoubleVector3D extractVectorComponent() {
-        return new DoubleVector3D(x, y, z);
+        
+        w = newW;
+        x = newX;
+        y = newY;
+        z = newZ;
     }
 
     /**
@@ -94,9 +91,13 @@ public class Quaternion {
         return Math.sqrt(w*w + x*x + y*y + z*z);
     }
 
-    public Quaternion normalized() {
+    public void normalize() {
         double reduction = 1 / this.magnitude();
-        return new Quaternion(reduction * w, reduction * x, reduction * y, reduction * z);
+        
+        w *= reduction;
+        x *= reduction;
+        y *= reduction;
+        z *= reduction;
     }
 
     @Override
