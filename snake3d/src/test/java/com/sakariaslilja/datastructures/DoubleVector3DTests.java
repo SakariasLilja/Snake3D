@@ -192,5 +192,18 @@ public class DoubleVector3DTests implements IHeading {
         assertTrue(vector.forAll(fiveDivides), "The forAll method should work as expected");
         assertFalse(vector.forAll(positive), "The forAll method should not return incorrect result");
     }
+
+    @Test
+    @DisplayName("DoubleVector3D floor")
+    public void floorConvert() {
+        DoubleVector3D vector1 = new DoubleVector3D(1, 0, -3);
+        DoubleVector3D vector2 = new DoubleVector3D(1.9, -2.2, -3.77);
+
+        Vector3D expected1 = new Vector3D(1, 0, -3);
+        Vector3D expected2 = new Vector3D(1, -2, -3);
+
+        assertEquals(expected1, vector1.flooredVector3D(), "The values should not change");
+        assertEquals(expected2, vector2.flooredVector3D(), "The values should be floored correctly");
+    }
     
 }

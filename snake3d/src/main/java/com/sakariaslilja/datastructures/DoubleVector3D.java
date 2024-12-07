@@ -177,6 +177,16 @@ public class DoubleVector3D extends AbstractVector {
         return predicate.test(x) && predicate.test(y) && predicate.test(z);
     }
 
+    /**
+     * Converts this DoubleVector3D to a Vector3D by casting its
+     * values to integers.
+     * <p> I.e. applies the floor function to each of the values.
+     * @return Vector3D with the floor of the coordinates
+     */
+    public Vector3D flooredVector3D() {
+        return new Vector3D((int) x, (int) y, (int) z);
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null || obj.getClass() != this.getClass()) {
