@@ -83,6 +83,10 @@ public class SnakeTests implements IHeading, IConstants {
         
         assertEquals(expectedGridPos1, snake.getGridPos());
 
+        snake.setPosition(new Vector3D(1501, 500, 500));
+
+        assertEquals(expectedGridPos1, snake.getGridPos());
+
         snake.setPosition(new Vector3D(1499, 500, 500));
 
         Vector3D expectedGridPos2 = new Vector3D(0, 0, 0);
