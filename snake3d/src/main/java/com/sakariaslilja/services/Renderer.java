@@ -1,17 +1,19 @@
 package com.sakariaslilja.services;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
 
 import com.sakariaslilja.App;
 import com.sakariaslilja.IConstants;
+import com.sakariaslilja.datastructures.ColoredCollector;
 import com.sakariaslilja.datastructures.DoubleVector3D;
 import com.sakariaslilja.datastructures.IHeading;
 import com.sakariaslilja.datastructures.Quaternion;
 import com.sakariaslilja.datastructures.Tuple;
 import com.sakariaslilja.entities.Apple;
-import com.sakariaslilja.entities.CubeEntity;
 import com.sakariaslilja.entities.Snake;
 import com.sakariaslilja.models.SettingsModel;
 
@@ -60,8 +62,9 @@ public class Renderer implements IConstants, IHeading {
     public void render() {
         this.clearCanvas(g);
         this.drawEdges(g);
-        this.drawApples(g);
-        this.drawSnake(g);
+        /*this.drawApples(g);
+        this.drawSnake(g);*/
+        drawCubeEntities(g, getCubeEntities());
     }
 
     /**
@@ -93,25 +96,42 @@ public class Renderer implements IConstants, IHeading {
     }
 
     /**
-     * Draws the game's apples onto the canvas.
-     * @param g The canvas onto which to draw
+     * @return Each entity's rendered vertices
      */
-    private void drawApples(GraphicsContext g) {
+    private ArrayList<ColoredCollector<ArrayList<DoubleVector3D>>> getCubeEntities() {
+        ArrayList<ColoredCollector<ArrayList<DoubleVector3D>>> entities = new ArrayList<>();
+
+        ArrayList<Snake> snake = engine.getSnake();
         ArrayList<Apple> apples = engine.getApples();
-        for (Apple apple : apples) { drawCubeEntity(g, appleColor, apple); }
+
+        UnaryOperator<DoubleVector3D> renderVertex = v -> applyMatrices(v);
+
+        for (int i = 1; i < snake.size(); i++) {
+            Snake segment = snake.get(i);
+            ArrayList<DoubleVector3D> vertices = segment.getVertices();
+            vertices.replaceAll(renderVertex);
+            entities.add(new ColoredCollector<ArrayList<DoubleVector3D>>(vertices, snakeColor));
+        }
+
+        for (Apple apple : apples) {
+            ArrayList<DoubleVector3D> vertices = apple.getVertices();
+            vertices.replaceAll(renderVertex);
+            entities.add(new ColoredCollector<ArrayList<DoubleVector3D>>(vertices, appleColor));
+        }
+
+        return entities;
     }
 
     /**
-     * Draws the snake onto the canvas.
-     * This excludes the snake's head, as the player needs to see.
-     * @param g The canvas onto which to draw
+     * Draws each cube entity in order of their z-coordinate.
+     * <p> I.e. sorts the cube entities by their z-coordinate and draws them.
+     * @param g The graphics context onto which to draw
+     * @param entities The list of entities to draw
      */
-    private void drawSnake(GraphicsContext g) {
-        ArrayList<Snake> snake = engine.getSnake();
-        int i = 1;
-        while (i < snake.size()) {
-            drawCubeEntity(g, snakeColor, snake.get(i));
-            i++;
+    private void drawCubeEntities(GraphicsContext g, ArrayList<ColoredCollector<ArrayList<DoubleVector3D>>> entities) {
+        Collections.sort(entities, new EntityZComparator());
+        for (ColoredCollector<ArrayList<DoubleVector3D>> entity : entities) {
+            drawCubeEntity(g, entity.color(), entity.obj());
         }
     }
 
@@ -123,15 +143,7 @@ public class Renderer implements IConstants, IHeading {
      * @param color The color of the entity
      * @param entity The entity do draw
      */
-    private void drawCubeEntity(GraphicsContext g, Color color, CubeEntity entity) {
-        ArrayList<DoubleVector3D> vertices = entity.getVertices();
-        // Render each vertex
-        for (int i = 0; i < vertices.size(); i++) {
-            DoubleVector3D vertex = vertices.get(i);
-            DoubleVector3D renderedVertex = applyMatrices(vertex);
-            vertices.set(i, renderedVertex);
-        }
-        
+    private void drawCubeEntity(GraphicsContext g, Color color, ArrayList<DoubleVector3D> vertices) {
         // The vertices used to make up each respective face, ordered so that a square can be drawn
         DoubleVector3D[] frontFace  = {vertices.get(0), vertices.get(1), vertices.get(3), vertices.get(2)};
         DoubleVector3D[] rearFace   = {vertices.get(4), vertices.get(5), vertices.get(7), vertices.get(6)};
