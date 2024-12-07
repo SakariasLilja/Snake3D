@@ -45,6 +45,9 @@ public abstract class Entity implements IConstants {
      * <p> - 501 => 1
      * <p> - 499 => 0
      * <p> - 500 => 0
+     * <p>
+     * For movable entities, this value is determined with the
+     * heading of the entity.
      * @return Grid coordinates of this entity
      */
     public Vector3D getGridPos() {
