@@ -79,19 +79,26 @@ public class SnakeTests implements IHeading, IConstants {
     @DisplayName("Snake getGridPos")
     public void getGridPos() {
         Snake snake = new Snake(new Vector3D(1500, 500, 500), LEFT, UP);
-        Vector3D expectedGridPos1 = new Vector3D(1, 0, 0);
-        
-        assertEquals(expectedGridPos1, snake.getGridPos());
+
+        Vector3D expectedGridPos = new Vector3D(1, 0, 0);
+        assertEquals(expectedGridPos, snake.getGridPos(), "The gridPos should not move when at center of block");
 
         snake.setPosition(new Vector3D(1501, 500, 500));
-
-        assertEquals(expectedGridPos1, snake.getGridPos());
+        assertEquals(expectedGridPos, snake.getGridPos(), "The gridPos should not move when before center of block");
 
         snake.setPosition(new Vector3D(1499, 500, 500));
+        expectedGridPos = new Vector3D(0, 0, 0);
+        assertEquals(expectedGridPos, snake.getGridPos(), "The gridPos should move when past center of block");
 
-        Vector3D expectedGridPos2 = new Vector3D(0, 0, 0);
+        snake = new Snake(new Vector3D(500, 500, 500), FORWARD, UP);
+        assertEquals(expectedGridPos, snake.getGridPos(), "The gridPos should not move when at center of block");
 
-        assertEquals(expectedGridPos2, snake.getGridPos());
+        snake.setPosition(new Vector3D(500, 500, 499));
+        assertEquals(expectedGridPos, snake.getGridPos(), "The gridPos should not move when before the center of block");
+
+        snake.setPosition(new Vector3D(500, 500, 501));
+        expectedGridPos = new Vector3D(0, 0, 1);
+        assertEquals(expectedGridPos, snake.getGridPos(), "The gridPos should move when after the center of block");
     }
     
 }
