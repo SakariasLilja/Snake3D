@@ -1,6 +1,6 @@
 package com.sakariaslilja.datastructures;
 
-import java.util.function.Function;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 /**
@@ -36,11 +36,11 @@ public class Tuple {
     /**
      * Method that takes an anonymous function and changes the
      * values of this Tuple accordingly.
-     * @param function Anonymous function to apply to this Tuple's values
+     * @param consumer Anonymous consumer to apply to this Tuple's values
      */
-    public void forEach(Function<DoubleVector3D, DoubleVector3D> function) {
-        value1 = function.apply(value1);
-        value2 = function.apply(value2);
+    public void forEach(Consumer<DoubleVector3D> consumer) {
+        consumer.accept(value1);
+        consumer.accept(value2);
     }
 
     /**

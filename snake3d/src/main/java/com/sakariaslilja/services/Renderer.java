@@ -2,9 +2,8 @@ package com.sakariaslilja.services;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.function.Function;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
-import java.util.function.UnaryOperator;
 
 import com.sakariaslilja.App;
 import com.sakariaslilja.IConstants;
@@ -80,6 +79,7 @@ public class Renderer implements IConstants, IHeading {
      */
     private void drawEdges(GraphicsContext g) {
         g.setStroke(strokeColor);
+
         for (Tuple edge : edges) {
             Tuple copy = edge.duplicate();
             copy.forEach(applyMatricesFunc);
@@ -102,12 +102,10 @@ public class Renderer implements IConstants, IHeading {
 
         Object[] entities = new Object[snake.size() - 1 + apples.size()];
 
-        UnaryOperator<DoubleVector3D> renderVertex = v -> applyMatrices(v);
-
         int index = 0;
         while (index < snake.size() - 1) {
             ArrayList<DoubleVector3D> vertices = snake.get(index + 1).getVertices();
-            vertices.replaceAll(renderVertex);
+            vertices.forEach(applyMatricesFunc);
             entities[index] = new ColoredCollector<ArrayList<DoubleVector3D>>(vertices, snakeColor);
             index++;
         }
@@ -117,7 +115,7 @@ public class Renderer implements IConstants, IHeading {
 
         while (index < apples.size()) {
             ArrayList<DoubleVector3D> vertices = apples.get(index).getVertices();
-            vertices.replaceAll(renderVertex);
+            vertices.forEach(applyMatricesFunc);
             entities[index + offset] = new ColoredCollector<ArrayList<DoubleVector3D>>(vertices, appleColor);
             index++;
         }
@@ -181,52 +179,52 @@ public class Renderer implements IConstants, IHeading {
     /**
      * Applies the translation matrix and world offset correction to the vertex.
      * @param vertex Vertex to translate
-     * @return The translated vertex
      */
-    protected DoubleVector3D translate(DoubleVector3D vertex) {
-        return vertex.add(engine.camera().neg());
+    protected void translate(DoubleVector3D vertex) {
+        DoubleVector3D camera = engine.camera().duplicate();
+        camera.neg();
+        vertex.add(camera);
     }
 
     /**
      * Applies the rotation matrices to the vertex in the order:
      * <p> rotZ, rotY, rotX
      * @param vertex The vertex to rotate
-     * @return The rotated vertex
      */
-    protected DoubleVector3D rotate(DoubleVector3D vertex) {
-        //Quaternion q = new Quaternion(engine.getQVector(), engine.getRotation());
+    protected void rotate(DoubleVector3D vertex) {
         Quaternion q = engine.quaternion();
-        return q.applyRotation(vertex);
+        q.applyRotation(vertex);
     }
 
     /**
      * Applies the camera transform matrix
      * @param vertex The vertex to transform
-     * @return The transformed vertex
      */
-    private DoubleVector3D cameraTransform(DoubleVector3D vertex) {
+    private void cameraTransform(DoubleVector3D vertex) {
         double newX = vertex.getX() * FOCAL_LENGTH / (0.0001 * 2);
         double newY = vertex.getY() * FOCAL_LENGTH / (0.0001 * 2);
 
-        return new DoubleVector3D(newX, newY, vertex.getZ());
+        vertex.setX(newX);
+        vertex.setY(newY);
     }
 
     /**
-     * Applies the perpective correction matrix
+     * Applies the perpective correction matrix to the vertex.
      * @param vertex The vertex to correct
-     * @return The corrected vertex
      */
-    protected DoubleVector3D perspectiveCorrection(DoubleVector3D vertex) {
-        return new DoubleVector3D(vertex.getX() / vertex.getZ(), vertex.getY() / vertex.getZ(), vertex.getZ());
+    protected void perspectiveCorrection(DoubleVector3D vertex) {
+        double oneOverZ = 1.0 / vertex.getZ();
+        vertex.setX(vertex.getX() * oneOverZ);
+        vertex.setY(vertex.getY() * oneOverZ);
     }
 
     /**
-     * Centers the vertex on the screen
+     * Centers the vertex on the screen.
      * @param vertex Vertex to translate
-     * @return The translated vertex
      */
-    private DoubleVector3D centerOnScreen(DoubleVector3D vertex) {
-        return new DoubleVector3D(vertex.getX() + 0.5 * App.getWidth(), vertex.getY() + 0.5 * App.getHeight(), vertex.getZ());
+    private void centerOnScreen(DoubleVector3D vertex) {
+        vertex.setX(vertex.getX() + 0.5 * App.getWidth());
+        vertex.setY(vertex.getY() + 0.5 * App.getHeight());
     }
 
     /**
@@ -234,14 +232,18 @@ public class Renderer implements IConstants, IHeading {
      * @param vertex The vertex to render
      * @return The rendered vertex
      */
-    private DoubleVector3D applyMatrices(DoubleVector3D vertex) {
-        return centerOnScreen(perspectiveCorrection(cameraTransform(rotate(translate(vertex)))));
+    private void applyMatrices(DoubleVector3D vertex) {
+        translate(vertex);
+        rotate(vertex);
+        cameraTransform(vertex);
+        perspectiveCorrection(vertex);
+        centerOnScreen(vertex);
     }
 
     /**
-     * Anonymous function that applies {@code applyMatrices} to a DoubleVector3D
+     * Consumer functio that applies the matrices to a vertex.
      */
-    private Function<DoubleVector3D, DoubleVector3D> applyMatricesFunc = (v) -> applyMatrices(v);
+    Consumer<DoubleVector3D> applyMatricesFunc = v -> applyMatrices(v);
 
     /**
      * Predicate that checks if the z-coordinate of a DoubleVector3D is positive

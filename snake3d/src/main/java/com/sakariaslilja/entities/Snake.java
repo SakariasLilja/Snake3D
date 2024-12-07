@@ -1,5 +1,6 @@
 package com.sakariaslilja.entities;
 
+import com.sakariaslilja.datastructures.DoubleVector3D;
 import com.sakariaslilja.datastructures.Vector3D;
 
 /**
@@ -110,7 +111,9 @@ public class Snake extends CubeEntity implements IMovable {
         if (heading.exists(i -> i < 0)) {
             offset = offset.add(heading.mul(UNIT - 1));
         }
-        return getPosition().add(offset).toDoubleVector3D().mul(1.0 / UNIT).toVector3D();
+        DoubleVector3D p1 = getPosition().add(offset).toDoubleVector3D();
+        p1.mul(1.0 / UNIT);
+        return p1.toVector3D();
     }
 
     @Override

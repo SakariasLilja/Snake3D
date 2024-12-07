@@ -74,7 +74,11 @@ public class TupleTests implements IHeading {
 
         Tuple tuple = new Tuple(value1, value2);
         
-        Tuple expected = new Tuple(value1.mul(scalar), value2.mul(scalar));
+        DoubleVector3D value1_ = value1.duplicate();
+        DoubleVector3D value2_ = value2.duplicate();
+        value1_.mul(scalar);
+        value2_.mul(scalar);
+        Tuple expected = new Tuple(value1_, value2_);
 
         assertNotEquals(expected, tuple, "Should not be equal before forEach is run");
 
@@ -106,7 +110,9 @@ public class TupleTests implements IHeading {
         DoubleVector3D check = new DoubleVector3D(1, 0, 0);
 
         assertEquals(true, tuple.contains(check), "The contains method should return true when Tuple contains Vector3D");
-        assertNotEquals(true, tuple.contains(check.mul(-1)), "The contains method should return false when Tuple doesn't contain Vector3D");
+        
+        check.mul(-1);
+        assertNotEquals(true, tuple.contains(check), "The contains method should return false when Tuple doesn't contain Vector3D");
     }
 
     @Test

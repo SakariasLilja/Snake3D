@@ -52,7 +52,9 @@ public abstract class Entity implements IConstants {
      */
     public Vector3D getGridPos() {
         Vector3D subtractOne = new Vector3D(-1, -1, -1);
-        return position.add(subtractOne).toDoubleVector3D().mul(1.0 / UNIT).toVector3D();
+        DoubleVector3D p1 = position.add(subtractOne).toDoubleVector3D();
+        p1.mul(1.0 / UNIT);
+        return p1.toVector3D();
     }
 
     /**

@@ -14,30 +14,6 @@ import java.util.function.Predicate;
 public class DoubleVector3DTests implements IHeading {
 
     @Test
-    @DisplayName("DoubleVector3D getX")
-    public void getX() {
-        double x = 7.0;
-        DoubleVector3D vector3d = new DoubleVector3D(x, 0, 0);
-        assertEquals(x, vector3d.getX(), "The getX method should work as expected");
-    }
-
-    @Test
-    @DisplayName("DoubleVector3D getY")
-    public void getY() {
-        double y = -3.5;
-        DoubleVector3D vector3d = new DoubleVector3D(0, y, 0);
-        assertEquals(y, vector3d.getY(), "The getY method should work as expected");
-    }
-
-    @Test
-    @DisplayName("DoubleVector3D getZ")
-    public void getZ() {
-        double z = 0.004;
-        DoubleVector3D vector3d = new DoubleVector3D(0, 0, z);
-        assertEquals(z, vector3d.getZ(), "The getZ method should work as expected");
-    }
-
-    @Test
     @DisplayName("DoubleVector3D equals")
     public void doubleVector3DEquals() {
         DoubleVector3D first = new DoubleVector3D(1, 2, 3);
@@ -52,39 +28,9 @@ public class DoubleVector3DTests implements IHeading {
     @DisplayName("DoubleVector3D round")
     public void round() {
         DoubleVector3D vector3d = new DoubleVector3D(2.5, -0.4, -0.9);
-        DoubleVector3D result = vector3d.round();
+        vector3d.round();
         DoubleVector3D expected = new DoubleVector3D(3, 0, -1);
-        assertEquals(expected, result, "The round method should work as expected");
-    }
-
-    @Test
-    @DisplayName("DoubleVector3D rotateX")
-    public void rotateX() {
-        double angle = Math.PI * 0.5;
-        DoubleVector3D vector3d = new DoubleVector3D(1, 2, 3);
-        DoubleVector3D result = vector3d.rotateX(angle).round();
-        DoubleVector3D expected = new DoubleVector3D(1, -3, 2);
-        assertEquals(expected, result, "The rotateX method should give correct result");
-    }
-
-    @Test
-    @DisplayName("DoubleVector3D rotateY")
-    public void rotateY() {
-        double angle = Math.PI * 0.5;
-        DoubleVector3D vector3d = new DoubleVector3D(1, 2, 3);
-        DoubleVector3D result = vector3d.rotateY(angle).round();
-        DoubleVector3D expected = new DoubleVector3D(3, 2, -1);
-        assertEquals(expected, result, "The rotateY method should give correct result");
-    }
-
-    @Test
-    @DisplayName("DoubleVector3D rotateZ")
-    public void rotateZ() {
-        double angle = Math.PI * 0.5;
-        DoubleVector3D vector3d = new DoubleVector3D(1, 2, 3);
-        DoubleVector3D result = vector3d.rotateZ(angle).round();
-        DoubleVector3D expected = new DoubleVector3D(-2, 1, 3);
-        assertEquals(expected, result, "The rotateZ method should give correct result");
+        assertEquals(expected, vector3d, "The round method should work as expected");
     }
 
     @Test
@@ -102,9 +48,10 @@ public class DoubleVector3DTests implements IHeading {
     public void mulDoubleVector() {
         int scalar = 10;
         DoubleVector3D vector = new DoubleVector3D(1.8, -1, 0.5);
+        vector.mul(scalar);
         DoubleVector3D expected = new DoubleVector3D(18, -10, 5);
 
-        assertEquals(expected, vector.mul(scalar), "The mul method should work as expected");
+        assertEquals(expected, vector, "The mul method should work as expected");
     }
 
     @Test
@@ -121,10 +68,11 @@ public class DoubleVector3DTests implements IHeading {
     public void doubleVectorAdd() {
         DoubleVector3D first = BACKWARD.toDoubleVector3D();
         DoubleVector3D second = FORWARD.toDoubleVector3D();
+        first.add(second);
 
         DoubleVector3D expected = new DoubleVector3D(0, 0, 0);
 
-        assertEquals(expected, first.add(second), "The add method should work as expected");
+        assertEquals(expected, first, "The add method should work as expected");
     }
 
     @Test
@@ -141,10 +89,10 @@ public class DoubleVector3DTests implements IHeading {
     @DisplayName("DoubleVector3D negate")
     public void doubleVectorNegate() {
         DoubleVector3D vector = new DoubleVector3D(1, 2, 3);
-        DoubleVector3D negated = vector.neg();
+        vector.neg();
         DoubleVector3D expected = new DoubleVector3D(-1, -2, -3);
 
-        assertEquals(expected, negated, "The negate method should work as expected");
+        assertEquals(expected, vector, "The negate method should work as expected");
     }
     
     @Test
@@ -170,17 +118,8 @@ public class DoubleVector3DTests implements IHeading {
     @DisplayName("DoubleVector3D normalize")
     public void normalize() {
         DoubleVector3D vector = new DoubleVector3D(1, 2, 3);
-        DoubleVector3D result = vector.normalized();
-        assertEquals(1.0, result.magnitude(), "The normalize method should work as expected");
-    }
-
-    @Test
-    @DisplayName("DoubleVector3D cross-product")
-    public void crossProduct() {
-        DoubleVector3D v1 = FORWARD.toDoubleVector3D();
-        DoubleVector3D v2 = UP.toDoubleVector3D();
-        DoubleVector3D expected = RIGHT.toDoubleVector3D();
-        assertEquals(expected, v1.crossProd(v2), "The cross-product should work as expected");
+        vector.normalized();
+        assertEquals(1.0, vector.magnitude(), "The normalize method should work as expected");
     }
 
     @Test

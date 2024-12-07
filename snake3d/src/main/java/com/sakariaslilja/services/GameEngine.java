@@ -112,7 +112,11 @@ public class GameEngine implements IConstants, IHeading {
     /**
      * @return The camera's location in the world
      */
-    public DoubleVector3D camera() { return head().getPosition().toDoubleVector3D().mul(1.0 / UNIT); }
+    public DoubleVector3D camera() {
+        DoubleVector3D headPos = head().getPosition().toDoubleVector3D();
+        headPos.mul(1.0 / UNIT);
+        return headPos;
+    }
 
     /**
      * @return The quaternion representing the rotations of the world

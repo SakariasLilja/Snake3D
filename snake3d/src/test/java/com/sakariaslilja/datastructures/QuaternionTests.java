@@ -38,7 +38,9 @@ public class QuaternionTests {
 
         double expectedW = 0.5 * Math.sqrt(3);
         double error = 0.000000001;
-        DoubleVector3D expectedVector = vector.mul(1.0 / 14.0);
+        
+        DoubleVector3D expectedVector = vector.duplicate();
+        expectedVector.mul(1.0 / 14.0);
 
         assertTrue(expectedW - error <= q.getW() && expectedW + error >= q.getW(), "The w-component should be within a range");
         assertEquals(expectedVector.toString(), q.extractVectorComponent().toString(), "The vector component should be correct");

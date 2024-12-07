@@ -11,17 +11,15 @@ import java.util.function.Predicate;
  */
 public class DoubleVector3D {
 
-    // Private values of this complex vector.
-    private final double x;
-    private final double y;
-    private final double z;
+    private double x;
+    private double y;
+    private double z;
 
     /**
      * 3D vector utilising doubles instead of integers.
-     * Used for specific rotations.
-     * @param x The x-coordinate of this [DoubleVector3D].
-     * @param y The y-coordinate of this [DoubleVector3D].
-     * @param z The z-coordinate of this [DoubleVector3D].
+     * @param x The x-coordinate
+     * @param y The y-coordinate
+     * @param z The z-coordinate
      */
     public DoubleVector3D (double x, double y, double z) {
         this.x = x;
@@ -29,73 +27,32 @@ public class DoubleVector3D {
         this.z = z;
     }
 
-    /**
-     * Getter for the x-coordinate.
-     * @return The x-coordinate of this [DoubleVector3D]
-     */
-    public double getX() {
-        return this.x;
-    }
+    public double getX() { return x; }
+    public void setX(double x) { this.x = x; }
+
+    public double getY() { return this.y; }
+    public void setY(double y) { this.y = y; }
+
+    public double getZ() { return this.z; }
+    public void setZ(double z) { this.z = z; }
 
     /**
-     * Getter for the y-coordinate.
-     * @return The y-coordinate of this [DoubleVector3D]
-     */
-    public double getY() {
-        return this.y;
-    }
-
-    /**
-     * Getter for the z-coordinate.
-     * @return The z-coordinate of this [DoubleVector3D]
-     */
-    public double getZ() {
-        return this.z;
-    }
-
-    /**
-     * Inhertied method.
-     * Multiplies this DoubleVector3D with a scalar
+     * Multiplies this DoubleVector3D by a scalar.
      * @param scalar The scalar with which to multiply this vector with
-     * @return A new DoubleVector3D with scaled values
      */
-    public DoubleVector3D mul(double scalar) {
-        return new DoubleVector3D(scalar * this.x, scalar * this.y, scalar * this.z);
-    }
-
-    /**
-     * Function for rotating this [DoubleVector3D] around the x-axis.
-     * @param radians Rotation amount in radians
-     * @return A new [DoubleVector3D] with the calculated values.
-     */
-    public DoubleVector3D rotateX(double radians) {
-        return new DoubleVector3D(x, y*Math.cos(radians)-z*Math.sin(radians), y*Math.sin(radians)+z*Math.cos(radians));
-    }
-
-    /**
-     * Function for rotating this [DoubleVector3D] around the y-axis.
-     * @param radians Rotation amount in radians
-     * @return A new [DoubleVector3D] with the calculated values.
-     */
-    public DoubleVector3D rotateY(double radians) {
-        return new DoubleVector3D(x*Math.cos(radians)+z*Math.sin(radians), y, -x*Math.sin(radians)+z*Math.cos(radians));
-    }
-
-    /**
-     * Function for rotating this [DoubleVector3D] around the z-axis.
-     * @param radians Rotation amount in radians
-     * @return A new [DoubleVector3D] with the calculated values.
-     */
-    public DoubleVector3D rotateZ(double radians) {
-        return new DoubleVector3D(x*Math.cos(radians)-y*Math.sin(radians), x*Math.sin(radians)+y*Math.cos(radians), z);
+    public void mul(double scalar) {
+        x *= scalar; 
+        y *= scalar;
+        z *= scalar;
     }
 
     /**
      * Rounds every value of the vector's values to the closest integer.
-     * @return A new [DoubleVector3D] with the rounded values.
      */
-    public DoubleVector3D round() {
-        return new DoubleVector3D(Math.round(x), Math.round(y), Math.round(z));
+    public void round() {
+        x = Math.round(x);
+        y = Math.round(y);
+        z = Math.round(z);
     }
 
     /**
@@ -104,21 +61,23 @@ public class DoubleVector3D {
      * @return Vector3D with this DoubleVector3D's values rounded to the closest integer.
      */
     public Vector3D toVector3D() {
-        DoubleVector3D rounded = this.round();
+        DoubleVector3D rounded = this.duplicate();
+        rounded.round();
         return new Vector3D((int) rounded.getX(), (int) rounded.getY(), (int) rounded.getZ());
     }
 
     /**
-     * Method for adding two DoubleVector3D to each other
-     * @param other The DoubleVector3D to add to this one
-     * @return A new DoubleVector3D with the added values
+     * Adds the values of another vector to this vector.
+     * @param other The vector whose values to add with
      */
-    public DoubleVector3D add(DoubleVector3D other) {
-        return new DoubleVector3D(x + other.getX(), y + other.getY(), z + other.getZ());
+    public void add(DoubleVector3D other) {
+        x += other.getX();
+        y += other.getY();
+        z += other.getZ();
     }
 
     /**
-     * Duplicates this DoubleVector3D
+     * Duplicates this vector.
      * @return A new DoubleVector3D with identical values
      */
     public DoubleVector3D duplicate() {
@@ -126,11 +85,10 @@ public class DoubleVector3D {
     }
 
     /**
-     * Negates the values of this DoubleVector3D
-     * @return A negated DoubleVector3D
+     * Negates the values of this vector.
      */
-    public DoubleVector3D neg() {
-        return new DoubleVector3D(-x, -y, -z);
+    public void neg() {
+        this.mul(-1);
     }
 
     /**
@@ -150,22 +108,10 @@ public class DoubleVector3D {
     }
 
     /**
-     * @return A normalized DoubleVector3D, i.e. the magnitude of this vector is 1.
+     * Normalizes this vector, i.e. the magnitude of this vector is 1.
      */
-    public DoubleVector3D normalized() {
-        return this.mul(1.0 / this.magnitude());
-    }
-
-    /**
-     * Performs cartesian vector cross-product with another vector.
-     * @param other The vector to perform the cross-product with
-     * @return The resultant vector of the cross-product
-     */
-    public DoubleVector3D crossProd(DoubleVector3D other) {
-        double newX = y * other.getZ() - (z * other.getY());
-        double newY = z * other.getX() - (x * other.getZ());
-        double newZ = x * other.getY() - (y * other.getX());
-        return new DoubleVector3D(newX, newY, newZ);
+    public void normalized() {
+        this.mul(1.0 / this.magnitude());
     }
 
     /**

@@ -34,9 +34,12 @@ public class RendererTests {
         Renderer renderer = new Renderer(null, engine);
 
         DoubleVector3D vertex = new DoubleVector3D(1, 2, 3);
+        renderer.rotate(vertex);
+        vertex.round();
+
         DoubleVector3D expected = new DoubleVector3D(-1, 2, -3);
 
-        assertEquals(expected, renderer.rotate(vertex).round(), "The rotate method should apply the matrices correctly");
+        assertEquals(expected, vertex, "The rotate method should apply the matrices correctly");
     }
 
     @Test
@@ -46,9 +49,11 @@ public class RendererTests {
         Renderer renderer = new Renderer(null, engine);
 
         DoubleVector3D vertex = new DoubleVector3D(8, -4, 2);
+        renderer.perspectiveCorrection(vertex);
+
         DoubleVector3D expected = new DoubleVector3D(4, -2, 2);
 
-        assertEquals(expected, renderer.perspectiveCorrection(vertex), "The perspective correction should work as expected");
+        assertEquals(expected, vertex, "The perspective correction should work as expected");
     }
     
 }
