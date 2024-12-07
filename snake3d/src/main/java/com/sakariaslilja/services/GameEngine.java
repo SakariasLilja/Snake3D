@@ -192,14 +192,14 @@ public class GameEngine implements IConstants, IHeading {
             Quaternion rotation;
 
             // Makes the rotation with the snake's position and the wanted direction
-            if (turningLeft) { rotation = new Quaternion(normal(), -ONE_DEG); }
-            else if (turningRight) { rotation = new Quaternion(normal(), ONE_DEG); }
-            else if (turningDown) { rotation = new Quaternion(snakeXAxis(), ONE_DEG); }
-            else { rotation = new Quaternion(snakeXAxis(), -ONE_DEG); }
+            if (turningLeft) { rotation = new Quaternion(normal(), -ONE_DEG * ROTATION_SPEED); }
+            else if (turningRight) { rotation = new Quaternion(normal(), ONE_DEG * ROTATION_SPEED); }
+            else if (turningDown) { rotation = new Quaternion(snakeXAxis(), ONE_DEG * ROTATION_SPEED); }
+            else { rotation = new Quaternion(snakeXAxis(), -ONE_DEG * ROTATION_SPEED); }
 
             // Applies the rotation
             q.mul(rotation);
-            rCountHelper++;
+            rCountHelper += ROTATION_SPEED;
 
             // Completed the rotation (degrees reached 90)
             if (rCountHelper == 90) { 

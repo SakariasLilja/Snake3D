@@ -47,5 +47,11 @@ public interface IConstants {
      * One degree in radians.
      */
     double ONE_DEG = Math.PI / 180.0;
+
+    /**
+     * Mulitplier for how fast the game rotates when turning.
+     * 90 MUST be divisible by this value.
+     */
+    int ROTATION_SPEED = 2;
     
 }
