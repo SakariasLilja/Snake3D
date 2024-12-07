@@ -53,5 +53,26 @@ public class SnakeTests implements IHeading, IConstants {
         assertEquals(BACKWARD, snake.getNormal(), "The normal should not change");
         assertEquals(LEFT, snake.getHeading(), "The apply turn method should work as expected");
     }
+
+    @Test
+    @DisplayName("Snake toString")
+    public void snakeToString() {
+        Snake snake = new Snake(new Vector3D(0, 0, 0), FORWARD, UP);
+
+        String part1 = "Position: Vector3D(0, 0, 0)\n";
+        String part2 = "Heading: Vector3D(0, 0, 1)\n";
+        String part3 = "Normal: Vector3D(0, -1, 0)\n";
+        String part4 = "GridPos: Vector3D(0, 0, 0)\n";
+        String part5 = "Next turn: N\n";
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(part1);
+        sb.append(part2);
+        sb.append(part3);
+        sb.append(part4);
+        sb.append(part5);
+
+        assertEquals(sb.toString(), snake.toString(), "The toString method should work as expected");
+    }
     
 }

@@ -103,5 +103,21 @@ public class Snake extends CubeEntity implements IMovable {
                 break;
         }
     }
+
+    @Override
+    public String toString() {
+        String p = "Position: " + this.getPosition().toString() + "\n";
+        String h = "Heading: " + this.getHeading().toString() + "\n";
+        String n = "Normal: " + this.getNormal().toString() + "\n";
+        String gp = "GridPos: " + this.getGridPos().toString() + "\n";
+        String t = "Next turn: " + this.nextTurn.name() + "\n";
+        StringBuilder b = new StringBuilder();
+        b.append(p);
+        b.append(h);
+        b.append(n);
+        b.append(gp);
+        b.append(t);
+        return b.toString();
+    }
     
 }
