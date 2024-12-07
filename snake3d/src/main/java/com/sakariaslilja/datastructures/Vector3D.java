@@ -6,7 +6,7 @@ import java.util.function.Predicate;
  * Class representing a 3D vector.
  * Vectors are considered equal if each of their values are the same.
  */
-public class Vector3D extends AbstractVector{
+public class Vector3D {
 
     // Private values of this vector.
     // Cannot be updated upon creation.

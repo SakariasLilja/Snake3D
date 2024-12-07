@@ -9,7 +9,7 @@ import java.util.function.Predicate;
  * 3D vector class for double precision.
  * Vectors are considered equal if each of their values are the same.
  */
-public class DoubleVector3D extends AbstractVector {
+public class DoubleVector3D {
 
     // Private values of this complex vector.
     private final double x;
