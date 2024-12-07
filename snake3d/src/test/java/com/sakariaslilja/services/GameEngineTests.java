@@ -257,6 +257,12 @@ public class GameEngineTests implements IConstants, IHeading {
         engine.setSnake(snake);
 
         assertTrue(engine.checkSnakeCollisions(), "The collision should be detected");
+
+        snakeHead.setPosition(new Vector3D(-2, 0, 0).mul(UNIT / 2).add(new Vector3D(500, 500, 500)));
+        snake.clear();
+        snake.add(snakeHead);
+
+        assertTrue(engine.checkSnakeCollisions(), "Player should not be allowed out of bounds");
     }
 
     @Test
