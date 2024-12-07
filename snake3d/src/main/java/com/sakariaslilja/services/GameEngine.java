@@ -290,7 +290,7 @@ public class GameEngine implements IConstants, IHeading {
     protected void growSnake() {
         Snake tail = snake.get(snake.size() - 1);
         Vector3D nextPos = tail.getPosition().add(tail.getHeading().neg().mul(UNIT));
-        Snake nextSegment = new Snake(nextPos, tail.getHeading(), tail.getNormal(), tail.getTurn());
+        Snake nextSegment = new Snake(nextPos, tail.getHeading(), tail.getNormal(), Turn.N);
         snake.add(nextSegment);
     }
 
