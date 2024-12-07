@@ -320,6 +320,7 @@ public class GameEngine implements IConstants, IHeading {
      */
     protected boolean checkSnakeCollisions() {
         Vector3D headGridPos = head().getGridPos();
+        if (!gridPositions.contains(headGridPos)) { return true; }
         for (int i = 1; i < snake.size(); i++) {
             if (snake.get(i).getGridPos().equals(headGridPos)) {
                 // TODO: add death
