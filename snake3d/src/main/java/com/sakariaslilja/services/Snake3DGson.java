@@ -11,7 +11,6 @@ public interface Snake3DGson {
     /**
      * The Gson service used by the application I/O services
      */
-    @SuppressWarnings("exports")
     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").setPrettyPrinting().create();
     
 }

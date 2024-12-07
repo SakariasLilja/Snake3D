@@ -99,7 +99,7 @@ public class GameEngine implements IConstants, IHeading {
      * Performs the action associated with each key.
      * @param keyCode The key code of the pressed key
      */
-    public void doButtonAction(@SuppressWarnings("exports") KeyCode keyCode) {
+    public void doButtonAction(KeyCode keyCode) {
         if (turnQueued()) { return; } // Stops multiple inputs
 
         if (keyCode.equals(KeyCode.LEFT)) { turningLeft = true; }
@@ -117,7 +117,7 @@ public class GameEngine implements IConstants, IHeading {
     /**
      * @return The quaternion representing the rotations of the world
      */
-    public Quaternion quaternion() { return new Quaternion(1, 0, 0, 0);}//q; }
+    public Quaternion quaternion() { return q; }
 
     /**
      * @return The head of the game's snake entity

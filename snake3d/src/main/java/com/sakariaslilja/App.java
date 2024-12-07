@@ -25,7 +25,7 @@ public class App extends Application implements IConstants {
 
     // Sets the primary scene of the application.
     @Override
-    public void start(@SuppressWarnings("exports") Stage stage) throws IOException {
+    public void start(Stage stage) throws IOException {
         stage.setTitle(GAME_NAME);
         stage.setMaximized(true);
         stage.setResizable(false);

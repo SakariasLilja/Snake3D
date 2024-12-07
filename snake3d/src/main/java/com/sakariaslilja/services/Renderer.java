@@ -40,7 +40,6 @@ public class Renderer implements IConstants, IHeading {
      * @param edges The edges of the world
      * @param normalVector The normal vector of the camera
      */
-    @SuppressWarnings("exports")
     public Renderer(GraphicsContext g, GameEngine engine) {
         this.g = g;
         this.edges = engine.getEdges();
