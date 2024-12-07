@@ -59,4 +59,10 @@ public abstract class Entity implements IConstants {
      */
     public abstract ArrayList<DoubleVector3D> getVertices();
 
+    /**
+     * Default size of an entity is one.
+     * @return The size of the entity
+     */
+    protected double size() { return 1; }
+
 }
