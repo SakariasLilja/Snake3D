@@ -74,5 +74,20 @@ public class SnakeTests implements IHeading, IConstants {
 
         assertEquals(sb.toString(), snake.toString(), "The toString method should work as expected");
     }
+
+    @Test
+    @DisplayName("Snake getGridPos")
+    public void getGridPos() {
+        Snake snake = new Snake(new Vector3D(1500, 500, 500), LEFT, UP);
+        Vector3D expectedGridPos1 = new Vector3D(1, 0, 0);
+        
+        assertEquals(expectedGridPos1, snake.getGridPos());
+
+        snake.setPosition(new Vector3D(1499, 500, 500));
+
+        Vector3D expectedGridPos2 = new Vector3D(0, 0, 0);
+
+        assertEquals(expectedGridPos2, snake.getGridPos());
+    }
     
 }
