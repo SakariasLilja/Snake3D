@@ -10,10 +10,16 @@ import com.sakariaslilja.datastructures.DoubleVector3D;
  * Compares the z-coordinates of a colored collector with entity coordinates used for drawing.
  * <p> Sorted in descending order
  */
-public class EntityZComparator implements Comparator<ColoredCollector<ArrayList<DoubleVector3D>>> {
+@SuppressWarnings("rawtypes")
+public class EntityZComparator implements Comparator {
 
+    @SuppressWarnings("unchecked")
     @Override
-    public int compare(ColoredCollector<ArrayList<DoubleVector3D>> c1, ColoredCollector<ArrayList<DoubleVector3D>> c2) {
+    public int compare(Object o1, Object o2) {
+
+        ColoredCollector<ArrayList<DoubleVector3D>> c1 = (ColoredCollector<ArrayList<DoubleVector3D>>) o1;
+        ColoredCollector<ArrayList<DoubleVector3D>> c2 = (ColoredCollector<ArrayList<DoubleVector3D>>) o2;
+
         double z1 = c1.obj().get(0).getZ();
         double z2 = c2.obj().get(0).getZ();
 

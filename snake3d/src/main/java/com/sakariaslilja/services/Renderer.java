@@ -1,6 +1,7 @@
 package com.sakariaslilja.services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -96,25 +97,30 @@ public class Renderer implements IConstants, IHeading {
     /**
      * @return Each entity's rendered vertices
      */
-    private ArrayList<ColoredCollector<ArrayList<DoubleVector3D>>> getCubeEntities() {
-        ArrayList<ColoredCollector<ArrayList<DoubleVector3D>>> entities = new ArrayList<>();
-
+    private Object[] getCubeEntities() {
         ArrayList<Snake> snake = engine.getSnake();
         ArrayList<Apple> apples = engine.getApples();
 
+        Object[] entities = new Object[snake.size() - 1 + apples.size()];
+
         UnaryOperator<DoubleVector3D> renderVertex = v -> applyMatrices(v);
 
-        for (int i = 1; i < snake.size(); i++) {
-            Snake segment = snake.get(i);
-            ArrayList<DoubleVector3D> vertices = segment.getVertices();
+        int index = 0;
+        while (index < snake.size() - 1) {
+            ArrayList<DoubleVector3D> vertices = snake.get(index + 1).getVertices();
             vertices.replaceAll(renderVertex);
-            entities.add(new ColoredCollector<ArrayList<DoubleVector3D>>(vertices, snakeColor));
+            entities[index] = new ColoredCollector<ArrayList<DoubleVector3D>>(vertices, snakeColor);
+            index++;
         }
 
-        for (Apple apple : apples) {
-            ArrayList<DoubleVector3D> vertices = apple.getVertices();
+        int offset = index;
+        index = 0;
+
+        while (index < apples.size()) {
+            ArrayList<DoubleVector3D> vertices = apples.get(index).getVertices();
             vertices.replaceAll(renderVertex);
-            entities.add(new ColoredCollector<ArrayList<DoubleVector3D>>(vertices, appleColor));
+            entities[index + offset] = new ColoredCollector<ArrayList<DoubleVector3D>>(vertices, appleColor);
+            index++;
         }
 
         return entities;
@@ -126,9 +132,12 @@ public class Renderer implements IConstants, IHeading {
      * @param g The graphics context onto which to draw
      * @param entities The list of entities to draw
      */
-    private void drawCubeEntities(GraphicsContext g, ArrayList<ColoredCollector<ArrayList<DoubleVector3D>>> entities) {
-        Collections.sort(entities, new EntityZComparator());
-        for (ColoredCollector<ArrayList<DoubleVector3D>> entity : entities) {
+    @SuppressWarnings("unchecked")
+    private void drawCubeEntities(GraphicsContext g, Object[] entities) {
+        Arrays.parallelSort(entities, new EntityZComparator());
+        
+        for (Object o : entities) {
+            ColoredCollector<ArrayList<DoubleVector3D>> entity = (ColoredCollector<ArrayList<DoubleVector3D>>) o;
             drawCubeEntity(g, entity.color(), entity.obj());
         }
     }

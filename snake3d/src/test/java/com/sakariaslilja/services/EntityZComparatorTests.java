@@ -44,6 +44,7 @@ public class EntityZComparatorTests {
         sorted.add(cc3);
         sorted.add(cc2);
 
+        @SuppressWarnings("unchecked")
         Comparator<ColoredCollector<ArrayList<DoubleVector3D>>> comparator = new EntityZComparator();
 
         Collections.sort(e1, comparator);
