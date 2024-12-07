@@ -62,8 +62,6 @@ public class Renderer implements IConstants, IHeading {
     public void render() {
         this.clearCanvas(g);
         this.drawEdges(g);
-        /*this.drawApples(g);
-        this.drawSnake(g);*/
         drawCubeEntities(g, getCubeEntities());
     }
 
