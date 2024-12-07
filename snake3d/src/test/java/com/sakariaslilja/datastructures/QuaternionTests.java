@@ -57,4 +57,24 @@ public class QuaternionTests {
         assertEquals(expected, q, "The conjugate should work as expected");
     }
 
+    @Test
+    @DisplayName("Quaternion magnitude")
+    public void magnitude() {
+        Quaternion q = new Quaternion(5, 4, 2, 2);
+        double qMagnitude = q.magnitude();
+
+        double expected = 7.0;
+        assertEquals(expected, qMagnitude, "The magnitude should be correct");
+    }
+
+    @Test
+    @DisplayName("Quaternion normalize")
+    public void normalize() {
+        Quaternion q = new Quaternion(3, 4, 0, 0);
+        q.normalize();
+        
+        Quaternion expected = new Quaternion(0.6, 0.8, 0, 0);
+        assertEquals(expected.toString(), q.toString(), "The normalize method should work as expected");
+    }
+
 }
