@@ -114,6 +114,7 @@ public class GameEngineTests implements IConstants, IHeading {
     public void spawnApple() {
         GameModel model = new GameModel();
         GameEngine engine = new GameEngine(model);
+        engine.setSnake(new ArrayList<Snake>());
         int oldAppleCount = engine.countApples();
 
         Apple apple = new Apple(new Vector3D(0,0,0));
