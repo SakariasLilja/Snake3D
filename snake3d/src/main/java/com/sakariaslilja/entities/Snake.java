@@ -105,6 +105,12 @@ public class Snake extends CubeEntity implements IMovable {
     }
 
     @Override
+    public Vector3D getGridPos() {
+        Vector3D offset = new Vector3D(-1, -1, -1).add(heading.mul(UNIT - 1));
+        return getPosition().add(offset).toDoubleVector3D().mul(1.0 / UNIT).toVector3D();
+    }
+
+    @Override
     public String toString() {
         String p = "Position: " + this.getPosition().toString() + "\n";
         String h = "Heading: " + this.getHeading().toString() + "\n";
