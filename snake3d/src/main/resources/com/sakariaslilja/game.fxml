@@ -9,26 +9,26 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 
 
 <StackPane fx:controller="com.sakariaslilja.controllers.GameController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Canvas fx:id="gameCanvas" />
-      <VBox visible="false" id="bgoverlay" fx:id="bgoverlay" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+      <HBox alignment="TOP_RIGHT" >
          <children>
-            <AnchorPane prefHeight="105.0" prefWidth="600.0">
-               <children>
-                  <Label id="title" alignment="CENTER" layoutX="140.0" layoutY="20.0" prefHeight="60.0" prefWidth="350.0" text="Paused" />
-                  <ImageView fitHeight="121.0" fitWidth="113.0" layoutX="473.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../images/placeholder.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-            <Button id="pausebtn" fx:id="resumebtn" mnemonicParsing="false" prefHeight="60.0" prefWidth="300.0" text="Resume" />
-            <Button id="pausebtn" fx:id="savebtn" layoutX="254.0" layoutY="189.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="300.0" text="Save" />
-            <Button id="pausebtn" onAction="#saveAndQuit" fx:id="savequitbtn" layoutX="254.0" layoutY="210.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="300.0" text="Save and Quit" />
+            <Label id="score" fx:id="score" alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" />
+         </children>
+         <padding>
+            <Insets right="30.0" />
+         </padding>
+      </HBox>
+      <VBox visible="false" id="bgoverlay" fx:id="bgoverlay" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="50.0">
+         <children>
+            <Label id="title" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" text="Paused" />
+            <Button id="pausebtn" fx:id="resumebtn" mnemonicParsing="false" text="Resume" />
+            <Button id="pausebtn" fx:id="savebtn" mnemonicParsing="false" text="Save" />
+            <Button id="pausebtn" onAction="#saveAndQuit" fx:id="savequitbtn" mnemonicParsing="false" text="Save and Quit" />
          </children>
          <padding>
             <Insets bottom="25.0" />

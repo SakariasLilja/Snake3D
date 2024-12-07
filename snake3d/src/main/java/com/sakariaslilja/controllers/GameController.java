@@ -11,6 +11,8 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
@@ -23,6 +25,12 @@ public class GameController implements IConstants {
     @FXML
     VBox bgoverlay;
 
+    @FXML
+    Button resumebtn, savebtn, savequitbtn;
+
+    @FXML
+    Label score;
+
     GameEngine engine;
     Renderer renderer;
 
@@ -32,11 +40,19 @@ public class GameController implements IConstants {
     public void initialize() {
         gameCanvas.setWidth(App.getWidth());
         gameCanvas.setHeight(App.getHeight());
+
+        resumebtn.setPrefWidth(0.3 * App.getWidth());
+        savebtn.setPrefWidth(0.3 * App.getWidth());
+        savequitbtn.setPrefWidth(0.3 * App.getWidth());
+
+        resumebtn.setPrefHeight(0.12 * App.getHeight());
+        savebtn.setPrefHeight(0.12 * App.getHeight());
+        savequitbtn.setPrefHeight(0.12 * App.getHeight());
         
         this.engine = App.getEngine();
         this.renderer = new Renderer(gameCanvas.getGraphicsContext2D(), engine);
 
-        this.gameClock = new GameClock(engine, renderer);
+        this.gameClock = new GameClock(engine, renderer, score);
         gameClock.start();
 
         EventHandler<KeyEvent> buttonPressed = e -> {

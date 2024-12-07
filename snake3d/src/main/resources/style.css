@@ -55,3 +55,13 @@
     background-color: cornflowerblue;
     color: whitesmoke;
 }
+
+#score {
+    -fx-font-family: 'Helvetica';
+    -fx-font-size: 128;
+    -fx-text-fill: white;
+
+    font-family: 'Doto ExtraBold';
+    font-size: 96;
+    color: white;
+}
