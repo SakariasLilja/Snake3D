@@ -9,7 +9,6 @@ import com.sakariaslilja.App;
 import com.sakariaslilja.IConstants;
 import com.sakariaslilja.datastructures.ColoredCollector;
 import com.sakariaslilja.datastructures.DoubleVector3D;
-import com.sakariaslilja.datastructures.IHeading;
 import com.sakariaslilja.datastructures.Quaternion;
 import com.sakariaslilja.datastructures.Tuple;
 import com.sakariaslilja.entities.Apple;
@@ -22,7 +21,7 @@ import javafx.scene.paint.Color;
 /**
  * 3D renderer for Snake 3D.
  */
-public class Renderer implements IConstants, IHeading {
+public class Renderer implements IConstants {
 
     // Local variables
     private GraphicsContext g;
