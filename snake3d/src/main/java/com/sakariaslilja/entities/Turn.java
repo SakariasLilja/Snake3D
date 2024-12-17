@@ -1,30 +1,29 @@
 package com.sakariaslilja.entities;
 
 import com.google.gson.annotations.SerializedName;
-import com.sakariaslilja.datastructures.IHeading;
-import com.sakariaslilja.datastructures.Vector3D;
+import com.sakariaslilja.datastructures.Heading;
 
 /**
  * Defines the direction for turning a movable object.
  */
-public enum Turn implements IHeading {
+public enum Turn {
     @SerializedName("left")
-    L(LEFT),
+    L(Heading.LEFT),
     @SerializedName("right")
-    R(RIGHT),
+    R(Heading.RIGHT),
     @SerializedName("up")
-    U(UP),
+    U(Heading.UP),
     @SerializedName("down")
-    D(DOWN),
+    D(Heading.DOWN),
     @SerializedName("null")
-    N(FORWARD);
+    N(Heading.FORWARD);
 
     /**
      * The Vector3D heading of this turn
      */
-    public final Vector3D direction;
+    public final Heading direction;
 
-    private Turn(Vector3D direction) {
+    private Turn(Heading direction) {
         this.direction = direction;
     }
 }
