@@ -8,15 +8,15 @@ import com.sakariaslilja.datastructures.Vector3D;
  * Defines the direction for turning a movable object.
  */
 public enum Turn implements IHeading {
-    @SerializedName("1")
+    @SerializedName("left")
     L(LEFT),
-    @SerializedName("2")
+    @SerializedName("right")
     R(RIGHT),
-    @SerializedName("3")
+    @SerializedName("up")
     U(UP),
-    @SerializedName("4")
+    @SerializedName("down")
     D(DOWN),
-    @SerializedName("0")
+    @SerializedName("null")
     N(FORWARD);
 
     /**

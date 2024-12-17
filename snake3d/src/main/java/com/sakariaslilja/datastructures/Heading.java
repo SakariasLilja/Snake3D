@@ -7,17 +7,17 @@ import com.google.gson.annotations.SerializedName;
  */
 public enum Heading {
 
-    @SerializedName("0")
+    @SerializedName("forward")
     FORWARD(new Vector3D(0, 0, 1)),
-    @SerializedName("1")
+    @SerializedName("backward")
     BACKWARD(new Vector3D(0, 0, -1)),
-    @SerializedName("2")
+    @SerializedName("left")
     LEFT(new Vector3D(-1, 0, 0)),
-    @SerializedName("3")
+    @SerializedName("right")
     RIGHT(new Vector3D(1, 0, 0)),
-    @SerializedName("4")
+    @SerializedName("up")
     UP(new Vector3D(0, -1, 0)),
-    @SerializedName("5")
+    @SerializedName("down")
     DOWN(new Vector3D(0, 1, 0));
 
     /**
