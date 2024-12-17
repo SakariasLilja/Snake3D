@@ -3,6 +3,7 @@ package com.sakariaslilja.entities;
 import com.sakariaslilja.datastructures.DoubleVector3D;
 import com.sakariaslilja.datastructures.Heading;
 import com.sakariaslilja.datastructures.Vector3D;
+import com.sakariaslilja.models.SnakeModel;
 
 /**
  * Snake class.
@@ -118,6 +119,38 @@ public class Snake extends CubeEntity implements IMovable {
             default:
                 break;
         }
+    }
+
+    /**
+     * @return This snake converted to a model representation of its current state
+     */
+    public SnakeModel toSnakeModel() {
+        SnakeModel model = new SnakeModel();
+        model.x = this.getPosition().getX();
+        model.y = this.getPosition().getY();
+        model.z = this.getPosition().getZ();
+
+        Heading heading_;
+        if (heading.equals(Heading.BACKWARD.vec)) { heading_ = Heading.BACKWARD; }
+        else if (heading.equals(Heading.LEFT.vec)) { heading_ = Heading.LEFT; }
+        else if (heading.equals(Heading.RIGHT.vec)) { heading_ = Heading.RIGHT; }
+        else if (heading.equals(Heading.UP.vec)) { heading_ = Heading.UP; }
+        else if (heading.equals(Heading.DOWN.vec)) { heading_ = Heading.DOWN; }
+        else { heading_ = Heading.FORWARD; }
+        model.heading = heading_;
+
+        Heading normal_;
+        if (normal.equals(Heading.FORWARD.vec)) { normal_ = Heading.FORWARD; }
+        else if (normal.equals(Heading.BACKWARD.vec)) { normal_ = Heading.BACKWARD; }
+        else if (normal.equals(Heading.LEFT.vec)) { normal_ = Heading.LEFT; }
+        else if (normal.equals(Heading.RIGHT.vec)) { normal_ = Heading.RIGHT; }
+        else if (normal.equals(Heading.DOWN.vec)) { normal_ = Heading.DOWN; }
+        else { normal_ = Heading.UP; }
+        model.normal = normal_;
+
+        model.nextTurn = this.nextTurn;
+
+        return model;
     }
 
     @Override

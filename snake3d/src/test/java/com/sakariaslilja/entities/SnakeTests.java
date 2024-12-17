@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import com.sakariaslilja.IConstants;
 import com.sakariaslilja.datastructures.Heading;
 import com.sakariaslilja.datastructures.Vector3D;
+import com.sakariaslilja.models.SnakeModel;
 
 public class SnakeTests implements IConstants {
 
@@ -99,6 +100,28 @@ public class SnakeTests implements IConstants {
         snake.setPosition(new Vector3D(500, 500, 501));
         expectedGridPos = new Vector3D(0, 0, 1);
         assertEquals(expectedGridPos, snake.getGridPos(), "The gridPos should move when after the center of block");
+    }
+
+    @Test
+    @DisplayName("Snake toSnakeModel")
+    public void toSnakeModelTest() {
+        Snake snake = new Snake(new Vector3D(0, 0, 0), Heading.DOWN, Heading.LEFT, Turn.R);
+        SnakeModel snakeModel = snake.toSnakeModel();
+
+        SnakeModel expected = new SnakeModel();
+        expected.x = 0;
+        expected.y = 0;
+        expected.z = 0;
+        expected.heading = Heading.DOWN;
+        expected.normal = Heading.LEFT;
+        expected.nextTurn = Turn.R;
+
+        assertEquals(expected.x, snakeModel.x, "The x should be set correctly");
+        assertEquals(expected.y, snakeModel.y, "The y should be set correctly");
+        assertEquals(expected.z, snakeModel.z, "The z should be set correctly");
+        assertEquals(expected.heading.vec, snakeModel.heading.vec, "The heading should be set correctly");
+        assertEquals(expected.normal.vec, snakeModel.normal.vec, "The normal should be set correctly");
+        assertEquals(expected.nextTurn.direction.vec, snakeModel.nextTurn.direction.vec, "The next turn should be set correctly");
     }
     
 }
