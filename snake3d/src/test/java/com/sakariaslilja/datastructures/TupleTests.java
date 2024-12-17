@@ -68,8 +68,8 @@ public class TupleTests {
     @Test
     @DisplayName("ForEach function")
     public void forEach() {
-        DoubleVector3D value1 = Heading.RIGHT.direction.toDoubleVector3D();
-        DoubleVector3D value2 = Heading.LEFT.direction.toDoubleVector3D();
+        DoubleVector3D value1 = Heading.RIGHT.vec.toDoubleVector3D();
+        DoubleVector3D value2 = Heading.LEFT.vec.toDoubleVector3D();
         int scalar = 2;
 
         Tuple tuple = new Tuple(value1, value2);
@@ -90,8 +90,8 @@ public class TupleTests {
     @Test
     @DisplayName("Tuple toString")
     public void tupleToString() {
-        DoubleVector3D value1 = Heading.RIGHT.direction.toDoubleVector3D();
-        DoubleVector3D value2 = Heading.DOWN.direction.toDoubleVector3D();
+        DoubleVector3D value1 = Heading.RIGHT.vec.toDoubleVector3D();
+        DoubleVector3D value2 = Heading.DOWN.vec.toDoubleVector3D();
 
         Tuple tuple = new Tuple(value1, value2);
 
@@ -103,8 +103,8 @@ public class TupleTests {
     @Test
     @DisplayName("Tuple contains")
     public void tupleContains() {
-        DoubleVector3D value1 = Heading.RIGHT.direction.toDoubleVector3D();
-        DoubleVector3D value2 = Heading.UP.direction.toDoubleVector3D();
+        DoubleVector3D value1 = Heading.RIGHT.vec.toDoubleVector3D();
+        DoubleVector3D value2 = Heading.UP.vec.toDoubleVector3D();
 
         Tuple tuple = new Tuple(value1, value2);
         DoubleVector3D check = new DoubleVector3D(1, 0, 0);

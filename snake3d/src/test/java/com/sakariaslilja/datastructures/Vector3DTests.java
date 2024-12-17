@@ -45,8 +45,8 @@ public class Vector3DTests {
     @Test
     @DisplayName("Vector3D add")
     public void addVector3D() {
-        Vector3D first = Heading.RIGHT.direction;
-        Vector3D second = Heading.DOWN.direction;
+        Vector3D first = Heading.RIGHT.vec;
+        Vector3D second = Heading.DOWN.vec;
         Vector3D result = first.add(second);
         Vector3D expected = new Vector3D(1, 1, 0);
         assertEquals(expected, result, "The add method should work as expected");
@@ -55,8 +55,8 @@ public class Vector3DTests {
     @Test
     @DisplayName("Vector3D negate")
     public void negateVector3D() {
-        Vector3D vector3d = Heading.BACKWARD.direction;
-        Vector3D expected = Heading.FORWARD.direction;
+        Vector3D vector3d = Heading.BACKWARD.vec;
+        Vector3D expected = Heading.FORWARD.vec;
         assertEquals(expected, vector3d.neg(), "The neg method should work as expected");
     }
 
@@ -64,7 +64,7 @@ public class Vector3DTests {
     @DisplayName("Vector3D scalar multiply")
     public void scalarMul() {
         int scalar = 5;
-        Vector3D vector3d = Heading.RIGHT.direction;
+        Vector3D vector3d = Heading.RIGHT.vec;
         Vector3D expected = new Vector3D(scalar, 0, 0);
         assertEquals(expected, vector3d.mul(scalar), "The mul method should work as expected");
     }
@@ -72,8 +72,8 @@ public class Vector3DTests {
     @Test
     @DisplayName("Vector3D equals")
     public void vectorEquals() {
-        Vector3D backward = Heading.BACKWARD.direction;
-        Vector3D forward = Heading.FORWARD.direction;
+        Vector3D backward = Heading.BACKWARD.vec;
+        Vector3D forward = Heading.FORWARD.vec;
         Vector3D custom = new Vector3D(0, 0, 1);
         assertEquals(forward, forward, "The equals method should return true if equal");
         assertNotEquals(backward, forward, "The equals method should return false when not equal");
@@ -113,15 +113,15 @@ public class Vector3DTests {
     @Test
     @DisplayName("Vector3D cross-product")
     public void crossProduct() {
-        assertEquals(Heading.RIGHT.direction, Heading.DOWN.direction.crossProd(Heading.FORWARD.direction), "The cross product should work as expected");
+        assertEquals(Heading.RIGHT.vec, Heading.DOWN.vec.crossProd(Heading.FORWARD.vec), "The cross product should work as expected");
     }
 
     @Test
     @DisplayName("Vector3D rotate")
     public void rotateVector3D() {
-        assertEquals(Heading.DOWN.direction, Heading.FORWARD.direction.rotateX(false), "RotateX should work properly");
-        assertEquals(Heading.RIGHT.direction, Heading.FORWARD.direction.rotateY(true), "RotateY should work properly");
-        assertEquals(Heading.DOWN.direction, Heading.RIGHT.direction.rotateZ(true), "RotateZ should work properly");
+        assertEquals(Heading.DOWN.vec, Heading.FORWARD.vec.rotateX(false), "RotateX should work properly");
+        assertEquals(Heading.RIGHT.vec, Heading.FORWARD.vec.rotateY(true), "RotateY should work properly");
+        assertEquals(Heading.DOWN.vec, Heading.RIGHT.vec.rotateZ(true), "RotateZ should work properly");
     }
     
 }

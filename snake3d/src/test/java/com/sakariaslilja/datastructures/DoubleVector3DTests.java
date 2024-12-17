@@ -66,8 +66,8 @@ public class DoubleVector3DTests {
     @Test
     @DisplayName("DoubleVector3D add")
     public void doubleVectorAdd() {
-        DoubleVector3D first = Heading.BACKWARD.direction.toDoubleVector3D();
-        DoubleVector3D second = Heading.FORWARD.direction.toDoubleVector3D();
+        DoubleVector3D first = Heading.BACKWARD.vec.toDoubleVector3D();
+        DoubleVector3D second = Heading.FORWARD.vec.toDoubleVector3D();
         first.add(second);
 
         DoubleVector3D expected = new DoubleVector3D(0, 0, 0);

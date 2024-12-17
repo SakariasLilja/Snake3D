@@ -77,7 +77,7 @@ public class GameEngine implements IConstants {
             }
         }
         q = new Quaternion(game.qW, game.qX, game.qY, game.qZ);
-        snake.add(new Snake(new Vector3D(500, 500, 500), Heading.FORWARD.direction, Heading.UP.direction));
+        snake.add(new Snake(new Vector3D(500, 500, 500), Heading.FORWARD.vec, Heading.UP.vec));
     }
 
     // Engine getters and setters

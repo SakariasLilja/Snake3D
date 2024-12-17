@@ -23,10 +23,10 @@ public enum Heading {
     /**
      * The Vector3D representation of this direction
      */
-    public final Vector3D direction;
+    public final Vector3D vec;
 
-    private Heading(Vector3D direction) {
-        this.direction = direction;
+    private Heading(Vector3D vec) {
+        this.vec = vec;
     }
     
 }
