@@ -14,7 +14,7 @@ public class SnakeTests implements IConstants {
     @Test
     @DisplayName("Snake move")
     public void snakeMove() {
-        Snake snake = new Snake(new Vector3D(0, 0, 501), Heading.FORWARD.vec, Heading.UP.vec);
+        Snake snake = new Snake(new Vector3D(0, 0, 501), Heading.FORWARD, Heading.UP);
         Vector3D expected = new Vector3D(0, 0, 501 + STEP_SIZE);
         snake.move();
         
@@ -24,7 +24,7 @@ public class SnakeTests implements IConstants {
     @Test
     @DisplayName("Snake turn left and right")
     public void snakeTurnHorizontal() {
-        Snake snake = new Snake(null, Heading.RIGHT.vec, Heading.DOWN.vec);
+        Snake snake = new Snake(null, Heading.RIGHT, Heading.DOWN);
         snake.turnRight();
         assertEquals(Heading.FORWARD.vec, snake.getHeading(), "Snake should turn right");
         snake.turnLeft();
@@ -35,7 +35,7 @@ public class SnakeTests implements IConstants {
     @Test
     @DisplayName("Snake turn up and down")
     public void snakeTurnVertical() {
-        Snake snake = new Snake(null, Heading.DOWN.vec, Heading.BACKWARD.vec);
+        Snake snake = new Snake(null, Heading.DOWN, Heading.BACKWARD);
         snake.turnUp();
         assertEquals(Heading.BACKWARD.vec, snake.getHeading(), "The snake should be facing the correct way");
         assertEquals(Heading.UP.vec, snake.getNormal(), "The snake should turn upward");
@@ -48,7 +48,7 @@ public class SnakeTests implements IConstants {
     @Test
     @DisplayName("Snake apply turn")
     public void applyTurn() {
-        Snake snake = new Snake(null, Heading.DOWN.vec, Heading.BACKWARD.vec, Turn.R);
+        Snake snake = new Snake(null, Heading.DOWN, Heading.BACKWARD, Turn.R);
         snake.applyTurn();
         assertEquals(Heading.BACKWARD.vec, snake.getNormal(), "The normal should not change");
         assertEquals(Heading.LEFT.vec, snake.getHeading(), "The apply turn method should work as expected");
@@ -57,7 +57,7 @@ public class SnakeTests implements IConstants {
     @Test
     @DisplayName("Snake toString")
     public void snakeToString() {
-        Snake snake = new Snake(new Vector3D(0, 0, 0), Heading.FORWARD.vec, Heading.UP.vec);
+        Snake snake = new Snake(new Vector3D(0, 0, 0), Heading.FORWARD, Heading.UP);
 
         String part1 = "Position: Vector3D(0, 0, 0)\n";
         String part2 = "Heading: Vector3D(0, 0, 1)\n";
@@ -78,7 +78,7 @@ public class SnakeTests implements IConstants {
     @Test
     @DisplayName("Snake getGridPos")
     public void getGridPos() {
-        Snake snake = new Snake(new Vector3D(1500, 500, 500), Heading.LEFT.vec, Heading.UP.vec);
+        Snake snake = new Snake(new Vector3D(1500, 500, 500), Heading.LEFT, Heading.UP);
 
         Vector3D expectedGridPos = new Vector3D(1, 0, 0);
         assertEquals(expectedGridPos, snake.getGridPos(), "The gridPos should not move when at center of block");
@@ -90,7 +90,7 @@ public class SnakeTests implements IConstants {
         expectedGridPos = new Vector3D(0, 0, 0);
         assertEquals(expectedGridPos, snake.getGridPos(), "The gridPos should move when past center of block");
 
-        snake = new Snake(new Vector3D(500, 500, 500), Heading.FORWARD.vec, Heading.UP.vec);
+        snake = new Snake(new Vector3D(500, 500, 500), Heading.FORWARD, Heading.UP);
         assertEquals(expectedGridPos, snake.getGridPos(), "The gridPos should not move when at center of block");
 
         snake.setPosition(new Vector3D(500, 500, 499));

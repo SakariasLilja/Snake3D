@@ -1,6 +1,7 @@
 package com.sakariaslilja.entities;
 
 import com.sakariaslilja.datastructures.DoubleVector3D;
+import com.sakariaslilja.datastructures.Heading;
 import com.sakariaslilja.datastructures.Vector3D;
 
 /**
@@ -15,13 +16,13 @@ public class Snake extends CubeEntity implements IMovable {
      * Creates a snake with all parameters.
      * @param position The world position of the snake
      * @param heading The heading direction of the snake
-     * @param normal The normal vector of the snake
+     * @param normal The normal heading of the snake
      * @param nextTurn The next turn the snake will take
      */
-    public Snake(Vector3D position, Vector3D heading, Vector3D normal, Turn nextTurn) {
+    public Snake(Vector3D position, Heading heading, Heading normal, Turn nextTurn) {
         super(position);
-        this.heading = heading;
-        this.normal = normal;
+        this.heading = heading.vec;
+        this.normal = normal.vec;
         this.nextTurn = nextTurn;
     }
 
@@ -32,8 +33,22 @@ public class Snake extends CubeEntity implements IMovable {
      * @param heading The heading direction of the snake
      * @param normal The next turn the snake will take
      */
-    public Snake(Vector3D position, Vector3D heading, Vector3D normal) {
+    public Snake(Vector3D position, Heading heading, Heading normal) {
         this(position, heading, normal, Turn.N);
+    }
+
+    /**
+     * Creates a snake with vector parameters.
+     * @param position The world position of the snake
+     * @param heading The vector heading of the snake
+     * @param normal The vector normal of the snake
+     * @param nextTurn The next turn the snake will take
+     */
+    public Snake(Vector3D position, Vector3D heading, Vector3D normal, Turn nextTurn) {
+        super(position);
+        this.heading = heading;
+        this.normal = normal;
+        this.nextTurn = nextTurn;
     }
 
     @Override

@@ -162,7 +162,7 @@ public class GameEngineTests implements IConstants {
         GameEngine engine = new GameEngine(new GameModel());
 
         Vector3D snakePos = new Vector3D(0, 4, 5).mul(UNIT / 2);
-        Snake snakeHead = new Snake(snakePos, Heading.FORWARD.vec, Heading.UP.vec);
+        Snake snakeHead = new Snake(snakePos, Heading.FORWARD, Heading.UP);
 
         ArrayList<Snake> snake = new ArrayList<>();
         snake.add(snakeHead);
@@ -178,7 +178,7 @@ public class GameEngineTests implements IConstants {
         GameEngine engine = new GameEngine(new GameModel());
 
         Vector3D snakePos = new Vector3D(0, 1, 2).mul(UNIT / 2).add(new Vector3D(500, 500, 500));
-        Snake snakeHead = new Snake(snakePos, Heading.FORWARD.vec, Heading.UP.vec);
+        Snake snakeHead = new Snake(snakePos, Heading.FORWARD, Heading.UP);
 
         ArrayList<Snake> snake = new ArrayList<>();
         snake.add(snakeHead);
@@ -199,7 +199,7 @@ public class GameEngineTests implements IConstants {
         GameEngine engine = new GameEngine(new GameModel());
 
         Vector3D snakePos = new Vector3D(0, 1, 2).mul(UNIT / 2).add(new Vector3D(500, 500, 500));
-        Snake snakeHead = new Snake(snakePos, Heading.FORWARD.vec, Heading.UP.vec);
+        Snake snakeHead = new Snake(snakePos, Heading.FORWARD, Heading.UP);
 
         ArrayList<Snake> snake = new ArrayList<>();
         snake.add(snakeHead);
@@ -225,7 +225,7 @@ public class GameEngineTests implements IConstants {
         GameEngine engine = new GameEngine(new GameModel());
 
         Vector3D snakePos = new Vector3D(0, 1, 2).mul(UNIT / 2).add(new Vector3D(500, 500, 500));
-        Snake snakeHead = new Snake(snakePos, Heading.FORWARD.vec, Heading.UP.vec);
+        Snake snakeHead = new Snake(snakePos, Heading.FORWARD, Heading.UP);
         
         ArrayList<Snake> snake = new ArrayList<>();
         snake.add(snakeHead);
@@ -249,7 +249,7 @@ public class GameEngineTests implements IConstants {
         assertFalse(engine.checkSnakeCollisions(), "No collision should occur at start");
 
         Vector3D snakePos = new Vector3D(0, 1, 2).mul(UNIT / 2).add(new Vector3D(500, 500, 500));
-        Snake snakeHead = new Snake(snakePos, Heading.FORWARD.vec, Heading.UP.vec);
+        Snake snakeHead = new Snake(snakePos, Heading.FORWARD, Heading.UP);
 
         ArrayList<Snake> snake = new ArrayList<>();
         snake.add(snakeHead);
@@ -272,7 +272,7 @@ public class GameEngineTests implements IConstants {
         GameEngine engine = new GameEngine(new GameModel());
 
         Vector3D pos = new Vector3D(0, 1, 2).mul(UNIT / 2).add(new Vector3D(500, 500, 500));
-        Snake snakeHead = new Snake(pos, Heading.FORWARD.vec, Heading.UP.vec);
+        Snake snakeHead = new Snake(pos, Heading.FORWARD, Heading.UP);
         Apple apple = new Apple(pos.add(new Vector3D(0, 0, 0)));
 
         ArrayList<Snake> snake = new ArrayList<>();
