@@ -6,15 +6,15 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import com.sakariaslilja.IConstants;
-import com.sakariaslilja.datastructures.IHeading;
+import com.sakariaslilja.datastructures.Heading;
 import com.sakariaslilja.datastructures.Vector3D;
 
-public class SnakeTests implements IHeading, IConstants {
+public class SnakeTests implements IConstants {
 
     @Test
     @DisplayName("Snake move")
     public void snakeMove() {
-        Snake snake = new Snake(new Vector3D(0, 0, 501), FORWARD, UP);
+        Snake snake = new Snake(new Vector3D(0, 0, 501), Heading.FORWARD.direction, Heading.UP.direction);
         Vector3D expected = new Vector3D(0, 0, 501 + STEP_SIZE);
         snake.move();
         
@@ -24,40 +24,40 @@ public class SnakeTests implements IHeading, IConstants {
     @Test
     @DisplayName("Snake turn left and right")
     public void snakeTurnHorizontal() {
-        Snake snake = new Snake(null, RIGHT, DOWN);
+        Snake snake = new Snake(null, Heading.RIGHT.direction, Heading.DOWN.direction);
         snake.turnRight();
-        assertEquals(FORWARD, snake.getHeading(), "Snake should turn right");
+        assertEquals(Heading.FORWARD.direction, snake.getHeading(), "Snake should turn right");
         snake.turnLeft();
         snake.turnLeft();
-        assertEquals(BACKWARD, snake.getHeading(), "Snake should turn left");
+        assertEquals(Heading.BACKWARD.direction, snake.getHeading(), "Snake should turn left");
     }
 
     @Test
     @DisplayName("Snake turn up and down")
     public void snakeTurnVertical() {
-        Snake snake = new Snake(null, DOWN, BACKWARD);
+        Snake snake = new Snake(null, Heading.DOWN.direction, Heading.BACKWARD.direction);
         snake.turnUp();
-        assertEquals(BACKWARD, snake.getHeading(), "The snake should be facing the correct way");
-        assertEquals(UP, snake.getNormal(), "The snake should turn upward");
+        assertEquals(Heading.BACKWARD.direction, snake.getHeading(), "The snake should be facing the correct way");
+        assertEquals(Heading.UP.direction, snake.getNormal(), "The snake should turn upward");
         snake.turnDown();
         snake.turnDown();
-        assertEquals(FORWARD, snake.getHeading(), "The snake should be facing the correct way");
-        assertEquals(DOWN, snake.getNormal(), "The snake should turn downward");
+        assertEquals(Heading.FORWARD.direction, snake.getHeading(), "The snake should be facing the correct way");
+        assertEquals(Heading.DOWN.direction, snake.getNormal(), "The snake should turn downward");
     }
 
     @Test
     @DisplayName("Snake apply turn")
     public void applyTurn() {
-        Snake snake = new Snake(null, DOWN, BACKWARD, Turn.R);
+        Snake snake = new Snake(null, Heading.DOWN.direction, Heading.BACKWARD.direction, Turn.R);
         snake.applyTurn();
-        assertEquals(BACKWARD, snake.getNormal(), "The normal should not change");
-        assertEquals(LEFT, snake.getHeading(), "The apply turn method should work as expected");
+        assertEquals(Heading.BACKWARD.direction, snake.getNormal(), "The normal should not change");
+        assertEquals(Heading.LEFT.direction, snake.getHeading(), "The apply turn method should work as expected");
     }
 
     @Test
     @DisplayName("Snake toString")
     public void snakeToString() {
-        Snake snake = new Snake(new Vector3D(0, 0, 0), FORWARD, UP);
+        Snake snake = new Snake(new Vector3D(0, 0, 0), Heading.FORWARD.direction, Heading.UP.direction);
 
         String part1 = "Position: Vector3D(0, 0, 0)\n";
         String part2 = "Heading: Vector3D(0, 0, 1)\n";
@@ -78,7 +78,7 @@ public class SnakeTests implements IHeading, IConstants {
     @Test
     @DisplayName("Snake getGridPos")
     public void getGridPos() {
-        Snake snake = new Snake(new Vector3D(1500, 500, 500), LEFT, UP);
+        Snake snake = new Snake(new Vector3D(1500, 500, 500), Heading.LEFT.direction, Heading.UP.direction);
 
         Vector3D expectedGridPos = new Vector3D(1, 0, 0);
         assertEquals(expectedGridPos, snake.getGridPos(), "The gridPos should not move when at center of block");
@@ -90,7 +90,7 @@ public class SnakeTests implements IHeading, IConstants {
         expectedGridPos = new Vector3D(0, 0, 0);
         assertEquals(expectedGridPos, snake.getGridPos(), "The gridPos should move when past center of block");
 
-        snake = new Snake(new Vector3D(500, 500, 500), FORWARD, UP);
+        snake = new Snake(new Vector3D(500, 500, 500), Heading.FORWARD.direction, Heading.UP.direction);
         assertEquals(expectedGridPos, snake.getGridPos(), "The gridPos should not move when at center of block");
 
         snake.setPosition(new Vector3D(500, 500, 499));

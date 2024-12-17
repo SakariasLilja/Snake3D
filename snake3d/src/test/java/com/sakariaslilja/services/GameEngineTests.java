@@ -11,14 +11,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import com.sakariaslilja.IConstants;
-import com.sakariaslilja.datastructures.IHeading;
+import com.sakariaslilja.datastructures.Heading;
 import com.sakariaslilja.datastructures.Vector3D;
 import com.sakariaslilja.entities.Apple;
 import com.sakariaslilja.entities.Snake;
 import com.sakariaslilja.entities.Turn;
 import com.sakariaslilja.models.GameModel;
 
-public class GameEngineTests implements IConstants, IHeading {
+public class GameEngineTests implements IConstants {
 
     @Test
     @DisplayName("GameEngine incrementScore")
@@ -162,7 +162,7 @@ public class GameEngineTests implements IConstants, IHeading {
         GameEngine engine = new GameEngine(new GameModel());
 
         Vector3D snakePos = new Vector3D(0, 4, 5).mul(UNIT / 2);
-        Snake snakeHead = new Snake(snakePos, FORWARD, UP);
+        Snake snakeHead = new Snake(snakePos, Heading.FORWARD.direction, Heading.UP.direction);
 
         ArrayList<Snake> snake = new ArrayList<>();
         snake.add(snakeHead);
@@ -178,7 +178,7 @@ public class GameEngineTests implements IConstants, IHeading {
         GameEngine engine = new GameEngine(new GameModel());
 
         Vector3D snakePos = new Vector3D(0, 1, 2).mul(UNIT / 2).add(new Vector3D(500, 500, 500));
-        Snake snakeHead = new Snake(snakePos, FORWARD, UP);
+        Snake snakeHead = new Snake(snakePos, Heading.FORWARD.direction, Heading.UP.direction);
 
         ArrayList<Snake> snake = new ArrayList<>();
         snake.add(snakeHead);
@@ -199,7 +199,7 @@ public class GameEngineTests implements IConstants, IHeading {
         GameEngine engine = new GameEngine(new GameModel());
 
         Vector3D snakePos = new Vector3D(0, 1, 2).mul(UNIT / 2).add(new Vector3D(500, 500, 500));
-        Snake snakeHead = new Snake(snakePos, FORWARD, UP);
+        Snake snakeHead = new Snake(snakePos, Heading.FORWARD.direction, Heading.UP.direction);
 
         ArrayList<Snake> snake = new ArrayList<>();
         snake.add(snakeHead);
@@ -215,7 +215,7 @@ public class GameEngineTests implements IConstants, IHeading {
 
         gameSnake = engine.getSnake();
         for (Snake s : gameSnake) {
-            assertEquals(DOWN, s.getHeading(),"The turns should be applied correctly");
+            assertEquals(Heading.DOWN.direction, s.getHeading(),"The turns should be applied correctly");
         }
     }
 
@@ -225,7 +225,7 @@ public class GameEngineTests implements IConstants, IHeading {
         GameEngine engine = new GameEngine(new GameModel());
 
         Vector3D snakePos = new Vector3D(0, 1, 2).mul(UNIT / 2).add(new Vector3D(500, 500, 500));
-        Snake snakeHead = new Snake(snakePos, FORWARD, UP);
+        Snake snakeHead = new Snake(snakePos, Heading.FORWARD.direction, Heading.UP.direction);
         
         ArrayList<Snake> snake = new ArrayList<>();
         snake.add(snakeHead);
@@ -249,7 +249,7 @@ public class GameEngineTests implements IConstants, IHeading {
         assertFalse(engine.checkSnakeCollisions(), "No collision should occur at start");
 
         Vector3D snakePos = new Vector3D(0, 1, 2).mul(UNIT / 2).add(new Vector3D(500, 500, 500));
-        Snake snakeHead = new Snake(snakePos, FORWARD, UP);
+        Snake snakeHead = new Snake(snakePos, Heading.FORWARD.direction, Heading.UP.direction);
 
         ArrayList<Snake> snake = new ArrayList<>();
         snake.add(snakeHead);
@@ -272,7 +272,7 @@ public class GameEngineTests implements IConstants, IHeading {
         GameEngine engine = new GameEngine(new GameModel());
 
         Vector3D pos = new Vector3D(0, 1, 2).mul(UNIT / 2).add(new Vector3D(500, 500, 500));
-        Snake snakeHead = new Snake(pos, FORWARD, UP);
+        Snake snakeHead = new Snake(pos, Heading.FORWARD.direction, Heading.UP.direction);
         Apple apple = new Apple(pos.add(new Vector3D(0, 0, 0)));
 
         ArrayList<Snake> snake = new ArrayList<>();

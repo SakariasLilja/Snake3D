@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.lang.Math;
 import java.util.function.Predicate;
 
-public class DoubleVector3DTests implements IHeading {
+public class DoubleVector3DTests {
 
     @Test
     @DisplayName("DoubleVector3D equals")
@@ -66,8 +66,8 @@ public class DoubleVector3DTests implements IHeading {
     @Test
     @DisplayName("DoubleVector3D add")
     public void doubleVectorAdd() {
-        DoubleVector3D first = BACKWARD.toDoubleVector3D();
-        DoubleVector3D second = FORWARD.toDoubleVector3D();
+        DoubleVector3D first = Heading.BACKWARD.direction.toDoubleVector3D();
+        DoubleVector3D second = Heading.FORWARD.direction.toDoubleVector3D();
         first.add(second);
 
         DoubleVector3D expected = new DoubleVector3D(0, 0, 0);

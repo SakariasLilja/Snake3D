@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class Vector3DTests implements IHeading {
+public class Vector3DTests {
 
     @Test
     @DisplayName("Vector3D toString")
@@ -45,8 +45,8 @@ public class Vector3DTests implements IHeading {
     @Test
     @DisplayName("Vector3D add")
     public void addVector3D() {
-        Vector3D first = RIGHT;
-        Vector3D second = DOWN;
+        Vector3D first = Heading.RIGHT.direction;
+        Vector3D second = Heading.DOWN.direction;
         Vector3D result = first.add(second);
         Vector3D expected = new Vector3D(1, 1, 0);
         assertEquals(expected, result, "The add method should work as expected");
@@ -55,8 +55,8 @@ public class Vector3DTests implements IHeading {
     @Test
     @DisplayName("Vector3D negate")
     public void negateVector3D() {
-        Vector3D vector3d = BACKWARD;
-        Vector3D expected = FORWARD;
+        Vector3D vector3d = Heading.BACKWARD.direction;
+        Vector3D expected = Heading.FORWARD.direction;
         assertEquals(expected, vector3d.neg(), "The neg method should work as expected");
     }
 
@@ -64,7 +64,7 @@ public class Vector3DTests implements IHeading {
     @DisplayName("Vector3D scalar multiply")
     public void scalarMul() {
         int scalar = 5;
-        Vector3D vector3d = RIGHT;
+        Vector3D vector3d = Heading.RIGHT.direction;
         Vector3D expected = new Vector3D(scalar, 0, 0);
         assertEquals(expected, vector3d.mul(scalar), "The mul method should work as expected");
     }
@@ -72,8 +72,8 @@ public class Vector3DTests implements IHeading {
     @Test
     @DisplayName("Vector3D equals")
     public void vectorEquals() {
-        Vector3D backward = BACKWARD;
-        Vector3D forward = FORWARD;
+        Vector3D backward = Heading.BACKWARD.direction;
+        Vector3D forward = Heading.FORWARD.direction;
         Vector3D custom = new Vector3D(0, 0, 1);
         assertEquals(forward, forward, "The equals method should return true if equal");
         assertNotEquals(backward, forward, "The equals method should return false when not equal");
@@ -113,15 +113,15 @@ public class Vector3DTests implements IHeading {
     @Test
     @DisplayName("Vector3D cross-product")
     public void crossProduct() {
-        assertEquals(RIGHT, DOWN.crossProd(FORWARD), "The cross product should work as expected");
+        assertEquals(Heading.RIGHT.direction, Heading.DOWN.direction.crossProd(Heading.FORWARD.direction), "The cross product should work as expected");
     }
 
     @Test
     @DisplayName("Vector3D rotate")
     public void rotateVector3D() {
-        assertEquals(DOWN, FORWARD.rotateX(false), "RotateX should work properly");
-        assertEquals(RIGHT, FORWARD.rotateY(true), "RotateY should work properly");
-        assertEquals(DOWN, RIGHT.rotateZ(true), "RotateZ should work properly");
+        assertEquals(Heading.DOWN.direction, Heading.FORWARD.direction.rotateX(false), "RotateX should work properly");
+        assertEquals(Heading.RIGHT.direction, Heading.FORWARD.direction.rotateY(true), "RotateY should work properly");
+        assertEquals(Heading.DOWN.direction, Heading.RIGHT.direction.rotateZ(true), "RotateZ should work properly");
     }
     
 }
