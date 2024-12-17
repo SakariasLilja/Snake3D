@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 
 import com.sakariaslilja.IConstants;
 import com.sakariaslilja.datastructures.DoubleVector3D;
-import com.sakariaslilja.datastructures.IHeading;
+import com.sakariaslilja.datastructures.Heading;
 import com.sakariaslilja.datastructures.Quaternion;
 import com.sakariaslilja.datastructures.Tuple;
 import com.sakariaslilja.datastructures.Vector3D;
@@ -22,7 +22,7 @@ import javafx.scene.input.KeyCode;
 /**
  * The game engine.
  */
-public class GameEngine implements IConstants, IHeading {
+public class GameEngine implements IConstants {
 
     private String gameTitle;
     private long seed;
@@ -77,7 +77,7 @@ public class GameEngine implements IConstants, IHeading {
             }
         }
         q = new Quaternion(game.qW, game.qX, game.qY, game.qZ);
-        snake.add(new Snake(new Vector3D(500, 500, 500), FORWARD, UP));
+        snake.add(new Snake(new Vector3D(500, 500, 500), Heading.FORWARD.direction, Heading.UP.direction));
     }
 
     // Engine getters and setters
