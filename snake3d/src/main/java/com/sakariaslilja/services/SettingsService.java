@@ -6,6 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import com.google.gson.JsonSyntaxException;
 import com.sakariaslilja.models.SettingsModel;
 
@@ -14,8 +18,9 @@ import com.sakariaslilja.models.SettingsModel;
  */
 public class SettingsService implements Snake3DGson {
 
-    private final String SETTINGS_PATH = "resources" + File.separator + "game_settings.json";
-    private final String BACKUP_PATH ="resources" + File.separator + "game_settings_error.json";
+    private final Path DIRECTORY_PATH = Paths.get("resources").toAbsolutePath();
+    private final String SETTINGS_PATH = DIRECTORY_PATH.toString() + File.separator + "game_settings.json";
+    private final String BACKUP_PATH = DIRECTORY_PATH.toString() + File.separator + "game_settings_error.json";
 
     File settingsFile = new File(SETTINGS_PATH);
     File backupFile = new File(BACKUP_PATH);
@@ -41,7 +46,7 @@ public class SettingsService implements Snake3DGson {
         } 
 
         // File did not exist
-        catch (FileNotFoundException e) {
+        catch (FileNotFoundException | NoSuchFileException e) {
             System.out.println("Settings file not found.");
             createAndPopulateFile(settingsFile, defaultSettingsString);
         }
@@ -84,9 +89,16 @@ public class SettingsService implements Snake3DGson {
      */
     private void createAndPopulateFile(File file, String contents) {
         BufferedWriter writer;
+        System.out.println("Creating and populating file...");
         try {
+            System.out.println("creating directories...");
+            Files.createDirectories(DIRECTORY_PATH);
+            System.out.println("directories created!");
+            if (file.createNewFile()) { System.out.println("created missing file"); }
             writer = new BufferedWriter(new FileWriter(file));
+            System.out.println("populating...");
             writer.write(contents);
+            System.out.println("populated!");
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
