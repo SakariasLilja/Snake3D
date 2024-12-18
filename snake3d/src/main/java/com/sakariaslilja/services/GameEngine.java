@@ -7,7 +7,6 @@ import java.util.function.Predicate;
 
 import com.sakariaslilja.IConstants;
 import com.sakariaslilja.datastructures.DoubleVector3D;
-import com.sakariaslilja.datastructures.Heading;
 import com.sakariaslilja.datastructures.Quaternion;
 import com.sakariaslilja.datastructures.Tuple;
 import com.sakariaslilja.datastructures.Vector3D;
@@ -15,6 +14,7 @@ import com.sakariaslilja.entities.Apple;
 import com.sakariaslilja.entities.Snake;
 import com.sakariaslilja.entities.Turn;
 import com.sakariaslilja.models.GameModel;
+import com.sakariaslilja.models.SnakeModel;
 import com.sakariaslilja.models.World;
 
 import javafx.scene.input.KeyCode;
@@ -77,7 +77,10 @@ public class GameEngine implements IConstants {
             }
         }
         q = new Quaternion(game.qW, game.qX, game.qY, game.qZ);
-        snake.add(new Snake(new Vector3D(500, 500, 500), Heading.FORWARD, Heading.UP));
+
+        for (SnakeModel snakeModel : game.snake) {
+            snake.add(snakeModel.createSnake());
+        }
     }
 
     // Engine getters and setters
@@ -176,6 +179,13 @@ public class GameEngine implements IConstants {
         model.qX = q.getX();
         model.qY = q.getY();
         model.qZ = q.getZ();
+
+        SnakeModel[] snakeModels = new SnakeModel[snake.size()];
+        for (int i = 0; i < snake.size(); i++) {
+            snakeModels[i] = snake.get(i).toSnakeModel();
+        }
+
+        model.snake = snakeModels;
 
         return model;
     }

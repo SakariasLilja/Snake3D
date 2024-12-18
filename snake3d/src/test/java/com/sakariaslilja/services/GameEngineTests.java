@@ -293,5 +293,15 @@ public class GameEngineTests implements IConstants {
         assertEquals(1, engine.getScore(), "The score should increment properly");
         assertEquals(2, snake.size(), "The snake should've grown");
     }
+
+    @Test
+    @DisplayName("GameEngine toGameModel snakes")
+    public void toGameModelSnakesTest() {
+        GameEngine game = new GameEngine(new GameModel());
+        int oldSize = game.getSnake().size();
+        game.growSnake();
+        GameModel gameModel = game.toGameModel();
+        assertEquals(oldSize + 1, gameModel.snake.length, "The growth should be present in the new game model");
+    }
     
 }
