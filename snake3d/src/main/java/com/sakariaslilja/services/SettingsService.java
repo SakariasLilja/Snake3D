@@ -33,18 +33,22 @@ public class SettingsService implements Snake3DGson {
         try 
         {
             StringBuilder stringBuilder = new StringBuilder();
+            System.out.println("Reading settings file...");
             Files.readAllLines(settingsFile.toPath()).forEach( (l) -> stringBuilder.append(l) );
+            System.out.println("Settings file succesfully read!");
             contents = stringBuilder.toString();
             settingsModel = gson.fromJson(contents, SettingsModel.class);
         } 
 
         // File did not exist
         catch (FileNotFoundException e) {
+            System.out.println("Settings file not found.");
             createAndPopulateFile(settingsFile, defaultSettingsString);
         }
 
         // The JSON in the file was wrong
         catch (JsonSyntaxException e) {
+            System.out.println("Settings file doesn't contain valid json.");
             createAndPopulateFile(backupFile, contents);
             resetSettings();
         }
