@@ -7,10 +7,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import com.google.gson.JsonSyntaxException;
+import com.sakariaslilja.App;
 import com.sakariaslilja.models.SettingsModel;
 
 /**
@@ -18,9 +17,8 @@ import com.sakariaslilja.models.SettingsModel;
  */
 public class SettingsService implements Snake3DGson {
 
-    private final Path DIRECTORY_PATH = Paths.get("resources").toAbsolutePath();
-    private final String SETTINGS_PATH = DIRECTORY_PATH.toString() + File.separator + "game_settings.json";
-    private final String BACKUP_PATH = DIRECTORY_PATH.toString() + File.separator + "game_settings_error.json";
+    private final String SETTINGS_PATH = App.DIRECTORY_PATH.toString() + File.separator + "game_settings.json";
+    private final String BACKUP_PATH = App.DIRECTORY_PATH.toString() + File.separator + "game_settings_error.json";
 
     File settingsFile = new File(SETTINGS_PATH);
     File backupFile = new File(BACKUP_PATH);
@@ -92,7 +90,7 @@ public class SettingsService implements Snake3DGson {
         System.out.println("Creating and populating file...");
         try {
             System.out.println("creating directories...");
-            Files.createDirectories(DIRECTORY_PATH);
+            Files.createDirectories(App.DIRECTORY_PATH);
             System.out.println("directories created!");
             if (file.createNewFile()) { System.out.println("created missing file"); }
             writer = new BufferedWriter(new FileWriter(file));

@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import com.sakariaslilja.models.GameModel;
 import com.sakariaslilja.services.GameEngine;
@@ -19,6 +21,7 @@ public class App extends Application implements IConstants {
 
     private static Scene scene;
     private static GameEngine engine = new GameEngine(new GameModel());
+    public static final Path DIRECTORY_PATH = Paths.get("resources").toAbsolutePath();
 
     // Variables of the scene.
     private static final String primarySceneFXML = "mainpage";
