@@ -103,3 +103,13 @@
     font-family: 'Doto SemiBold';
     font-size: 26;
 }
+
+#selectText {
+    -fx-text-fill: red;
+    -fx-font-family: 'Doto SemiBold';
+    -fx-font-size: 18;
+
+    color: red;
+    font-family: 'Doto SemiBold';
+    font-size: 18;
+}
