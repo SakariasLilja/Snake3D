@@ -20,9 +20,9 @@
       </HBox>
    </top>
    <center>
-      <ScrollPane id="scroll" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <content>
-            <ListView id="gamesList" fx:id="gamesList" prefHeight="-Infinity" prefWidth="-Infinity" />
+            <ListView fx:id="gamesList" prefHeight="-Infinity" prefWidth="-Infinity" />
          </content>
       </ScrollPane>
    </center>
