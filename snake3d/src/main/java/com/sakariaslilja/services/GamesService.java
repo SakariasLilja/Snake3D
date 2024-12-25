@@ -1,6 +1,9 @@
 package com.sakariaslilja.services;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
@@ -62,6 +65,51 @@ public class GamesService implements Snake3DGson {
         catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    /**
+     * Saves a game file to the games folder.
+     * @param game The game to save
+     */
+    public static void saveGame(GameModel game) {
+        System.out.println("Saving game: game_" + game.seed + "...");
+        try {
+            Files.createDirectories(Paths.get(GAMES_DIRECTORY));
+            File gameFile = new File(GAMES_DIRECTORY + File.separator + "game_" + game.seed + ".json");
+            if (gameFile.createNewFile()) { System.out.println("created file"); }
+
+            BufferedWriter writer = new BufferedWriter(new FileWriter(gameFile));
+            System.out.println("saving...");
+            String gameString = gson.toJson(game);
+            writer.write(gameString);
+            writer.close();
+            System.out.println("saved!");
+        }
+
+        // Unhandled exception
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Deletes a game if it is found in the games folder
+     * @param game The game to delete
+     */
+    public static void deleteGame(GameModel game) {
+        System.out.println("Deleting game: game_" + game.seed + "...");
+        try {
+            Files.createDirectories(Paths.get(GAMES_DIRECTORY));
+            Path gamePath = Paths.get(GAMES_DIRECTORY + File.separator + "game_" + game.seed + ".json");
+            boolean deleted = Files.deleteIfExists(gamePath);
+            if (deleted) { System.out.println("deleted successfully"); }
+            else { System.out.println("deleting failed"); }
+        } 
+        
+        // Unhandled exception
+        catch (IOException e) {
+            e.printStackTrace();
         }
     }
     

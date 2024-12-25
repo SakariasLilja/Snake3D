@@ -38,4 +38,20 @@ public class GamesServiceTests {
         assertEquals(0, gameModels.size());
     }
 
+    @Test
+    @DisplayName("GamesService save and delete game")
+    public void saveGameTest() {
+        GameModel model = new GameModel();
+        model.seed = 0;
+        GamesService.saveGame(model);
+        ArrayList<GameModel> savedGames = GamesService.getGames();
+        boolean savedSuccessfully = savedGames.removeIf(g -> g.seed == 0l);
+        assertTrue(savedSuccessfully, "The saveGame method should work as expected");
+
+        GamesService.deleteGame(model);
+        savedGames = GamesService.getGames();
+        boolean deletedSuccesfully = savedGames.removeIf(g -> g.seed == 0l);
+        assertFalse(deletedSuccesfully, "The deleteGame method should work as expected");
+    }
+
 }
