@@ -1,16 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.BorderPane?>
 
 <fx:root type="javafx.scene.control.ListCell" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
     <graphic>
-        <HBox alignment="CENTER_LEFT" prefHeight="100" prefWidth="-Infinity">
-            <children>
-                <Label id="selectText" fx:id="gameTitle" />
-                <Label id="selectText" fx:id="creationDate" />
-                <Label id="selectText" fx:id="lastPlayed" />
-            </children>
-        </HBox>
+        <BorderPane >
+            <left>
+                <HBox alignment="CENTER_LEFT" spacing="15">
+                    <children>
+                        <Label id="selectText" fx:id="gameTitle" />
+                        <Label id="selectText" fx:id="lastPlayed" />
+                        <Label id="selectText" fx:id="creationDate" />
+                    </children>
+                </HBox>
+            </left>
+            <right>
+                <HBox fx:id="selectActions" visible="false" spacing="10" alignment="CENTER_RIGHT" BorderPane.alignment="CENTER" >
+                    <children>
+                        <Button fx:id="playbtn" text="Play" />
+                        <Button fx:id="deletebtn" text="Delete" />
+                    </children>
+                    <padding>
+                        <Insets top="5" bottom="5" />
+                    </padding>
+                </HBox>
+            </right>
+        </BorderPane>
     </graphic>
 </fx:root>
