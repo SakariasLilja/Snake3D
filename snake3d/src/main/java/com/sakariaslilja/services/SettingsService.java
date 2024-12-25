@@ -2,7 +2,6 @@ package com.sakariaslilja.services;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -35,16 +34,12 @@ public class SettingsService implements Snake3DGson {
         String contents = "";
         try 
         {
-            StringBuilder stringBuilder = new StringBuilder();
-            System.out.println("Reading settings file...");
-            Files.readAllLines(settingsFile.toPath()).forEach( (l) -> stringBuilder.append(l) );
-            System.out.println("Settings file succesfully read!");
-            contents = stringBuilder.toString();
+            contents = ReadFileService.readFile(settingsFile.toPath());
             settingsModel = gson.fromJson(contents, SettingsModel.class);
         } 
 
         // File did not exist
-        catch (FileNotFoundException | NoSuchFileException e) {
+        catch (NoSuchFileException e) {
             System.out.println("Settings file not found.");
             createAndPopulateFile(settingsFile, defaultSettingsString);
         }
@@ -54,11 +49,6 @@ public class SettingsService implements Snake3DGson {
             System.out.println("Settings file doesn't contain valid json.");
             createAndPopulateFile(backupFile, contents);
             resetSettings();
-        }
-
-        // I/O Exception
-        catch (IOException e) {
-            e.printStackTrace();
         }
 
         return settingsModel;
@@ -88,17 +78,19 @@ public class SettingsService implements Snake3DGson {
     private void createAndPopulateFile(File file, String contents) {
         BufferedWriter writer;
         System.out.println("Creating and populating file...");
+
         try {
-            System.out.println("creating directories...");
             Files.createDirectories(App.DIRECTORY_PATH);
-            System.out.println("directories created!");
             if (file.createNewFile()) { System.out.println("created missing file"); }
             writer = new BufferedWriter(new FileWriter(file));
             System.out.println("populating...");
             writer.write(contents);
             System.out.println("populated!");
             writer.close();
-        } catch (IOException e) {
+        } 
+        
+        // Unhandled exception
+        catch (IOException e) {
             e.printStackTrace();
         }
     }
