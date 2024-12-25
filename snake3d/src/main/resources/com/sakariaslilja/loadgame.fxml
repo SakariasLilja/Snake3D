@@ -19,10 +19,16 @@
         </padding>
       </HBox>
    </top>
+
    <center>
         <ListView id="list" fx:id="gamesList" prefHeight="-Infinity" prefWidth="-Infinity" BorderPane.alignment="CENTER" />
    </center>
+
    <bottom>
       <Button onAction="#gotoMainPage" text="Back" BorderPane.alignment="TOP_LEFT" />
    </bottom>
+
+   <padding>
+      <Insets top="10" bottom="10" />
+   </padding>
 </BorderPane>
