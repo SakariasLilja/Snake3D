@@ -80,6 +80,10 @@ public class GameCell extends ListCell<GameModel> {
         else { selectActions.setVisible(false); }
     }
 
+    /**
+     * Launches the game at this item's index.
+     * @throws IOException The game.fxml file wasn't found
+     */
     @FXML
     private void playGame() throws IOException {
         ObservableList<GameModel> list = listViewProperty().get().getItems();
@@ -88,6 +92,9 @@ public class GameCell extends ListCell<GameModel> {
         App.setRoot("game");
     }
 
+    /**
+     * Deletes this game instance from the list of games.
+     */
     @FXML
     private void deleteGame() {
         ObservableList<GameModel> list = listViewProperty().get().getItems();
