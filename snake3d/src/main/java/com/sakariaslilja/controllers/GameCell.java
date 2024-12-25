@@ -2,6 +2,7 @@ package com.sakariaslilja.controllers;
 
 import java.io.IOException;
 
+import com.sakariaslilja.App;
 import com.sakariaslilja.models.GameModel;
 
 import javafx.fxml.FXML;
@@ -36,7 +37,7 @@ public class GameCell extends ListCell<GameModel> {
      */
     private void loadFXML() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("game_cell.fxml"));
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("game_cell.fxml"));
             loader.setController(this);
             loader.setRoot(this);
             loader.load();
