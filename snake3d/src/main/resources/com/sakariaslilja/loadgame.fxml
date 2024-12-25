@@ -20,11 +20,7 @@
       </HBox>
    </top>
    <center>
-      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <content>
-            <ListView fx:id="gamesList" prefHeight="-Infinity" prefWidth="-Infinity" />
-         </content>
-      </ScrollPane>
+        <ListView id="list" fx:id="gamesList" prefHeight="-Infinity" prefWidth="-Infinity" BorderPane.alignment="CENTER" />
    </center>
    <bottom>
       <Button onAction="#gotoMainPage" text="Back" BorderPane.alignment="TOP_LEFT" />
