@@ -6,7 +6,10 @@ import java.text.SimpleDateFormat;
 
 import com.sakariaslilja.App;
 import com.sakariaslilja.models.GameModel;
+import com.sakariaslilja.services.GameEngine;
+import com.sakariaslilja.services.GamesService;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ContentDisplay;
@@ -75,6 +78,23 @@ public class GameCell extends ListCell<GameModel> {
 
         if (isSelected()) { selectActions.setVisible(true); }
         else { selectActions.setVisible(false); }
+    }
+
+    @FXML
+    private void playGame() throws IOException {
+        ObservableList<GameModel> list = listViewProperty().get().getItems();
+        GameModel game = list.get(this.getIndex());
+        App.setEngine(new GameEngine(game));
+        App.setRoot("game");
+    }
+
+    @FXML
+    private void deleteGame() {
+        ObservableList<GameModel> list = listViewProperty().get().getItems();
+        GameModel game = list.get(this.getIndex());
+        if (GamesService.deleteGame(game)) {
+            list.remove(this.getIndex());
+        }
     }
     
 }
