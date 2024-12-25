@@ -1,6 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+
 <fx:root type="javafx.scene.control.ListCell" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
     <graphic>
-        <HBox>
+        <HBox alignment="CENTER_LEFT" prefHeight="100" prefWidth="-Infinity">
             <children>
                 <Label id="selectText" fx:id="gameTitle" />
                 <Label id="selectText" fx:id="creationDate" />
