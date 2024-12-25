@@ -72,7 +72,7 @@ public class GamesService implements Snake3DGson {
      * Saves a game file to the games folder.
      * @param game The game to save
      */
-    public static void saveGame(GameModel game) {
+    public static boolean saveGame(GameModel game) {
         System.out.println("Saving game: game_" + game.seed + "...");
         try {
             Files.createDirectories(Paths.get(GAMES_DIRECTORY));
@@ -85,11 +85,13 @@ public class GamesService implements Snake3DGson {
             writer.write(gameString);
             writer.close();
             System.out.println("saved!");
+            return true;
         }
 
         // Unhandled exception
         catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
@@ -97,19 +99,20 @@ public class GamesService implements Snake3DGson {
      * Deletes a game if it is found in the games folder
      * @param game The game to delete
      */
-    public static void deleteGame(GameModel game) {
+    public static boolean deleteGame(GameModel game) {
         System.out.println("Deleting game: game_" + game.seed + "...");
         try {
             Files.createDirectories(Paths.get(GAMES_DIRECTORY));
             Path gamePath = Paths.get(GAMES_DIRECTORY + File.separator + "game_" + game.seed + ".json");
             boolean deleted = Files.deleteIfExists(gamePath);
-            if (deleted) { System.out.println("deleted successfully"); }
-            else { System.out.println("deleting failed"); }
+            if (deleted) { System.out.println("deleted successfully"); return true; }
+            else { System.out.println("deleting failed"); return false; }
         } 
         
         // Unhandled exception
         catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
     }
     
