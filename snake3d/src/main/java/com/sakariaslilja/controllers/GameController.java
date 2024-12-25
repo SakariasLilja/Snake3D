@@ -2,8 +2,10 @@ package com.sakariaslilja.controllers;
 
 import com.sakariaslilja.App;
 import com.sakariaslilja.IConstants;
+import com.sakariaslilja.models.GameModel;
 import com.sakariaslilja.services.GameClock;
 import com.sakariaslilja.services.GameEngine;
+import com.sakariaslilja.services.GamesService;
 import com.sakariaslilja.services.Renderer;
 
 import javafx.event.EventHandler;
@@ -80,11 +82,31 @@ public class GameController implements IConstants {
     }
 
     /**
-     * Calls closeApp from [App].
+     * Saves the game.
+     * Displays icon to display if the game was successfully saved.
+     */
+    @FXML
+    private void saveGame() {
+        GameModel model = engine.toGameModel();
+        boolean saveSuccess = GamesService.saveGame(model);
+        if (saveSuccess) {
+            // TODO: Add icons to display save status
+            System.out.println("Game saved successfully!");
+        }
+
+        else {
+            System.out.println("Error when saving game.");
+        }
+    }
+
+    /**
+     * Saves the game with {@code saveGame} and calls the {@code closeApp}
+     * method from the App.
      * Stops the application.
      */
     @FXML
     private void saveAndQuit() {
+        saveGame();
         App.closeApp();
     }
 
