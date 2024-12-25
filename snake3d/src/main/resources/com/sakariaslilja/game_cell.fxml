@@ -21,8 +21,8 @@
             <right>
                 <HBox fx:id="selectActions" visible="false" spacing="10" alignment="CENTER_RIGHT" BorderPane.alignment="CENTER" >
                     <children>
-                        <Button fx:id="playbtn" text="Play" />
-                        <Button fx:id="deletebtn" text="Delete" />
+                        <Button fx:id="playbtn" onAction="#playGame" text="Play" />
+                        <Button fx:id="deletebtn" onAction="#deleteGame" text="Delete" />
                     </children>
                     <padding>
                         <Insets top="5" bottom="5" />
