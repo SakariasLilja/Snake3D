@@ -114,6 +114,7 @@ public class GameController implements IConstants {
      * Triggers the visibility of the pause overlay and
      * pauses the game.
      */
+    @FXML
     private void triggerPause() {
         bgoverlay.setVisible(!bgoverlay.isVisible());
         engine.togglePause();
