@@ -1,0 +1,11 @@
+<fx:root type="javafx.scene.control.ListCell" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+    <graphic>
+        <HBox>
+            <children>
+                <Label id="selectText" fx:id="gameTitle" />
+                <Label id="selectText" fx:id="creationDate" />
+                <Label id="selectText" fx:id="lastPlayed" />
+            </children>
+        </HBox>
+    </graphic>
+</fx:root>
