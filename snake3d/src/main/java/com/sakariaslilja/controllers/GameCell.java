@@ -1,6 +1,8 @@
 package com.sakariaslilja.controllers;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import com.sakariaslilja.App;
 import com.sakariaslilja.models.GameModel;
@@ -10,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
+import javafx.scene.layout.HBox;
 
 /**
  * Game cell for ListViews that correctly displays the contents of the GameModel.
@@ -24,6 +27,11 @@ public class GameCell extends ListCell<GameModel> {
 
     @FXML
     private Label lastPlayed;
+
+    @FXML
+    private HBox selectActions;
+
+    DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 
     /**
      * GameCell that loads up an fxml-file to display elements of a game.
@@ -58,12 +66,15 @@ public class GameCell extends ListCell<GameModel> {
         }
 
         else {
-            gameTitle.setText((model.gameTitle != "") ? model.gameTitle : "Game Id: " + model.seed);
-            creationDate.setText(model.creationDate.toString());
-            lastPlayed.setText(model.playDate.toString());
+            gameTitle.setText((model.gameTitle.length() > 0) ? model.gameTitle : "Game Id: " + model.seed);
+            creationDate.setText("Created: " + df.format(model.creationDate));
+            lastPlayed.setText("Last played: " + df.format(model.playDate));
 
             setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
         }
+
+        if (isSelected()) { selectActions.setVisible(true); }
+        else { selectActions.setVisible(false); }
     }
     
 }
