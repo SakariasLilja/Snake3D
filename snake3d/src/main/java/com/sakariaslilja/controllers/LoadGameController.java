@@ -29,18 +29,16 @@ public class LoadGameController {
      * Method called when the scene is loaded.
      */
     public void initialize() {
+        ArrayList<GameModel> savedGames = GamesService.getGames();
+        savedGames.forEach(g -> games.add(g));
+        gamesList.setItems(games);
 
-        // Sets the cell display graphics of the list view
         gamesList.setCellFactory(new Callback<ListView<GameModel>,ListCell<GameModel>>() {
             @Override
             public ListCell<GameModel> call(ListView<GameModel> list) {
                 return new GameCell();
             }
         });
-
-        ArrayList<GameModel> savedGames = GamesService.getGames();
-        savedGames.forEach(g -> games.add(g));
-        gamesList.setItems(games);
     }
 
     /**
