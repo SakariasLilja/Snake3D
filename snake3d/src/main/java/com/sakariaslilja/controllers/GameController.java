@@ -106,14 +106,13 @@ public class GameController implements IConstants {
     }
 
     /**
-     * Saves the game with {@code saveGame} and calls the {@code closeApp}
-     * method from the App.
-     * Stops the application.
+     * Saves the game with {@code saveGame}.
+     * Redirects the player to the main page.
      */
     @FXML
-    private void saveAndQuit() {
+    private void saveAndQuit() throws IOException {
         saveGame();
-        App.closeApp();
+        App.setRoot("mainpage");
     }
 
     /**
