@@ -466,5 +466,5 @@ documentation/.*
 .vscode
 .vscode/*
 snake3d/resources/game_settings_error.json
-resources
-resources/*
+snake3d/resources/games
+/resources
