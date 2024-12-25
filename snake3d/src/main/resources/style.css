@@ -82,34 +82,22 @@
 
 .list-cell {
     -fx-background-color: rgba(0,0,0,0);
-    -fx-text-fill: whitesmoke;
-    -fx-font-family: 'Doto SemiBold';
-    -fx-font-size: 26;
 
-    background-color: cornflowerblue;
-    color: whitesmoke;
-    font-family: 'Doto SemiBold';
-    font-size: 26;
+    background-color: rgba(0,0,0,0);
 }
 
 .list-cell:selected {
     -fx-background-color: rgba(1,1,1,0.5);
-    -fx-text-fill: whitesmoke;
-    -fx-font-family: 'Doto SemiBold';
-    -fx-font-size: 26;
 
-    background-color: #4a4e69;
-    color: whitesmoke;
-    font-family: 'Doto SemiBold';
-    font-size: 26;
+    background-color: rgba(1,1,1,0.5);
 }
 
 #selectText {
     -fx-text-fill: whitesmoke;
     -fx-font-family: 'Doto SemiBold';
-    -fx-font-size: 18;
+    -fx-font-size: 22;
 
     color: whitesmoke;
     font-family: 'Doto SemiBold';
-    font-size: 18;
+    font-size: 22;
 }
