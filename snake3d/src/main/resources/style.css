@@ -66,7 +66,7 @@
     color: white;
 }
 
-#scroll {
+.scroll-pane {
     -fx-background-color: cornflowerblue;
     -fx-border-color: cornflowerblue;
 
@@ -74,8 +74,32 @@
     border-color: cornflowerblue;
 }
 
-#gamesList {
+.list-view:vertical {
+    -fx-background-color: cornflowerblue;
+
+    background-color: cornflowerblue;
+}
+
+.list-cell {
+    -fx-background-color: red;
+    -fx-text-fill: whitesmoke;
+    -fx-font-family: 'Doto SemiBold';
+    -fx-font-size: 26;
+
+    background-color: cornflowerblue;
+    color: whitesmoke;
+    font-family: 'Doto SemiBold';
+    font-size: 26;
+}
+
+.list-cell:selected {
     -fx-background-color: #4a4e69;
+    -fx-text-fill: whitesmoke;
+    -fx-font-family: 'Doto SemiBold';
+    -fx-font-size: 26;
 
     background-color: #4a4e69;
+    color: whitesmoke;
+    font-family: 'Doto SemiBold';
+    font-size: 26;
 }
