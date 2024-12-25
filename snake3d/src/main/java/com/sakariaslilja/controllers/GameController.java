@@ -19,6 +19,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 
+/**
+ * Controller for the game scene.
+ */
 public class GameController implements IConstants {
 
     @FXML
@@ -39,6 +42,9 @@ public class GameController implements IConstants {
     long startTime = System.nanoTime();
     GameClock gameClock;
     
+    /**
+     * Method called when the scene is loaded.
+     */
     public void initialize() {
         gameCanvas.setWidth(App.getWidth());
         gameCanvas.setHeight(App.getHeight());
