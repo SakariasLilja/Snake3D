@@ -65,3 +65,17 @@
     font-size: 96;
     color: white;
 }
+
+#scroll {
+    -fx-background-color: cornflowerblue;
+    -fx-border-color: cornflowerblue;
+
+    background-color: cornflowerblue;
+    border-color: cornflowerblue;
+}
+
+#gamesList {
+    -fx-background-color: #4a4e69;
+
+    background-color: #4a4e69;
+}
