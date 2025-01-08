@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.function.Predicate;
 
 import com.sakariaslilja.IConstants;
+import com.sakariaslilja.controllers.GameController;
 import com.sakariaslilja.datastructures.DoubleVector3D;
 import com.sakariaslilja.datastructures.Quaternion;
 import com.sakariaslilja.datastructures.Tuple;
@@ -49,6 +50,8 @@ public class GameEngine implements IConstants {
 
     private Quaternion q;
     private int rCountHelper = 0;
+
+    private GameController controller = null;
 
     /**
      * To create an instance of a game engine, the world dimensions are needed
@@ -102,6 +105,8 @@ public class GameEngine implements IConstants {
     private boolean turnQueued() { return turningLeft || turningRight || turningDown || turningUp; }
 
     public boolean isGameOver() { return gameOver; }
+
+    public void setGameController(GameController controller) { this.controller = controller; }
 
     /**
      * Performs the action associated with each key.
@@ -254,6 +259,7 @@ public class GameEngine implements IConstants {
                 if (turnQueued()) { isTurning = true; }
                 else { applyTurns(); propagateTurns(); }
             }
+            if (checkSnakeCollisions()) { killPlayer(); }
         }
     }
 
@@ -357,12 +363,22 @@ public class GameEngine implements IConstants {
         if (!gridPositions.contains(headGridPos)) { return true; }
         for (int i = 1; i < snake.size(); i++) {
             if (snake.get(i).getGridPos().equals(headGridPos)) {
-                // TODO: add death
-                gameOver = true;
                 return true;
             }
         }
         return false;
+    }
+
+    /**
+     * Events that are triggered when the player is killed.
+     */
+    private void killPlayer() {
+        gameOver = true;
+        try {
+            controller.playerDied();
+        } catch (NullPointerException e) {
+            System.out.println("Warning: No controller is assigned to this game instance.");
+        }
     }
     
 }
