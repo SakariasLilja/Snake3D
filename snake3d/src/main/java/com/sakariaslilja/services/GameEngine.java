@@ -207,7 +207,7 @@ public class GameEngine implements IConstants {
     public HighscoreModel gameHighscore() {
         HighscoreModel model = new HighscoreModel();
 
-        model.date = this.creationDate;
+        model.creationDate = this.creationDate;
         model.score = this.getScore();
         model.worldDepth = this.worldDepth;
         model.worldHeight = this.worldHeight;

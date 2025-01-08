@@ -12,6 +12,7 @@ import com.sakariaslilja.IConstants;
 public class HighscoreModel implements IConstants {
 
     public int score = 0;
+    public Date creationDate = new Date();
     public Date date = new Date();
     public int worldWidth = MIN_WORLD_SIZE;
     public int worldHeight = MIN_WORLD_SIZE;
