@@ -44,6 +44,7 @@ public class GameEngine implements IConstants {
     private boolean turningUp = false;
     private boolean turningDown = false;
     private boolean isTurning = false;
+    private boolean gameOver = false;
 
     private Quaternion q;
     private int rCountHelper = 0;
@@ -64,6 +65,7 @@ public class GameEngine implements IConstants {
         this.worldWidth = game.worldWidth;
         this.worldHeight = game.worldHeight;
         this.worldDepth = game.worldDepth;
+        this.gameOver = game.gameOver;
         this.appleLimit = Integer.max(1, (int) Math.cbrt(worldWidth*worldHeight*worldDepth) - 2);
         World world = new World(worldWidth, worldHeight, worldDepth);
         this.edges = world.getEdges();
@@ -194,7 +196,7 @@ public class GameEngine implements IConstants {
      * Update method of the world.
      */
     public void update() {
-        if (paused) {
+        if (paused || gameOver) {
             return;
         }
 
@@ -338,6 +340,7 @@ public class GameEngine implements IConstants {
         for (int i = 1; i < snake.size(); i++) {
             if (snake.get(i).getGridPos().equals(headGridPos)) {
                 // TODO: add death
+                gameOver = true;
                 return true;
             }
         }

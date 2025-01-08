@@ -20,6 +20,7 @@ public class GameModel {
     public double qX = 0;
     public double qY = 0;
     public double qZ = 0;
+    public boolean gameOver = false;
 
     public SnakeModel[] snake = {new SnakeModel()};
     
