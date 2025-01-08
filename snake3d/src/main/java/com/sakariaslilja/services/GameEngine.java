@@ -14,6 +14,7 @@ import com.sakariaslilja.entities.Apple;
 import com.sakariaslilja.entities.Snake;
 import com.sakariaslilja.entities.Turn;
 import com.sakariaslilja.models.GameModel;
+import com.sakariaslilja.models.HighscoreModel;
 import com.sakariaslilja.models.SnakeModel;
 import com.sakariaslilja.models.World;
 
@@ -98,7 +99,9 @@ public class GameEngine implements IConstants {
 
     public int getScore() { return score; }
 
-    private boolean turnQueued() { return turningLeft || turningRight || turningDown || turningUp; }  
+    private boolean turnQueued() { return turningLeft || turningRight || turningDown || turningUp; }
+
+    public boolean isGameOver() { return gameOver; }
 
     /**
      * Performs the action associated with each key.
@@ -191,6 +194,21 @@ public class GameEngine implements IConstants {
 
         return model;
     }
+
+    /**
+     * @return The saved score state of this model.
+     */
+    public HighscoreModel gameHighscore() {
+        HighscoreModel model = new HighscoreModel();
+
+        model.date = this.creationDate;
+        model.score = this.getScore();
+        model.worldDepth = this.worldDepth;
+        model.worldHeight = this.worldHeight;
+        model.worldWidth = this.worldWidth;
+
+        return model;
+    } 
 
     /**
      * Update method of the world.
