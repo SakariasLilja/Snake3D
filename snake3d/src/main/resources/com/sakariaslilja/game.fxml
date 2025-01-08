@@ -25,7 +25,7 @@
       </HBox>
       <VBox visible="false" id="bgoverlay" fx:id="bgoverlay" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="50.0">
          <children>
-            <Label id="title" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" text="Paused" />
+            <Label id="title" fx:id="pauseLabel" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" text="Paused" />
             <Button id="pausebtn" onAction="#triggerPause" fx:id="resumebtn" mnemonicParsing="false" text="Resume" />
             <Button id="pausebtn" onAction="#saveGame" fx:id="savebtn" mnemonicParsing="false" text="Save" />
             <Button id="pausebtn" onAction="#saveAndQuit" fx:id="savequitbtn" mnemonicParsing="false" text="Save and Quit" />
