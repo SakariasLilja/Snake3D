@@ -129,13 +129,10 @@ public class HighscoresService implements Snake3DGson {
      */
     protected static void createHighscoreFiles() {
         try {
-            System.out.println("Creating highscores files...");
             Files.createDirectories(App.DIRECTORY_PATH);
             
             HIGHSCORES_ERROR_PATH.toFile().createNewFile();
             if (HIGHSCORES_PATH.toFile().createNewFile()) { clearHighscores(); }
-
-            System.out.println("Successfully created highscore files!");
         }
 
         // Unhandled exception
