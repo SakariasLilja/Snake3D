@@ -3,9 +3,11 @@ package com.sakariaslilja.controllers;
 import com.sakariaslilja.App;
 import com.sakariaslilja.IConstants;
 import com.sakariaslilja.models.GameModel;
+import com.sakariaslilja.models.HighscoreModel;
 import com.sakariaslilja.services.GameClock;
 import com.sakariaslilja.services.GameEngine;
 import com.sakariaslilja.services.GamesService;
+import com.sakariaslilja.services.HighscoresService;
 import com.sakariaslilja.services.Renderer;
 
 import javafx.event.EventHandler;
@@ -36,6 +38,9 @@ public class GameController implements IConstants {
     @FXML
     Label score;
 
+    @FXML
+    Label pauseLabel;
+
     GameEngine engine;
     Renderer renderer;
 
@@ -58,6 +63,8 @@ public class GameController implements IConstants {
         savequitbtn.setPrefHeight(0.12 * App.getHeight());
         
         this.engine = App.getEngine();
+        engine.setGameController(this);
+        if (engine.isGameOver()) { pauseLabel.setText("Game Over!"); }
         this.renderer = new Renderer(gameCanvas.getGraphicsContext2D(), engine);
 
         this.gameClock = new GameClock(engine, renderer, score);
@@ -123,6 +130,25 @@ public class GameController implements IConstants {
     private void triggerPause() {
         bgoverlay.setVisible(!bgoverlay.isVisible());
         engine.togglePause();
+    }
+
+    /**
+     * Saves the highscore of the world
+     */
+    private void saveHighscore() {
+        HighscoreModel model = engine.gameHighscore();
+        HighscoresService.addHighscore(model);
+    }
+
+    /**
+     * Saves the highscore state of the world,
+     * the world itself and pauses the game screen.
+     */
+    public void playerDied() {
+        saveGame();
+        saveHighscore();
+        pauseLabel.setText("Game Over!");
+        this.triggerPause();
     }
     
 }
