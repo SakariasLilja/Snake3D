@@ -189,6 +189,7 @@ public class GameEngine implements IConstants {
         model.qX = q.getX();
         model.qY = q.getY();
         model.qZ = q.getZ();
+        model.gameOver = gameOver;
 
         SnakeModel[] snakeModels = new SnakeModel[snake.size()];
         for (int i = 0; i < snake.size(); i++) {
