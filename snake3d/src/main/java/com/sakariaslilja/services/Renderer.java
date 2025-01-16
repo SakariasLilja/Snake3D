@@ -240,9 +240,9 @@ public class Renderer implements IConstants {
     }
 
     /**
-     * Consumer functio that applies the matrices to a vertex.
+     * Consumer function that applies the matrices to a vertex.
      */
-    Consumer<DoubleVector3D> applyMatricesFunc = v -> applyMatrices(v);
+    private Consumer<DoubleVector3D> applyMatricesFunc = v -> applyMatrices(v);
 
     /**
      * Predicate that checks if the z-coordinate of a DoubleVector3D is positive
