@@ -54,11 +54,8 @@ public class GameEngine implements IConstants {
     private GameController controller = null;
 
     /**
-     * To create an instance of a game engine, the world dimensions are needed
-     * @param seed The random seed of the game
-     * @param worldWidth Width of the world
-     * @param worldHeight Height of the world
-     * @param worldDepth Depth of the world
+     * Creates a new {@code GameEngine} instance
+     * @param game The state of this game
      */
     public GameEngine(GameModel game) {
         this.gameTitle = game.gameTitle;
