@@ -19,11 +19,11 @@ public class SettingsService implements Snake3DGson {
     private final String SETTINGS_PATH = App.DIRECTORY_PATH.toString() + File.separator + "game_settings.json";
     private final String BACKUP_PATH = App.DIRECTORY_PATH.toString() + File.separator + "game_settings_error.json";
 
-    File settingsFile = new File(SETTINGS_PATH);
-    File backupFile = new File(BACKUP_PATH);
+    private File settingsFile = new File(SETTINGS_PATH);
+    private File backupFile = new File(BACKUP_PATH);
 
-    SettingsModel defaultSettings = new SettingsModel();
-    String defaultSettingsString = gson.toJson(defaultSettings);
+    private SettingsModel defaultSettings = new SettingsModel();
+    private String defaultSettingsString = gson.toJson(defaultSettings);
 
     /**
      * Gets the settings saved at game_settings.json
