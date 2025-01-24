@@ -101,3 +101,21 @@
     font-family: 'Doto SemiBold';
     font-size: 22;
 }
+
+#modifybtn {
+    -fx-font-family: 'Doto SemiBold';
+    -fx-background-color: cornflowerblue;
+    -fx-text-fill: whitesmoke;
+
+    font-family: 'Doto SemiBold';
+    background-color: cornflowerblue;
+    color: whitesmoke;
+}
+
+#basetext {
+    -fx-font-family: 'Doto SemiBold';
+    -fx-text-fill: cornflowerblue;
+
+    font-family: 'Doto SemiBold';
+    color: cornflowerblue;
+}
