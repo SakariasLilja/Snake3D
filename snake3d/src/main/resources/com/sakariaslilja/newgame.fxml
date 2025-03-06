@@ -40,7 +40,7 @@
                         <Font size="28.0" />
                      </font>
                   </Label>
-                  <TextField />
+                  <TextField id="textfield" fx:id="gameNameField" />
                </children>
                <VBox.margin>
                   <Insets />

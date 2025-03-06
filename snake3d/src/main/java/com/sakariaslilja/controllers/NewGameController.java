@@ -2,18 +2,24 @@ package com.sakariaslilja.controllers;
 
 import com.sakariaslilja.App;
 import com.sakariaslilja.IConstants;
+import com.sakariaslilja.models.GameModel;
+import com.sakariaslilja.services.GameEngine;
 
 import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 /**
  * Controller for newgame.fxml.
  * View for starting a new game and giving it parameters.
  */
 public class NewGameController implements IConstants {
+
+    @FXML
+    TextField gameNameField;
 
     @FXML
     Button cancelbtn;
@@ -54,6 +60,7 @@ public class NewGameController implements IConstants {
 
     /** Called upon launch. Initializes integer properties */
     public void initialize() {
+        gameNameField.setPrefColumnCount(30);
         widthLabel.setText(width.toString());
         heightLabel.setText(height.toString());
         depthLabel.setText(depth.toString());
@@ -110,6 +117,12 @@ public class NewGameController implements IConstants {
      */
     @FXML
     private void createGame() throws IOException {
+        GameModel gameSettings = new GameModel();
+        gameSettings.gameTitle = gameNameField.getText();
+        gameSettings.worldWidth = width;
+        gameSettings.worldHeight = height;
+        gameSettings.worldDepth = depth;
+        App.setEngine(new GameEngine(gameSettings));
         App.setRoot("game");
     }
     
