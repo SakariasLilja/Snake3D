@@ -119,3 +119,15 @@
     font-family: 'Doto SemiBold';
     color: cornflowerblue;
 }
+
+#textfield {
+    -fx-font-family: 'Doto SemiBold';
+    -fx-text-fill: whitesmoke;
+    -fx-font-size: 22;
+    -fx-background-color: rgba(1,1,1,0.7), #4a4e69;
+    -fx-background-insets: 0 0 -2 0, 0 0 0 0;
+
+    background-color: red;
+    font-family: 'Doto SemiBold';
+    font-size: 22;
+}
