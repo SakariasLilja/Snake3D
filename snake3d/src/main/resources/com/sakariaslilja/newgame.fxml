@@ -58,7 +58,7 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                      <children>
-                        <Button id="modifybtn" fx:id="incrwbtn" mnemonicParsing="false" text="+">
+                        <Button onAction="#increaseWidth" id="modifybtn" fx:id="incrwbtn" mnemonicParsing="false" text="+">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -70,14 +70,14 @@
                                     <Font size="20.0" />
                                  </font>
                               </Label>
-                              <Label id="basetext" text="w">
+                              <Label id="basetext" fx:id="widthLabel">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Label>
                            </children>
                         </HBox>
-                        <Button id="modifybtn" fx:id="decrwbtn" mnemonicParsing="false" text="-">
+                        <Button onAction="#decreaseWidth" id="modifybtn" fx:id="decrwbtn" mnemonicParsing="false" text="-">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -86,7 +86,7 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                      <children>
-                        <Button id="modifybtn" fx:id="incrhbtn" mnemonicParsing="false" text="+">
+                        <Button onAction="#increaseHeight" id="modifybtn" fx:id="incrhbtn" mnemonicParsing="false" text="+">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -98,14 +98,14 @@
                                     <Font size="20.0" />
                                  </font>
                               </Label>
-                              <Label id="basetext" text="h">
+                              <Label id="basetext" fx:id="heightLabel">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Label>
                            </children>
                         </HBox>
-                        <Button id="modifybtn" fx:id="decrhbtn" mnemonicParsing="false" text="-">
+                        <Button onAction="#decreaseHeight" id="modifybtn" fx:id="decrhbtn" mnemonicParsing="false" text="-">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -114,7 +114,7 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                      <children>
-                        <Button id="modifybtn" fx:id="incrdbtn" mnemonicParsing="false" text="+">
+                        <Button onAction="#increaseDepth" id="modifybtn" fx:id="incrdbtn" mnemonicParsing="false" text="+">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -126,14 +126,14 @@
                                     <Font size="20.0" />
                                  </font>
                               </Label>
-                              <Label id="basetext" text="d">
+                              <Label id="basetext" fx:id="depthLabel">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Label>
                            </children>
                         </HBox>
-                        <Button id="modifybtn" fx:id="decrdbtn" mnemonicParsing="false" text="-">
+                        <Button onAction="#decreaseDepth" id="modifybtn" fx:id="decrdbtn" mnemonicParsing="false" text="-">
                            <font>
                               <Font size="18.0" />
                            </font>
